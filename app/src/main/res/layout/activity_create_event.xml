@@ -1,0 +1,106 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin">
+
+                <EditText
+                    android:id="@+id/etTilte"
+                    style="@style/AppTheme.EditText"
+                    android:hint="Title" />
+
+                <EditText
+                    android:id="@+id/etDescription"
+                    style="@style/AppTheme.EditText"
+                    android:hint="Description" />
+
+                <RelativeLayout
+                    android:id="@+id/rlDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center">
+
+                    <EditText
+                        android:id="@+id/etDate"
+                        style="@style/AppTheme.EditText"
+                        android:hint="12/11/2016"
+android:focusable="false"
+                        />
+
+                    <ImageView
+                        android:id="@+id/ivDateicon"
+                        style="@style/AppTheme.ImageView.Wrap"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="12dp"
+                        android:src="@drawable/ic_events" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center">
+
+                    <EditText
+                        android:id="@+id/etTime"
+                        style="@style/AppTheme.EditText"
+                        android:focusable="false"
+                        android:hint="HH:MM" />
+
+                    <ImageView
+                        android:id="@+id/ivTimeicon"
+                        style="@style/AppTheme.ImageView.Wrap"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="12dp"
+                        android:src="@drawable/ic_clock" />
+
+                </RelativeLayout>
+
+                <FrameLayout
+                    android:id="@+id/frameLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_x2"></FrameLayout>
+
+                <fragment
+                    android:id="@+id/fragmentImageUpload"
+                    android:name="com.golf.budz.core.components.FragmentImageUpload"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:layout="@layout/fragment_image_upload"></fragment>
+
+                <Button
+                    android:id="@+id/btnPost"
+                    style="@style/AppTheme.Button"
+                    android:text="@string/post" />
+            </LinearLayout>
+
+
+        </RelativeLayout>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.design.widget.CoordinatorLayout>
+
+

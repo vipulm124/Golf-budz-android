@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_profile"
+            android:title="My Profile" />
+        <item
+            android:id="@+id/nav_notification"
+            android:icon="@drawable/ic_notification"
+            android:title="Notifications" />
+        <item
+            android:id="@+id/nav_friend"
+            android:icon="@drawable/ic_friends"
+            android:title="Friends" />
+        <item
+            android:id="@+id/nav_club"
+            android:icon="@drawable/ic_clubs"
+            android:title="Clubs" />
+        <item
+            android:id="@+id/nav_round"
+            android:icon="@drawable/ic_create_page"
+            android:title="Play requests" />
+        <item
+            android:id="@+id/nav_createpage"
+            android:icon="@drawable/ic_create_page"
+            android:title="Create group" />
+        <item
+            android:id="@+id/nav_mygroup"
+            android:icon="@drawable/ic_create_page"
+            android:title="My group" />
+        <item
+          android:id="@+id/nav_event"
+            android:icon="@drawable/ic_events"
+            android:title="Events" />
+        <item
+            android:id="@+id/nav_buyitems"
+            android:icon="@drawable/ic_items"
+            android:title="Buy items" />
+        <item
+            android:id="@+id/nav_sellitems"
+            android:icon="@drawable/ic_items"
+            android:visible="false"
+            android:title="Sell items" />
+        <item
+            android:id="@+id/nav_chat"
+            android:icon="@drawable/ic_comment"
+            android:title=" Chat" />
+
+        <item
+            android:id="@+id/nav_daledgolfchat"
+            android:icon="@drawable/ic_comment"
+            android:title="Dales golf chat" />
+
+        <item
+            android:id="@+id/nav_oncourse"
+            android:icon="@drawable/ic_comment"
+            android:title="On the course" />
+        <item
+            android:id="@+id/nav_more"
+            android:icon="@drawable/ic_more"
+            android:title="More" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Share" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_menu_send"
+                android:visible="false"
+                android:title="Send" />
+        </menu>
+    </item>
+    <item android:title="Account">
+        <menu>
+            <item
+                 android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_logout"
+                android:visible="false"
+                android:title="Logout" />
+            <item
+                android:id="@+id/nav_login"
+                android:icon="@drawable/ic_logout"
+                android:visible="false"
+                android:title="Login" />
+
+        </menu>
+    </item>
+</menu>

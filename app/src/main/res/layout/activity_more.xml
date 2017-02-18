@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_more"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg">
+
+    <LinearLayout
+        android:id="@+id/menus"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cvAboutus"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            card_view:cardBackgroundColor="@color/color1"
+            card_view:cardCornerRadius="0dp"
+            custom:cardUseCompatPadding="false">
+
+            <TextView
+                android:id="@+id/emrgserv"
+                style="@style/AppTheme.TextView.Wrap"
+                android:layout_gravity="center"
+                android:layout_marginTop="0dp"
+                android:gravity="center"
+                android:text="@string/aboutus" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|right"
+                android:src="@drawable/ic_next" />
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cvContacus"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            card_view:cardBackgroundColor="@color/color2"
+            card_view:cardCornerRadius="0dp"
+            custom:cardUseCompatPadding="false">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|right"
+                android:src="@drawable/ic_next" />
+
+            <TextView
+                android:id="@+id/muniserv"
+                style="@style/AppTheme.TextView.Wrap"
+                android:layout_gravity="center"
+                android:layout_marginTop="0dp"
+                android:gravity="center"
+                android:text="@string/contactus"
+
+                />
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cvHelp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            card_view:cardBackgroundColor="@color/color3"
+            card_view:cardCornerRadius="0dp"
+            custom:cardUseCompatPadding="false">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|right"
+                android:src="@drawable/ic_next" />
+
+            <TextView
+                android:id="@+id/sportevent"
+                style="@style/AppTheme.TextView.Wrap"
+                android:layout_gravity="center"
+                android:layout_marginTop="0dp"
+                android:gravity="center"
+                android:text="@string/help" />
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cvRate"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            card_view:cardBackgroundColor="@color/color4"
+            card_view:cardCornerRadius="0dp"
+            custom:cardUseCompatPadding="false">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|right"
+                android:src="@drawable/ic_next" />
+
+            <TextView
+                android:id="@+id/localevent"
+                style="@style/AppTheme.TextView.Wrap"
+                android:layout_gravity="center"
+                android:layout_marginTop="0dp"
+                android:gravity="center"
+                android:text="@string/rate" />
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cvPolicy"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            card_view:cardBackgroundColor="@color/color5"
+            card_view:cardCornerRadius="0dp"
+            custom:cardUseCompatPadding="false">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|right"
+                android:src="@drawable/ic_next" />
+
+            <TextView
+                android:id="@+id/promotions"
+                style="@style/AppTheme.TextView.Wrap"
+                android:layout_gravity="center"
+                android:layout_marginTop="0dp"
+                android:gravity="center"
+                android:text="@string/privacypolicy" />
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cvTc"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            card_view:cardBackgroundColor="@color/color6"
+            card_view:cardCornerRadius="0dp"
+            custom:cardUseCompatPadding="false">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|right"
+                android:src="@drawable/ic_next" />
+
+            <TextView
+                android:id="@+id/aboutus"
+                style="@style/AppTheme.TextView.Wrap"
+                android:layout_gravity="center"
+                android:layout_marginTop="0dp"
+                android:gravity="center"
+                android:text="@string/terms" />
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cvUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            card_view:cardBackgroundColor="@color/color8"
+            card_view:cardCornerRadius="0dp"
+            custom:cardUseCompatPadding="false">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|right"
+                android:src="@drawable/ic_next" />
+
+            <TextView
+
+                style="@style/AppTheme.TextView.Wrap"
+                android:layout_gravity="center"
+                android:layout_marginTop="0dp"
+                android:gravity="center"
+                android:text="@string/upadte" />
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cvShare"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            card_view:cardBackgroundColor="@color/color9"
+            card_view:cardCornerRadius="0dp"
+            custom:cardUseCompatPadding="false">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|right"
+                android:src="@drawable/ic_next" />
+
+            <TextView
+
+                style="@style/AppTheme.TextView.Wrap"
+                android:layout_gravity="center"
+                android:layout_marginTop="0dp"
+                android:gravity="center"
+                android:text="@string/share" />
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+</RelativeLayout>

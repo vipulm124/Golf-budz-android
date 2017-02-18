@@ -1,0 +1,75 @@
+<android.support.v7.widget.CardView
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/space_x1"
+    android:layout_marginLeft="@dimen/space_x1"
+    android:layout_marginRight="@dimen/space_x1"
+    card_view:cardBackgroundColor="@color/colorGrayTrans"
+    card_view:cardCornerRadius="@dimen/space_x1">
+
+    <RelativeLayout
+        android:id="@+id/rlBlog"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/space_x2"
+
+        android:orientation="horizontal">
+
+
+        <com.golf.budz.utils.RoundedImageView
+            android:id="@+id/ivPic"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+
+            android:layout_below="@+id/tvName"
+            android:src="@drawable/pic"/>
+
+        <TextView
+            android:id="@+id/tvDesc"
+            style="@style/AppTheme.TextView.Wrap"
+            android:layout_below="@+id/tvName"
+            android:layout_toRightOf="@+id/ivPic"
+            android:text="Because of the importance of balance and stability in the golf swing, the need for good golf shoes is a “no brainer.”.."/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_below="@+id/ivPic"
+            android:layout_marginTop="@dimen/space_x3"
+            android:layout_marginLeft="@dimen/space_x2"
+            android:layout_marginRight="@dimen/space_x2"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    style="@style/AppTheme.TextView.Wrap"
+                    android:text="Posted: "/>
+
+                <TextView
+                    android:id="@+id/tvDate"
+                    style="@style/AppTheme.TextView.Wrap"
+                    android:text="November 13, 2016"/>
+
+            </LinearLayout>
+            <TextView
+                android:id="@+id/tvView"
+                style="@style/AppTheme.TextView.Wrap"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/yellow"
+                android:text="View Detail"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvName"
+            style="@style/AppTheme.TextView.Wrap"
+            android:textStyle="bold"
+            android:text="The Importance Of Sole"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/ivPic"
+            android:layout_toEndOf="@+id/ivPic" />
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

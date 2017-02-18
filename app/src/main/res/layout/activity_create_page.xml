@@ -1,0 +1,126 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/space_x2"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/etName"
+                    style="@style/AppTheme.EditText"
+                    android:hint="Name"
+
+                    />
+
+                <EditText
+                    android:id="@+id/etCat"
+                    style="@style/AppTheme.EditText"
+
+                    android:hint="Select Category"
+                    android:inputType="text|textMultiLine"
+                    />
+                <EditText
+                    android:id="@+id/etDesc"
+                    style="@style/AppTheme.EditText"
+                    android:layout_height="@dimen/space_x6"
+                    android:gravity="top"
+                    android:hint="Select Description"
+                    android:inputType="text|textMultiLine"
+                    />
+
+                <EditText
+                    android:id="@+id/etHours"
+                    style="@style/AppTheme.EditText"
+                    android:focusable="false"
+                    android:hint="Operating Hours"
+
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/ivEdit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/space_x2"
+                        android:visibility="gone"
+                        android:src="@drawable/ic_edit" />
+
+                    <ImageView
+                        android:id="@+id/ivVideo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/space_x2"
+                        android:src="@drawable/ic_video_camera" />
+
+                    <ImageView
+                        android:id="@+id/ivGallery"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/space_x2"
+                        android:src="@drawable/ic_gallery" />
+
+                    <ImageView
+                        android:id="@+id/ivInvite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/space_x2"
+                        android:src="@drawable/ic_user_identity_white_24px" />
+                </LinearLayout>
+                <FrameLayout
+                    android:id="@+id/frameLayout"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/space_x2"
+
+                    android:layout_height="wrap_content"></FrameLayout>
+                <fragment
+                    android:id="@+id/fragmentImageUpload"
+                    android:name="com.golf.budz.core.components.FragmentImageUpload"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    tools:layout="@layout/fragment_image_upload"></fragment>
+
+                <FrameLayout
+                    android:id="@+id/videoframeLayout"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/space_x2"
+                    android:layout_height="wrap_content"></FrameLayout>
+                <fragment
+                    android:id="@+id/fragmentVideoUpload"
+                    android:name="com.golf.budz.core.components.FragmentVideoUpload"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:layout="@layout/fragment_image_upload"></fragment>
+                <Button
+                    android:id="@+id/btnUpdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/border"
+                    android:text="Create Group"
+                    android:textColor="@color/yellow" />
+            </LinearLayout>
+        </RelativeLayout>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.design.widget.CoordinatorLayout>
+

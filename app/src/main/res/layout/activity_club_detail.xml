@@ -1,0 +1,126 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg"
+    xmlns:custom="http://schemas.android.com/tools">
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="vertical">
+    <RelativeLayout
+        android:id="@+id/sliderlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="10dp">
+
+        <com.daimajia.slider.library.SliderLayout
+            android:id="@+id/slider"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            custom:auto_cycle="true"
+            custom:indicator_visibility="visible"
+            custom:pager_animation="Accordion"
+            custom:pager_animation_span="1100" />
+    </RelativeLayout>
+
+
+
+        <TextView
+            android:id="@+id/clubhead"
+            style="@style/AppTheme.TextView.CardView.Title"
+            android:text="Golf Club Name:" />
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/space_x1"
+            android:layout_marginRight="@dimen/space_x1"
+            card_view:cardBackgroundColor="@color/transblack"
+            card_view:cardCornerRadius="@dimen/space_x1">
+
+            <TextView
+                android:id="@+id/tvClubName"
+                style="@style/AppTheme.TextView"
+                android:text="Spn Club" />
+        </android.support.v7.widget.CardView>
+        <TextView
+            style="@style/AppTheme.TextView.CardView.Title"
+            android:text="Description:" />
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/space_x1"
+            android:layout_marginRight="@dimen/space_x1"
+            card_view:cardBackgroundColor="@color/transblack"
+            card_view:cardCornerRadius="@dimen/space_x1">
+
+            <TextView
+                android:id="@+id/tvDescription"
+                style="@style/AppTheme.TextView"
+                android:text="@string/slide_2_desc" />
+        </android.support.v7.widget.CardView>
+        <TextView
+            style="@style/AppTheme.TextView.CardView.Title"
+            android:text="Operating Hours:" />
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/space_x1"
+            android:layout_marginRight="@dimen/space_x1"
+            card_view:cardBackgroundColor="@color/transblack"
+            card_view:cardCornerRadius="@dimen/space_x1">
+
+            <TextView
+                android:id="@+id/tvOperatingHorus"
+                style="@style/AppTheme.TextView.CardView"
+                android:text="10:00A.M to 5:00P.M" />
+        </android.support.v7.widget.CardView>
+        <TextView
+            style="@style/AppTheme.TextView.CardView.Title"
+            android:text="Contact No." />
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/space_x1"
+            android:layout_marginRight="@dimen/space_x1"
+            card_view:cardBackgroundColor="@color/transblack"
+            card_view:cardCornerRadius="@dimen/space_x1">
+
+            <TextView
+                android:id="@+id/tvContactNo"
+                style="@style/AppTheme.TextView"
+                android:text="011 43784858" />
+        </android.support.v7.widget.CardView>
+        <TextView
+            style="@style/AppTheme.TextView.CardView.Title"
+            android:text="Address" />
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/space_x1"
+            android:layout_marginRight="@dimen/space_x1"
+            card_view:cardBackgroundColor="@color/transblack"
+            card_view:cardCornerRadius="@dimen/space_x1">
+
+            <TextView
+                android:id="@+id/tvAddress"
+                style="@style/AppTheme.TextView"
+                android:text="Delhi NCR" />
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>
+</android.support.design.widget.CoordinatorLayout>

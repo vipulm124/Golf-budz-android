@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_about_us"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.golf.budz.more.AboutUsActivity">
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="The sport of Long Drive will expand its presence on television in 2017 with three televised events on Golf Channel, including the season-culminating World Long Drive Championship over two nights in primetime in September, and two additional televised events airing on Golf Channel in June and July. For the first time ever, the Women’s Division will be live on TV, airing on Golf Channel at each of the three televised events, and it marks the first time in 13 years that the Women’s Division will be represented at scheduled Long Drive sanctioned events."/>
+</RelativeLayout>

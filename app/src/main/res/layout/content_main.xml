@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+
+    tools:showIn="@layout/app_bar_main">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg"
+        tools:context="com.golf.budz.home.MainActivity"
+        android:layout_marginTop="40dp"
+        tools:showIn="@layout/app_bar_main">
+        <fragment
+            android:id="@+id/fragmentLoader"
+            android:name="com.golf.budz.core.components.FragmentDataLoader"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            tools:layout="@layout/fragment_data_loader"></fragment>
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+
+        >
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/llPost"
+                style="@style/AppTheme.LinearLayout">
+
+                <EditText
+                    android:id="@+id/etPost"
+                    style="@style/AppTheme.EditText"
+                    android:drawableLeft="@drawable/ic_golf_flag_and_field"
+                    android:hint="Whats on your golfing mind?" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="@dimen/space_x2">
+
+
+                    <LinearLayout
+                        android:id="@+id/llVideo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:layout_weight="1">
+
+
+                        <ImageView
+                            android:id="@+id/video"
+                            style="@style/AppTheme.ImageView.Wrap"
+                            android:layout_marginLeft="10dp"
+
+                            android:layout_toRightOf="@+id/addtext"
+                            android:src="@drawable/ic_video_camera"
+                            android:layout_width="wrap_content" />
+
+                        <TextView
+                            style="@style/AppTheme.TextView"
+                            android:text="Video" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llGallery"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/image"
+                            style="@style/AppTheme.ImageView.Wrap"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@+id/video"
+                            android:src="@drawable/ic_gallery" />
+
+                        <TextView
+                            style="@style/AppTheme.TextView"
+                            android:text="Images" />
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/btnPost"
+                        style="@style/AppTheme.Button.Wrap"
+                        android:layout_marginTop="0dp"
+                        android:text="Post"
+                        android:textColor="@color/yellow" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical" />
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</RelativeLayout>
+
+    </android.support.design.widget.CoordinatorLayout>

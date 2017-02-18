@@ -1,0 +1,270 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/space_x2"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/space_x2"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <com.golf.budz.utils.RoundedImageView
+                    android:id="@+id/ivPic"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/pic" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvName"
+                        style="@style/AppTheme.TextView.Wrap"
+                        android:layout_marginLeft="@dimen/space_x2"
+                        android:text="Robin" />
+
+                    <TextView
+
+                        style="@style/AppTheme.TextView.Wrap"
+                        android:layout_marginLeft="@dimen/space_x2"
+                        android:text="Venue"
+                        android:textColor="@color/yellow" />
+
+                    <TextView
+                        android:id="@+id/tvVenue"
+                        style="@style/AppTheme.TextView.Wrap"
+                        android:layout_marginLeft="@dimen/space_x2"
+                        android:text="Joe Madsen
+General Manager/Director of Golf
+83040 Dismal River Trail, Mullen, NE 69152" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvDesc"
+                style="@style/AppTheme.TextView.Wrap"
+                android:layout_marginLeft="@dimen/space_x2"
+                android:text="" />
+
+            <android.support.percent.PercentRelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:descendantFocusability="beforeDescendants"
+                android:focusableInTouchMode="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/AppTheme.TextView.Wrap"
+                    android:layout_centerVertical="true"
+                    android:text="Number of Holes"
+                    android:textColor="@color/yellow"
+                    app:layout_widthPercent="50%" />
+
+                <TextView
+                    android:id="@+id/tvHoles"
+                    style="@style/AppTheme.TextView.Wrap"
+                    android:layout_alignParentRight="true"
+                    android:text="18"
+                    app:layout_widthPercent="50%" />
+            </android.support.percent.PercentRelativeLayout>
+
+            <android.support.percent.PercentRelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:descendantFocusability="beforeDescendants"
+                android:focusableInTouchMode="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/AppTheme.TextView.Wrap"
+                    android:layout_centerVertical="true"
+                    android:text="Day"
+                    android:textColor="@color/yellow"
+                    app:layout_widthPercent="50%" />
+
+                <TextView
+                    android:id="@+id/tvDay"
+                    style="@style/AppTheme.TextView.Wrap"
+                    android:layout_alignParentRight="true"
+                    android:text="----"
+                    app:layout_widthPercent="50%" />
+            </android.support.percent.PercentRelativeLayout>
+
+            <android.support.percent.PercentRelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:descendantFocusability="beforeDescendants"
+                android:focusableInTouchMode="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/AppTheme.TextView.Wrap"
+                    android:layout_centerVertical="true"
+                    android:text="T off Time"
+                    android:textColor="@color/yellow"
+                    app:layout_widthPercent="50%" />
+
+                <TextView
+                    android:id="@+id/tvTeaOffTime"
+                    style="@style/AppTheme.TextView.Wrap"
+                    android:layout_alignParentRight="true"
+                    android:text="-"
+                    app:layout_widthPercent="50%" />
+
+            </android.support.percent.PercentRelativeLayout>
+
+            <android.support.percent.PercentRelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:descendantFocusability="beforeDescendants"
+                android:focusableInTouchMode="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/AppTheme.TextView.Wrap"
+                    android:layout_centerVertical="true"
+                    android:text="Number of players"
+                    android:textColor="@color/yellow"
+                    app:layout_widthPercent="50%" />
+
+                <TextView
+                    android:id="@+id/tvPlayers"
+                    style="@style/AppTheme.TextView.Wrap"
+                    android:layout_alignParentRight="true"
+                    android:text="5"
+                    app:layout_widthPercent="50%" />
+
+            </android.support.percent.PercentRelativeLayout>
+            <android.support.percent.PercentRelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:descendantFocusability="beforeDescendants"
+                android:focusableInTouchMode="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/AppTheme.TextView.Wrap"
+                    android:layout_centerVertical="true"
+                    android:text="Handicap"
+                    android:textColor="@color/yellow"
+                    app:layout_widthPercent="50%" />
+
+                <TextView
+                    android:id="@+id/tvHandicap"
+                    style="@style/AppTheme.TextView.Wrap"
+                    android:layout_alignParentRight="true"
+                    android:text="No"
+                    app:layout_widthPercent="50%" />
+            </android.support.percent.PercentRelativeLayout>
+            <android.support.percent.PercentRelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:descendantFocusability="beforeDescendants"
+                android:focusableInTouchMode="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/AppTheme.TextView.Wrap"
+                    android:layout_centerVertical="true"
+                    android:text="Industry"
+                    android:textColor="@color/yellow"
+                    app:layout_widthPercent="50%" />
+
+                <TextView
+                    android:id="@+id/tvIndustry"
+                    style="@style/AppTheme.TextView.Wrap"
+                    android:layout_alignParentRight="true"
+                    android:text="-"
+                    app:layout_widthPercent="50%" />
+            </android.support.percent.PercentRelativeLayout>
+            <android.support.percent.PercentRelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:descendantFocusability="beforeDescendants"
+                android:focusableInTouchMode="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/AppTheme.TextView.Wrap"
+                    android:layout_centerVertical="true"
+                    android:text="Profession"
+                    android:textColor="@color/yellow"
+                    app:layout_widthPercent="50%" />
+
+                <TextView
+                    android:id="@+id/tvProfession"
+                    style="@style/AppTheme.TextView.Wrap"
+                    android:layout_alignParentRight="true"
+                    android:text="-"
+                    app:layout_widthPercent="50%" />
+
+            </android.support.percent.PercentRelativeLayout>
+            <android.support.percent.PercentRelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:descendantFocusability="beforeDescendants"
+                android:focusableInTouchMode="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/AppTheme.TextView.Wrap"
+                    android:layout_centerVertical="true"
+                    android:text="Gender"
+                    android:textColor="@color/yellow"
+                    app:layout_widthPercent="50%" />
+
+                <TextView
+                    android:id="@+id/tvGender"
+                    style="@style/AppTheme.TextView.Wrap"
+                    android:layout_alignParentRight="true"
+                    android:text="Male"
+                    app:layout_widthPercent="50%" />
+
+            </android.support.percent.PercentRelativeLayout>
+            <android.support.percent.PercentRelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusableInTouchMode="true"
+                android:orientation="horizontal">
+
+                <Button
+                    style="@style/AppTheme.Button.Wrap"
+                    android:layout_centerVertical="true"
+                    android:text="Cancel"
+                    android:textColor="@color/yellow"
+                    android:layout_marginRight="@dimen/space_x1"
+                    app:layout_widthPercent="50%" />
+
+                <Button
+                    style="@style/AppTheme.Button.Wrap"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:text="Join"
+                    android:textColor="@color/yellow"
+                    android:layout_marginRight="@dimen/space_x1"
+                    app:layout_widthPercent="50%" />
+
+            </android.support.percent.PercentRelativeLayout>
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+</android.support.design.widget.CoordinatorLayout>

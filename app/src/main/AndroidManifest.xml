@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.golf.budz.home">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:node="replace">
+
+        <!--
+     Set custom default icon. This is used when no icon is set for incoming notification messages.
+     See README(https://goo.gl/l4GJaQ) for more.
+        -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_clock" />
+        <!--
+             Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more.
+        -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
+
+        <activity
+            android:name="com.golf.budz.LauncherActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".SplashScreen"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".WelcomeActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name="com.golf.budz.auth.profile.ProfileActivity" />
+        <activity
+            android:name="com.golf.budz.auth.profile.EditProfileActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name="com.golf.budz.auth.profile.ChnagePasswordActivity" />
+        <activity
+            android:name="com.golf.budz.items.BuyItemActivity"
+            android:label="Buy Items" />
+        <activity android:name="com.golf.budz.items.BuyItemDetailActivity" />
+        <activity
+            android:name="com.golf.budz.auth.login.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name="com.golf.budz.auth.Register.RegisterActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity android:name="com.golf.budz.more.MoreActivity" />
+        <activity
+            android:name="com.golf.budz.notification.NotificationActivity"
+            android:label="Notification" />
+        <activity
+            android:name="com.golf.budz.friends.MyFriendActivity"
+            android:label="My Friends" />
+        <activity
+            android:name="com.golf.budz.event.EventActivity"
+            android:label="Events" />
+        <activity
+            android:name="com.golf.budz.event.CreateEventActivity"
+            android:label="Create Event" />
+        <activity
+            android:name="com.golf.budz.club.MyClubActivity"
+            android:label="My Club" />
+        <activity
+            android:name="com.golf.budz.club.ClubDetailActivity"
+            android:label="Detail" />
+        <activity
+            android:name="com.golf.budz.group.CreatePageActivity"
+            android:label="Create Group" />
+        <activity android:name="com.golf.budz.chat.ChatDashboradActivity" />
+        <activity android:name="com.golf.budz.auth.login.ForgotActivity" />
+        <activity
+            android:name="com.golf.budz.club.JoinClubActivity"
+            android:label="Join Club" />
+        <activity
+            android:name="com.golf.budz.items.SellItemActivity"
+            android:label="Post an item for sale" />
+        <activity android:name=".ImageDataPostActivity" />
+        <activity android:name="com.golf.budz.blog.BLogActivity" />
+        <activity android:name="com.golf.budz.blog.BlogDeatilActivity" />
+        <activity
+            android:name="com.golf.budz.playrequest.PlayRequestActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name="com.golf.budz.playrequest.RequestDetailActivity" />
+        <activity android:name="com.golf.budz.event.EventDetailActivity" />
+        <activity android:name=".VideoDatapostActivity" />
+        <activity
+            android:name="com.golf.budz.more.AboutUsActivity"
+            android:label="About Us" />
+        <activity
+            android:name="com.golf.budz.more.ContactUsActivity"
+            android:label="Contact Us" />
+        <activity
+            android:name="com.golf.budz.more.TermsConditionActivity"
+            android:label="Terms and Condition" />
+        <activity android:name=".VideoActivity" />
+        <activity android:name="com.golf.budz.friends.FriendProfileActivity" />
+        <activity android:name="com.golf.budz.chat.MyChatActivity" />
+        <activity
+            android:name=".comment.CommentsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+<activity android:name="com.golf.budz.group.invite.InviteFriendActivity"
+    android:label="Add Member"></activity>
+        <activity android:name="com.golf.budz.group.MyGroupActivity"
+            android:label="My Groups"></activity>
+
+        <service android:name="com.golf.budz.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name="com.golf.budz.MyFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+    </application>
+
+</manifest>

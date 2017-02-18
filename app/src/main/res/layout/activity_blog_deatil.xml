@@ -1,0 +1,63 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg">
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/space_x2"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/space_x2"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_toRightOf="@+id/ivImage"
+            android:layout_height="wrap_content"
+            >
+        <com.golf.budz.utils.RoundedImageView
+            android:id="@+id/ivImage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/pic" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_toRightOf="@+id/ivImage"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+           >
+            <TextView
+            android:id="@+id/tvTilte"
+            style="@style/AppTheme.TextView.Wrap"
+            android:layout_toRightOf="@+id/ivImage"
+            android:textStyle="bold"
+            android:text="The Importance Of Sole"/>
+            <TextView
+                android:id="@+id/tvPosted"
+                style="@style/AppTheme.TextView.Wrap"
+                android:layout_gravity="end"
+                android:layout_marginTop="@dimen/space_x2"
+                android:text="Posted on: November 13, 2016"/></LinearLayout>
+            </LinearLayout>
+        <TextView
+            android:id="@+id/tvDesc"
+            style="@style/AppTheme.TextView.Wrap"
+            android:layout_below="@+id/tv_name"
+            android:layout_toRightOf="@+id/eventimg"
+            android:text="Because of the importance of balance and stability in the golf swing, the need for good golf shoes is a “no brainer.” Indeed, “golf shoes are specifically designed to give players stability, balance and flexibility during the unique motion of a golf swing”. As a result, the purpose of this post is not to convince you that you should play golf in golf shoes instead of your loafers. (As per above, that’s a “no brainer.”) Instead, the following discussion is designed for the golfer who understands the importance of finding a good golf shoe, but is struggling with sorting through the myriad options available on the market.
+
+Spikes
+
+You should not be wearing golf shoes with metal spikes. All new golf shoes all have this covered, so the pair you see in the attic or at the second hand goods store with metal spikes should stay on the shelf. Metal spikes are hard on the golf course and provide no additional benefit to the more comfortable and easier-on-the-golf course plastic spikes of today’s golf shoe. The real question might be whether to try the golf shoes with replaceable plastic spikes versus the casual shoe with the molded cleats built in (also known as spike-less). The general consensus seems to be that the latter style gives away some amount of traction compared to golf shoes with replaceable spikes. This is particularly exacerbated when these shoes are worn at home, on the street, and at the golf course. However, just how much is lost appears to be minimal, and can be reduced by keeping the soles clean."/>
+
+    </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+</android.support.design.widget.CoordinatorLayout>

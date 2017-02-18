@@ -1,0 +1,184 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg">
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true">
+
+
+        <LinearLayout
+            android:id="@+id/email_login_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/space_x2">
+
+            <ImageView
+                android:id="@+id/iv_logo"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:src="@drawable/logo_old" />
+
+
+            <EditText
+                android:id="@+id/etFrstnme"
+                style="@style/AppTheme.EditText"
+                android:drawableLeft="@drawable/ic_user_identity_white_24px"
+                android:hint="First name"
+
+                />
+
+            <EditText
+                android:id="@+id/etLstmne"
+                style="@style/AppTheme.EditText"
+                android:drawableLeft="@drawable/ic_user_identity_white_24px"
+                android:hint="Last Name" />
+
+
+            <EditText
+                android:id="@+id/etEmail"
+                style="@style/AppTheme.EditText"
+                android:drawableLeft="@drawable/ic_email_white_24px"
+                android:hint="Email" />
+
+
+            <EditText
+                android:id="@+id/etPassword"
+                style="@style/AppTheme.EditText"
+                android:drawableLeft="@drawable/ic_lock_white_24px"
+                android:hint="Password"
+                android:inputType="textPassword" />
+
+
+            <EditText
+                android:id="@+id/etCnfrmpswrd"
+                style="@style/AppTheme.EditText"
+                android:drawableLeft="@drawable/ic_lock_white_24px"
+                android:hint="Confirm Password"
+                android:inputType="textPassword" />
+            <RelativeLayout
+
+                style="@style/AppTheme.EditText"
+                >
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:spinnerMode="dialog"
+                android:layout_toRightOf="@+id/img"
+                />
+                <ImageView
+                    android:id="@+id/img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_clubs"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/ic_down_arrow"/>
+            </RelativeLayout>
+            <!--<fragment
+                android:id="@+id/componentRoleSelector"
+                android:name="com.golf.budz.core.components.ComponentItemSelector"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:layout="@layout/component_role_item_selector"></fragment>-->
+            <LinearLayout
+                android:id="@+id/llClubDeatl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:orientation="vertical">
+            <EditText
+                android:id="@+id/etClubName"
+                style="@style/AppTheme.EditText"
+                android:drawableLeft="@drawable/ic_clubs"
+                android:hint="Club Name" />
+                <EditText
+                    android:id="@+id/etDesc"
+                    style="@style/AppTheme.EditText"
+                    android:drawableLeft="@drawable/ic_comment"
+                    android:hint="Description" />
+                <EditText
+                    android:id="@+id/etAddress"
+                    style="@style/AppTheme.EditText"
+                    android:drawableLeft="@drawable/ic_location"
+                    android:hint="Address" />
+                <EditText
+                    android:id="@+id/etCity"
+                    style="@style/AppTheme.EditText"
+                    android:drawableLeft="@drawable/ic_location"
+                    android:hint="City" />
+                <EditText
+                    android:id="@+id/etSubrub"
+                    style="@style/AppTheme.EditText"
+                    android:drawableLeft="@drawable/ic_location"
+                    android:hint="Subrub" />
+                <fragment
+                    android:id="@+id/componentCitySelector"
+                    android:name="com.golf.budz.core.components.ComponentItemSelector"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:layout="@layout/component_item_selector"></fragment>
+
+                <EditText
+                    android:id="@+id/etOperatingHours"
+                    style="@style/AppTheme.EditText"
+                    android:drawableLeft="@drawable/ic_clock"
+                    android:hint="Operating Hours" />
+                <EditText
+                    android:id="@+id/etContactNo"
+                    style="@style/AppTheme.EditText"
+                    android:drawableLeft="@drawable/ic_phone_white_24px"
+                    android:hint="Contact No" />
+            </LinearLayout>
+            <RelativeLayout
+                android:id="@+id/tandc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true">
+
+                <TextView
+                    android:id="@+id/tvIaccept"
+                    style="@style/normaltext"
+                    android:layout_toRightOf="@+id/tvTccheckBox"
+                    android:text="@string/iaccept" />
+
+                <TextView
+                    android:id="@+id/tvTc"
+
+                    style="@style/normaltext"
+                    android:layout_toRightOf="@+id/tvIaccept"
+                    android:text="@string/tandc" />
+
+                <CheckBox
+                    android:id="@+id/tvTccheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin" />
+
+
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/btSgnupbtn"
+                style="@style/AppTheme.Button"
+                android:layout_marginTop="@dimen/space_x2"
+                android:text="@string/lup" />
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+</RelativeLayout>
+
+

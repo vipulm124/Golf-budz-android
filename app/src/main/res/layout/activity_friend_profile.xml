@@ -1,0 +1,428 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/space_x2"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <com.golf.budz.utils.RoundedImageView
+                android:id="@+id/ivProfile"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/pic" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ivProfile"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/profilelayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/namelayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_user_identity_white_24px" />
+
+                            <View
+                                android:layout_width="1dp"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@color/colordark"></View>
+
+                            <TextView
+                                android:id="@+id/tvName"
+                                style="@style/AppTheme.TextView.Wrap"
+                                android:text=""
+
+                                />
+                        </LinearLayout>
+
+                        <View style="@style/AppTheme.Divider.CardView"></View>
+                        <LinearLayout
+
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_user_identity_white_24px" />
+
+                            <View
+                                android:layout_width="1dp"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@color/colordark"></View>
+
+                            <TextView
+                                android:id="@+id/tvLName"
+                                style="@style/AppTheme.TextView.Wrap"
+                                android:text=""
+
+                                />
+                        </LinearLayout>
+
+                        <View style="@style/AppTheme.Divider.CardView"></View>
+                    </LinearLayout>
+
+
+
+                    <LinearLayout
+                        android:id="@+id/emaillayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:src="@drawable/ic_email_white_24px" />
+
+                            <View
+                                android:layout_width="1dp"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@color/colordark"></View>
+
+                            <TextView
+                                android:id="@+id/tvEmail"
+                                style="@style/AppTheme.TextView.Wrap"
+                                android:text="" />
+                        </LinearLayout>
+
+                        <View style="@style/AppTheme.Divider.CardView"></View>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/handicaplayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_comment" />
+
+                            <View
+                                android:layout_width="1dp"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@color/colordark"></View>
+
+                            <TextView
+                                android:id="@+id/tvHandcap"
+                                style="@style/AppTheme.TextView.Wrap"
+
+                                android:text="" />
+                        </LinearLayout>
+
+                        <View style="@style/AppTheme.Divider.CardView"></View>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/strengthlayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_comment" />
+
+                            <View
+                                android:layout_width="1dp"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@color/colordark"></View>
+
+                            <TextView
+                                android:id="@+id/tvStrength"
+
+                                style="@style/AppTheme.TextView.Wrap"
+
+                                android:text="" />
+                        </LinearLayout>
+
+                        <View style="@style/AppTheme.Divider.CardView"></View>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/weaklayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_clubs" />
+
+                            <View
+                                android:layout_width="1dp"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@color/colordark"></View>
+
+                            <TextView
+                                android:id="@+id/tvWeakness"
+                                style="@style/AppTheme.TextView.Wrap"
+
+                                android:text=""
+
+                                />
+                        </LinearLayout>
+
+                        <View style="@style/AppTheme.Divider.CardView"></View>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/requestperlayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_create_page" />
+
+                            <View
+                                android:layout_width="1dp"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@color/colordark"></View>
+
+                            <TextView
+                                android:id="@+id/tvRounds"
+                                style="@style/AppTheme.TextView.Wrap"
+                                android:text=""
+
+                                />
+                        </LinearLayout>
+
+                        <View style="@style/AppTheme.Divider.CardView"></View>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/golfbaglayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_golf_flag_and_field" />
+
+                            <View
+                                android:layout_width="1dp"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@color/colordark"></View>
+
+                            <TextView
+                                android:id="@+id/tvGolfbag"
+                                style="@style/AppTheme.TextView.Wrap"
+
+                                android:text=""
+
+                                />
+                        </LinearLayout>
+
+                        <View style="@style/AppTheme.Divider.CardView"></View>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/gamesplayedlayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_email_white_24px" />
+
+                            <View
+                                android:layout_width="1dp"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@color/colordark"></View>
+
+                            <TextView
+                                android:id="@+id/tvGamesPlayes"
+                                style="@style/AppTheme.TextView.Wrap"
+
+                                android:text=""
+
+                                />
+                        </LinearLayout>
+
+                        <View style="@style/AppTheme.Divider.CardView"></View>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/mobilelayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_phone_white_24px" />
+
+                            <View
+                                android:layout_width="1dp"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@color/colordark"></View>
+
+                            <TextView
+                                android:id="@+id/tvMobile"
+                                style="@style/AppTheme.TextView.Wrap"
+
+                                android:text=""
+
+
+                                />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+</android.support.design.widget.CoordinatorLayout>
