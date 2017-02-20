@@ -32,6 +32,7 @@ public class BoEventData {
     public static final int EVENT_FRIEND_ITEM_CLICK = 21;
     public static final int EVENT_NOTI_ACCEPT_CLICK = 22;
     public static final int EVENT_NOTI_CANCEL_CLICK = 23;
+    public static final int EVENT_PLAY_REQ_SEND_CLICK = 24;
     public final int eventType;
 
     public int getId() {

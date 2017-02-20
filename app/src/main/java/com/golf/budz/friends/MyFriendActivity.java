@@ -221,7 +221,8 @@ public class MyFriendActivity extends BaseActivity {
                 break;
             }
             case BoEventData.EVENT_EVENT_FSENDREQ_CLICK: {
-                sendPlayReq(data);
+                startActivity(new Intent(this, MyAllPlayReqActivity.class));
+                //sendPlayReq(data);
                 break;
             }
         }
@@ -261,37 +262,7 @@ public class MyFriendActivity extends BaseActivity {
         });
 
     }
-    private void sendPlayReq(String friendId) {
-        showProgressDialog("Performing operation", "Please wait...");
-        String userId = Pref.Read(this, Const.PREF_USER_ID);
-        IApiService service = APIHelper.getAppServiceMethod();
-        Call<PojoFriend> call = service.sendPlayReqByuserId(userId,friendId);
-        call.enqueue(new Callback<PojoFriend>() {
-            @Override
-            public void onResponse(Call<PojoFriend> call, Response<PojoFriend> response) {
-                hideDialog();
-                if (response.isSuccessful()) {
-                    PojoFriend pojoUser = response.body();
-                    if (pojoUser.getStatus() == Const.STATUS_SUCCESS) {
-                        toast(pojoUser.getMessage());
-                    } else if (pojoUser.getStatus() == Const.STATUS_FAILED) {
-                        toast(pojoUser.getMessage());
-                    } else if (pojoUser.getStatus() == Const.STATUS_ERROR) {
-                        toast(pojoUser.getMessage());
-                    }
-                } else {
-                    toast("Something went wrong");
-                }
-            }
 
-            @Override
-            public void onFailure(Call<PojoFriend> call, Throwable t) {
-                hideDialog();
-                Common.logException(getApplicationContext(), "Internal server error", t, null);
-            }
-        });
-
-    }
     private void addFriend(String friendId,final int position) {
         showProgressDialog("Performing operation", "Please wait...");
         String userId = Pref.Read(this, Const.PREF_USER_ID);

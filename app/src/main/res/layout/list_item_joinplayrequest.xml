@@ -42,7 +42,7 @@
             style="@style/AppTheme.TextView.Wrap"
             android:layout_gravity="end"
             android:textColor="@color/yellow"
-            android:text="View Details"
+            android:text="Send"
             />
     </LinearLayout>
 </android.support.v7.widget.CardView>

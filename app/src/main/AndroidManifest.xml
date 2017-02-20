@@ -102,6 +102,7 @@
             android:label="Post an item for sale" />
         <activity android:name=".ImageDataPostActivity" />
         <activity android:name="com.golf.budz.blog.BLogActivity" />
+        <activity android:name="com.golf.budz.blog.OnCourseActivity" />
         <activity android:name="com.golf.budz.blog.BlogDeatilActivity" />
         <activity
             android:name="com.golf.budz.playrequest.PlayRequestActivity"
@@ -124,10 +125,14 @@
         <activity
             android:name=".comment.CommentsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-<activity android:name="com.golf.budz.group.invite.InviteFriendActivity"
-    android:label="Add Member"></activity>
-        <activity android:name="com.golf.budz.group.MyGroupActivity"
-            android:label="My Groups"></activity>
+        <activity
+            android:name="com.golf.budz.group.invite.InviteFriendActivity"
+            android:label="Add Member" />
+        <activity
+            android:name="com.golf.budz.group.MyGroupActivity"
+            android:label="My Groups" />
+        <activity android:name="com.golf.budz.friends.MyAllPlayReqActivity"
+            android:label="My Play Request"></activity>
 
         <service android:name="com.golf.budz.MyFirebaseMessagingService">
             <intent-filter>

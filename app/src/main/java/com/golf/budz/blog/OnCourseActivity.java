@@ -1,8 +1,6 @@
 package com.golf.budz.blog;
 
 import android.content.Intent;
-import android.os.Parcelable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,11 +10,7 @@ import android.view.View;
 import com.golf.budz.core.base.BaseActivity;
 import com.golf.budz.core.base.BoEventData;
 import com.golf.budz.core.components.FragmentDataLoader;
-import com.golf.budz.event.EventDetailActivity;
 import com.golf.budz.home.R;
-import com.golf.budz.home.model.BoService;
-import com.golf.budz.home.model.PojoService;
-import com.golf.budz.items.BuyItemAdapter;
 import com.golf.budz.utils.Common;
 import com.golf.budz.utils.Const;
 import com.golf.budz.utils.api.APIHelper;
@@ -32,7 +26,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class BLogActivity extends BaseActivity {
+/**
+ * Created by Adcore on 2/20/2017.
+ */
+
+public class OnCourseActivity extends BaseActivity {
 
     private BlogAdapter adapter;
     private FragmentDataLoader fragmentLoader;
@@ -112,7 +110,7 @@ public class BLogActivity extends BaseActivity {
     }
     private void updateViews(int size) {
         if (size == 0) {
-            fragmentLoader.setDataEmpty("No blogs are available");
+            fragmentLoader.setDataEmpty("No data available");
             recyclerView.setVisibility(View.GONE);
         } else {
             fragmentLoader.setDataAvailable();

@@ -222,9 +222,13 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
     }
     private void getVenues() {
         List<String> categories = new ArrayList<String>();
-        categories.add("Delhi");
-        categories.add("Agra");
-        categories.add("Mumbai");
+        categories.add("King David Mowbray Golf Club");
+        categories.add("Langebaan Country Estate");
+        categories.add("Paarl Golf Club");
+        categories.add("Steenberg Golf Club");
+        categories.add("Erinvale Golf Club");
+        categories.add("The Arabella Country Estate");
+
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), R.layout.item_spinner_dropdown, categories);
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -282,9 +286,13 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
     }
     private void getLocation() {
         List<String> categories = new ArrayList<String>();
-        categories.add("USA");
-        categories.add("India");
-        categories.add("Germany");
+        categories.add("Adelaide");
+        categories.add("Aliwal North");
+        categories.add("Balfour");
+        categories.add("Dohne");
+        categories.add("Dordrecht");
+        categories.add("Katberg");
+        categories.add("Mdantsane");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), R.layout.item_spinner_dropdown, categories);
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

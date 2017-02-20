@@ -454,7 +454,8 @@ public class MainActivity extends BaseActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         if (id == R.id.nav_home) {
-            // startActivity(new Intent(MainActivity.this, MainActivity.class));
+             startActivity(new Intent(MainActivity.this, MainActivity.class));
+            finish();
             // Handle the camera action
         } else if (id == R.id.nav_event) {
             startActivity(new Intent(MainActivity.this, EventActivity.class));
@@ -493,6 +494,9 @@ public class MainActivity extends BaseActivity
 
         } else if (id == R.id.nav_share) {
             Common.shareApp(this);
+
+        } else if (id == R.id.nav_oncourse) {
+            startActivity(new Intent(MainActivity.this, BLogActivity.class));
 
         } else if (id == R.id.nav_daledgolfchat) {
             startActivity(new Intent(MainActivity.this, BLogActivity.class));
