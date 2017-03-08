@@ -1,27 +1,18 @@
 package com.golf.budz.auth.profile;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.Matrix;
-import android.location.Address;
-import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,38 +20,25 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.golf.budz.auth.BoUser;
-import com.golf.budz.auth.GetImageContent;
 import com.golf.budz.auth.PojoUser;
 import com.golf.budz.auth.Register.BoCity;
 import com.golf.budz.auth.Register.PojoCity;
-import com.golf.budz.auth.Register.RegisterActivity;
 import com.golf.budz.core.base.BaseActivity;
 import com.golf.budz.core.components.ComponentItemSelector;
 import com.golf.budz.home.MainActivity;
 import com.golf.budz.home.R;
-import com.golf.budz.utils.CheckNetworkConnection;
 import com.golf.budz.utils.Common;
-import com.golf.budz.utils.ConnectionAlertDialog;
 import com.golf.budz.utils.Const;
 import com.golf.budz.utils.Pref;
-import com.golf.budz.utils.ShowAlert;
-import com.golf.budz.utils.Validations;
 import com.golf.budz.utils.api.APIHelper;
 import com.golf.budz.utils.api.IApiService;
-import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
@@ -75,13 +53,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -100,8 +73,6 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
     EditText etEmail;
 
 
-
-
     @BindView(R.id.btSgnupbtn)
     Button btSgnupbtn;
 
@@ -109,8 +80,7 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
     LinearLayout emailLoginForm;
     @BindView(R.id.llClubDeatl)
     LinearLayout llClubDeatl;
-    @BindView(R.id.spinner)
-    Spinner spinner;
+
     boolean checked = false;
     List<String> items = new ArrayList<String>();
     List<String> roleitems = new ArrayList<String>();
@@ -133,6 +103,26 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
     @BindView(R.id.etContactNo)
     EditText etContactNo;
     String userType;
+    @BindView(R.id.etSex)
+    EditText etSex;
+    @BindView(R.id.etAge)
+    EditText etAge;
+    @BindView(R.id.etHandicap)
+    EditText etHandicap;
+    @BindView(R.id.etAffiliate)
+    EditText etAffiliate;
+    @BindView(R.id.etProfession)
+    EditText etProfession;
+    @BindView(R.id.etRound)
+    EditText etRound;
+    @BindView(R.id.etRefer)
+    EditText etRefer;
+    @BindView(R.id.etLike)
+    EditText etLike;
+    @BindView(R.id.etSocialLike)
+    EditText etSocialLike;
+    @BindView(R.id.etType)
+    EditText etType;
     private DatabaseReference mDatabase;
     private boolean isUploading;
     private Uri selectedImage;
@@ -142,8 +132,9 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
     private ArrayList<Uri> allItems;
     private UploadTask uploadTask;
     private ArrayList<String> allUploadedUri;
-    String userChoosenTask="";
+    String userChoosenTask = "";
     private static final int REQUEST_CAMERA = 2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -163,7 +154,7 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
         allItems = new ArrayList<>();
         allUploadedUri = new ArrayList<>();
         getAllCountries();
-        getRoles();
+
         getProfile();
         try {
             storageRef = FirebaseStorage.getInstance().getReferenceFromUrl(Const.FIREBASE_STORAGE_BUCKET_PATH);
@@ -179,23 +170,6 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
         showImagePicker();
     }
 
-    private void getRoles() {
-
-        spinner.setOnItemSelectedListener(this);
-
-        // Spinner Drop down elements
-        List<String> categories = new ArrayList<String>();
-        categories.add("Individual");
-        categories.add("Club");
-        // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, R.layout.item_spinner_dropdown, categories);
-
-        // Drop down layout style - list view with radio button
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        // attaching data adapter to spinner
-        spinner.setAdapter(dataAdapter);
-    }
 
     public void showImagePicker() {
         if (isUploading) {
@@ -209,21 +183,21 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
     }
 
     private void selectImage() {
-        final CharSequence[] items = { "Take Photo", "Choose from Library",
-                "Cancel" };
+        final CharSequence[] items = {"Take Photo", "Choose from Library",
+                "Cancel"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Add Photo!");
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
-                boolean result= Common.checkPermission(EditProfileActivity.this);
+                boolean result = Common.checkPermission(EditProfileActivity.this);
                 if (items[item].equals("Take Photo")) {
-                    userChoosenTask="Take Photo";
-                    if(result)
+                    userChoosenTask = "Take Photo";
+                    if (result)
                         cameraIntent();
                 } else if (items[item].equals("Choose from Library")) {
-                    userChoosenTask="Choose from Library";
-                    if(result)
+                    userChoosenTask = "Choose from Library";
+                    if (result)
                         galleryIntent();
                 } else if (items[item].equals("Cancel")) {
                     dialog.dismiss();
@@ -232,29 +206,30 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
         });
         builder.show();
     }
-    private void cameraIntent()
-    {
+
+    private void cameraIntent() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent, REQUEST_CAMERA);
     }
-    private void galleryIntent()
-    {
+
+    private void galleryIntent() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_PICK);//
         intent.putExtra("crop", "true");
         intent.putExtra("aspectX", 0);
         intent.putExtra("aspectY", 0);
-        startActivityForResult(Intent.createChooser(intent, "Select File"),REQUEST_IMAGE_PICK);
+        startActivityForResult(Intent.createChooser(intent, "Select File"), REQUEST_IMAGE_PICK);
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         switch (requestCode) {
             case Common.MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    if(userChoosenTask.equals("Take Photo"))
+                    if (userChoosenTask.equals("Take Photo"))
                         cameraIntent();
-                    else if(userChoosenTask.equals("Choose from Library"))
+                    else if (userChoosenTask.equals("Choose from Library"))
                         galleryIntent();
                 } else {
 //code for deny
@@ -262,6 +237,7 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
                 break;
         }
     }
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
@@ -276,7 +252,7 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
                     Bitmap photo = extras2.getParcelable("data");
                     ivPic.setImageBitmap(photo);
                     isProfilePicChanged = true;
-                    String compressedImage = SiliCompressor.with(getApplicationContext()).compress(getImageUri(this,photo).toString());
+                    String compressedImage = SiliCompressor.with(getApplicationContext()).compress(getImageUri(this, photo).toString());
                     selectedImage = Uri.fromFile(new File(compressedImage));
                     uploadImageToStorage(compressedImage, allItems.size() - 1);
                     ivPic.setImageURI(selectedImage);
@@ -300,12 +276,14 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
 
         }
     }
+
     public Uri getImageUri(Context inContext, Bitmap inImage) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
         String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
         return Uri.parse(path);
     }
+
     private void onCaptureImageResult(Intent data) {
         Uri selectedImage = data.getData();
         ivPic.setImageURI(selectedImage);
@@ -315,8 +293,9 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
         uploadImageToStorage(compressedImage, allItems.size() - 1);
         ivPic.setImageURI(selectedImage);
     }
+
     private void uploadImageToStorage(final String file, final int position) {
-        StorageReference imageRef = storageRef.child("Images/"+"image_" + System.currentTimeMillis() + ".jpg");
+        StorageReference imageRef = storageRef.child("Images/" + "image_" + System.currentTimeMillis() + ".jpg");
         FileInputStream stream = null;
         try {
             stream = new FileInputStream(new File(file));
@@ -451,11 +430,23 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
                 etSubrub.setText(user.getSubRub());
                 etContactNo.setText(user.getContact());
                 etOperatingHours.setText(user.getOperatingHours());
+                etType.setText(user.getUserType());
             }
+            etType.setText(user.getUserType());
             etFrstnme.setText(user.getFirstName());
             etLstmne.setText(user.getLastName());
             etEmail.setText(user.getEmail());
             etClubName.setText(user.getClubName());
+
+            etSex.setText(user.getSex());
+            etAge.setText(user.getAge());
+            etHandicap.setText(user.getHandicap());
+            etAffiliate.setText(user.getAffiliated());
+            etProfession.setText(user.getProfession());
+            etRefer.setText(user.getRefer());
+            etRound.setText(user.getRounds());
+            etLike.setText(user.getPlayWithUs());
+            etSocialLike.setText(user.getPlayWithOther());
             Common.showRoundImage(getApplicationContext(), ivPic, user.getProfileImage());
             try {
                 selectedImage = Uri.parse(user.getProfileImage());
@@ -500,6 +491,16 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
             String operatingHours = etOperatingHours.getText().toString();
             String contactNo = etContactNo.getText().toString();
 
+            String sex = etSex.getText().toString();
+            String age = etAge.getText().toString();
+            String handicap = etHandicap.getText().toString();
+            String affliate = etAffiliate.getText().toString();
+            String profession = etProfession.getText().toString();
+            String refer = etRefer.getText().toString();
+            String round = etRound.getText().toString();
+            String like = etLike.getText().toString();
+            String sociallike = etSocialLike.getText().toString();
+
 
             if (TextUtils.isEmpty(fName)) {
                 etFrstnme.setError("Enter FirstName");
@@ -534,12 +535,12 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
                 user.setFirstName(fName);
                 user.setLastName(lName);
                 user.setCountry("India");
-                if(allUploadedUri.size()>0)
-                user.setProfileImage(allUploadedUri.get(0));
+                if (allUploadedUri.size() > 0)
+                    user.setProfileImage(allUploadedUri.get(0));
                 else
                     user.setProfileImage("");
                 user.setDob("");
-                user.setHandicap("");
+                user.setHandicap(handicap);
                 user.setStrength("");
                 user.setWeakness("");
 
@@ -548,11 +549,19 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
                 user.setDeviceType(Const.DEVICE_TYPE);
                 user.setUserType(userType);
                 user.setClubName(club);
+                user.setAge(age);
                 user.setDescription(description);
                 user.setAddress(address);
                 user.setCity(city);
                 user.setSubRub(subrub);
                 user.setOperatingHours(operatingHours);
+                user.setSex(sex);
+                user.setAffiliated(affliate);
+                user.setProfession(profession);
+                user.setRoundsPerMonth(round);
+                user.setRefer(refer);
+                user.setPlayWithUs(like);
+                user.setPlayWithOther(sociallike);
                 updateProfile(user);
             }
 
@@ -563,7 +572,7 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
         showProgressDialog("Updating", "Please wait...");
 
         IApiService service = APIHelper.getAppServiceMethod();
-        Call<PojoUser> call = service.updateProfile(user.getUserId(),user);
+        Call<PojoUser> call = service.updateProfile(user.getUserId(), user);
         call.enqueue(new Callback<PojoUser>() {
             @Override
             public void onResponse(Call<PojoUser> call, Response<PojoUser> response) {
@@ -613,4 +622,143 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
 
     }
 
+    @OnClick(R.id.etSex)
+    public void selGneder() {
+        AlertDialog.Builder builderSingle = new AlertDialog.Builder(this);
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.select_dialog_singlechoice);
+        arrayAdapter.add("Male");
+        arrayAdapter.add("Female");
+        builderSingle.setNegativeButton(
+                "cancel",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        builderSingle.setAdapter(
+                arrayAdapter,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String strGender = arrayAdapter.getItem(which);
+                        etSex.setText(strGender);
+                    }
+                });
+        AlertDialog dialog = builderSingle.create();
+        dialog.show();
+    }
+
+    @OnClick(R.id.etLike)
+    public void selLikeChoice() {
+        AlertDialog.Builder builderSingle = new AlertDialog.Builder(this);
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.select_dialog_singlechoice);
+        arrayAdapter.add("Yes");
+        arrayAdapter.add("No");
+        builderSingle.setNegativeButton(
+                "cancel",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        builderSingle.setAdapter(
+                arrayAdapter,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String strGender = arrayAdapter.getItem(which);
+                        etLike.setText(strGender);
+                    }
+                });
+        final AlertDialog dialog = builderSingle.create();
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface arg0) {
+                dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK);
+            }
+        });
+        dialog.show();
+    }
+
+    @OnClick(R.id.etSocialLike)
+    public void selSLikeChoice() {
+        AlertDialog.Builder builderSingle = new AlertDialog.Builder(this);
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.select_dialog_singlechoice);
+        arrayAdapter.add("Yes");
+        arrayAdapter.add("No");
+        builderSingle.setNegativeButton(
+                "cancel",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        builderSingle.setAdapter(
+                arrayAdapter,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String strGender = arrayAdapter.getItem(which);
+                        etSocialLike.setText(strGender);
+                    }
+                });
+        final AlertDialog dialog = builderSingle.create();
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface arg0) {
+                dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK);
+            }
+        });
+        dialog.show();
+    }
+
+    @OnClick(R.id.etHandicap)
+    public void selHandiChoice() {
+        AlertDialog.Builder builderSingle = new AlertDialog.Builder(this);
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.select_dialog_singlechoice);
+        arrayAdapter.add("Yes");
+        arrayAdapter.add("No");
+
+        builderSingle.setNegativeButton(
+                "cancel",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        builderSingle.setAdapter(
+                arrayAdapter,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String strGender = arrayAdapter.getItem(which);
+                        etHandicap.setText(strGender);
+                    }
+                });
+        final AlertDialog dialog = builderSingle.create();
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface arg0) {
+                dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK);
+            }
+        });
+
+        dialog.show();
+    }
 }

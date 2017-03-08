@@ -73,7 +73,6 @@ public class MyAllPlayReqActivity extends BaseActivity {
         recyclerView.setLayoutManager(manager);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
-        updateViews(allItems.size());
         fillData();
 
     }

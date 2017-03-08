@@ -60,6 +60,24 @@ public class BoUser implements Serializable {
     public String rounds;
     @SerializedName("status")
     public String status;
+
+    @SerializedName("sex")
+    public String sex;
+    @SerializedName("affiliated")
+    public String affiliated;
+    @SerializedName("age")
+    public String age;
+    @SerializedName("profession")
+    public String profession;
+    @SerializedName("roundsPerMonth")
+    public String roundsPerMonth;
+    @SerializedName("refer")
+    public String refer;
+    @SerializedName("playWithUs")
+    public String playWithUs;
+    @SerializedName("playWithOther")
+    public String playWithOther;
+
     public String getEmail() {
         return email;
     }
@@ -258,5 +276,69 @@ public class BoUser implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getAffiliated() {
+        return affiliated;
+    }
+
+    public void setAffiliated(String affiliated) {
+        this.affiliated = affiliated;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    public String getProfession() {
+        return profession;
+    }
+
+    public void setProfession(String profession) {
+        this.profession = profession;
+    }
+
+    public String getRoundsPerMonth() {
+        return roundsPerMonth;
+    }
+
+    public void setRoundsPerMonth(String roundsPerMonth) {
+        this.roundsPerMonth = roundsPerMonth;
+    }
+
+    public String getRefer() {
+        return refer;
+    }
+
+    public void setRefer(String refer) {
+        this.refer = refer;
+    }
+
+    public String getPlayWithUs() {
+        return playWithUs;
+    }
+
+    public void setPlayWithUs(String playWithUs) {
+        this.playWithUs = playWithUs;
+    }
+
+    public String getPlayWithOther() {
+        return playWithOther;
+    }
+
+    public void setPlayWithOther(String playWithOther) {
+        this.playWithOther = playWithOther;
     }
 }

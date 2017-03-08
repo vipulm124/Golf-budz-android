@@ -24,6 +24,7 @@ public class Const {
     public static final String EXTRA_REQ_ID = "playReqId";
     public static final String EXTRA_USER_ID = "userId";
     public static final String EXTRA_POST_ID = "postId";
+    public static final String EXTRA_POST = "post";
     public static boolean IS_TEST = false;
     public static boolean IS_PRODUCTION=false;
     public static String API_BASE_URL_DEV="https://golfbudz-staging.herokuapp.com/api/";//https://golfbudz-api.herokuapp.com/api/";

@@ -35,7 +35,7 @@ public class ChatUserAdapter extends RecyclerView.Adapter<ChatUserAdapter.ViewHo
     public ChatUserAdapter(List<Post> user, Activity comtext) {
         this.allUsers = user;
         this.comtext=comtext;
-         name = Pref.Read(comtext, Const.PREF_USER_DISPLAY_NAME);
+             name = Pref.Read(comtext, Const.PREF_USER_DISPLAY_NAME);
     }
 
     @Override

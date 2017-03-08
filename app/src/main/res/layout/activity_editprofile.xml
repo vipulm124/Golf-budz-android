@@ -27,52 +27,146 @@
                 android:layout_marginTop="20dp"
                 android:src="@drawable/pic" />
 
+            <TextView
+                style="@style/AppTheme.TextView"
+                android:text="First name" />
 
             <EditText
                 android:id="@+id/etFrstnme"
                 style="@style/AppTheme.EditText"
-                android:drawableLeft="@drawable/ic_user_identity_white_24px"
-                android:hint="First name"
+                android:layout_marginTop="0dp"
+                android:hint="Enter name"
 
                 />
+
+            <TextView
+                style="@style/AppTheme.TextView"
+                android:text="Last name" />
 
             <EditText
                 android:id="@+id/etLstmne"
                 style="@style/AppTheme.EditText"
-                android:drawableLeft="@drawable/ic_user_identity_white_24px"
-                android:hint="Last Name" />
+                android:layout_marginTop="0dp"
+                android:hint="Enter Last Name" />
 
+            <TextView
+                style="@style/AppTheme.TextView"
+                android:text="Email" />
 
             <EditText
                 android:id="@+id/etEmail"
                 style="@style/AppTheme.EditText"
-                android:drawableLeft="@drawable/ic_email_white_24px"
-                android:hint="Email" />
+                android:layout_marginTop="0dp"
+                android:inputType="textEmailAddress"
+                android:hint="Enter Email" />
+
+            <TextView
+                style="@style/AppTheme.TextView"
+                android:text="Sex" />
+
+            <EditText
+                android:id="@+id/etSex"
+                style="@style/AppTheme.EditText"
+                android:layout_marginTop="0dp"
+                android:focusable="false"
+                android:hint="Enter Sex" />
+
+            <TextView
+                style="@style/AppTheme.TextView"
+                android:text="Age" />
+
+            <EditText
+                android:id="@+id/etAge"
+                style="@style/AppTheme.EditText"
+                android:layout_marginTop="0dp"
+                android:inputType="number"
+                android:hint="Enter Age" />
+
+            <TextView
+                style="@style/AppTheme.TextView"
+                android:text="Handicap" />
+
+            <EditText
+                android:id="@+id/etHandicap"
+                style="@style/AppTheme.EditText"
+                android:layout_marginTop="0dp"
+                android:focusable="false"
+                android:hint="Enter Handicap" />
+
+            <TextView
+                style="@style/AppTheme.TextView"
+                android:text="Affiliated" />
+
+            <EditText
+                android:id="@+id/etAffiliate"
+                style="@style/AppTheme.EditText"
+                android:layout_marginTop="0dp"
+                android:hint="Enter description" />
+
+            <TextView
+                style="@style/AppTheme.TextView"
+                android:text="Profession" />
+
+            <EditText
+                android:id="@+id/etProfession"
+                style="@style/AppTheme.EditText"
+                android:layout_marginTop="0dp"
+                android:hint="Enter Profession" />
+
+            <TextView
+                style="@style/AppTheme.TextView"
+                android:text="How many rounds of golf do you played per month" />
+
+            <EditText
+                android:id="@+id/etRound"
+                style="@style/AppTheme.EditText"
+                android:layout_marginTop="0dp"
+                android:inputType="number"
+                android:hint="Enter Rounds" />
+
+            <TextView
+                style="@style/AppTheme.TextView"
+                android:text="Which do you refer" />
+
+            <EditText
+                android:id="@+id/etRefer"
+                style="@style/AppTheme.EditText"
+                android:layout_marginTop="0dp"
+                android:hint="Both" />
+
+            <TextView
+                style="@style/AppTheme.TextView"
+                android:text="Would you like to play in our golfing budz golf days" />
+
+            <EditText
+                android:id="@+id/etLike"
+                style="@style/AppTheme.EditText"
+                android:layout_marginTop="0dp"
+                android:focusable="false"
+                android:hint="Enter Choice" />
+
+            <TextView
+                style="@style/AppTheme.TextView"
+                android:text="Would you like to play in our golfing budz on Social golfing days" />
+
+            <EditText
+                android:id="@+id/etSocialLike"
+                style="@style/AppTheme.EditText"
+                android:layout_marginTop="0dp"
+                android:focusable="false"
+                android:hint="Enter Choice" />
+
+            <TextView
+                style="@style/AppTheme.TextView"
+                android:text="User Type" />
+
+            <EditText
+                android:id="@+id/etType"
+                style="@style/AppTheme.EditText"
+                android:layout_marginTop="0dp"
+                android:hint="" />
 
 
-            <RelativeLayout
-
-                style="@style/AppTheme.EditText">
-
-                <Spinner
-                    android:id="@+id/spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/img"
-                    android:spinnerMode="dialog" />
-
-                <ImageView
-                    android:id="@+id/img"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_clubs" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:src="@drawable/ic_down_arrow" />
-            </RelativeLayout>
             <!--<fragment
                 android:id="@+id/componentRoleSelector"
                 android:name="com.golf.budz.core.components.ComponentItemSelector"
@@ -86,35 +180,55 @@
 
                 android:orientation="vertical">
 
+                <TextView
+                    style="@style/AppTheme.TextView"
+                    android:text="Club name" />
+
                 <EditText
                     android:id="@+id/etClubName"
                     style="@style/AppTheme.EditText"
-                    android:drawableLeft="@drawable/ic_clubs"
-                    android:hint="Club Name" />
+                    android:layout_marginTop="0dp"
+                    android:hint="Enter Club Name" />
+
+                <TextView
+                    style="@style/AppTheme.TextView"
+                    android:text="Description" />
 
                 <EditText
                     android:id="@+id/etDesc"
                     style="@style/AppTheme.EditText"
-                    android:drawableLeft="@drawable/ic_comment"
+                    android:layout_marginTop="0dp"
                     android:hint="Description" />
+
+                <TextView
+                    style="@style/AppTheme.TextView"
+                    android:text="Address" />
 
                 <EditText
                     android:id="@+id/etAddress"
                     style="@style/AppTheme.EditText"
-                    android:drawableLeft="@drawable/ic_location"
-                    android:hint="Address" />
+                    android:layout_marginTop="0dp"
+                    android:hint="Enter full Address" />
+
+                <TextView
+                    style="@style/AppTheme.TextView"
+                    android:text="City" />
 
                 <EditText
                     android:id="@+id/etCity"
                     style="@style/AppTheme.EditText"
-                    android:drawableLeft="@drawable/ic_location"
-                    android:hint="City" />
+                    android:layout_marginTop="0dp"
+                    android:hint="Enter City" />
+
+                <TextView
+                    style="@style/AppTheme.TextView"
+                    android:text="Subrub" />
 
                 <EditText
                     android:id="@+id/etSubrub"
                     style="@style/AppTheme.EditText"
-                    android:drawableLeft="@drawable/ic_location"
-                    android:hint="Subrub" />
+                    android:layout_marginTop="0dp"
+                    android:hint="Enter Subrub" />
 
                 <fragment
                     android:id="@+id/componentCitySelector"
@@ -123,16 +237,24 @@
                     android:layout_height="wrap_content"
                     tools:layout="@layout/component_item_selector"></fragment>
 
+                <TextView
+                    style="@style/AppTheme.TextView"
+                    android:text="Operating Hours" />
+
                 <EditText
                     android:id="@+id/etOperatingHours"
                     style="@style/AppTheme.EditText"
-                    android:drawableLeft="@drawable/ic_clock"
-                    android:hint="Operating Hours" />
+                    android:layout_marginTop="0dp"
+                    android:hint="Enter Operating Hours" />
+
+                <TextView
+                    style="@style/AppTheme.TextView"
+                    android:text="Contact No" />
 
                 <EditText
                     android:id="@+id/etContactNo"
                     style="@style/AppTheme.EditText"
-                    android:drawableLeft="@drawable/ic_phone_white_24px"
+                    android:layout_marginTop="0dp"
                     android:hint="Contact No" />
             </LinearLayout>
 

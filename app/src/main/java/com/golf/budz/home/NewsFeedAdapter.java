@@ -6,10 +6,13 @@ import android.media.Image;
 import android.media.ThumbnailUtils;
 import android.media.session.MediaController;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -51,6 +54,7 @@ public class NewsFeedAdapter extends
     }
 
     // Create new views (invoked by the layout manager)
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public ViewHolder
     onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -98,13 +102,34 @@ public class NewsFeedAdapter extends
 
             holder.ivVideo.setVideoURI(uri);
             holder.ivVideo.requestFocus();
-            holder.ivVideo.start();
+            holder.ivVideo.pause();
 
 
         } else {
             holder.feedImage1.setVisibility(View.GONE);
             holder.ivVideo.setVisibility(View.GONE);
         }
+        holder.ivVideo.setOnTouchListener(new View.OnTouchListener()
+        {
+            @Override
+            public boolean onTouch(View v, MotionEvent motionEvent)
+            {
+                if (holder.ivVideo.isPlaying())
+                {
+                    holder.ivVideo.pause();
+
+                   int position = holder.ivVideo.getCurrentPosition();
+                    return false;
+                }
+                else
+                {
+
+                    holder.ivVideo.seekTo(position);
+                    holder.ivVideo.start();
+                    return false;
+                }
+            }
+        });
 
         holder.llShare.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,6 +151,12 @@ public class NewsFeedAdapter extends
                 else{
                     EventBus.getDefault().post(new BoEventData(BoEventData.EVENT_NEWS_LIKE_CLICK,position,"true",item));
                 }
+            }
+        });
+        holder.feedImage1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EventBus.getDefault().post(new BoEventData(BoEventData.EVENT_POST_IMAGES_CLICK,position,"",item));
             }
         });
     }

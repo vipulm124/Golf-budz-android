@@ -112,12 +112,22 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     public void init() {
         getAllCountries();
         getRoles();
+        tvTccheckBox.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                //is chkIos checked?
+                if (((CheckBox) v).isChecked()) {
+                    checked = true;
+                } else
+                    checked = false;
+            }
+        });
     }
 
     private void getRoles() {
 
         spinner.setOnItemSelectedListener(this);
-
         // Spinner Drop down elements
         List<String> categories = new ArrayList<String>();
         categories.add("Individual");
@@ -196,17 +206,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     @OnClick(R.id.btSgnupbtn)
     public void sungUp() {
         btSgnupbtn.setOnClickListener(this);
-        tvTccheckBox.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                //is chkIos checked?
-                if (((CheckBox) v).isChecked()) {
-                    checked = true;
-                } else
-                    checked = false;
-            }
-        });
     }
 
     @Override
@@ -268,7 +268,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                     etSubrub.setError("Enter contact no");
                 }
             }*/
-            else if (checked != true) {
+            else if (checked == false) {
                 ShowAlert.showAlertDialog(this, "", "Please select terms & Condition", false);
 
             } else {

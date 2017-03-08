@@ -94,6 +94,14 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
     RadioButton radioYes;
     @BindView(R.id.radioGroupGender)
     RadioGroup radioGroupGender;
+    @BindView(R.id.radioGroupPlayers)
+    RadioGroup radioGroupPlayers;
+    @BindView(R.id.radioP1)
+    RadioButton radioP1;
+    @BindView(R.id.radioP2)
+    RadioButton radioP2;
+    @BindView(R.id.radioP3)
+    RadioButton radioP3;
     /*@BindView(R.id.seekBar1)
     SeekBar seekBar1;*/
     @BindView(R.id.btnSubmit)
@@ -141,6 +149,9 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
 
         int selectedHandicapId = radioGroupHandicap.getCheckedRadioButtonId();
         radioHandicapButton = (RadioButton) view.findViewById(selectedHandicapId);
+
+        int selectedPlayersId = radioGroupPlayers.getCheckedRadioButtonId();
+        radioP1 = (RadioButton) view.findViewById(selectedPlayersId);
 
         int selectedGenderId = radioGroupGender.getCheckedRadioButtonId();
         radioGenderButton = (RadioButton) view.findViewById(selectedGenderId);
@@ -366,6 +377,8 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
         boPlay.setUserImgUrl(userImage);
         boPlay.setUserName(userName);
         boPlay.setVenue(venue);
+        boPlay.setPlayers(radioP1.getText().toString());
+
         performSubmission(boPlay);
     }
 

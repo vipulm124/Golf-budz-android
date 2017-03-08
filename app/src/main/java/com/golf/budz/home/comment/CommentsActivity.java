@@ -19,6 +19,7 @@ import com.golf.budz.auth.PojoUser;
 import com.golf.budz.auth.profile.EditProfileActivity;
 import com.golf.budz.core.base.BaseActivity;
 import com.golf.budz.core.components.FragmentDataLoader;
+import com.golf.budz.home.MainActivity;
 import com.golf.budz.home.NewsFeedAdapter;
 import com.golf.budz.home.R;
 import com.golf.budz.home.model.BoPost;
@@ -180,13 +181,9 @@ public class CommentsActivity extends BaseActivity {
                         commnet.setUserName(userName);
                         commnet.setUserId(userId);
                         commnet.setPostId(postid);
-                        if(allItems.size()>0)
-                         allItems.add(0,commnet);
-                        else
-                            allItems.add(commnet);
-                        adapter = new AdapterComment(allItems);
-                        recyclerView.setAdapter(adapter);
-                        adapter.notifyDataSetChanged();
+
+                       allItems.add(commnet);
+                        bindData(allItems);
 
                         toast(pojoUser.getMessage());
 
@@ -210,6 +207,7 @@ public class CommentsActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
+        startActivity(new Intent(CommentsActivity.this, MainActivity.class));
         finish();
         super.onBackPressed();
     }

@@ -41,6 +41,8 @@ public class BoPlay implements Serializable {
     public String userName;
     @SerializedName("userImgUrl")
     public String userImgUrl;
+    @SerializedName("players")
+    public String players;
 
     public String getNoOfHoles() {
         return noOfHoles;
@@ -168,5 +170,13 @@ public class BoPlay implements Serializable {
 
     public void setUserImgUrl(String userImgUrl) {
         this.userImgUrl = userImgUrl;
+    }
+
+    public String getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(String players) {
+        this.players = players;
     }
 }

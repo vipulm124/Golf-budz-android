@@ -22,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.golf.budz.auth.login.LoginActivity;
+import com.golf.budz.auth.profile.EditProfileActivity;
 import com.golf.budz.auth.profile.ProfileActivity;
 import com.golf.budz.blog.BLogActivity;
 import com.golf.budz.chat.MyChatActivity;
@@ -35,6 +36,7 @@ import com.golf.budz.friends.MyFriendActivity;
 import com.golf.budz.group.MyGroupActivity;
 import com.golf.budz.home.comment.AdapterComment;
 import com.golf.budz.home.comment.CommentsActivity;
+import com.golf.budz.home.gallery.GalleryActivity;
 import com.golf.budz.home.model.BoPost;
 import com.golf.budz.home.model.PojoPost;
 import com.golf.budz.items.BuyItemActivity;
@@ -50,6 +52,7 @@ import com.golf.budz.utils.api.APIHelper;
 import com.golf.budz.utils.api.IApiService;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -67,7 +70,7 @@ public class MainActivity extends BaseActivity
 
     private NewsFeedAdapter adapter;
     private FragmentDataLoader fragmentLoader;
-    private ArrayList<BoPost> allItems = new ArrayList<>();
+    private ArrayList<BoPost> allItems;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     @BindView(R.id.llPost)
@@ -127,7 +130,7 @@ public class MainActivity extends BaseActivity
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
         recyclerView.setNestedScrollingEnabled(false);
-        updateViews(allItems.size());
+        //updateViews(allItems.size());
         fillData();
         setupUserProfile();
 
@@ -272,6 +275,12 @@ public class MainActivity extends BaseActivity
                 overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
                 break;
             }
+            case BoEventData.EVENT_POST_IMAGES_CLICK: {
+                BoPost post=(BoPost) object;
+                startActivity(new Intent(this, GalleryActivity.class).putExtra(Const.EXTRA_POST, (Serializable) post));
+                overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
+                break;
+            }
         }
     }
 
@@ -392,10 +401,9 @@ public class MainActivity extends BaseActivity
                         post.setImage("");
                         post.setVideo("");
                         post.setLikes(new ArrayList<String>());
-                        allItems.add(0, post);
-                        adapter = new NewsFeedAdapter(allItems);
-                        recyclerView.setAdapter(adapter);
-                        adapter.notifyDataSetChanged();
+                        allItems.add(0,post);
+                        bindData(allItems);
+                        //adapter.notifyDataSetChanged();
 
                         toast(pojo.getMessage());
 
@@ -461,7 +469,7 @@ public class MainActivity extends BaseActivity
             startActivity(new Intent(MainActivity.this, EventActivity.class));
             // Handle the camera action
         } else if (id == R.id.nav_profile) {
-            startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+            startActivity(new Intent(MainActivity.this, EditProfileActivity.class));
 
         } else if (id == R.id.nav_notification) {
 

@@ -4,6 +4,7 @@ import com.golf.budz.utils.Common;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,7 +13,7 @@ import java.util.Map;
  */
 
 @IgnoreExtraProperties
-public class Post {
+public class Post  {
     public String postId;
     public String from;
 

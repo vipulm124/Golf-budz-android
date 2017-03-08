@@ -29,7 +29,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class VideoDatapostActivity extends BaseActivity implements FragmentImageUpload.ImageUploadListener {
+public class VideoDatapostActivity extends BaseActivity implements FragmentVideoUpload.VideoUploadListener {
     @BindView(R.id.etText)
     EditText etText;
     @BindView(R.id.frameLayout)
@@ -58,12 +58,12 @@ public class VideoDatapostActivity extends BaseActivity implements FragmentImage
 
 
     @Override
-    public void onImageUploadComplete(ArrayList<String> allUploadedUri) {
+    public void onVideoUploadComplete(ArrayList<String> allUploadedUri) {
         this.allUploadedImage = allUploadedUri;
     }
 
     @Override
-    public void onImageUploadFailed() {
+    public void onVideoUploadFailed() {
 
     }
 

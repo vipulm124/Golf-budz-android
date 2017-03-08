@@ -2,6 +2,7 @@ package com.golf.budz.home.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -9,7 +10,7 @@ import java.util.ArrayList;
  * Created by Adcore on 2/4/2017.
  */
 
-public class BoPost {
+public class BoPost implements Serializable {
     @SerializedName("_id")
     String _id;
     @SerializedName("userName")

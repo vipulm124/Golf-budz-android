@@ -68,6 +68,105 @@
                 android:layout_width="wrap_content"
                 android:layout_weight="2"
                 android:layout_margin="@dimen/space_x2"
+                android:orientation="horizontal">
+
+                <android.support.percent.PercentRelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="beforeDescendants"
+                    android:focusableInTouchMode="true"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/AppTheme.TextView.Wrap"
+                        app:layout_widthPercent="50%"
+                        android:layout_centerVertical="true"
+                        android:text="Number of Players"/>
+
+                    <RadioGroup
+                        android:id="@+id/radioGroupPlayers"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:orientation="horizontal"
+                        app:layout_widthPercent="50%">
+
+                        <RadioButton
+                            android:id="@+id/radioP1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:textColor="@color/colorWhite"
+                            android:text="2" />
+
+                        <RadioButton
+                            android:id="@+id/radioP2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorWhite"
+                            android:text="3" />
+
+                        <RadioButton
+                            android:id="@+id/radioP3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorWhite"
+                            android:text="4" />
+                    </RadioGroup>
+                </android.support.percent.PercentRelativeLayout>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                 android:layout_gravity="center"
+                android:layout_margin="@dimen/space_x2"
+                android:orientation="horizontal">
+
+                <android.support.percent.PercentRelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="beforeDescendants"
+                    android:focusableInTouchMode="true"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+
+
+                    <RadioGroup
+                        android:id="@+id/radioGroupCart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:orientation="horizontal"
+                        app:layout_widthPercent="100%">
+
+                        <RadioButton
+                            android:id="@+id/radioWalking"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:textColor="@color/colorWhite"
+                            android:text="You Walking" />
+
+                        <RadioButton
+                            android:id="@+id/radioGolfcart"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorWhite"
+                            android:text="Taking golf cart " />
+
+
+                    </RadioGroup>
+                </android.support.percent.PercentRelativeLayout>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_weight="2"
+                android:layout_margin="@dimen/space_x2"
 
                 android:orientation="horizontal">
 
@@ -76,7 +175,6 @@
                     android:layout_height="wrap_content"
                     android:descendantFocusability="beforeDescendants"
                     android:focusableInTouchMode="true"
-
                     android:orientation="horizontal">
 
                     <TextView
@@ -235,7 +333,9 @@
             <EditText
                 android:id="@+id/etPlayrequestInfo"
                 style="@style/AppTheme.EditText"
-                android:hint="Desscription"
+                android:layout_height="@dimen/space_x5"
+                android:hint="Play Request Details"
+                android:inputType="textMultiLine"
 
                 />
             <LinearLayout
@@ -561,8 +661,8 @@
                     android:id="@+id/customSeekBar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:dsb_min="16"
-                    app:dsb_max="100"
+                    app:dsb_min="18"
+                    app:dsb_max="70"
                     app:dsb_indicatorColor="@color/yellow"
                     app:dsb_progressColor="@color/yellow"
                     />

@@ -131,8 +131,9 @@
         <activity
             android:name="com.golf.budz.group.MyGroupActivity"
             android:label="My Groups" />
-        <activity android:name="com.golf.budz.friends.MyAllPlayReqActivity"
-            android:label="My Play Request"></activity>
+        <activity
+            android:name="com.golf.budz.friends.MyAllPlayReqActivity"
+            android:label="My Play Request" />
 
         <service android:name="com.golf.budz.MyFirebaseMessagingService">
             <intent-filter>
@@ -144,6 +145,7 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
+        <activity android:name=".gallery.GalleryActivity"></activity>
     </application>
 
 </manifest>
