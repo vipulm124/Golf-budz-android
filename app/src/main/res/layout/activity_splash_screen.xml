@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_splash">
+    android:background="@drawable/splash">
 
 
     <LinearLayout
@@ -10,6 +10,7 @@
         android:layout_height="match_parent"
         android:padding="24dp"
         android:orientation="vertical"
+        android:visibility="gone"
         android:gravity="center">
 
     <ImageView
@@ -32,6 +33,18 @@
         style="@style/category"
         android:text="Social Golfing Network"
         android:layout_centerHorizontal="true"
+        android:layout_above="@+id/tvVersion"
         android:layout_marginBottom="@dimen/space_x3"
-        android:layout_alignParentBottom="true"/>
+        android:visibility="gone"
+        />
+    <TextView
+        android:id="@+id/tvVersion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="version"
+        android:textColor="@color/yellow"
+        android:textSize="12sp" />
 </RelativeLayout>

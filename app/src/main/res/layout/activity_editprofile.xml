@@ -84,25 +84,50 @@
 
             <TextView
                 style="@style/AppTheme.TextView"
-                android:text="Handicap" />
+                android:text="Are you Handicap" />
 
-            <EditText
+           <!-- <EditText
                 android:id="@+id/etHandicap"
                 style="@style/AppTheme.EditText"
                 android:layout_marginTop="0dp"
                 android:focusable="false"
-                android:hint="Enter Handicap" />
+                 android:text="No" />-->
+            <Spinner
+                android:id="@+id/spHandicap"
+                style="@style/AppTheme.EditText"
+                android:spinnerMode="dialog"
 
+                />
             <TextView
                 style="@style/AppTheme.TextView"
                 android:text="Affiliated" />
 
-            <EditText
+          <!--  <EditText
                 android:id="@+id/etAffiliate"
                 style="@style/AppTheme.EditText"
                 android:layout_marginTop="0dp"
-                android:hint="Enter description" />
+                android:hint="Enter description" />-->
+            <Spinner
+                android:id="@+id/spAffiliate"
+                style="@style/AppTheme.EditText"
+                android:spinnerMode="dialog"
 
+                />
+            <LinearLayout
+                android:id="@+id/llCousre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:orientation="vertical">
+            <TextView
+                style="@style/AppTheme.TextView"
+                android:text="Select Course" />
+            <Spinner
+                android:id="@+id/spCourses"
+                style="@style/AppTheme.EditText"
+                android:spinnerMode="dialog"
+
+                /></LinearLayout>
             <TextView
                 style="@style/AppTheme.TextView"
                 android:text="Profession" />
@@ -128,11 +153,17 @@
                 style="@style/AppTheme.TextView"
                 android:text="Which do you refer" />
 
-            <EditText
+           <!-- <EditText
                 android:id="@+id/etRefer"
                 style="@style/AppTheme.EditText"
                 android:layout_marginTop="0dp"
-                android:hint="Both" />
+                android:hint="Both" />-->
+            <Spinner
+                android:id="@+id/spRefer"
+                style="@style/AppTheme.EditText"
+                android:spinnerMode="dialog"
+
+                />
 
             <TextView
                 style="@style/AppTheme.TextView"
@@ -158,12 +189,14 @@
 
             <TextView
                 style="@style/AppTheme.TextView"
+                android:visibility="gone"
                 android:text="User Type" />
 
             <EditText
                 android:id="@+id/etType"
                 style="@style/AppTheme.EditText"
                 android:layout_marginTop="0dp"
+                android:visibility="gone"
                 android:hint="" />
 
 
@@ -232,10 +265,10 @@
 
                 <fragment
                     android:id="@+id/componentCitySelector"
-                    android:name="com.golf.budz.core.components.ComponentItemSelector"
+                    android:name="com.golf.budz.core.components.ComponentLocationItemSelector"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:layout="@layout/component_item_selector"></fragment>
+                    tools:layout="@layout/component_item_profile_selector"></fragment>
 
                 <TextView
                     style="@style/AppTheme.TextView"

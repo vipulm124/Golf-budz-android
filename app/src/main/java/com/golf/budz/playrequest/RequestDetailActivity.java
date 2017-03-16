@@ -68,8 +68,10 @@ public class RequestDetailActivity extends BaseActivity {
         tvHandicap.setText(boPlay.getHandicap());
         tvHoles.setText(boPlay.getNoOfHoles());
         tvIndustry.setText(boPlay.getIndustry());
-        tvPlayers.setText(boPlay.getProfession());
+        tvPlayers.setText(boPlay.getPlayers());
         tvProfession.setText(boPlay.getProfession());
+        tvTeaOffTime.setText(boPlay.getTeeOffTime());
+
         tvVenue.setText(boPlay.getVenue());
         Common.showBigImage(this, ivPic, boPlay.getUserImgUrl());
     }

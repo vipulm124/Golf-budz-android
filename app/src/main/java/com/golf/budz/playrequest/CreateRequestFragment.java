@@ -260,10 +260,10 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
         categories.add("Delhi");
         categories.add("Agra");
         categories.add("Mumbai");
+        categories.add("None");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), R.layout.item_spinner_dropdown, categories);
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
         // attaching data adapter to spinner
         etIndustry.setAdapter(dataAdapter);
 
@@ -281,6 +281,7 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
         categories.add("Club Member");
         categories.add("Business man");
         categories.add("Service man");
+        categories.add("None");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), R.layout.item_spinner_dropdown, categories);
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

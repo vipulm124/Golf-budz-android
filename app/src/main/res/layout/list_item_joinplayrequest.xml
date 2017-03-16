@@ -42,7 +42,7 @@
             style="@style/AppTheme.TextView.Wrap"
             android:layout_gravity="end"
             android:textColor="@color/yellow"
-            android:text="Send"
+            android:text="Pair up"
             />
     </LinearLayout>
 </android.support.v7.widget.CardView>

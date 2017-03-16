@@ -217,7 +217,7 @@
                         style="@style/AppTheme.TextView.Wrap"
                         app:layout_widthPercent="50%"
                         android:layout_centerVertical="true"
-                        android:text="Venue"/>
+                        android:text="Golf Club"/>
                    <!-- <EditText
                         android:id="@+id/etVenue"
                         style="@style/AppTheme.EditText"

@@ -63,6 +63,12 @@
                 android:drawableLeft="@drawable/ic_lock_white_24px"
                 android:hint="Confirm Password"
                 android:inputType="textPassword" />
+            <fragment
+                android:id="@+id/componentCitySelector"
+                android:name="com.golf.budz.core.components.ComponentItemSelector"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:layout="@layout/component_item_selector"></fragment>
             <RelativeLayout
 
                 style="@style/AppTheme.EditText"
@@ -123,12 +129,7 @@
                     style="@style/AppTheme.EditText"
                     android:drawableLeft="@drawable/ic_location"
                     android:hint="Subrub" />
-                <fragment
-                    android:id="@+id/componentCitySelector"
-                    android:name="com.golf.budz.core.components.ComponentItemSelector"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:layout="@layout/component_item_selector"></fragment>
+
 
                 <EditText
                     android:id="@+id/etOperatingHours"

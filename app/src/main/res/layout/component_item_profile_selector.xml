@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- <TextView
+         android:id="@+id/tvItem"
+         style="@style/AppTheme.TextView.Wrap"
+         android:textColor="@color/colorWhite"
+         android:text="&#45;&#45;Select&#45;&#45;"
+         android:textSize="20sp" />-->
+    <EditText
+
+        android:id="@+id/tvItem"
+        style="@style/AppTheme.EditText"
+        android:editable="false"
+        android:focusable="false"
+        android:hint="Select Location" />
+</LinearLayout>

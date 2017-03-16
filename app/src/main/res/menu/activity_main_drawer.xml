@@ -20,8 +20,8 @@
             android:title="Friends" />
         <item
             android:id="@+id/nav_club"
-            android:icon="@drawable/ic_clubs"
-            android:title="Clubs" />
+            android:icon="@drawable/ic_golfclub"
+            android:title="Golf clubs" />
         <item
             android:id="@+id/nav_round"
             android:icon="@drawable/ic_golf_playerequest"
@@ -50,16 +50,16 @@
         <item
             android:id="@+id/nav_chat"
             android:icon="@drawable/ic_comment"
-            android:title=" Chat" />
+            android:title="Budz chat" />
 
         <item
             android:id="@+id/nav_daledgolfchat"
-            android:icon="@drawable/ic_blog"
+            android:icon="@drawable/ic_golfchat"
             android:title="Dales golf chat" />
 
         <item
             android:id="@+id/nav_oncourse"
-            android:icon="@drawable/ic_blog"
+            android:icon="@drawable/ic_course"
             android:title="On the course" />
         <item
             android:id="@+id/nav_more"
