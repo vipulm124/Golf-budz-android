@@ -111,9 +111,10 @@ public class JoinFragment extends BaseFragment {
     IApiService apiService;
 
     public void fillData() {
+        String userId = Pref.Read(getActivity(), Const.PREF_USER_ID);
         if (apiService == null)
             apiService = APIHelper.getAppServiceMethod();
-        Call<PojoPlay> call = apiService.getAllPlayReq();
+        Call<PojoPlay> call = apiService.getAllPlayReq(userId);
         call.enqueue(new Callback<PojoPlay>() {
             @Override
             public void onResponse(Call<PojoPlay> call, Response<PojoPlay> response) {

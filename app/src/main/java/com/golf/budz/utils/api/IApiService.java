@@ -129,8 +129,8 @@ public interface IApiService {
     @POST("playrequests")
     Call<PojoPlay> craeteRequest(@Body BoPlay boPlay);
 
-    @GET("playrequests")
-    Call<PojoPlay> getAllPlayReq();
+    @GET("playrequests/{userId}")
+    Call<PojoPlay> getAllPlayReq(@Path("userId") String userId);
 
     @FormUrlEncoded
     @POST("upcomming/games")
@@ -182,5 +182,11 @@ public interface IApiService {
     @POST("events/attendees")
     Call<PojoEvent> attendByuserid(@Field("userName") String userName, @Field("userId") String userId, @Field("eventId") String eventId);
 
+    @FormUrlEncoded
+    @POST("join/playrequest")
+    Call<PojoPlay> joinPlayReq(@Field("requestId") int requestId, @Field("userId") String userId);
+    @FormUrlEncoded
+    @PUT("requests")
+    Call<PojoPlay> cancelPlayReq(@Field("requestId") int requestId, @Field("userId") String userId, @Field("status") String status);
 
 }

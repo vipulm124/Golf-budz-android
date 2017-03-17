@@ -3,18 +3,28 @@ package com.golf.budz.playrequest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.golf.budz.blog.BoBlog;
 import com.golf.budz.core.base.BaseActivity;
 import com.golf.budz.home.R;
 import com.golf.budz.playrequest.model.BoPlay;
+import com.golf.budz.playrequest.model.PojoPlay;
 import com.golf.budz.utils.Common;
 import com.golf.budz.utils.Const;
+import com.golf.budz.utils.Pref;
 import com.golf.budz.utils.RoundedImageView;
+import com.golf.budz.utils.api.APIHelper;
+import com.golf.budz.utils.api.IApiService;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RequestDetailActivity extends BaseActivity {
 
@@ -43,7 +53,12 @@ public class RequestDetailActivity extends BaseActivity {
     TextView tvProfession;
     @BindView(R.id.tvGender)
     TextView tvGender;
-
+    @BindView(R.id.btnJoin)
+    Button btnJoin;
+    @BindView(R.id.btnCancel)
+    Button btnCancel;
+     int reuestId;
+    String userStatus;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +75,8 @@ public class RequestDetailActivity extends BaseActivity {
     public void init() {
         Intent intent = getIntent();
         BoPlay boPlay = (BoPlay) intent.getSerializableExtra(Const.EXTRA_REQ_ID);
-
+        reuestId=boPlay.getId();
+        userStatus=boPlay.getUserStatus();
         tvName.setText(boPlay.getUserName());
         tvDesc.setText(boPlay.getRequestInfo());
         tvDay.setText(boPlay.getDay());
@@ -74,6 +90,11 @@ public class RequestDetailActivity extends BaseActivity {
 
         tvVenue.setText(boPlay.getVenue());
         Common.showBigImage(this, ivPic, boPlay.getUserImgUrl());
+        if(userStatus.equalsIgnoreCase("cancel")){
+            btnCancel.setVisibility(View.GONE);
+        }if(userStatus.equalsIgnoreCase("join")){
+            btnJoin.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -81,6 +102,85 @@ public class RequestDetailActivity extends BaseActivity {
 
     }
 
+    public void joinReq() {
+        showProgressDialog("Sending your request", "Please wait...");
+        String userId = Pref.Read(this, Const.PREF_USER_ID);
+        IApiService apiService = APIHelper.getAppServiceMethod();
+        Call<PojoPlay> call = apiService.joinPlayReq(reuestId,userId);
+        call.enqueue(new Callback<PojoPlay>() {
+            @Override
+            public void onResponse(Call<PojoPlay> call, Response<PojoPlay> response) {
+                hideDialog();
+                if (response.isSuccessful()) {
+                    PojoPlay pojo = response.body();
+                    if (pojo.getStatus() == Const.STATUS_SUCCESS) {
+                        toast(pojo.getMessage());
+                        startActivity(new Intent(RequestDetailActivity.this, PlayRequestActivity.class));
+                        finish();
+                    } else if (pojo.getStatus() == Const.STATUS_FAILED) {
+                        toast(pojo.getMessage());
+                    } else if (pojo.getStatus() == Const.STATUS_ERROR) {
+                        toast(pojo.getMessage());
+                    }
+                } else {
+
+                    toast("Something went wrong");
+
+                }
+            }
+
+
+            @Override
+            public void onFailure(Call<PojoPlay> call, Throwable t) {
+                hideDialog();
+                Common.logException(getApplicationContext(), "Internal server error", t, null);
+            }
+        });
+    }
+    public void cancelReq() {
+        showProgressDialog("Sending your request", "Please wait...");
+        String userId = Pref.Read(this, Const.PREF_USER_ID);
+        IApiService apiService = APIHelper.getAppServiceMethod();
+        Call<PojoPlay> call = apiService.cancelPlayReq(reuestId,userId,"cancel");
+        call.enqueue(new Callback<PojoPlay>() {
+            @Override
+            public void onResponse(Call<PojoPlay> call, Response<PojoPlay> response) {
+                hideDialog();
+                if (response.isSuccessful()) {
+                    PojoPlay pojo = response.body();
+                    if (pojo.getStatus() == Const.STATUS_SUCCESS) {
+                        toast(pojo.getMessage());
+                        startActivity(new Intent(RequestDetailActivity.this, PlayRequestActivity.class));
+                        finish();
+                    } else if (pojo.getStatus() == Const.STATUS_FAILED) {
+                        toast(pojo.getMessage());
+                    } else if (pojo.getStatus() == Const.STATUS_ERROR) {
+                        toast(pojo.getMessage());
+                    }
+                } else {
+
+                    toast("Something went wrong");
+
+                }
+            }
+
+
+            @Override
+            public void onFailure(Call<PojoPlay> call, Throwable t) {
+                hideDialog();
+                Common.logException(getApplicationContext(), "Internal server error", t, null);
+            }
+        });
+    }
+    @OnClick(R.id.btnCancel)
+    public void onCancel() {
+        cancelReq();
+    }
+
+    @OnClick(R.id.btnJoin)
+    public void onJoin() {
+        joinReq();
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

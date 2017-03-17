@@ -245,6 +245,7 @@ General Manager/Director of Golf
                 android:orientation="horizontal">
 
                 <Button
+                    android:id="@+id/btnCancel"
                     style="@style/AppTheme.Button.Wrap"
                     android:layout_centerVertical="true"
                     android:text="Cancel"
@@ -253,6 +254,7 @@ General Manager/Director of Golf
                     app:layout_widthPercent="50%" />
 
                 <Button
+                    android:id="@+id/btnJoin"
                     style="@style/AppTheme.Button.Wrap"
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
