@@ -8,19 +8,18 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.RelativeLayout;
 
 
-import com.golf.budz.core.base.BaseActivity;
 import com.golf.budz.home.R;
 import com.golf.budz.home.SplashScreen;
-import com.golf.budz.utils.Const;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class LauncherActivity extends BaseActivity {
+public class LauncherActivity extends AppCompatActivity {
 
     private static final int MY_PERMISSIONS_REQUEST_ACCESS_EXTERNAL_STORAGE = 1;
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 2;
@@ -44,15 +43,7 @@ public class LauncherActivity extends BaseActivity {
 
     }
 
-    @Override
-    public void init() {
 
-    }
-
-    @Override
-    public void log(String message) {
-
-    }
 
     private void askReadExternalStoragePermission() {
         int permissionCheck = ContextCompat.checkSelfPermission(this,
@@ -90,6 +81,7 @@ public class LauncherActivity extends BaseActivity {
                 Manifest.permission.ACCESS_FINE_LOCATION);
         if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
             askReadPhoneStatePermission();
+            //launchApp();
         } else {
             // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
@@ -115,11 +107,11 @@ public class LauncherActivity extends BaseActivity {
             }
         }
     }
-
     private void askReadPhoneStatePermission() {
         int permissionCheck = ContextCompat.checkSelfPermission(this,
                 Manifest.permission.READ_PHONE_STATE);
         if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
+
             launchApp();
         } else {
             // Should we show an explanation?
@@ -142,9 +134,11 @@ public class LauncherActivity extends BaseActivity {
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.READ_PHONE_STATE},
                         MY_PERMISSIONS_REQUEST_ACCESS_PHONE_STATE);
+
             }
         }
     }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
@@ -156,7 +150,7 @@ public class LauncherActivity extends BaseActivity {
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     askLocationPermission();
                 } else {
-                    /*Snackbar snackbar = Snackbar
+                    Snackbar snackbar = Snackbar
                             .make(llParent, "You must provide permission to allow app to function correctly", Snackbar.LENGTH_INDEFINITE)
                             .setAction("Ok", new View.OnClickListener() {
                                 @Override
@@ -166,17 +160,17 @@ public class LauncherActivity extends BaseActivity {
                                             MY_PERMISSIONS_REQUEST_ACCESS_EXTERNAL_STORAGE);
                                 }
                             });
-                    snackbar.show();*/
-                    askLocationPermission();
+                    snackbar.show();
+
                 }
                 return;
             }
             case MY_PERMISSIONS_REQUEST_LOCATION: {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    askReadPhoneStatePermission();
+                   askReadPhoneStatePermission();
                 } else {
-                   /* Snackbar snackbar = Snackbar
+                    Snackbar snackbar = Snackbar
                             .make(llParent, "You must provide permission to allow app to function correctly", Snackbar.LENGTH_INDEFINITE)
                             .setAction("Ok", new View.OnClickListener() {
                                 @Override
@@ -186,8 +180,8 @@ public class LauncherActivity extends BaseActivity {
                                             MY_PERMISSIONS_REQUEST_LOCATION);
                                 }
                             });
-                    snackbar.show();*/
-                    askReadPhoneStatePermission();
+                    snackbar.show();
+
                 }
                 return;
             }
@@ -197,7 +191,7 @@ public class LauncherActivity extends BaseActivity {
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     launchApp();
                 } else {
-                    /*Snackbar snackbar = Snackbar
+                    Snackbar snackbar = Snackbar
                             .make(llParent, "You must provide permission to allow app to function correctly", Snackbar.LENGTH_INDEFINITE)
                             .setAction("Ok", new View.OnClickListener() {
                                 @Override
@@ -207,8 +201,8 @@ public class LauncherActivity extends BaseActivity {
                                             MY_PERMISSIONS_REQUEST_ACCESS_PHONE_STATE);
                                 }
                             });
-                    snackbar.show();*/
-                    launchApp();
+                    snackbar.show();
+
                 }
                 return;
             }

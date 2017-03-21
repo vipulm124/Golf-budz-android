@@ -91,7 +91,7 @@ public class MainActivity extends BaseActivity
     private BottomSheetDialog mBottomSheetDialog;
     private AdapterComment mAdapter;
     LinearLayoutManager manager;
-
+    NavigationView navigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,9 +106,11 @@ public class MainActivity extends BaseActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
         menu = navigationView.getMenu();
+        navigationView.getMenu().getItem(0).setChecked(true);
         View header = navigationView.getHeaderView(0);
         tvName = (TextView) header.findViewById(R.id.tvName);
         ivPic = (ImageView) header.findViewById(R.id.ivPic);
@@ -221,7 +223,7 @@ public class MainActivity extends BaseActivity
         this.allItems = allItems;
         adapter = new NewsFeedAdapter(allItems);
         recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        //adapter.notifyDataSetChanged();
         updateViews(allItems.size());
     }
 
@@ -460,6 +462,7 @@ public class MainActivity extends BaseActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+
         int id = item.getItemId();
         if (id == R.id.nav_home) {
              startActivity(new Intent(MainActivity.this, MainActivity.class));

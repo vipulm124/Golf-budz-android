@@ -101,7 +101,6 @@ public class NewsFeedAdapter extends
             Uri uri = Uri.parse(item.getVideo());
 
             holder.ivVideo.setVideoURI(uri);
-            holder.ivVideo.requestFocus();
             holder.ivVideo.pause();
 
 
@@ -117,7 +116,6 @@ public class NewsFeedAdapter extends
                 if (holder.ivVideo.isPlaying())
                 {
                     holder.ivVideo.pause();
-
                    int position = holder.ivVideo.getCurrentPosition();
                     return false;
                 }

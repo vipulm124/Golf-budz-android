@@ -116,8 +116,10 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
     Spinner spCourses;
     @BindView(R.id.spRefer)
     Spinner spRefer;
-    @BindView(R.id.etProfession)
-    EditText etProfession;
+    @BindView(R.id.spProfession)
+    Spinner spProfession;
+
+
     @BindView(R.id.etRound)
     EditText etRound;
 
@@ -129,6 +131,8 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
     EditText etType;
     @BindView(R.id.llCousre)
     LinearLayout llCousre;
+    @BindView(R.id.llhandicap)
+    LinearLayout llhandicap;
     private DatabaseReference mDatabase;
     private boolean isUploading;
     private Uri selectedImage;
@@ -140,7 +144,7 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
     private ArrayList<String> allUploadedUri;
     String userChoosenTask = "";
     private static final int REQUEST_CAMERA = 2;
-String affliateval,handicapval,corsesval,referval;
+String affliateval,handicapval,corsesval,referval,professionval;
     final List<String> course = new ArrayList<String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -162,6 +166,7 @@ String affliateval,handicapval,corsesval,referval;
         handicap();
         getCorses();
         preferOption();
+        getProfession();
         allItems = new ArrayList<>();
         allUploadedUri = new ArrayList<>();
         getAllCountries();
@@ -455,7 +460,7 @@ String affliateval,handicapval,corsesval,referval;
             etAge.setText(user.getAge());
 
 
-            etProfession.setText(user.getProfession());
+            //etProfession.setText(user.getProfession());
 
             etRound.setText(user.getRounds());
             etLike.setText(user.getPlayWithUs());
@@ -508,7 +513,7 @@ String affliateval,handicapval,corsesval,referval;
             String age = etAge.getText().toString();
             String handicap = handicapval;
             String affliate = affliateval;
-            String profession = etProfession.getText().toString();
+            String profession = professionval;
             String refer = referval;
             String round = etRound.getText().toString();
             String like = etLike.getText().toString();
@@ -767,6 +772,31 @@ String affliateval,handicapval,corsesval,referval;
             }
         });
     }
+    private void getProfession() {
+        final List<String> profession = new ArrayList<String>();
+        profession.add("Buisness man");
+        profession.add("Service man");
+        // Creating adapter for spinner
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, R.layout.item_spinner_dropdown, profession);
+
+        // Drop down layout style - list view with radio button
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // attaching data adapter to spinner
+        spProfession.setAdapter(dataAdapter);
+        spProfession.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                professionval=profession.get(position).toString();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
     private void handicap() {
         // Spinner Drop down elements
         final List<String> handicap = new ArrayList<String>();
@@ -784,6 +814,11 @@ String affliateval,handicapval,corsesval,referval;
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 handicapval=handicap.get(position).toString();
+                if(handicapval.equals("Yes")){
+                    llhandicap.setVisibility(View.VISIBLE);
+                }else{
+                    llhandicap.setVisibility(View.GONE);
+                }
             }
 
             @Override

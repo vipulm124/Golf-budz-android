@@ -90,11 +90,12 @@ public class RequestDetailActivity extends BaseActivity {
 
         tvVenue.setText(boPlay.getVenue());
         Common.showBigImage(this, ivPic, boPlay.getUserImgUrl());
+        if(userStatus!=null){
         if(userStatus.equalsIgnoreCase("cancel")){
             btnCancel.setVisibility(View.GONE);
-        }if(userStatus.equalsIgnoreCase("join")){
+        }else if(userStatus.equalsIgnoreCase("join")){
             btnJoin.setVisibility(View.GONE);
-        }
+        }}else{}
     }
 
     @Override

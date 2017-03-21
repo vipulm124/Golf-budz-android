@@ -36,7 +36,8 @@ public class GalleryActivity extends BaseActivity {
     @Override
     public void init() {
         Intent intent=getIntent();
-      BoPost post= (BoPost) intent.getSerializableExtra(Const.EXTRA_POST);
+        BoPost post= (BoPost) intent.getSerializableExtra(Const.EXTRA_POST);
+        setTitle(post.getUserName());
         scrollGalleryView = (ScrollGalleryView)findViewById(R.id.scroll_gallery_view);
 
             String[] parts = post.getImage().split("\\|");
@@ -53,7 +54,7 @@ public class GalleryActivity extends BaseActivity {
                 .setThumbnailSize(100)
                 .setZoom(true)
                 .setFragmentManager(getSupportFragmentManager())
-                .addMedia(MediaInfo.mediaLoader(new MediaLoader() {
+              /*  .addMedia(MediaInfo.mediaLoader(new MediaLoader() {
                     @Override public boolean isImage() {
                         return true;
                     }
@@ -70,7 +71,7 @@ public class GalleryActivity extends BaseActivity {
                         callback.onSuccess();
                     }
                 }))
-
+*/
                 .addMedia(infos);
 
     }

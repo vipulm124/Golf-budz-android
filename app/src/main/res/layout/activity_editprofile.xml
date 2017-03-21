@@ -62,14 +62,14 @@
 
             <TextView
                 style="@style/AppTheme.TextView"
-                android:text="Sex" />
+                android:text="Gender" />
 
             <EditText
                 android:id="@+id/etSex"
                 style="@style/AppTheme.EditText"
                 android:layout_marginTop="0dp"
                 android:focusable="false"
-                android:hint="Enter Sex" />
+                android:hint="Select Gender" />
 
             <TextView
                 style="@style/AppTheme.TextView"
@@ -84,20 +84,36 @@
 
             <TextView
                 style="@style/AppTheme.TextView"
-                android:text="Are you Handicap" />
+                android:text="Do you have handicap"
+                android:id="@+id/textView2" />
 
-           <!-- <EditText
-                android:id="@+id/etHandicap"
-                style="@style/AppTheme.EditText"
-                android:layout_marginTop="0dp"
-                android:focusable="false"
-                 android:text="No" />-->
+            <!-- <EditText
+                 android:id="@+id/etHandicap"
+                 style="@style/AppTheme.EditText"
+                 android:layout_marginTop="0dp"
+                 android:focusable="false"
+                  android:text="No" />-->
             <Spinner
                 android:id="@+id/spHandicap"
                 style="@style/AppTheme.EditText"
                 android:spinnerMode="dialog"
 
                 />
+            <LinearLayout
+                android:id="@+id/llhandicap"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            <TextView
+                style="@style/AppTheme.TextView"
+                android:text="Number of handicap" />
+
+              <EditText
+                  android:id="@+id/etHandicapCount"
+                  style="@style/AppTheme.EditText"
+                  android:layout_marginTop="0dp"
+                  android:inputType="number"
+                  android:hint="Enter number of handicap" /></LinearLayout>
             <TextView
                 style="@style/AppTheme.TextView"
                 android:text="Affiliated" />
@@ -132,11 +148,17 @@
                 style="@style/AppTheme.TextView"
                 android:text="Profession" />
 
-            <EditText
+            <!--<EditText
                 android:id="@+id/etProfession"
                 style="@style/AppTheme.EditText"
                 android:layout_marginTop="0dp"
-                android:hint="Enter Profession" />
+                android:hint="Enter Profession" />-->
+            <Spinner
+                android:id="@+id/spProfession"
+                style="@style/AppTheme.EditText"
+                android:spinnerMode="dialog"
+
+                />
 
             <TextView
                 style="@style/AppTheme.TextView"
@@ -178,6 +200,7 @@
 
             <TextView
                 style="@style/AppTheme.TextView"
+                android:visibility="gone"
                 android:text="Would you like to play in our golfing budz on Social golfing days" />
 
             <EditText
@@ -185,6 +208,7 @@
                 style="@style/AppTheme.EditText"
                 android:layout_marginTop="0dp"
                 android:focusable="false"
+                android:visibility="gone"
                 android:hint="Enter Choice" />
 
             <TextView
