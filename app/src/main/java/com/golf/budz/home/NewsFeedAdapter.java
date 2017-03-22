@@ -85,6 +85,7 @@ public class NewsFeedAdapter extends
             holder.ivLike.setVisibility(View.GONE);
             holder.llLike.setClickable(false);
         }
+        Common.showRoundImage(context, holder.ivProfilepic, item.getUserImgUrl());
         if (item.getPostType().equals(Const.IMAGE)) {
             holder.feedImage1.setVisibility(View.VISIBLE);
             try {
@@ -93,7 +94,7 @@ public class NewsFeedAdapter extends
             } catch (Exception e) {
                 holder.feedImage1.setVisibility(View.GONE);
             }
-            Common.showBigImage(context, holder.ivProfilepic, item.getUserImgUrl());
+
 
         } else if (item.getPostType().equals(Const.VIDEO)) {
             holder.ivVideo.setVisibility(View.VISIBLE);

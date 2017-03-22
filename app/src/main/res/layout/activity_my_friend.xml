@@ -59,5 +59,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </RelativeLayout>
-
+    <Button
+        android:id="@+id/btnDone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/border"
+        android:text="Done"
+        android:textColor="@color/yellow" />
 </android.support.design.widget.CoordinatorLayout>

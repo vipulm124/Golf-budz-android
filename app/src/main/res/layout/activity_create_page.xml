@@ -31,24 +31,24 @@
                 <EditText
                     android:id="@+id/etCat"
                     style="@style/AppTheme.EditText"
-
                     android:hint="Select Category"
                     android:inputType="text|textMultiLine"
-                    />
+                    android:visibility="gone" />
+
                 <EditText
                     android:id="@+id/etDesc"
                     style="@style/AppTheme.EditText"
                     android:layout_height="@dimen/space_x6"
                     android:gravity="top"
                     android:hint="Select Description"
-                    android:inputType="text|textMultiLine"
-                    />
+                    android:inputType="text|textMultiLine" />
 
                 <EditText
                     android:id="@+id/etHours"
                     style="@style/AppTheme.EditText"
                     android:focusable="false"
                     android:hint="Operating Hours"
+                    android:visibility="gone"
 
                     />
 
@@ -85,12 +85,14 @@
                         android:padding="@dimen/space_x2"
                         android:src="@drawable/ic_user_identity_white_24px" />
                 </LinearLayout>
+
                 <FrameLayout
                     android:id="@+id/frameLayout"
                     android:layout_width="match_parent"
-                    android:layout_marginTop="@dimen/space_x2"
+                    android:layout_height="wrap_content"
 
-                    android:layout_height="wrap_content"></FrameLayout>
+                    android:layout_marginTop="@dimen/space_x2"></FrameLayout>
+
                 <fragment
                     android:id="@+id/fragmentImageUpload"
                     android:name="com.golf.budz.core.components.FragmentImageUpload"
@@ -102,14 +104,16 @@
                 <FrameLayout
                     android:id="@+id/videoframeLayout"
                     android:layout_width="match_parent"
-                    android:layout_marginTop="@dimen/space_x2"
-                    android:layout_height="wrap_content"></FrameLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/space_x2"></FrameLayout>
+
                 <fragment
                     android:id="@+id/fragmentVideoUpload"
                     android:name="com.golf.budz.core.components.FragmentVideoUpload"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:layout="@layout/fragment_image_upload"></fragment>
+
                 <Button
                     android:id="@+id/btnUpdate"
                     android:layout_width="match_parent"

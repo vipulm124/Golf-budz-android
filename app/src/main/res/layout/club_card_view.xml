@@ -44,7 +44,7 @@
                 android:background="@color/transblack"
                 android:padding="@dimen/space_x1"
                 android:layout_gravity="end"
-                android:text="Join"/>
+                android:text="Follow"/>
         </LinearLayout>
 
     </RelativeLayout>

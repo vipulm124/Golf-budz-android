@@ -65,9 +65,28 @@
             android:id="@+id/nav_more"
             android:icon="@drawable/ic_more"
             android:title="More" />
+        <item
+            android:id="@+id/nav_share"
+            android:icon="@drawable/ic_menu_share"
+            android:title="Share" />
+        <item
+            android:id="@+id/nav_send"
+            android:icon="@drawable/ic_menu_send"
+            android:visible="false"
+            android:title="Send" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_logout"
+            android:visible="false"
+            android:title="Logout" />
+        <item
+            android:id="@+id/nav_login"
+            android:icon="@drawable/ic_logout"
+            android:visible="false"
+            android:title="Login" />
     </group>
 
-    <item android:title="Communicate">
+    <!--<item android:title="Communicate">
         <menu>
             <item
                 android:id="@+id/nav_share"
@@ -94,5 +113,5 @@
                 android:title="Login" />
 
         </menu>
-    </item>
+    </item>-->
 </menu>

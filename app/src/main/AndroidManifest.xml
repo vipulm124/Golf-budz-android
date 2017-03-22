@@ -87,7 +87,7 @@
             android:label="Create Event" />
         <activity
             android:name="com.golf.budz.club.MyClubActivity"
-            android:label="My Club" />
+            android:label="Golf Club" />
         <activity
             android:name="com.golf.budz.club.ClubDetailActivity"
             android:label="Detail" />
