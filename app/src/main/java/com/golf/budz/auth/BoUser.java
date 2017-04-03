@@ -77,6 +77,19 @@ public class BoUser implements Serializable {
     public String playWithUs;
     @SerializedName("playWithOther")
     public String playWithOther;
+    @SerializedName("noOfHandicap")
+    public String noOfHandicap;
+    @SerializedName("course")
+    public String course;
+    @SerializedName("location")
+    public String location;
+    public String getNoOfHandicap() {
+        return noOfHandicap;
+    }
+
+    public void setNoOfHandicap(String noOfHandicap) {
+        this.noOfHandicap = noOfHandicap;
+    }
 
     public String getEmail() {
         return email;
@@ -340,5 +353,21 @@ public class BoUser implements Serializable {
 
     public void setPlayWithOther(String playWithOther) {
         this.playWithOther = playWithOther;
+    }
+
+    public String getCourse() {
+        return course;
+    }
+
+    public void setCourse(String course) {
+        this.course = course;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }

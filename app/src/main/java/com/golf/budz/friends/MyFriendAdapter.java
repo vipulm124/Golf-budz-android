@@ -73,6 +73,9 @@ public class MyFriendAdapter extends
         }else if(item.getStatus().equals(Const.SENT)){
             holder.tvStatus.setText(Const.SENT);
             item.setStatus(Const.SENT);
+        }else if(item.getStatus().equals(Const.PENDING)){
+            holder.tvStatus.setText(Const.ACCEPT);
+            item.setStatus(Const.ACCEPT);
         }
 
         Common.showBigImage(context, holder.ivPic, item.getProfileImage());

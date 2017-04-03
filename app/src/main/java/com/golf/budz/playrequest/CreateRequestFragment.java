@@ -39,6 +39,7 @@ import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import butterknife.BindView;
@@ -108,6 +109,8 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
     Button btnSubmit;
     @BindView(R.id.llRefine)
     LinearLayout llRefine;
+    @BindView(R.id.llhandicapCount)
+    LinearLayout llhandicapCount;
     View view;
     DatePickerDialog datePickerDialog;
     int Year, Month, Day, Hour, Minute;
@@ -149,7 +152,17 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
 
         int selectedHandicapId = radioGroupHandicap.getCheckedRadioButtonId();
         radioHandicapButton = (RadioButton) view.findViewById(selectedHandicapId);
-
+        radioGroupHandicap.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                radioHandicapButton = (RadioButton) view.findViewById(checkedId);
+                if (radioHandicapButton.getText().toString().equals("Yes")) {
+                    llhandicapCount.setVisibility(View.VISIBLE);
+                } else {
+                    llhandicapCount.setVisibility(View.GONE);
+                }
+            }
+        });
         int selectedPlayersId = radioGroupPlayers.getCheckedRadioButtonId();
         radioP1 = (RadioButton) view.findViewById(selectedPlayersId);
 
@@ -171,6 +184,11 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
             llRefine.setVisibility(View.VISIBLE);
         } else {
             llRefine.setVisibility(View.GONE);
+        }
+        if (radioHandicapButton.getText().toString().equals("Yes")) {
+            llhandicapCount.setVisibility(View.VISIBLE);
+        } else {
+            llhandicapCount.setVisibility(View.GONE);
         }
         getVenues();
         getIndustry();
@@ -201,8 +219,10 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
         datePickerDialog.setThemeDark(false);
         datePickerDialog.showYearPickerFirst(false);
         datePickerDialog.setAccentColor(Color.parseColor("#009688"));
-        datePickerDialog.setTitle("Select Date From DatePickerDialog");
-        datePickerDialog.show(myContext.getFragmentManager(), "DatePickerDialog");
+        datePickerDialog.setTitle("Select Date From Golfing Budz");
+        final Calendar c = Calendar.getInstance();
+        datePickerDialog.show(myContext.getFragmentManager(), "DatePickerDialogto");
+        datePickerDialog.setMinDate(c);
     }
 
     @Override

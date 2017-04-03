@@ -20,7 +20,8 @@ public class BoNoti {
     public String title;
     @SerializedName("userId")
     public String userId;
-
+    @SerializedName("friendId")
+    public String friendId;
     @SerializedName("type")
     public String type;
     public String get_id() {
@@ -77,5 +78,13 @@ public class BoNoti {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getFriendId() {
+        return friendId;
+    }
+
+    public void setFriendId(String friendId) {
+        this.friendId = friendId;
     }
 }

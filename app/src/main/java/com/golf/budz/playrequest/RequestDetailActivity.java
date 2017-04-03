@@ -115,7 +115,7 @@ public class RequestDetailActivity extends BaseActivity {
                 if (response.isSuccessful()) {
                     PojoPlay pojo = response.body();
                     if (pojo.getStatus() == Const.STATUS_SUCCESS) {
-                        toast(pojo.getMessage());
+                        toast("Play request send successfully");
                         startActivity(new Intent(RequestDetailActivity.this, PlayRequestActivity.class));
                         finish();
                     } else if (pojo.getStatus() == Const.STATUS_FAILED) {

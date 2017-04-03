@@ -42,7 +42,6 @@
         <RelativeLayout
             android:id="@+id/rlSearch"
             android:layout_width="wrap_content"
-
             android:layout_height="wrap_content">
             <EditText
                 android:id="@+id/etSearch"
@@ -57,7 +56,6 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
                 android:background="@drawable/custom_circle"
                 android:inputType="text"
                 android:textColor="@color/colorWhite"
@@ -81,5 +79,14 @@
             android:layout_below="@+id/rlSearch"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+
     </RelativeLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="@dimen/space_x4"
+        app:backgroundTint="@color/colorWhite"
+        android:src="@drawable/ic_filter"/>
 </android.support.design.widget.CoordinatorLayout>

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.golf.budz.core.base.BoEventData;
@@ -115,7 +116,8 @@ public class NotificationAdapter extends
         ImageView ivAccept;
         @BindView(R.id.ivCancel)
         ImageView ivCancel;
-
+        @BindView(R.id.llInput)
+        LinearLayout llInput;
         ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);

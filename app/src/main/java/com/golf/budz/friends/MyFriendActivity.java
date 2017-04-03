@@ -21,6 +21,7 @@ import com.golf.budz.core.base.BaseActivity;
 import com.golf.budz.core.base.BoEventData;
 import com.golf.budz.core.components.FragmentDataLoader;
 import com.golf.budz.event.EventDetailActivity;
+import com.golf.budz.group.CreatePageActivity;
 import com.golf.budz.home.JSONResponse;
 import com.golf.budz.home.R;
 import com.golf.budz.home.RequestInterface;
@@ -28,6 +29,7 @@ import com.golf.budz.home.model.BoService;
 import com.golf.budz.home.model.PojoService;
 import com.golf.budz.model.Notification;
 import com.golf.budz.notification.NotificationAdapter;
+import com.golf.budz.playrequest.PlayRequestActivity;
 import com.golf.budz.utils.Common;
 import com.golf.budz.utils.Const;
 import com.golf.budz.utils.Pref;
@@ -221,7 +223,7 @@ public class MyFriendActivity extends BaseActivity {
                 break;
             }
             case BoEventData.EVENT_EVENT_FSENDREQ_CLICK: {
-                startActivity(new Intent(this, MyAllPlayReqActivity.class));
+                startActivity(new Intent(this, PlayRequestActivity.class).putExtra(Const.EXTRA_FRAGMENT_DISPLAY_COUNT, "0"));
                 //sendPlayReq(data);
                 break;
             }
@@ -233,7 +235,7 @@ public class MyFriendActivity extends BaseActivity {
         showProgressDialog("Performing operation", "Please wait...");
         String userId = Pref.Read(this, Const.PREF_USER_ID);
         IApiService service = APIHelper.getAppServiceMethod();
-        Call<PojoFriend> call = service.friendStatus(status,friendId,userId);
+        Call<PojoFriend> call = service.friendStatus(status,friendId,userId,"");
         call.enqueue(new Callback<PojoFriend>() {
             @Override
             public void onResponse(Call<PojoFriend> call, Response<PojoFriend> response) {

@@ -83,7 +83,7 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
     LinearLayout llClubDeatl;
 
     boolean checked = false;
-    List<String> items = new ArrayList<String>();
+    List<String> locationList = new ArrayList<String>();
     List<String> roleitems = new ArrayList<String>();
     ComponentLocationItemSelector citySelector;
     ComponentItemSelector roleSelector;
@@ -118,7 +118,8 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
     Spinner spRefer;
     @BindView(R.id.spProfession)
     Spinner spProfession;
-
+    @BindView(R.id.spLocation)
+    Spinner spLocation;
 
     @BindView(R.id.etRound)
     EditText etRound;
@@ -133,6 +134,8 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
     LinearLayout llCousre;
     @BindView(R.id.llhandicap)
     LinearLayout llhandicap;
+    @BindView(R.id.etHandicapCount)
+    EditText etHandicapCount;
     private DatabaseReference mDatabase;
     private boolean isUploading;
     private Uri selectedImage;
@@ -144,8 +147,13 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
     private ArrayList<String> allUploadedUri;
     String userChoosenTask = "";
     private static final int REQUEST_CAMERA = 2;
-String affliateval,handicapval,corsesval,referval,professionval;
+    String affliateval, handicapval, corsesval, referval, professionval;
     final List<String> course = new ArrayList<String>();
+    String    location;
+     List<String> professionList;
+     List<String> affliateList;
+    List<String> handicapList;
+    List<String> referList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -179,8 +187,6 @@ String affliateval,handicapval,corsesval,referval,professionval;
             throw new RuntimeException("PLease initilalize firebase");
         }
     }
-
-
 
 
     @OnClick({R.id.ivPic})
@@ -397,11 +403,27 @@ String affliateval,handicapval,corsesval,referval,professionval;
 
     private void bindData(ArrayList<BoCity> allItems) {
         for (int i = 0; i < allItems.size(); i++) {
-            items.add(allItems.get(i).getName());
+            locationList.add(allItems.get(i).getName());
         }
-        citySelector = (ComponentLocationItemSelector) getSupportFragmentManager().findFragmentById(R.id.componentCitySelector);
-        // items = new String[]{"Noida", "Delhi"};
-        citySelector.initialize(items, "Select Country");
+        // Creating adapter for spinner
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, R.layout.item_spinner_dropdown, locationList);
+
+        // Drop down layout style - list view with radio button
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // attaching data adapter to spinner
+        spLocation.setAdapter(dataAdapter);
+        spLocation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                location = locationList.get(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     private void getProfile() {
@@ -416,7 +438,7 @@ String affliateval,handicapval,corsesval,referval,professionval;
                 if (response.isSuccessful()) {
                     PojoUser pojoUser = response.body();
                     if (pojoUser.getStatus() == Const.STATUS_SUCCESS) {
-                        toast(pojoUser.getMessage());
+                        //toast(pojoUser.getMessage());
                         binddata(pojoUser.getAllItems().get(0));
                     } else if (pojoUser.getStatus() == Const.STATUS_FAILED) {
                         toast(pojoUser.getMessage());
@@ -458,14 +480,26 @@ String affliateval,handicapval,corsesval,referval,professionval;
 
             etSex.setText(user.getSex());
             etAge.setText(user.getAge());
+            int index=professionList.indexOf(user.getProfession());
+            spProfession.setSelection(index);
 
+            int indexhandicap=handicapList.indexOf(user.getHandicap());
+            spHandicap.setSelection(indexhandicap);
+            etHandicapCount.setText(user.getNoOfHandicap());
 
-            //etProfession.setText(user.getProfession());
+            int indexrefer=referList.indexOf(user.getRefer());
+            spRefer.setSelection(indexrefer);
 
-            etRound.setText(user.getRounds());
+            int indexaffliate=referList.indexOf(user.getAffiliated());
+            spAffiliate.setSelection(indexaffliate);
+
+            int indexLocation=locationList.indexOf(user.getLocation());
+            spLocation.setSelection(indexLocation);
+
+            etRound.setText(user.getRoundsPerMonth());
             etLike.setText(user.getPlayWithUs());
             etSocialLike.setText(user.getPlayWithOther());
-            Common.showRoundImage(getApplicationContext(), ivPic, user.getProfileImage());
+            Common.showRoundImage(getApplicationContext(), ivPic, Pref.Read(this, Const.PREF_USE_IMAGE_PATH));
             try {
                 selectedImage = Uri.parse(user.getProfileImage());
             } catch (Exception ex) {
@@ -508,6 +542,7 @@ String affliateval,handicapval,corsesval,referval,professionval;
             String subrub = etSubrub.getText().toString();
             String operatingHours = etOperatingHours.getText().toString();
             String contactNo = etContactNo.getText().toString();
+            String handicapCount = etHandicapCount.getText().toString();
 
             String sex = etSex.getText().toString();
             String age = etAge.getText().toString();
@@ -542,7 +577,10 @@ String affliateval,handicapval,corsesval,referval,professionval;
                 }
             }*/
             else {
-
+                if(citySelector==null)
+                    toast("something is wrong");
+                else{
+                    location = citySelector.getSelectedItem();}
                 BoUser user = new BoUser();
                 user.setUserId(userId);
                 user.setEmail(email);
@@ -554,7 +592,7 @@ String affliateval,handicapval,corsesval,referval,professionval;
                 if (allUploadedUri.size() > 0)
                     user.setProfileImage(allUploadedUri.get(0));
                 else
-                    user.setProfileImage("");
+                 user.setProfileImage(Pref.Read(this, Const.PREF_USE_IMAGE_PATH));
                 user.setDob("");
                 user.setHandicap(handicap);
                 user.setStrength("");
@@ -578,6 +616,10 @@ String affliateval,handicapval,corsesval,referval,professionval;
                 user.setRefer(refer);
                 user.setPlayWithUs(like);
                 user.setPlayWithOther(sociallike);
+                user.setLocation(location);
+                user.setCourse(corsesval);
+                user.setNoOfHandicap(handicapCount);
+
                 updateProfile(user);
             }
 
@@ -743,12 +785,12 @@ String affliateval,handicapval,corsesval,referval,professionval;
 
     private void affliate() {
         // Spinner Drop down elements
-        final List<String> affliate = new ArrayList<String>();
-        affliate.add("No");
-        affliate.add("Yes");
+        affliateList = new ArrayList<String>();
+        affliateList.add("No");
+        affliateList.add("Yes");
 
         // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, R.layout.item_spinner_dropdown, affliate);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, R.layout.item_spinner_dropdown, affliateList);
 
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -758,10 +800,10 @@ String affliateval,handicapval,corsesval,referval,professionval;
         spAffiliate.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                affliateval=affliate.get(position).toString();
-                if(affliateval.equalsIgnoreCase("yes")){
-                 llCousre.setVisibility(View.VISIBLE);
-                }else  if(affliateval.equalsIgnoreCase("No")){
+                affliateval = affliateList.get(position).toString();
+                if (affliateval.equalsIgnoreCase("yes")) {
+                    llCousre.setVisibility(View.VISIBLE);
+                } else if (affliateval.equalsIgnoreCase("No")) {
                     llCousre.setVisibility(View.GONE);
                 }
             }
@@ -772,12 +814,13 @@ String affliateval,handicapval,corsesval,referval,professionval;
             }
         });
     }
+
     private void getProfession() {
-        final List<String> profession = new ArrayList<String>();
-        profession.add("Buisness man");
-        profession.add("Service man");
+         professionList = new ArrayList<String>();
+        professionList.add("Buisness man");
+        professionList.add("Service man");
         // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, R.layout.item_spinner_dropdown, profession);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, R.layout.item_spinner_dropdown, professionList);
 
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -787,7 +830,7 @@ String affliateval,handicapval,corsesval,referval,professionval;
         spProfession.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                professionval=profession.get(position).toString();
+                professionval = professionList.get(position).toString();
 
             }
 
@@ -797,13 +840,14 @@ String affliateval,handicapval,corsesval,referval,professionval;
             }
         });
     }
+
     private void handicap() {
         // Spinner Drop down elements
-        final List<String> handicap = new ArrayList<String>();
-        handicap.add("No");
-        handicap.add("Yes");
+         handicapList = new ArrayList<String>();
+        handicapList.add("No");
+        handicapList.add("Yes");
         // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, R.layout.item_spinner_dropdown, handicap);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, R.layout.item_spinner_dropdown, handicapList);
 
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -813,10 +857,10 @@ String affliateval,handicapval,corsesval,referval,professionval;
         spHandicap.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                handicapval=handicap.get(position).toString();
-                if(handicapval.equals("Yes")){
+                handicapval = handicapList.get(position).toString();
+                if (handicapval.equals("Yes")) {
                     llhandicap.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     llhandicap.setVisibility(View.GONE);
                 }
             }
@@ -827,14 +871,15 @@ String affliateval,handicapval,corsesval,referval,professionval;
             }
         });
     }
+
     private void preferOption() {
         // Spinner Drop down elements
-        final List<String> refer = new ArrayList<String>();
-        refer.add("Walking");
-        refer.add("Taking golf cart");
-        refer.add("Both");
+       referList = new ArrayList<String>();
+        referList.add("Walking");
+        referList.add("Taking golf cart");
+        referList.add("Both");
         // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, R.layout.item_spinner_dropdown, refer);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, R.layout.item_spinner_dropdown, referList);
 
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -844,7 +889,7 @@ String affliateval,handicapval,corsesval,referval,professionval;
         spRefer.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                referval=refer.get(position).toString();
+                referval = referList.get(position).toString();
             }
 
             @Override
@@ -853,8 +898,9 @@ String affliateval,handicapval,corsesval,referval,professionval;
             }
         });
     }
+
     public void getCorses() {
-            IApiService   apiService = APIHelper.getAppServiceMethod();
+        IApiService apiService = APIHelper.getAppServiceMethod();
         Call<PojoUser> call = apiService.getAllClub();
         call.enqueue(new Callback<PojoUser>() {
             @Override
@@ -885,7 +931,7 @@ String affliateval,handicapval,corsesval,referval,professionval;
     }
 
     private void bindClubData(ArrayList<BoUser> allItems) {
-        for(int i=0;i<allItems.size(); i++){
+        for (int i = 0; i < allItems.size(); i++) {
             course.add(allItems.get(i).getClubName());
         }
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, R.layout.item_spinner_dropdown, course);
@@ -898,7 +944,7 @@ String affliateval,handicapval,corsesval,referval,professionval;
         spCourses.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                corsesval=course.get(position).toString();
+                corsesval = course.get(position).toString();
             }
 
             @Override

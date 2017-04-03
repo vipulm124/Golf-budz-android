@@ -27,8 +27,8 @@ public class Const {
     public static final String EXTRA_POST = "post";
     public static boolean IS_TEST = false;
     public static boolean IS_PRODUCTION=false;
-    public static String API_BASE_URL_DEV="https://golfbudz-staging.herokuapp.com/api/";//https://golfbudz-api.herokuapp.com/api/";
-    public static final String API_BASE_URL_PROD = "https://golfbudz-staging.herokuapp.com/api/";//https://golfbudz-staging.herokuapp.com/api/
+    public static String API_BASE_URL_DEV="https://golfbudz-api.herokuapp.com/api/";//https://golfbudz-api.herokuapp.com/api/";
+    public static final String API_BASE_URL_PROD = "https://golfbudz-api.herokuapp.com/api/";//https://golfbudz-staging.herokuapp.com/api/
 
     public static final String DUMMYID = "45a4a2ac-a0e6-11e6-b706-90b11c086519";
     public static final String EXTRA_EVENT_ID = "evenId";
@@ -37,6 +37,7 @@ public class Const {
     public static final String PENDING = "pending";
     public static final String SENT = "sent";
     public static final String ACCEPT = "accept";
+    public static final String CANCEL = "cancel";
     public static final String UNBLOCK = "unblock";
     public static final String IMAGE = "image";
     public static final String VIDEO = "video";

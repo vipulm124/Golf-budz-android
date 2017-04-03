@@ -27,6 +27,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Created by Irfan on 2/02/17.
@@ -138,7 +139,7 @@ public interface IApiService {
 
     @FormUrlEncoded
     @PUT("request/status")
-    Call<PojoFriend> friendStatus(@Field("status") String status, @Field("friendId") String friendId, @Field("userId") String userId);
+    Call<PojoFriend> friendStatus(@Field("status") String status, @Field("friendId") String friendId, @Field("userId") String userId,@Field("notificationId") String notificationId);
 
     @GET("users/{userId}/friends/{text}/search")
     Call<PojoFriend> getSearchFriends(@Path("userId") String userId, @Path("text") String text);
@@ -188,5 +189,7 @@ public interface IApiService {
     @FormUrlEncoded
     @PUT("requests")
     Call<PojoPlay> cancelPlayReq(@Field("requestId") int requestId, @Field("userId") String userId, @Field("status") String status);
-
+    @FormUrlEncoded
+    @POST("playrequests/filter/{userId}")
+    Call<PojoPlay> getAllFilterPlayReq(@Path("userId") String userId, @Field("handicap") String handicap,@Field("industry") String industry);
 }

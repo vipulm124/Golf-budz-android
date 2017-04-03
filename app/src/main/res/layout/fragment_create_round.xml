@@ -437,6 +437,36 @@
 
 
             </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/llhandicapCount"
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="2"
+                    android:layout_margin="@dimen/space_x2"
+                    android:orientation="horizontal">
+                <android.support.percent.PercentRelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="beforeDescendants"
+                    android:focusableInTouchMode="true"
+                    android:orientation="horizontal">
+                    <TextView
+                        style="@style/AppTheme.TextView.Wrap"
+                        app:layout_widthPercent="50%"
+                        android:layout_centerVertical="true"
+                        android:text="Number of handicap"/>
+                    <EditText
+                        android:id="@+id/etHandicapCount"
+                        style="@style/AppTheme.EditText"
+                        android:hint="no. of handicap"
+                        app:layout_widthPercent="50%"
+                        android:inputType="number"
+                        android:maxLength="2"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        />
+                </android.support.percent.PercentRelativeLayout>
+</LinearLayout>
             <LinearLayout
                 android:layout_height="match_parent"
                 android:layout_width="wrap_content"
@@ -454,7 +484,7 @@
                         style="@style/AppTheme.TextView.Wrap"
                         app:layout_widthPercent="50%"
                         android:layout_centerVertical="true"
-                        android:text="Select Location"/>
+                        android:text="Select members region"/>
                     <!--<EditText
                         android:id="@+id/etlocation"
                         style="@style/AppTheme.EditText"

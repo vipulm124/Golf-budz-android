@@ -113,6 +113,7 @@
                   style="@style/AppTheme.EditText"
                   android:layout_marginTop="0dp"
                   android:inputType="number"
+                  android:maxLength="2"
                   android:hint="Enter number of handicap" /></LinearLayout>
             <TextView
                 style="@style/AppTheme.TextView"
@@ -287,13 +288,12 @@
                     android:layout_marginTop="0dp"
                     android:hint="Enter Subrub" />
 
-                <fragment
-                    android:id="@+id/componentCitySelector"
-                    android:name="com.golf.budz.core.components.ComponentLocationItemSelector"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:layout="@layout/component_item_profile_selector"></fragment>
+                <Spinner
+                    android:id="@+id/spLocation"
+                    style="@style/AppTheme.EditText"
+                    android:spinnerMode="dialog"
 
+                    />
                 <TextView
                     style="@style/AppTheme.TextView"
                     android:text="Operating Hours" />
@@ -312,6 +312,7 @@
                     android:id="@+id/etContactNo"
                     style="@style/AppTheme.EditText"
                     android:layout_marginTop="0dp"
+                    android:inputType="number"
                     android:hint="Contact No" />
             </LinearLayout>
 

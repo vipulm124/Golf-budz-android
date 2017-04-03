@@ -8,12 +8,15 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import com.golf.budz.auth.PojoUser;
 import com.golf.budz.core.base.BaseActivity;
 import com.golf.budz.core.base.BoEventData;
 import com.golf.budz.core.components.FragmentDataLoader;
+import com.golf.budz.friends.PojoFriend;
 import com.golf.budz.home.JSONResponse;
 import com.golf.budz.home.NewsFeedAdapter;
 import com.golf.budz.home.R;
@@ -49,7 +52,7 @@ public class NotificationActivity extends BaseActivity {
     private ArrayList<BoNoti> allItems;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
-
+    LinearLayoutManager manager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +70,7 @@ public class NotificationActivity extends BaseActivity {
 
     @Override
     public void init() {
-        LinearLayoutManager manager = new LinearLayoutManager(this);
+         manager = new LinearLayoutManager(this);
         allItems = new ArrayList<>();
         allItems.clear();
         adapter = new NotificationAdapter(allItems);
@@ -121,7 +124,7 @@ public class NotificationActivity extends BaseActivity {
 
     private void updateViews(int size) {
         if (size == 0) {
-            fragmentLoader.setDataEmpty("No services are available in your region for the chosen category");
+            fragmentLoader.setDataEmpty("No request found");
             recyclerView.setVisibility(View.GONE);
         } else {
             fragmentLoader.setDataAvailable();
@@ -144,18 +147,18 @@ public class NotificationActivity extends BaseActivity {
         switch (eventType) {
             case BoEventData.EVENT_NOTI_ACCEPT_CLICK: {
                 BoNoti noti = (BoNoti) object;
-                performAcceptance(noti,id);
+                performAction(noti,Const.ACCEPT,id);
                 break;
             }
             case BoEventData.EVENT_NOTI_CANCEL_CLICK: {
                 BoNoti noti = (BoNoti) object;
-                performCancellation(noti,id);
+                performAction(noti,Const.CANCEL,id);
                 break;
             }
         }
     }
 
-    private void performAcceptance(BoNoti noti, final int position) {
+  /*  private void performAcceptance(BoNoti noti, final int position) {
         showProgressDialog("Performing your request", "Please wait...");
         String userId = Pref.Read(this, Const.PREF_USER_ID);
         IApiService service = APIHelper.getAppServiceMethod();
@@ -185,9 +188,41 @@ public class NotificationActivity extends BaseActivity {
                 Common.logException(getApplicationContext(), "Internal server error", t, null);
             }
         });
-    }
+    }*/
+    private void performAction(BoNoti noti, final String status, final int position) {
+        showProgressDialog("Performing operation", "Please wait...");
+        String userId = Pref.Read(this, Const.PREF_USER_ID);
+        IApiService service = APIHelper.getAppServiceMethod();
+        Call<PojoFriend> call = service.friendStatus(status,noti.getFriendId(),userId,noti.get_id());
+        call.enqueue(new Callback<PojoFriend>() {
+            @Override
+            public void onResponse(Call<PojoFriend> call, Response<PojoFriend> response) {
+                hideDialog();
+                if (response.isSuccessful()) {
+                    PojoFriend pojoUser = response.body();
+                    if (pojoUser.getStatus() == Const.STATUS_SUCCESS) {
+                        toast(pojoUser.getMessage());
+                        adapter.notifyItemRemoved(position);
 
-    private void performCancellation(BoNoti noti, final int position) {
+                    } else if (pojoUser.getStatus() == Const.STATUS_FAILED) {
+                        toast(pojoUser.getMessage());
+                    } else if (pojoUser.getStatus() == Const.STATUS_ERROR) {
+                        toast(pojoUser.getMessage());
+                    }
+                } else {
+                    toast("Something went wrong");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PojoFriend> call, Throwable t) {
+                hideDialog();
+                Common.logException(getApplicationContext(), "Internal server error", t, null);
+            }
+        });
+
+    }
+   /* private void performCancellation(BoNoti noti, final int position) {
         showProgressDialog("Performing your request", "Please wait...");
         String userId = Pref.Read(this, Const.PREF_USER_ID);
         IApiService service = APIHelper.getAppServiceMethod();
@@ -217,7 +252,7 @@ public class NotificationActivity extends BaseActivity {
                 Common.logException(getApplicationContext(), "Internal server error", t, null);
             }
         });
-    }
+    }*/
 
     @Override
     public void onStart() {

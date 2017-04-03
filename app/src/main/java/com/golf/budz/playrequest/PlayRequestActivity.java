@@ -57,7 +57,7 @@ String fragDisply="0";
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new CreateRequestFragment(), "Create Play Request");
         adapter.addFragment(new JoinFragment(), "Join Request");
-        adapter.addFragment(new UpcomingGamesFragment(), "Upcoming Rounds");
+        adapter.addFragment(new UpcomingGamesFragment(), "My Upcoming Rounds");
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(Integer.parseInt(fragDisply));
     }

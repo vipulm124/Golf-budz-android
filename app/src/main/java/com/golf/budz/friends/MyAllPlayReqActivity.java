@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
@@ -188,7 +189,15 @@ public class MyAllPlayReqActivity extends BaseActivity {
         EventBus.getDefault().unregister(this);
         super.onStop();
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            finish();
+        }
 
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public void log(String message) {

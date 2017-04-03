@@ -1,6 +1,10 @@
 package com.golf.budz.playrequest;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
@@ -8,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -16,6 +21,7 @@ import android.widget.TextView;
 
 import com.golf.budz.core.base.BaseFragment;
 import com.golf.budz.core.components.FragmentDataLoader;
+import com.golf.budz.event.CreateEventActivity;
 import com.golf.budz.friends.PojoFriend;
 import com.golf.budz.home.R;
 import com.golf.budz.playrequest.adapter.AdapterJoinPlayRequest;
@@ -58,7 +64,8 @@ public class JoinFragment extends BaseFragment {
     private ArrayList<BoPlay> allItems;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
-
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
     public JoinFragment() {
         // Required empty public constructor
     }
@@ -210,5 +217,109 @@ public class JoinFragment extends BaseFragment {
     @Override
     public void log(String message) {
 
+    }
+    @OnClick(R.id.fab)
+    public void onClick(View view) {
+        AlertDialog.Builder builderSingle = new AlertDialog.Builder(getActivity());
+        builderSingle.setTitle("Filter By:-");
+
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.select_dialog_singlechoice);
+        arrayAdapter.add("Handicap");
+        arrayAdapter.add("Industry");
+
+        builderSingle.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        builderSingle.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String strName = arrayAdapter.getItem(which);
+                if(strName.equals("Handicap"))
+                filterData(strName);
+                else
+                    filterIndustryData(strName);
+                dialog.dismiss();
+
+            }
+        });
+        builderSingle.show();
+    }
+    public void filterData(String filterByHandicap) {
+        String userId = Pref.Read(getActivity(), Const.PREF_USER_ID);
+
+            apiService = APIHelper.getAppServiceMethod();
+        Call<PojoPlay> call = apiService.getAllFilterPlayReq(userId,"yes","");
+        call.enqueue(new Callback<PojoPlay>() {
+            @Override
+            public void onResponse(Call<PojoPlay> call, Response<PojoPlay> response) {
+                hideDialog();
+                if (response.isSuccessful()) {
+                    PojoPlay pojo = response.body();
+                    if (pojo.getStatus() == Const.STATUS_SUCCESS) {
+                        //toast(pojo.getMessage());
+                        bindData(pojo.getAllItems());
+                        // updateCategories(position);
+
+                    } else if (pojo.getStatus() == Const.STATUS_FAILED) {
+                        updateViews(0);
+                        //toast(pojo.getMessage());
+                    } else if (pojo.getStatus() == Const.STATUS_ERROR) {
+                        updateViews(0);
+                        //toast(pojo.getMessage());
+                    }
+                } else {
+                    toast("Something went wrong");
+                    updateViews(0);
+                }
+            }
+
+
+            @Override
+            public void onFailure(Call<PojoPlay> call, Throwable t) {
+                updateViews(0);
+                Common.logException(getActivity(), "Internal server error", t, null);
+            }
+        });
+    }
+    public void filterIndustryData(String filterByHandicap) {
+        String userId = Pref.Read(getActivity(), Const.PREF_USER_ID);
+
+        apiService = APIHelper.getAppServiceMethod();
+        Call<PojoPlay> call = apiService.getAllFilterPlayReq(userId,"","hindustan");
+        call.enqueue(new Callback<PojoPlay>() {
+            @Override
+            public void onResponse(Call<PojoPlay> call, Response<PojoPlay> response) {
+                hideDialog();
+                if (response.isSuccessful()) {
+                    PojoPlay pojo = response.body();
+                    if (pojo.getStatus() == Const.STATUS_SUCCESS) {
+                        //toast(pojo.getMessage());
+                        bindData(pojo.getAllItems());
+                        // updateCategories(position);
+
+                    } else if (pojo.getStatus() == Const.STATUS_FAILED) {
+                        updateViews(0);
+                        //toast(pojo.getMessage());
+                    } else if (pojo.getStatus() == Const.STATUS_ERROR) {
+                        updateViews(0);
+                        //toast(pojo.getMessage());
+                    }
+                } else {
+                    toast("Something went wrong");
+                    updateViews(0);
+                }
+            }
+
+
+            @Override
+            public void onFailure(Call<PojoPlay> call, Throwable t) {
+                updateViews(0);
+                Common.logException(getActivity(), "Internal server error", t, null);
+            }
+        });
     }
 }

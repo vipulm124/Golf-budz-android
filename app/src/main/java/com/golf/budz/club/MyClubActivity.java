@@ -171,7 +171,7 @@ public class MyClubActivity extends BaseActivity {
                     if (pojoUser.getStatus() == Const.STATUS_SUCCESS) {
                         new SweetAlertDialog(MyClubActivity.this, SweetAlertDialog.SUCCESS_TYPE)
                                 .setTitleText("Congratulations")
-                                .setContentText("You have joined the club.")
+                                .setContentText("you are following the this club .")
                                 .show();
 
 

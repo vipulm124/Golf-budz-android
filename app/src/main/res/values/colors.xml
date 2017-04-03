@@ -16,6 +16,7 @@
     <color name="transblack">#99000000</color>
     <color name="yellow">#F0DFB1</color>
     <color name="colorGrayTrans">#CC2E2E2E</color>
+    <color name="colorGreen">#008000</color>
     <!-- Screens background color-->
     <color name="bg_screen1">#f64c73</color>
     <color name="bg_screen2">#20d2bb</color>
