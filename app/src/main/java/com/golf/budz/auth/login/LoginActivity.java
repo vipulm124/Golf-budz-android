@@ -1,6 +1,7 @@
 package com.golf.budz.auth.login;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.facebook.AccessToken;
@@ -29,6 +31,8 @@ import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.Profile;
+import com.facebook.ProfileTracker;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.golf.budz.auth.BoUser;
@@ -75,6 +79,9 @@ public class LoginActivity extends BaseActivity {
     ImageView ivFacebook;
     private CallbackManager callbackManager;
     private LoginButton loginButton;
+    ProgressDialog progress;
+    private String facebook_id,type, m_name, l_name, gender, profile_image, full_name, email_id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,7 +91,7 @@ public class LoginActivity extends BaseActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         //for facebook init
         FacebookSdk.sdkInitialize(getApplicationContext());
-        callbackManager = CallbackManager.Factory.create();
+
         //End
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
@@ -94,37 +101,79 @@ public class LoginActivity extends BaseActivity {
     @Override
     public void init() {
        // printHashKey(this);
-            //for facebook
-        loginButton = (LoginButton)findViewById(R.id.login_button);
+        ///start facebook
+        callbackManager = CallbackManager.Factory.create();
+        loginButton = (LoginButton) findViewById(R.id.login_button);
+
         loginButton.setReadPermissions(Arrays.asList(
                 "public_profile", "email", "user_birthday", "user_friends"));
-
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+
             @Override
             public void onSuccess(LoginResult loginResult) {
+                log("facebook:onSuccess:" + loginResult);
+//                toast("User authenticated successfully")
+                toast("logoin sucessfull");
 
-                toast("User ID:  " +
-                        loginResult.getAccessToken().getUserId());
-                Log.e("===",loginResult.getAccessToken().getUserId());
-                Profile user = Profile.getCurrentProfile();
-                if (AccessToken.getCurrentAccessToken() != null) {
-                    RequestData();
-                }
+
+                ProfileTracker mProfileTracker = new ProfileTracker() {
+                    @Override
+                    protected void onCurrentProfileChanged(Profile oldProfile, Profile newProfile) {
+                        facebook_id=  newProfile.getId();
+                        full_name=  newProfile.getName();
+                        type=  "facebook";
+
+                    }
+                };
+                GraphRequest request = GraphRequest.newMeRequest(
+                        loginResult.getAccessToken(),
+                        new GraphRequest.GraphJSONObjectCallback() {
+                            @Override
+                            public void onCompleted(JSONObject object, GraphResponse response) {
+                                Log.v("LoginActivity", response.toString());
+
+                                // Application code
+                                String email = null;
+                                String birthday = null;
+                                try {
+                                    email = object.getString("email");
+                                    birthday = object.getString("birthday"); // 01/31/1980 format
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                Intent i=new Intent(LoginActivity.this, MainActivity.class);
+                                i.putExtra("type","facebook");
+                                i.putExtra("facebook_id",facebook_id);
+                                i.putExtra("dob",birthday);
+                                i.putExtra("full_name",full_name);
+                                i.putExtra("email_id",email);
+                                startActivity(i);
+                                finish();
+
+                            }
+                        });
+                Bundle parameters = new Bundle();
+                parameters.putString("fields", "id,name,email,gender,birthday");
+                request.setParameters(parameters);
+                request.executeAsync();
+                //handleFacebookAccessToken(loginResult.getAccessToken());
             }
 
             @Override
             public void onCancel() {
-                toast("Login attempt cancelled.");
-
+                toast("request cancelled");
             }
 
             @Override
-            public void onError(FacebookException e) {
-                toast("Login attempt failed.");
-
+            public void onError(FacebookException error) {
+                Common.logException(getApplicationContext(), "Facebook login error", error, null);
             }
         });
-    }
+        }
+
+
+
 
 
     @OnClick(R.id.btnLogin)
@@ -231,7 +280,7 @@ public class LoginActivity extends BaseActivity {
     @OnClick(R.id.ivFacebook)
     public  void onFacebook(){
         loginButton.callOnClick();
-
+       // LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("public_profile", "user_friends", "email"));
     }
 
     public String  printHashKey(Context context) {
@@ -277,14 +326,7 @@ public class LoginActivity extends BaseActivity {
                         Log.e("", json.getString("email"));
                         Log.e("", json.getString("id"));
                     }
-
-
-
-
-
-
-
-                } catch (JSONException e) {
+              } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
