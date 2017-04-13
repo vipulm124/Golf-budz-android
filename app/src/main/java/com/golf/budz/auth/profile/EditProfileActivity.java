@@ -268,7 +268,7 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == REQUEST_IMAGE_PICK) {
 
-                Uri selectedImage = data.getData();
+                /*Uri selectedImage = data.getData();
                 if (selectedImage != null) {
                     ivPic.setImageURI(selectedImage);
                 }
@@ -281,7 +281,13 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
                     selectedImage = Uri.fromFile(new File(compressedImage));
                     uploadImageToStorage(compressedImage, allItems.size() - 1);
                     ivPic.setImageURI(selectedImage);
-                }
+                }*/
+                Uri selectedImage = data.getData();
+                isProfilePicChanged = true;
+
+                uploadImageToStorage(selectedImage.toString(), allItems.size() - 1);
+                ivPic.setImageURI(selectedImage);
+
             } else if (requestCode == REQUEST_CAMERA)
                 onCaptureImageResult(data);
         }
@@ -303,14 +309,23 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
     }
 
     public Uri getImageUri(Context inContext, Bitmap inImage) {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+      /*  ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);*/
         String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
         return Uri.parse(path);
     }
 
     private void onCaptureImageResult(Intent data) {
-        Uri selectedImage = data.getData();
+        /*Uri selectedImage = data.getData();
+        ivPic.setImageURI(selectedImage);
+        isProfilePicChanged = true;
+        String compressedImage = SiliCompressor.with(getApplicationContext()).compress(selectedImage.toString());
+        selectedImage = Uri.fromFile(new File(compressedImage));
+        uploadImageToStorage(compressedImage, allItems.size() - 1);
+        ivPic.setImageURI(selectedImage);*/
+        Bundle extras = data.getExtras();
+        Bitmap imageBitmap = (Bitmap) extras.get("data");
+        Uri selectedImage=getImageUri(this,imageBitmap);
         ivPic.setImageURI(selectedImage);
         isProfilePicChanged = true;
         String compressedImage = SiliCompressor.with(getApplicationContext()).compress(selectedImage.toString());

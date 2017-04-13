@@ -84,15 +84,7 @@ public class ImageDataPostActivity extends BaseActivity implements FragmentImage
             if (requestCode == REQUEST_IMAGE_PICK) {
 
                 Uri selectedImage = imageReturnedIntent.getData();
-                if (selectedImage != null) {
-                    fragmentImageUploader.addNewUri(selectedImage);
-                }
-                Bundle extras2 = imageReturnedIntent.getExtras();
-                if (extras2 != null) {
-                    Bitmap photo = extras2.getParcelable("data");
-                    //  getImageUri(this,photo);
-                    fragmentImageUploader.addNewUri(getImageUri(this, photo));
-                }
+                fragmentImageUploader.addNewUri(selectedImage);
             } else if (requestCode == REQUEST_CAMERA)
                 onCaptureImageResult(imageReturnedIntent);
         }
@@ -107,15 +99,20 @@ public class ImageDataPostActivity extends BaseActivity implements FragmentImage
     }
 
     public Uri getImageUri(Context inContext, Bitmap inImage) {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+      /*  ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);*/
         String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
         return Uri.parse(path);
     }
 
     private void onCaptureImageResult(Intent data) {
-        fragmentImageUploader.onCaptureImageResult(data);
+       /* fragmentImageUploader.onCaptureImageResult(data);
          Uri selectedImage = data.getData();
+        fragmentImageUploader.addNewUri(selectedImage);*/
+        fragmentImageUploader.onCaptureImageResult(data);
+        Bundle extras = data.getExtras();
+        Bitmap imageBitmap = (Bitmap) extras.get("data");
+        Uri selectedImage=getImageUri(this,imageBitmap);
         fragmentImageUploader.addNewUri(selectedImage);
     }
 
