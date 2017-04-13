@@ -84,7 +84,7 @@ public class LoginActivity extends BaseActivity {
     private LoginButton loginButton;
     ProgressDialog progress;
     private String facebook_id,type, m_name, l_name, gender, profile_image, full_name, email_id;
-
+    String toke;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,6 +103,7 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void init() {
+         toke= FirebaseInstanceId.getInstance().getToken();
         // printHashKey(this);
         ///start facebook
         callbackManager = CallbackManager.Factory.create();
@@ -197,7 +198,7 @@ public class LoginActivity extends BaseActivity {
 
     private void performLogin(String userName, String password) {
         showProgressDialog("Performing login", "Please wait...");
-        String toke= FirebaseInstanceId.getInstance().getToken();
+
         String imei= Common.getImei(this);
         IApiService service = APIHelper.getAppServiceMethod();
         Call<PojoUser> call = service.login(userName, password,Const.DEVICE_TYPE,imei,toke);
