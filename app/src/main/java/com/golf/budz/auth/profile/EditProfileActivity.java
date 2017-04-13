@@ -149,11 +149,12 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
     private static final int REQUEST_CAMERA = 2;
     String affliateval, handicapval, corsesval, referval, professionval;
     final List<String> course = new ArrayList<String>();
-    String    location;
-     List<String> professionList;
-     List<String> affliateList;
+    String location;
+    List<String> professionList;
+    List<String> affliateList;
     List<String> handicapList;
     List<String> referList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -480,20 +481,20 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
 
             etSex.setText(user.getSex());
             etAge.setText(user.getAge());
-            int index=professionList.indexOf(user.getProfession());
+            int index = professionList.indexOf(user.getProfession());
             spProfession.setSelection(index);
 
-            int indexhandicap=handicapList.indexOf(user.getHandicap());
+            int indexhandicap = handicapList.indexOf(user.getHandicap());
             spHandicap.setSelection(indexhandicap);
             etHandicapCount.setText(user.getNoOfHandicap());
 
-            int indexrefer=referList.indexOf(user.getRefer());
+            int indexrefer = referList.indexOf(user.getRefer());
             spRefer.setSelection(indexrefer);
 
-            int indexaffliate=referList.indexOf(user.getAffiliated());
+            int indexaffliate = referList.indexOf(user.getAffiliated());
             spAffiliate.setSelection(indexaffliate);
 
-            int indexLocation=locationList.indexOf(user.getLocation());
+            int indexLocation = locationList.indexOf(user.getLocation());
             spLocation.setSelection(indexLocation);
 
             etRound.setText(user.getRoundsPerMonth());
@@ -576,11 +577,20 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
                     etSubrub.setError("Enter contact no");
                 }
             }*/
+           else if(refer.equalsIgnoreCase("Select you prefer")){
+                toast("Please select you prefer");
+            }
+            else if(profession.equalsIgnoreCase("Please select profession")){
+                toast("Please select profession");
+            }
+            /*else if(.equalsIgnoreCase("Please select industry")){
+                toast("Please select industry");
+            }*/
             else {
-                if(citySelector==null)
+               /* if(citySelector==null)
                     toast("something is wrong");
                 else{
-                    location = citySelector.getSelectedItem();}
+                    location = citySelector.getSelectedItem();}*/
                 BoUser user = new BoUser();
                 user.setUserId(userId);
                 user.setEmail(email);
@@ -592,7 +602,7 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
                 if (allUploadedUri.size() > 0)
                     user.setProfileImage(allUploadedUri.get(0));
                 else
-                 user.setProfileImage(Pref.Read(this, Const.PREF_USE_IMAGE_PATH));
+                    user.setProfileImage(Pref.Read(this, Const.PREF_USE_IMAGE_PATH));
                 user.setDob("");
                 user.setHandicap(handicap);
                 user.setStrength("");
@@ -816,7 +826,8 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
     }
 
     private void getProfession() {
-         professionList = new ArrayList<String>();
+        professionList = new ArrayList<String>();
+        professionList.add("Please select profession");
         professionList.add("Buisness man");
         professionList.add("Service man");
         // Creating adapter for spinner
@@ -843,7 +854,7 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
 
     private void handicap() {
         // Spinner Drop down elements
-         handicapList = new ArrayList<String>();
+        handicapList = new ArrayList<String>();
         handicapList.add("No");
         handicapList.add("Yes");
         // Creating adapter for spinner
@@ -874,7 +885,8 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
 
     private void preferOption() {
         // Spinner Drop down elements
-       referList = new ArrayList<String>();
+        referList = new ArrayList<String>();
+        referList.add("Select you prefer");
         referList.add("Walking");
         referList.add("Taking golf cart");
         referList.add("Both");

@@ -2,20 +2,16 @@ package com.golf.budz.chat;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+
 import com.golf.budz.core.base.BoEventData;
 import com.golf.budz.home.R;
-import com.golf.budz.utils.Const;
-import com.golf.budz.utils.Pref;
 
 import java.util.List;
 
@@ -79,8 +75,7 @@ public class MyChatAdapter extends RecyclerView.Adapter<MyChatAdapter.ViewHolder
         TextView tvDate;
         @BindView(R.id.tvName)
         TextView tvName;
-        @BindView(R.id.ivPic)
-        ImageView ivPic;
+
         @BindView(R.id.rlChat)
         RelativeLayout rlChat;
         public ViewHolder(View view) {

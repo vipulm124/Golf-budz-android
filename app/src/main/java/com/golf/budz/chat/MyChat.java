@@ -18,14 +18,14 @@ public class MyChat {
     public String message;
 
     public String postedOn;
+    public String chatWithId;
 
-
-    public MyChat(String name, String image,String message) {
+    public MyChat(String name, String image, String message, String chatWithId) {
         this.name = name;
         this.image = image;
-
         this.postedOn = Common.getTimestamp();
         this.message=message;
+        this.chatWithId=chatWithId;
     }
 
 
@@ -41,7 +41,7 @@ public class MyChat {
         result.put("image", image);
         result.put("message", message);
         result.put("postedOn", postedOn);
-
+        result.put("chatWithId", chatWithId);
         return result;
     }
 
@@ -83,5 +83,13 @@ public class MyChat {
 
     public void setChatId(String chatId) {
         this.chatId = chatId;
+    }
+
+    public String getChatWithId() {
+        return chatWithId;
+    }
+
+    public void setChatWithId(String chatWithId) {
+        this.chatWithId = chatWithId;
     }
 }

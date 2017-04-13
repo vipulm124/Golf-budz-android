@@ -1,32 +1,25 @@
 package com.golf.budz.chat;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.golf.budz.auth.BoUser;
+
 import com.golf.budz.core.base.BaseActivity;
 import com.golf.budz.core.base.BoEventData;
-import com.golf.budz.core.components.FragmentDataLoader;
-import com.golf.budz.friends.BoFriend;
-import com.golf.budz.friends.FriendProfileActivity;
-import com.golf.budz.friends.MyFriendAdapter;
 import com.golf.budz.home.R;
 import com.golf.budz.utils.Const;
 import com.golf.budz.utils.Pref;
@@ -37,11 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import butterknife.BindView;
@@ -49,39 +38,54 @@ import butterknife.ButterKnife;
 import de.greenrobot.event.EventBus;
 
 public class MyChatActivity extends BaseActivity {
-
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     MyChatAdapter adapter;
     private List<MyChat> allMyChat= new ArrayList<>();
-    private FragmentDataLoader fragmentLoader;
+    private CollapsingToolbarLayout collapsingToolbarLayout = null;
+    @BindView(R.id.noUsersText)
+    TextView noUsersText;
+    @BindView(R.id.progress)
+    ProgressBar progress;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_my_chat);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setContentView(R.layout.activity_recyclerview);
+        ButterKnife.bind(this);
 
         ButterKnife.bind(this);
-        fragmentLoader = (FragmentDataLoader) getSupportFragmentManager().findFragmentById(R.id.fragmentLoader);
-        if (fragmentLoader == null)
-            toast("null");
-        else
-            init();
-
-
+        init();
 
     }
 
+
+
+
+
     @Override
     public void init() {
+
         LinearLayoutManager manager = new LinearLayoutManager(this);
         allMyChat = new ArrayList<>();
         recyclerView.setLayoutManager(manager);
         recyclerView.setHasFixedSize(true);
         getAllChatUsers();
+
+
+
+
     }
+
+    @Override
+    public void log(String message) {
+
+    }
+
     private void getAllChatUsers() {
         String userId = Pref.Read(this, Const.PREF_USER_ID);
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -99,17 +103,19 @@ public class MyChatActivity extends BaseActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 log("Operation cancelled");
-                toast(getResources().getString(R.string.post_detail_error_toast));
+
 
             }
         });
     }
     private void updateViews(int size) {
         if (size == 0) {
-            fragmentLoader.setDataEmpty("No Friends Found");
+            progress.setVisibility(View.GONE);
+            noUsersText.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.GONE);
         } else {
-            fragmentLoader.setDataAvailable();
+            progress.setVisibility(View.GONE);
+            noUsersText.setVisibility(View.GONE);
             recyclerView.setVisibility(View.VISIBLE);
         }
     }
@@ -120,11 +126,6 @@ public class MyChatActivity extends BaseActivity {
         adapter.notifyDataSetChanged();
         updateViews(allMyChat.size());
     }
-    @Override
-    public void log(String message) {
-
-    }
-
     @Override
     public void onStart() {
         super.onStart();
@@ -148,7 +149,8 @@ public class MyChatActivity extends BaseActivity {
                 Intent intent = new Intent(this, ChatDashboradActivity.class);
                 intent.putExtra(Const.EXTRA_CHAT_WITH, friend.getName());
                 intent.putExtra(Const.EXTRA_CHANNEL_ID, friend.chatId);
-                intent.putExtra(Const.EXTRA_IMAGE_URL, friend.getImage());
+                intent.putExtra(Const.EXTRA_CHATWITH_ID, Integer.parseInt(friend.chatWithId));
+
                 startActivity(intent);
                 break;
             }
@@ -160,6 +162,7 @@ public class MyChatActivity extends BaseActivity {
         int id = item.getItemId();
         if (id == android.R.id.home) {
             finish();
+            return true;
         }
 
         return super.onOptionsItemSelected(item);

@@ -46,6 +46,7 @@ public class Const {
     public static final String EXTRA_CHAT_WITH = "chatWith";
     public static final String EXTRA_CHANNEL_ID = "channelId";
     public static final String EXTRA_FRIEND_ID = "friendId";
+    public static final String EXTRA_CHATWITH_ID = "chatwithId";
     public static final String FIREBASE_DB_CONVERSATIONS = "chat";
     public static final String FIREBASE_DB_CHANNELS = "channel";
     public static final String EXTRA_IMAGE_URL = "image";

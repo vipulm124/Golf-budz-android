@@ -4,16 +4,14 @@ import com.golf.budz.utils.Common;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Created by Irfan on 06/09/16.
  */
-
 @IgnoreExtraProperties
-public class Post  {
+public class Post {
     public String postId;
     public String from;
 
@@ -23,7 +21,7 @@ public class Post  {
     public String postedOn;
 
 
-    public Post(String from, String text,String to) {
+    public Post(String from, String text, String to) {
         this.from = from;
         this.to = to;
 

@@ -84,7 +84,7 @@
 
             <TextView
                 style="@style/AppTheme.TextView"
-                android:text="Do you have handicap"
+                android:text="Do you have a handicap"
                 android:id="@+id/textView2" />
 
             <!-- <EditText
@@ -106,7 +106,7 @@
                 android:orientation="vertical">
             <TextView
                 style="@style/AppTheme.TextView"
-                android:text="Number of handicap" />
+                android:text="What is your handicap" />
 
               <EditText
                   android:id="@+id/etHandicapCount"
@@ -117,7 +117,7 @@
                   android:hint="Enter number of handicap" /></LinearLayout>
             <TextView
                 style="@style/AppTheme.TextView"
-                android:text="Affiliated" />
+                android:text="Affiliation" />
 
           <!--  <EditText
                 android:id="@+id/etAffiliate"
@@ -163,18 +163,18 @@
 
             <TextView
                 style="@style/AppTheme.TextView"
-                android:text="How many rounds of golf do you played per month" />
+                android:text="How many rounds of golf do you play per month" />
 
             <EditText
                 android:id="@+id/etRound"
                 style="@style/AppTheme.EditText"
                 android:layout_marginTop="0dp"
                 android:inputType="number"
-                android:hint="Enter Rounds" />
+                android:hint="Enter number of rounds " />
 
             <TextView
                 style="@style/AppTheme.TextView"
-                android:text="Which do you refer" />
+                android:text="Which do you prefer" />
 
            <!-- <EditText
                 android:id="@+id/etRefer"
@@ -250,13 +250,13 @@
 
                 <TextView
                     style="@style/AppTheme.TextView"
-                    android:text="Description" />
+                    android:text="Bio" />
 
                 <EditText
                     android:id="@+id/etDesc"
                     style="@style/AppTheme.EditText"
                     android:layout_marginTop="0dp"
-                    android:hint="Description" />
+                    android:hint="Enter description" />
 
                 <TextView
                     style="@style/AppTheme.TextView"
@@ -280,28 +280,31 @@
 
                 <TextView
                     style="@style/AppTheme.TextView"
-                    android:text="Subrub" />
+                    android:text="Suburb" />
 
                 <EditText
                     android:id="@+id/etSubrub"
                     style="@style/AppTheme.EditText"
                     android:layout_marginTop="0dp"
-                    android:hint="Enter Subrub" />
+                    android:hint="Enter suburb" />
 
                 <Spinner
                     android:id="@+id/spLocation"
                     style="@style/AppTheme.EditText"
+                    android:visibility="gone"
                     android:spinnerMode="dialog"
 
                     />
                 <TextView
                     style="@style/AppTheme.TextView"
+                    android:visibility="gone"
                     android:text="Operating Hours" />
 
                 <EditText
                     android:id="@+id/etOperatingHours"
                     style="@style/AppTheme.EditText"
                     android:layout_marginTop="0dp"
+                    android:visibility="gone"
                     android:hint="Enter Operating Hours" />
 
                 <TextView

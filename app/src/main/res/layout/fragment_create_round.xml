@@ -355,7 +355,7 @@
                     style="@style/AppTheme.TextView.Wrap"
                     app:layout_widthPercent="50%"
                     android:layout_centerVertical="true"
-                    android:text="Refined your request"/>
+                    android:text="Refine your request"/>
                 <RadioGroup
                     android:id="@+id/radioGroupRefine"
                     android:layout_width="wrap_content"

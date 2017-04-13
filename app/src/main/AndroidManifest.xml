@@ -75,7 +75,7 @@
         <activity android:name="com.golf.budz.more.MoreActivity" />
         <activity
             android:name="com.golf.budz.notification.NotificationActivity"
-            android:label="Notification" />
+            android:label="Notifications" />
         <activity
             android:name="com.golf.budz.friends.MyFriendActivity"
             android:label="Search Friends" />
@@ -124,7 +124,8 @@
         <activity android:name=".VideoActivity" />
         <activity android:name="com.golf.budz.friends.FriendProfileActivity"
             android:label="Profile"/>
-        <activity android:name="com.golf.budz.chat.MyChatActivity" />
+        <activity android:name="com.golf.budz.chat.MyChatActivity"
+            android:label="Budz chat"/>
         <activity
             android:name=".comment.CommentsActivity"
             android:theme="@style/AppTheme.NoActionBar" />

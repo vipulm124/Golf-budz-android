@@ -39,7 +39,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CreatePageActivity extends BaseActivity implements TimePickerDialog.OnTimeSetListener,FragmentImageUpload.ImageUploadListener,FragmentVideoUpload.VideoUploadListener {
+public class CreatePageActivity extends BaseActivity implements TimePickerDialog.OnTimeSetListener, FragmentImageUpload.ImageUploadListener, FragmentVideoUpload.VideoUploadListener {
 
 
     @BindView(R.id.etName)
@@ -61,7 +61,7 @@ public class CreatePageActivity extends BaseActivity implements TimePickerDialog
 
     @BindView(R.id.btnUpdate)
     Button btnUpdate;
-    TimePickerDialog timePickerDialog ;
+    TimePickerDialog timePickerDialog;
     int Year, Month, Day, Hour, Minute;
     private ArrayList<String> allUploadedImage;
     private ArrayList<String> allUploadedVideo;
@@ -70,7 +70,8 @@ public class CreatePageActivity extends BaseActivity implements TimePickerDialog
     private static final int REQUEST_CAMERA = 2;
     private FragmentVideoUpload fragmentVideoUploader;
     private static final int REQUEST_VIEDO_PICK = 3;
-    String friendIds="",picUrls="",videoUrls="";
+    String friendIds = "", picUrls = "", videoUrls = "", name = "", description = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,17 +88,23 @@ public class CreatePageActivity extends BaseActivity implements TimePickerDialog
         fragmentVideoUploader = (FragmentVideoUpload) getSupportFragmentManager().findFragmentById(R.id.fragmentVideoUpload);
         fragmentImageUploader.setVisibility(false);
         fragmentVideoUploader.setVisibility(false);
-        Intent intent=getIntent();
-        if (intent!=null){
-         friendIds=intent.getStringExtra(Const.EXTRA_FRIEND_ID);}
+        Intent intent = getIntent();
+        if (intent != null) {
+            friendIds = intent.getStringExtra(Const.EXTRA_FRIEND_ID);
+            name = intent.getStringExtra("name");
+            description = intent.getStringExtra("description");
+            etName.setText(name);
+            etDesc.setText(description);
+
+        }
     }
 
 
     @OnClick(R.id.btnUpdate)
     public void onUpdate() {
-       // getPicsURL();
-        String name = etName.getText().toString();
-        String description = etDesc.getText().toString();
+        // getPicsURL();
+        name = etName.getText().toString();
+        description = etDesc.getText().toString();
         String category = etCat.getText().toString();
         String operatingHour = etHours.getText().toString();
 
@@ -107,13 +114,13 @@ public class CreatePageActivity extends BaseActivity implements TimePickerDialog
         } else if (TextUtils.isEmpty(description)) {
             etDesc.setError("Please enter");
             return;
-        } else if (TextUtils.isEmpty(category)) {
+        } /*else if (TextUtils.isEmpty(category)) {
             etCat.setError("Please enter");
             return;
         } else if (TextUtils.isEmpty(operatingHour)) {
             etHours.setError("Please enter");
             return;
-        }
+        }*/
         createGroup(name, description, category, operatingHour);
     }
 
@@ -122,7 +129,7 @@ public class CreatePageActivity extends BaseActivity implements TimePickerDialog
         String userId = Pref.Read(this, Const.PREF_USER_ID);
         String userName = Pref.Read(this, Const.PREF_USER_DISPLAY_NAME);
         IApiService service = APIHelper.getAppServiceMethod();
-        Call<PojoUser> call = service.createGroup(userName,name, description, category, operatingHour, getPicsURL(), getVideoURL(), userId,friendIds);
+        Call<PojoUser> call = service.createGroup(userName, name, description, category, operatingHour, getPicsURL(), getVideoURL(), userId, friendIds);
         call.enqueue(new Callback<PojoUser>() {
             @Override
             public void onResponse(Call<PojoUser> call, Response<PojoUser> response) {
@@ -158,44 +165,51 @@ public class CreatePageActivity extends BaseActivity implements TimePickerDialog
         startActivity(intent);
         finish();
     }
-@OnClick(R.id.etHours)
-public void operatingHours(){
-    timePickerDialog = TimePickerDialog.newInstance(this, Hour, Minute, true);
 
-    timePickerDialog.setThemeDark(false);
+    @OnClick(R.id.etHours)
+    public void operatingHours() {
+        timePickerDialog = TimePickerDialog.newInstance(this, Hour, Minute, true);
 
-    // timePickerDialog.show(false);
+        timePickerDialog.setThemeDark(false);
 
-    timePickerDialog.setAccentColor(Color.parseColor("#009688"));
+        // timePickerDialog.show(false);
 
-    timePickerDialog.setTitle("Select Time From TimePickerDialog");
-    timePickerDialog.show(getFragmentManager(), "TimePickerDialog");
-}
+        timePickerDialog.setAccentColor(Color.parseColor("#009688"));
+
+        timePickerDialog.setTitle("Select Time From TimePickerDialog");
+        timePickerDialog.show(getFragmentManager(), "TimePickerDialog");
+    }
+
     @Override
     public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute, int second) {
-        etHours.setText(hourOfDay+":"+minute);
+        etHours.setText(hourOfDay + ":" + minute);
     }
+
     @Override
     public void log(String message) {
 
     }
 
     @OnClick(R.id.ivGallery)
-    public void openGallery(){
+    public void openGallery() {
         fragmentImageUploader.setVisibility(true);
     }
+
     @OnClick(R.id.ivVideo)
-    public void openVideo(){
+    public void openVideo() {
         fragmentVideoUploader.setVisibility(true);
     }
+
     @OnClick(R.id.ivInvite)
-    public void openInvitation(){
-       startActivity(new Intent(this, InviteFriendActivity.class));
+    public void openInvitation() {
+        startActivity(new Intent(this, InviteFriendActivity.class).putExtra("name", etName.getText().toString()).putExtra("description", etDesc.getText().toString()));
     }
+
     @Override
     public void onImageUploadComplete(ArrayList<String> allUploadedUri) {
         this.allUploadedImage = allUploadedUri;
     }
+
     @Override
     public void onVideoUploadComplete(ArrayList<String> allUploadedUri) {
         this.allUploadedVideo = allUploadedUri;
@@ -205,6 +219,7 @@ public void operatingHours(){
     public void onVideoUploadFailed() {
 
     }
+
     @Override
     public void onImageUploadFailed() {
 
@@ -249,11 +264,13 @@ public void operatingHours(){
         Uri selectedImage = data.getData();
         fragmentImageUploader.addNewUri(selectedImage);
     }
+
     @Override
     public void onBackPressed() {
         finish();
         super.onBackPressed();
     }
+
     private String getPicsURL() {
         try {
             for (int i = 0; i < allUploadedImage.size(); i++) {
@@ -263,6 +280,7 @@ public void operatingHours(){
         }
         return picUrls;
     }
+
     private String getVideoURL() {
         try {
             for (int i = 0; i < allUploadedVideo.size(); i++) {
@@ -272,6 +290,7 @@ public void operatingHours(){
         }
         return videoUrls;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();

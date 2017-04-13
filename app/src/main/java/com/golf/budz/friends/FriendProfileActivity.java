@@ -74,8 +74,8 @@ public class FriendProfileActivity extends BaseActivity {
     EditText etEmail;
 
 
-    @BindView(R.id.btSgnupbtn)
-    Button btSgnupbtn;
+/*    @BindView(R.id.btSgnupbtn)
+    Button btSgnupbtn;*/
 
     @BindView(R.id.email_login_form)
     LinearLayout emailLoginForm;

@@ -48,7 +48,7 @@ public class ChatDashboradActivity extends BaseActivity {
     RecyclerView recyclerView;
     private List<Post> allItems;
     private ChatUserAdapter adapter;
-
+    String chatWithId,chatWithImage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +66,7 @@ public class ChatDashboradActivity extends BaseActivity {
                     saveChatDeatil(channelId, chatWith, messageText);
                     messageArea.setText("");
                     saveChannel(channelId, chatWith, messageText);
+                    saveChannelFrom(channelId, chatWith, messageText,chatWithId);
                 }
 
             }
@@ -80,17 +81,24 @@ public class ChatDashboradActivity extends BaseActivity {
     public void init() {
         allItems = new ArrayList<>();
         Intent intent = getIntent();
-        if (intent != null && intent.hasExtra(Const.EXTRA_CHANNEL_ID)) {
+        if (intent != null) {
+            // BoJob   job= (BoJob) intent.getExtras().getSerializable(Const.EXTRA_JOB_DETAIL);
             channelId = intent.getStringExtra(Const.EXTRA_CHANNEL_ID);
             chatWith = intent.getStringExtra(Const.EXTRA_CHAT_WITH);
-            friendImageUrl = intent.getStringExtra(Const.EXTRA_IMAGE_URL);
+            chatWithId = intent.getStringExtra(Const.EXTRA_CHATWITH_ID);
+            chatWithImage = intent.getStringExtra(Const.EXTRA_IMAGE_URL);
 
+            setTitle(chatWith);
         }
+
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
+        if(channelId!=null)
+            getMessages();
+        else
+            toast("channel Id is missing");
 
-        getMessages();
     }
 
     private void getMessages() {
@@ -117,6 +125,7 @@ public class ChatDashboradActivity extends BaseActivity {
     }
 
     private void updateAdapter(List<Post> allItems) {
+        progress.setVisibility(View.GONE);
         if (allItems != null && allItems.size() > 0) {
             adapter = new ChatUserAdapter(allItems, this);
 
@@ -142,7 +151,7 @@ public class ChatDashboradActivity extends BaseActivity {
     }
 
     public void saveChatDeatil(String channelId, String to, String message) {
-       String from = Pref.Read(this, Const.PREF_USER_DISPLAY_NAME);
+        String from = Pref.Read(this, Const.PREF_USER_DISPLAY_NAME);
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         String key = mDatabase.child(Const.FIREBASE_DB_CONVERSATIONS).child(channelId).push().getKey();
         final Post post = new Post(from, message, to);
@@ -165,13 +174,37 @@ public class ChatDashboradActivity extends BaseActivity {
     }
     public void saveChannel(String channelId, String name, String message) {
         String userId = Pref.Read(this, Const.PREF_USER_ID);
+
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         String key = mDatabase.child(Const.FIREBASE_DB_CHANNELS).child(userId).push().getKey();
-        final MyChat chat = new MyChat(name, friendImageUrl, message);
+        final MyChat chat = new MyChat(name, chatWithImage, message,userId);
         Map<String, Object> postValues = chat.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put("/" + Const.FIREBASE_DB_CHANNELS + "/" + userId + "/" + channelId, postValues);
+        mDatabase.updateChildren(childUpdates, new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+
+                if (databaseError != null) {
+                    Common.logException(getApplicationContext(), "Error while creating new post", databaseError, null);
+                    return;
+                }
+                Toast.makeText(getApplicationContext(), getString(R.string.post_successfully_submit_toast), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+    public void saveChannelFrom(String channelId, String name, String message, String chatWithId) {
+        String from = Pref.Read(this, Const.PREF_USER_DISPLAY_NAME);
+        String userImg = Pref.Read(this, Const.PREF_USE_IMAGE_PATH);
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        String key = mDatabase.child(Const.FIREBASE_DB_CHANNELS).child(chatWithId).push().getKey();
+        final MyChat chat = new MyChat(from, userImg, message,chatWithId);
+        Map<String, Object> postValues = chat.toMap();
+
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/" + Const.FIREBASE_DB_CHANNELS + "/" + chatWithId + "/" + channelId, postValues);
         mDatabase.updateChildren(childUpdates, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {

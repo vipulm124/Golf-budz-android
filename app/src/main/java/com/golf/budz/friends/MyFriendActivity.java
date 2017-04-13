@@ -219,6 +219,7 @@ public class MyFriendActivity extends BaseActivity {
                 intent.putExtra(Const.EXTRA_CHAT_WITH, friend.getFirstName());
                 intent.putExtra(Const.EXTRA_CHANNEL_ID, friend.getChanelId());
                 intent.putExtra(Const.EXTRA_IMAGE_URL, friend.getProfileImage());
+                intent.putExtra(Const.EXTRA_CHATWITH_ID, friend.getUserId());
                 startActivity(intent);
                 break;
             }

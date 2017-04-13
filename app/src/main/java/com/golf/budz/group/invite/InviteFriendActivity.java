@@ -51,12 +51,12 @@ public class InviteFriendActivity extends BaseActivity {
     RecyclerView recyclerView;
     @BindView(R.id.btnDone)
     Button btnDone;
-    String friendIds;
+    String friendIds,description="",name="";
     List<String> idList= new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_friend);
+        setContentView(R.layout.activity_invite_friend);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = this.getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -74,6 +74,11 @@ public class InviteFriendActivity extends BaseActivity {
 
     @Override
     public void init() {
+        Intent intent=getIntent();
+        if (intent!=null){
+            name=intent.getStringExtra("name");
+            description=intent.getStringExtra("description");}
+
         LinearLayoutManager manager = new LinearLayoutManager(this);
         allItems = new ArrayList<>();
         adapter = new AdapterInviteFriend(allItems);
@@ -165,7 +170,7 @@ public class InviteFriendActivity extends BaseActivity {
     @OnClick(R.id.btnDone)
     public void onDone(){
         getFiriendIds();
-        startActivity(new Intent(this, CreatePageActivity.class).putExtra(Const.EXTRA_FRIEND_ID,friendIds));
+        startActivity(new Intent(this, CreatePageActivity.class).putExtra(Const.EXTRA_FRIEND_ID,friendIds).putExtra("name",name).putExtra("description",description));
     }
     private void getFiriendIds() {
         try {

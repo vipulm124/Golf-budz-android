@@ -2,7 +2,6 @@ package com.golf.budz.chat;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -35,7 +34,7 @@ public class ChatUserAdapter extends RecyclerView.Adapter<ChatUserAdapter.ViewHo
     public ChatUserAdapter(List<Post> user, Activity comtext) {
         this.allUsers = user;
         this.comtext=comtext;
-             name = Pref.Read(comtext, Const.PREF_USER_DISPLAY_NAME);
+        name = Pref.Read(comtext, Const.PREF_USER_DISPLAY_NAME);
     }
 
     @Override
