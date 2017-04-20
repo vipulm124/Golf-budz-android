@@ -13,12 +13,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bg"
-        tools:context="com.golf.budz.home.MainActivity"
+        tools:context="com.adcoretechnologies.golfbudz.home.MainActivity"
         android:layout_marginTop="40dp"
         tools:showIn="@layout/app_bar_main">
         <fragment
             android:id="@+id/fragmentLoader"
-            android:name="com.golf.budz.core.components.FragmentDataLoader"
+            android:name="com.adcoretechnologies.golfbudz.core.components.FragmentDataLoader"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"

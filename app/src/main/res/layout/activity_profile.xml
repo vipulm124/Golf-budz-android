@@ -17,7 +17,7 @@
             android:layout_height="match_parent">
 
 
-            <com.golf.budz.utils.RoundedImageView
+            <com.adcoretechnologies.golfbudz.utils.RoundedImageView
                 android:id="@+id/ivProfile"
                 android:layout_width="130dp"
                 android:layout_height="130dp"

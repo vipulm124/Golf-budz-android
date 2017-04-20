@@ -95,7 +95,7 @@
 
                 <fragment
                     android:id="@+id/fragmentImageUpload"
-                    android:name="com.golf.budz.core.components.FragmentImageUpload"
+                    android:name="com.adcoretechnologies.golfbudz.core.components.FragmentImageUpload"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
@@ -109,7 +109,7 @@
 
                 <fragment
                     android:id="@+id/fragmentVideoUpload"
-                    android:name="com.golf.budz.core.components.FragmentVideoUpload"
+                    android:name="com.adcoretechnologies.golfbudz.core.components.FragmentVideoUpload"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:layout="@layout/fragment_image_upload"></fragment>

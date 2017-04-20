@@ -65,7 +65,7 @@
                 android:inputType="textPassword" />
             <fragment
                 android:id="@+id/componentCitySelector"
-                android:name="com.golf.budz.core.components.ComponentItemSelector"
+                android:name="com.adcoretechnologies.golfbudz.core.components.ComponentItemSelector"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:layout="@layout/component_item_selector"></fragment>

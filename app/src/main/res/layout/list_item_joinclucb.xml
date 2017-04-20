@@ -15,7 +15,7 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         >
-        <com.golf.budz.utils.RoundedImageView
+        <com.adcoretechnologies.golfbudz.utils.RoundedImageView
             android:id="@+id/eventimg"
             android:layout_width="60dp"
             android:layout_height="60dp"

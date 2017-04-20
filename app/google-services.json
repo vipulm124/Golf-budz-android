@@ -8,12 +8,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:75123473387:android:775ca478687fb7d3",
+        "mobilesdk_app_id": "1:75123473387:android:265d4b49aebc2b06",
         "android_client_info": {
-          "package_name": "com.golf.budz.home"
+          "package_name": "com.adcoretechnologies.golfbudz"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "75123473387-4qvg11ustusiccjaqj4do8sj7l146sa2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.adcoretechnologies.golfbudz",
+            "certificate_hash": "d37d6256296f7dbea48c70de2848dc96db165142"
+          }
+        },
         {
           "client_id": "75123473387-g4n2ltsc196ssuhg1l2i0n927e8i77nv.apps.googleusercontent.com",
           "client_type": 3
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "75123473387-g4n2ltsc196ssuhg1l2i0n927e8i77nv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

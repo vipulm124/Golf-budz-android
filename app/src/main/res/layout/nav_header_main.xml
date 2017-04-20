@@ -19,7 +19,7 @@
         android:orientation="vertical"
         android:layout_height="match_parent">
 
-    <com.golf.budz.utils.RoundedImageView
+    <com.adcoretechnologies.golfbudz.utils.RoundedImageView
         android:id="@+id/ivPic"
         android:layout_width="80dp"
         android:layout_height="80dp"

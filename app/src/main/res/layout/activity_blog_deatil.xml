@@ -20,7 +20,7 @@
             android:layout_toRightOf="@+id/ivImage"
             android:layout_height="wrap_content"
             >
-        <com.golf.budz.utils.RoundedImageView
+        <com.adcoretechnologies.golfbudz.utils.RoundedImageView
             android:id="@+id/ivImage"
             android:layout_width="80dp"
             android:layout_height="80dp"

@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"></FrameLayout>
     <fragment
         android:id="@+id/fragmentImageUpload"
-        android:name="com.golf.budz.core.components.FragmentImageUpload"
+        android:name="com.adcoretechnologies.golfbudz.core.components.FragmentImageUpload"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:layout="@layout/fragment_image_upload"></fragment>

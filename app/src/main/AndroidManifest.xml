@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.golf.budz.home">
+    package="com.adcoretechnologies.golfbudz">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -36,7 +36,7 @@
             android:resource="@color/colorAccent" />
 
         <activity
-            android:name="com.golf.budz.LauncherActivity"
+            android:name="com.adcoretechnologies.golfbudz.LauncherActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -46,112 +46,112 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SplashScreen"
+            android:name="com.adcoretechnologies.golfbudz.home.SplashScreen"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.adcoretechnologies.golfbudz.home.MainActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name=".WelcomeActivity"
+            android:name="com.adcoretechnologies.golfbudz.home.WelcomeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="com.golf.budz.auth.profile.ProfileActivity" />
+        <activity android:name="com.adcoretechnologies.golfbudz.auth.profile.ProfileActivity" />
         <activity
-            android:name="com.golf.budz.auth.profile.EditProfileActivity"
+            android:name="com.adcoretechnologies.golfbudz.auth.profile.EditProfileActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="com.golf.budz.auth.profile.ChnagePasswordActivity" />
+        <activity android:name="com.adcoretechnologies.golfbudz.auth.profile.ChnagePasswordActivity" />
         <activity
-            android:name="com.golf.budz.items.BuyItemActivity"
+            android:name="com.adcoretechnologies.golfbudz.items.BuyItemActivity"
             android:label="Buy Items" />
-        <activity android:name="com.golf.budz.items.BuyItemDetailActivity" />
+        <activity android:name="com.adcoretechnologies.golfbudz.items.BuyItemDetailActivity" />
         <activity
-            android:name="com.golf.budz.auth.login.LoginActivity"
+            android:name="com.adcoretechnologies.golfbudz.auth.login.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name="com.golf.budz.auth.Register.RegisterActivity"
+            android:name="com.adcoretechnologies.golfbudz.auth.Register.RegisterActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name="com.golf.budz.more.MoreActivity" />
+        <activity android:name="com.adcoretechnologies.golfbudz.more.MoreActivity" />
         <activity
-            android:name="com.golf.budz.notification.NotificationActivity"
+            android:name="com.adcoretechnologies.golfbudz.notification.NotificationActivity"
             android:label="Notifications" />
         <activity
-            android:name="com.golf.budz.friends.MyFriendActivity"
+            android:name="com.adcoretechnologies.golfbudz.friends.MyFriendActivity"
             android:label="Search Friends" />
         <activity
-            android:name="com.golf.budz.event.EventActivity"
+            android:name="com.adcoretechnologies.golfbudz.event.EventActivity"
             android:label="Events" />
         <activity
-            android:name="com.golf.budz.event.CreateEventActivity"
+            android:name="com.adcoretechnologies.golfbudz.event.CreateEventActivity"
             android:label="Create Event" />
         <activity
-            android:name="com.golf.budz.club.MyClubActivity"
+            android:name="com.adcoretechnologies.golfbudz.club.MyClubActivity"
             android:label="Golf Clubs" />
         <activity
-            android:name="com.golf.budz.club.ClubDetailActivity"
+            android:name="com.adcoretechnologies.golfbudz.club.ClubDetailActivity"
             android:label="Detail" />
         <activity
-            android:name="com.golf.budz.group.CreatePageActivity"
+            android:name="com.adcoretechnologies.golfbudz.group.CreatePageActivity"
             android:label="Create Group" />
-        <activity android:name="com.golf.budz.chat.ChatDashboradActivity" />
-        <activity android:name="com.golf.budz.auth.login.ForgotActivity" />
+        <activity android:name="com.adcoretechnologies.golfbudz.chat.ChatDashboradActivity" />
+        <activity android:name="com.adcoretechnologies.golfbudz.auth.login.ForgotActivity" />
         <activity
-            android:name="com.golf.budz.club.JoinClubActivity"
+            android:name="com.adcoretechnologies.golfbudz.club.JoinClubActivity"
             android:label="Join Club" />
         <activity
-            android:name="com.golf.budz.items.SellItemActivity"
+            android:name="com.adcoretechnologies.golfbudz.items.SellItemActivity"
             android:label="Post an item for sale" />
-        <activity android:name=".ImageDataPostActivity" />
-        <activity android:name="com.golf.budz.blog.BLogActivity" />
-        <activity android:name="com.golf.budz.blog.OnCourseActivity" />
-        <activity android:name="com.golf.budz.blog.BlogDeatilActivity" />
+        <activity android:name="com.adcoretechnologies.golfbudz.home.ImageDataPostActivity" />
+        <activity android:name="com.adcoretechnologies.golfbudz.blog.BLogActivity" />
+        <activity android:name="com.adcoretechnologies.golfbudz.blog.OnCourseActivity" />
+        <activity android:name="com.adcoretechnologies.golfbudz.blog.BlogDeatilActivity" />
         <activity
-            android:name="com.golf.budz.playrequest.PlayRequestActivity"
+            android:name="com.adcoretechnologies.golfbudz.playrequest.PlayRequestActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="com.golf.budz.playrequest.RequestDetailActivity" />
-        <activity android:name="com.golf.budz.event.EventDetailActivity" />
-        <activity android:name=".VideoDatapostActivity" />
+        <activity android:name="com.adcoretechnologies.golfbudz.playrequest.RequestDetailActivity" />
+        <activity android:name="com.adcoretechnologies.golfbudz.event.EventDetailActivity" />
+        <activity android:name="com.adcoretechnologies.golfbudz.home.VideoDatapostActivity" />
         <activity
-            android:name="com.golf.budz.more.AboutUsActivity"
+            android:name="com.adcoretechnologies.golfbudz.more.AboutUsActivity"
             android:label="About Us" />
         <activity
-            android:name="com.golf.budz.more.ContactUsActivity"
+            android:name="com.adcoretechnologies.golfbudz.more.ContactUsActivity"
             android:label="Contact Us" />
         <activity
-            android:name="com.golf.budz.more.TermsConditionActivity"
+            android:name="com.adcoretechnologies.golfbudz.more.TermsConditionActivity"
             android:label="Terms and Condition" />
-        <activity android:name=".VideoActivity" />
-        <activity android:name="com.golf.budz.friends.FriendProfileActivity"
+        <activity android:name="com.adcoretechnologies.golfbudz.home.VideoActivity" />
+        <activity android:name="com.adcoretechnologies.golfbudz.friends.FriendProfileActivity"
             android:label="Profile"/>
-        <activity android:name="com.golf.budz.chat.MyChatActivity"
+        <activity android:name="com.adcoretechnologies.golfbudz.chat.MyChatActivity"
             android:label="Budz chat"/>
         <activity
-            android:name=".comment.CommentsActivity"
+            android:name="com.adcoretechnologies.golfbudz.home.comment.CommentsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.golf.budz.group.invite.InviteFriendActivity"
+            android:name="com.adcoretechnologies.golfbudz.group.invite.InviteFriendActivity"
             android:label="Add Member" />
         <activity
-            android:name="com.golf.budz.group.MyGroupActivity"
+            android:name="com.adcoretechnologies.golfbudz.group.MyGroupActivity"
             android:label="My Groups" />
         <activity
-            android:name="com.golf.budz.friends.MyAllPlayReqActivity"
+            android:name="com.adcoretechnologies.golfbudz.friends.MyAllPlayReqActivity"
             android:label="My Play Request" />
 
-        <service android:name="com.golf.budz.MyFirebaseMessagingService">
+        <service android:name="com.adcoretechnologies.golfbudz.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <service android:name="com.golf.budz.MyFirebaseInstanceIDService">
+        <service android:name="com.adcoretechnologies.golfbudz.MyFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
 
-        <activity android:name=".gallery.GalleryActivity" />
+        <activity android:name="com.adcoretechnologies.golfbudz.home.gallery.GalleryActivity" />
         <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
 
