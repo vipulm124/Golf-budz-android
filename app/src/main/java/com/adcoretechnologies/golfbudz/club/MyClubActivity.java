@@ -16,6 +16,7 @@ import com.adcoretechnologies.golfbudz.core.components.FragmentDataLoader;
 import com.adcoretechnologies.golfbudz.utils.Common;
 import com.adcoretechnologies.golfbudz.utils.Const;
 import com.adcoretechnologies.golfbudz.utils.Pref;
+import com.adcoretechnologies.golfbudz.utils.ShowAlert;
 import com.adcoretechnologies.golfbudz.utils.api.APIHelper;
 import com.adcoretechnologies.golfbudz.utils.api.IApiService;
 
@@ -24,7 +25,6 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import cn.pedant.SweetAlert.SweetAlertDialog;
 import de.greenrobot.event.EventBus;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -150,11 +150,11 @@ public class MyClubActivity extends BaseActivity {
                 if (response.isSuccessful()) {
                     PojoUser pojoUser = response.body();
                     if (pojoUser.getStatus() == Const.STATUS_SUCCESS) {
-                        new SweetAlertDialog(MyClubActivity.this, SweetAlertDialog.SUCCESS_TYPE)
+                    /*    new SweetAlertDialog(MyClubActivity.this, SweetAlertDialog.SUCCESS_TYPE)
                                 .setTitleText("Congratulations")
                                 .setContentText("you are following the this club .")
-                                .show();
-
+                                .show();*/
+                        ShowAlert.showAlertDialog(MyClubActivity.this,"Congratulations","you are following the this club",false);
 
                     } else if (pojoUser.getStatus() == Const.STATUS_FAILED) {
                         toast(pojoUser.getMessage());

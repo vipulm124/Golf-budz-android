@@ -222,6 +222,9 @@ public class JoinFragment extends BaseFragment {
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.select_dialog_singlechoice);
         arrayAdapter.add("Handicap");
         arrayAdapter.add("Industry");
+        arrayAdapter.add("Type");
+        arrayAdapter.add("Region");
+        arrayAdapter.add("Profession");
 
         builderSingle.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
             @Override

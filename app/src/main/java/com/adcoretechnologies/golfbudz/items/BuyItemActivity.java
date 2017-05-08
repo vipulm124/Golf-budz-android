@@ -7,12 +7,14 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.adcoretechnologies.golfbudz.R;
+import com.adcoretechnologies.golfbudz.club.MyClubActivity;
 import com.adcoretechnologies.golfbudz.core.base.BaseActivity;
 import com.adcoretechnologies.golfbudz.core.base.BoEventData;
 import com.adcoretechnologies.golfbudz.core.components.FragmentDataLoader;
 import com.adcoretechnologies.golfbudz.utils.Common;
 import com.adcoretechnologies.golfbudz.utils.Const;
 import com.adcoretechnologies.golfbudz.utils.Pref;
+import com.adcoretechnologies.golfbudz.utils.ShowAlert;
 import com.adcoretechnologies.golfbudz.utils.api.APIHelper;
 import com.adcoretechnologies.golfbudz.utils.api.IApiService;
 
@@ -20,7 +22,6 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import cn.pedant.SweetAlert.SweetAlertDialog;
 import de.greenrobot.event.EventBus;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -145,11 +146,11 @@ public class BuyItemActivity extends BaseActivity {
                 if (response.isSuccessful()) {
                     PojoItems pojoUser = response.body();
                     if (pojoUser.getStatus() == Const.STATUS_SUCCESS) {
-                        new SweetAlertDialog(BuyItemActivity.this, SweetAlertDialog.SUCCESS_TYPE)
+                     /*   new SweetAlertDialog(BuyItemActivity.this, SweetAlertDialog.SUCCESS_TYPE)
                                 .setTitleText("Congratulations")
                                 .setContentText("You have buy this item.")
-                                .show();
-
+                                .show();*/
+                        ShowAlert.showAlertDialog(BuyItemActivity.this,"Congratulations","You have buy this item.",false);
                     } else if (pojoUser.getStatus() == Const.STATUS_FAILED) {
                         toast(pojoUser.getMessage());
                     } else if (pojoUser.getStatus() == Const.STATUS_ERROR) {

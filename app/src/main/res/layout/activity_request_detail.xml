@@ -241,6 +241,95 @@ General Manager/Director of Golf
             <android.support.percent.PercentRelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:descendantFocusability="beforeDescendants"
+                android:focusableInTouchMode="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/AppTheme.TextView.Wrap"
+                    android:layout_centerVertical="true"
+                    android:text="Type"
+                    android:textColor="@color/yellow"
+                    app:layout_widthPercent="50%" />
+
+                <TextView
+                    android:id="@+id/tvType"
+                    style="@style/AppTheme.TextView.Wrap"
+                    android:layout_alignParentRight="true"
+                    android:text=""
+                    app:layout_widthPercent="50%" />
+
+            </android.support.percent.PercentRelativeLayout>
+            <android.support.percent.PercentRelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:descendantFocusability="beforeDescendants"
+                android:focusableInTouchMode="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/AppTheme.TextView.Wrap"
+                    android:layout_centerVertical="true"
+                    android:text="Location"
+                    android:textColor="@color/yellow"
+                    app:layout_widthPercent="50%" />
+
+                <TextView
+                    android:id="@+id/tvlocation"
+                    style="@style/AppTheme.TextView.Wrap"
+                    android:layout_alignParentRight="true"
+                    android:text=""
+                    app:layout_widthPercent="50%" />
+
+            </android.support.percent.PercentRelativeLayout>
+
+            <android.support.percent.PercentRelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:descendantFocusability="beforeDescendants"
+                android:focusableInTouchMode="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/AppTheme.TextView.Wrap"
+                    android:layout_centerVertical="true"
+                    android:text="Age"
+                    android:textColor="@color/yellow"
+                    app:layout_widthPercent="50%" />
+
+                <TextView
+                    android:id="@+id/tvAge"
+                    style="@style/AppTheme.TextView.Wrap"
+                    android:layout_alignParentRight="true"
+                    android:text=""
+                    app:layout_widthPercent="50%" />
+
+            </android.support.percent.PercentRelativeLayout>
+            <android.support.percent.PercentRelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:descendantFocusability="beforeDescendants"
+                android:focusableInTouchMode="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/AppTheme.TextView.Wrap"
+                    android:layout_centerVertical="true"
+                    android:text="Craete on"
+                    android:textColor="@color/yellow"
+                    app:layout_widthPercent="50%" />
+
+                <TextView
+                    android:id="@+id/tvDate"
+                    style="@style/AppTheme.TextView.Wrap"
+                    android:layout_alignParentRight="true"
+                    android:text=""
+                    app:layout_widthPercent="50%" />
+
+            </android.support.percent.PercentRelativeLayout>
+            <android.support.percent.PercentRelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:focusableInTouchMode="true"
                 android:orientation="horizontal">
 

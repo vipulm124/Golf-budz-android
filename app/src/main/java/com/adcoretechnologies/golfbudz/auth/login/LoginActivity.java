@@ -340,4 +340,5 @@ public class LoginActivity extends BaseActivity {
         request.setParameters(parameters);
         request.executeAsync();
     }
+
 }

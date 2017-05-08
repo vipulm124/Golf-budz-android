@@ -47,6 +47,8 @@ public class BoPlay implements Serializable {
     public int Id;
     @SerializedName("userStatus")
     public String userStatus;
+    @SerializedName("dateCreated")
+    public String dateCreated;
     public String getNoOfHoles() {
         return noOfHoles;
     }
@@ -197,5 +199,13 @@ public class BoPlay implements Serializable {
 
     public void setUserStatus(String userStatus) {
         this.userStatus = userStatus;
+    }
+
+    public String getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(String dateCreated) {
+        this.dateCreated = dateCreated;
     }
 }

@@ -8,11 +8,11 @@ import android.view.MenuItem;
 import com.adcoretechnologies.golfbudz.R;
 import com.adcoretechnologies.golfbudz.core.base.BaseActivity;
 import com.adcoretechnologies.golfbudz.utils.Common;
+import com.adcoretechnologies.golfbudz.utils.ShowAlert;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class MoreActivity extends BaseActivity {
 
@@ -69,13 +69,14 @@ public class MoreActivity extends BaseActivity {
     @OnClick(R.id.cvUpdate)
     public void perfrmUpdate() {
         //Common.openPlayStoreApp(this);
-        SweetAlertDialog sd = new SweetAlertDialog(this);
+      /*  SweetAlertDialog sd = new SweetAlertDialog(this);
 
         sd.setCancelable(true);
         sd.setCanceledOnTouchOutside(true);
         sd.setConfirmText("Ok");
         sd.setTitleText("No update found.");
-        sd.show();
+        sd.show();*/
+        ShowAlert.showAlertDialog(this,"No update found.","",false);
     }
     @OnClick(R.id.cvRate)
     public void perfrmRate() {

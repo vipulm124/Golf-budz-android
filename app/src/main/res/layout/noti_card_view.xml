@@ -2,14 +2,14 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/space_x2"
+    android:layout_margin="@dimen/space_x1"
     card_view:cardBackgroundColor="@color/colorGrayTrans"
     card_view:cardCornerRadius="5dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/space_x2"
+        android:layout_margin="@dimen/space_x1"
         android:orientation="horizontal">
 
         <com.adcoretechnologies.golfbudz.utils.RoundedImageView

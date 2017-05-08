@@ -15,6 +15,7 @@ import com.adcoretechnologies.golfbudz.utils.Common;
 import com.adcoretechnologies.golfbudz.utils.Const;
 import com.adcoretechnologies.golfbudz.utils.Pref;
 import com.adcoretechnologies.golfbudz.utils.RoundedImageView;
+import com.adcoretechnologies.golfbudz.utils.ShowAlert;
 import com.adcoretechnologies.golfbudz.utils.api.APIHelper;
 import com.adcoretechnologies.golfbudz.utils.api.IApiService;
 
@@ -56,8 +57,17 @@ public class RequestDetailActivity extends BaseActivity {
     Button btnJoin;
     @BindView(R.id.btnCancel)
     Button btnCancel;
-     int reuestId;
+    int reuestId;
     String userStatus;
+    @BindView(R.id.tvType)
+    TextView tvType;
+    @BindView(R.id.tvlocation)
+    TextView tvlocation;
+    @BindView(R.id.tvAge)
+    TextView tvAge;
+    @BindView(R.id.tvDate)
+    TextView tvDate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,8 +84,8 @@ public class RequestDetailActivity extends BaseActivity {
     public void init() {
         Intent intent = getIntent();
         BoPlay boPlay = (BoPlay) intent.getSerializableExtra(Const.EXTRA_REQ_ID);
-        reuestId=boPlay.getId();
-        userStatus=boPlay.getUserStatus();
+        reuestId = boPlay.getId();
+        userStatus = boPlay.getUserStatus();
         tvName.setText(boPlay.getUserName());
         tvDesc.setText(boPlay.getRequestInfo());
         tvDay.setText(boPlay.getDay());
@@ -86,15 +96,20 @@ public class RequestDetailActivity extends BaseActivity {
         tvPlayers.setText(boPlay.getPlayers());
         tvProfession.setText(boPlay.getProfession());
         tvTeaOffTime.setText(boPlay.getTeeOffTime());
+        tvAge.setText(boPlay.getAge());
+        tvDate.setText(boPlay.getDateCreated());
+        tvlocation.setText(boPlay.getLocations());
 
         tvVenue.setText(boPlay.getVenue());
         Common.showBigImage(this, ivPic, boPlay.getUserImgUrl());
-        if(userStatus!=null){
-        if(userStatus.equalsIgnoreCase("cancel")){
-            btnCancel.setVisibility(View.GONE);
-        }else if(userStatus.equalsIgnoreCase("join")){
-            btnJoin.setVisibility(View.GONE);
-        }}else{}
+        if (userStatus != null) {
+            if (userStatus.equalsIgnoreCase("cancel")) {
+                btnCancel.setVisibility(View.GONE);
+            } else if (userStatus.equalsIgnoreCase("join")) {
+                btnJoin.setVisibility(View.GONE);
+            }
+        } else {
+        }
     }
 
     @Override
@@ -106,7 +121,7 @@ public class RequestDetailActivity extends BaseActivity {
         showProgressDialog("Sending your request", "Please wait...");
         String userId = Pref.Read(this, Const.PREF_USER_ID);
         IApiService apiService = APIHelper.getAppServiceMethod();
-        Call<PojoPlay> call = apiService.joinPlayReq(reuestId,userId);
+        Call<PojoPlay> call = apiService.joinPlayReq(reuestId, userId);
         call.enqueue(new Callback<PojoPlay>() {
             @Override
             public void onResponse(Call<PojoPlay> call, Response<PojoPlay> response) {
@@ -114,9 +129,7 @@ public class RequestDetailActivity extends BaseActivity {
                 if (response.isSuccessful()) {
                     PojoPlay pojo = response.body();
                     if (pojo.getStatus() == Const.STATUS_SUCCESS) {
-                        toast("Play request send successfully");
-                        startActivity(new Intent(RequestDetailActivity.this, PlayRequestActivity.class));
-                        finish();
+                        ShowAlert.showAlertDialog(RequestDetailActivity.this,"Play request send successfully","",false);
                     } else if (pojo.getStatus() == Const.STATUS_FAILED) {
                         toast(pojo.getMessage());
                     } else if (pojo.getStatus() == Const.STATUS_ERROR) {
@@ -137,11 +150,12 @@ public class RequestDetailActivity extends BaseActivity {
             }
         });
     }
+
     public void cancelReq() {
         showProgressDialog("Sending your request", "Please wait...");
         String userId = Pref.Read(this, Const.PREF_USER_ID);
         IApiService apiService = APIHelper.getAppServiceMethod();
-        Call<PojoPlay> call = apiService.cancelPlayReq(reuestId,userId,"cancel");
+        Call<PojoPlay> call = apiService.cancelPlayReq(reuestId, userId, "cancel");
         call.enqueue(new Callback<PojoPlay>() {
             @Override
             public void onResponse(Call<PojoPlay> call, Response<PojoPlay> response) {
@@ -172,6 +186,7 @@ public class RequestDetailActivity extends BaseActivity {
             }
         });
     }
+
     @OnClick(R.id.btnCancel)
     public void onCancel() {
         cancelReq();
