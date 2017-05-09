@@ -19,6 +19,7 @@ import com.adcoretechnologies.golfbudz.playrequest.model.BoPlay;
 import com.adcoretechnologies.golfbudz.playrequest.model.PojoPlay;
 import com.adcoretechnologies.golfbudz.utils.Common;
 import com.adcoretechnologies.golfbudz.utils.Const;
+import com.adcoretechnologies.golfbudz.utils.Pref;
 import com.adcoretechnologies.golfbudz.utils.api.APIHelper;
 import com.adcoretechnologies.golfbudz.utils.api.IApiService;
 
@@ -88,6 +89,7 @@ public class UpcomingGamesFragment extends BaseFragment {
     IApiService apiService;
 
     public void fillData() {
+        String userId = Pref.Read(getActivity(), Const.PREF_USER_ID);
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         Date date = new Date();
         String currDate = dateFormat.format(date).toString();
@@ -95,7 +97,7 @@ public class UpcomingGamesFragment extends BaseFragment {
 
         if (apiService == null)
             apiService = APIHelper.getAppServiceMethod();
-        Call<PojoPlay> call = apiService.getAllUpcomingGames(currDate);
+        Call<PojoPlay> call = apiService.getAllUpcomingGames(userId,currDate);
         call.enqueue(new Callback<PojoPlay>() {
             @Override
             public void onResponse(Call<PojoPlay> call, Response<PojoPlay> response) {

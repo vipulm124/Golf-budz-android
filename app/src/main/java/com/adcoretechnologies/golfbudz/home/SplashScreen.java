@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.adcoretechnologies.golfbudz.R;
 import com.adcoretechnologies.golfbudz.auth.login.LoginActivity;
+import com.adcoretechnologies.golfbudz.core.base.BaseActivity;
 import com.adcoretechnologies.golfbudz.utils.Common;
 import com.adcoretechnologies.golfbudz.utils.Const;
 import com.adcoretechnologies.golfbudz.utils.Pref;
@@ -18,7 +19,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class SplashScreen extends Activity {
+public class SplashScreen extends BaseActivity {
 
     // Splash screen timer
     private static int SPLASH_TIME_OUT = 1000;
@@ -62,6 +63,16 @@ public class SplashScreen extends Activity {
             }
         };
         background.start();
+    }
+
+    @Override
+    public void init() {
+
+    }
+
+    @Override
+    public void log(String message) {
+
     }
 
     private void openNextScreen(Intent finalIntent) {

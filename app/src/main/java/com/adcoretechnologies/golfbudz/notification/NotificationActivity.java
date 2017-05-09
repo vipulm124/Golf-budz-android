@@ -128,12 +128,16 @@ public class NotificationActivity extends BaseActivity {
         switch (eventType) {
             case BoEventData.EVENT_NOTI_ACCEPT_CLICK: {
                 BoNoti noti = (BoNoti) object;
-                performAction(noti,Const.ACCEPT,id);
+
+                performAction(noti,noti.get_id(),Const.ACCEPT,id);
+
                 break;
             }
             case BoEventData.EVENT_NOTI_CANCEL_CLICK: {
                 BoNoti noti = (BoNoti) object;
-                performAction(noti,Const.CANCEL,id);
+
+                    performAction(noti,noti.get_id(),Const.CANCEL,id);
+
                 break;
             }
         }
@@ -170,11 +174,20 @@ public class NotificationActivity extends BaseActivity {
             }
         });
     }*/
-    private void performAction(BoNoti noti, final String status, final int position) {
+    private void performAction(BoNoti noti, String notId, final String status, final int position) {
         showProgressDialog("Performing operation", "Please wait...");
         String userId = Pref.Read(this, Const.PREF_USER_ID);
         IApiService service = APIHelper.getAppServiceMethod();
-        Call<PojoFriend> call = service.friendStatus(status,noti.getFriendId(),userId,noti.get_id());
+        Call<PojoFriend> call = null;
+
+
+        if(noti.getType().equals("playRequest"))
+            call = service.joinStatus(status,noti.getRequestId(),noti.getFriendId(),notId);
+        else if(noti.getType().equals("friendRequest"))
+            call = service.friendStatus(status,noti.getFriendId(),userId,notId);
+        else{
+
+        }
         call.enqueue(new Callback<PojoFriend>() {
             @Override
             public void onResponse(Call<PojoFriend> call, Response<PojoFriend> response) {

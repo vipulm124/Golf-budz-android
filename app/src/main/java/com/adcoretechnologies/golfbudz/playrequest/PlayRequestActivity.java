@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.WindowManager;
 
 import com.adcoretechnologies.golfbudz.R;
+import com.adcoretechnologies.golfbudz.core.base.BaseActivity;
 import com.adcoretechnologies.golfbudz.core.base.BoEventData;
 import com.adcoretechnologies.golfbudz.utils.Const;
 
@@ -22,7 +23,7 @@ import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
-public class PlayRequestActivity extends AppCompatActivity {
+public class PlayRequestActivity extends BaseActivity {
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -49,6 +50,16 @@ String fragDisply="0";
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
+    }
+
+    @Override
+    public void init() {
+
+    }
+
+    @Override
+    public void log(String message) {
+
     }
 
     private void setupViewPager(ViewPager viewPager) {

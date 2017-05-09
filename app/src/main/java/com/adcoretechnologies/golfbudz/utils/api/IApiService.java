@@ -132,12 +132,17 @@ public interface IApiService {
     Call<PojoPlay> getAllPlayReq(@Path("userId") String userId);
 
     @FormUrlEncoded
-    @POST("upcomming/games")
-    Call<PojoPlay> getAllUpcomingGames(@Field("currentDate") String currentDate);
+    @POST("users/{userId}/upcomming/games")
+    Call<PojoPlay> getAllUpcomingGames(@Path("userId") String userId,@Field("currentDate") String currentDate);
 
     @FormUrlEncoded
     @PUT("request/status")
     Call<PojoFriend> friendStatus(@Field("status") String status, @Field("friendId") String friendId, @Field("userId") String userId,@Field("notificationId") String notificationId);
+
+    @FormUrlEncoded
+    @PUT("requests")
+    Call<PojoFriend> joinStatus(@Field("status") String status, @Field("requestId") String requestId, @Field("userId") String userId,@Field("notificationId") String notificationId);
+
 
     @GET("users/{userId}/friends/{text}/search")
     Call<PojoFriend> getSearchFriends(@Path("userId") String userId, @Path("text") String text);

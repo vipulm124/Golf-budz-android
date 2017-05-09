@@ -26,7 +26,8 @@ public class BoFriend {
     public String chanelId;
     @SerializedName("status")
     public String status;
-
+    @SerializedName("requestId")
+    public String requestId;
     public boolean userStatus;
     public boolean isSelected() {
         return isSelected;
@@ -115,5 +116,13 @@ public class BoFriend {
 
     public void setUserStatus(boolean userStatus) {
         this.userStatus = userStatus;
+    }
+
+    public String getRequestId() {
+        return requestId;
+    }
+
+    public void setRequestId(String requestId) {
+        this.requestId = requestId;
     }
 }
