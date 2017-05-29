@@ -6,16 +6,22 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.adcoretechnologies.golfbudz.R;
+import com.adcoretechnologies.golfbudz.core.base.BoEventData;
 import com.adcoretechnologies.golfbudz.home.model.BoService;
 import com.adcoretechnologies.golfbudz.playrequest.RequestDetailActivity;
+import com.adcoretechnologies.golfbudz.playrequest.model.BoPlay;
+import com.adcoretechnologies.golfbudz.utils.Common;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import de.greenrobot.event.EventBus;
 
 /**
  * Created by Rehan on 1/14/2017.
@@ -26,9 +32,9 @@ public class AdapterUpComingGames extends
     Context context;
 
 
-    private ArrayList<BoService> allItems;
+    private ArrayList<BoPlay> allItems;
 
-    public AdapterUpComingGames(ArrayList<BoService> allItems) {
+    public AdapterUpComingGames(ArrayList<BoPlay> allItems) {
         this.allItems = allItems;
     }
 
@@ -50,15 +56,16 @@ public class AdapterUpComingGames extends
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(final AdapterUpComingGames.ViewHolder holder, final int position) {
-        final BoService item = getItem(position);
+        final BoPlay item = getItem(position);
 
 
-       // holder.tvMessage.setText(item.getServiceDescription());
-        //Common.showBigImage(context, holder.ivServiceImage, item.getImagePath());
-        holder.llUpCominglayout.setOnClickListener(new View.OnClickListener() {
+        holder.tvName.setText(item.getUserName());
+        Common.showBigImage(context, holder.ivPic, item.getUserImgUrl());
+        holder.tvDesc.setText(item.getRequestInfo());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(new Intent(context, RequestDetailActivity.class));
+                EventBus.getDefault().post(new BoEventData(BoEventData.EVENT_PLAY_REQ_UPCOMING_CLICK,position,"",item));
             }
         });
     }
@@ -69,7 +76,7 @@ public class AdapterUpComingGames extends
         return allItems.size();
     }
 
-    public BoService getItem(int position) {
+    public BoPlay getItem(int position) {
         return allItems.get(position);
     }
 
@@ -93,6 +100,12 @@ public class AdapterUpComingGames extends
 
         @BindView(R.id.llUpCominglayout)
         LinearLayout llUpCominglayout;
+        @BindView(R.id.tvName)
+        TextView tvName;
+        @BindView(R.id.tvDesc)
+        TextView tvDesc;
+        @BindView(R.id.ivPic)
+        ImageView ivPic;
         ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);

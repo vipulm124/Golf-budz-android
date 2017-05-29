@@ -24,6 +24,7 @@ import android.widget.TextView;
 import com.adcoretechnologies.golfbudz.R;
 import com.adcoretechnologies.golfbudz.auth.login.LoginActivity;
 import com.adcoretechnologies.golfbudz.auth.profile.EditProfileActivity;
+import com.adcoretechnologies.golfbudz.auth.profile.ProfileActivity;
 import com.adcoretechnologies.golfbudz.blog.BLogActivity;
 import com.adcoretechnologies.golfbudz.chat.MyChatActivity;
 import com.adcoretechnologies.golfbudz.club.MyClubActivity;
@@ -283,6 +284,13 @@ public class MainActivity extends BaseActivity
                 overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
                 break;
             }
+            case BoEventData.EVENT_NEWS_FEED_USER_CLICK: {
+                BoPost post=(BoPost) object;
+                startActivity(new Intent(this, ProfileActivity.class).putExtra(Const.EXTRA_USER_ID, post.getUserId()));
+                overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
+                break;
+            }
+
         }
     }
 

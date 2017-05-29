@@ -19,7 +19,7 @@
             android:orientation="horizontal">
 
             <com.adcoretechnologies.golfbudz.utils.RoundedImageView
-                android:id="@+id/eventimg"
+                android:id="@+id/ivPic"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:src="@drawable/pic" />
@@ -35,6 +35,7 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/tvName"
                         style="@style/AppTheme.TextView.Wrap"
                         android:layout_marginLeft="@dimen/space_x2"
                         android:text="Robin" />
@@ -42,10 +43,12 @@
                     <ImageView
                         style="@style/AppTheme.ImageView.Wrap"
                         android:layout_alignParentRight="true"
+                        android:visibility="gone"
                         android:src="@drawable/ic_edit" />
                 </RelativeLayout>
 
                 <TextView
+                    android:id="@+id/tvDesc"
                     style="@style/AppTheme.TextView.Wrap"
                     android:layout_marginLeft="@dimen/space_x2"
                     android:text="Dismal River Golf Club provides a pure and unique golf experience, with peaceful and serene surroundings, and e......" />
@@ -60,6 +63,7 @@
             <TextView
                 style="@style/AppTheme.TextView.Wrap"
                 android:text="2 of 3 Person Joined"
+                android:visibility="gone"
                 android:textColor="@color/yellow" />
 
             <TextView

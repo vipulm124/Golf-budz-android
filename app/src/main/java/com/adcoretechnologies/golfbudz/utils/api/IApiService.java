@@ -16,6 +16,7 @@ import com.adcoretechnologies.golfbudz.more.PojoContact;
 import com.adcoretechnologies.golfbudz.more.PojoFaq;
 import com.adcoretechnologies.golfbudz.notification.PojoNoti;
 import com.adcoretechnologies.golfbudz.playrequest.model.BoPlay;
+import com.adcoretechnologies.golfbudz.playrequest.model.PojoDropValues;
 import com.adcoretechnologies.golfbudz.playrequest.model.PojoPlay;
 
 import retrofit2.Call;
@@ -195,4 +196,13 @@ public interface IApiService {
     @FormUrlEncoded
     @POST("playrequests/filter/{userId}")
     Call<PojoPlay> getAllFilterPlayReq(@Path("userId") String userId, @Field("handicap") String handicap,@Field("industry") String industry);
+
+    @GET("profession")
+    Call<PojoDropValues> getAllProfession();
+    @GET("region")
+    Call<PojoDropValues> getAllRegions();
+    @GET("industry")
+    Call<PojoDropValues> getAllIndustry();
+    @GET("categories")
+    Call<PojoDropValues> getAllVenues();
 }

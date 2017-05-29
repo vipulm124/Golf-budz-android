@@ -147,6 +147,18 @@ public class NewsFeedAdapter extends
                 EventBus.getDefault().post(new BoEventData(BoEventData.EVENT_POST_IMAGES_CLICK,position,"",item));
             }
         });
+        holder.ivProfilepic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EventBus.getDefault().post(new BoEventData(BoEventData.EVENT_NEWS_FEED_USER_CLICK,position,"",item));
+            }
+        });
+        holder.tvName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EventBus.getDefault().post(new BoEventData(BoEventData.EVENT_NEWS_FEED_USER_CLICK,position,"",item));
+            }
+        });
     }
 
 

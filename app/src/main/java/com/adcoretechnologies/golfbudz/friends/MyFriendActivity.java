@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.adcoretechnologies.golfbudz.R;
+import com.adcoretechnologies.golfbudz.auth.profile.ProfileActivity;
 import com.adcoretechnologies.golfbudz.chat.ChatDashboradActivity;
 import com.adcoretechnologies.golfbudz.core.base.BaseActivity;
 import com.adcoretechnologies.golfbudz.core.base.BoEventData;
@@ -184,7 +185,7 @@ public class MyFriendActivity extends BaseActivity {
         Object object = eventData.getObject();
         switch (eventType) {
             case BoEventData.EVENT_EVENT_FPROFILE_CLICK: {
-              startActivity(new Intent(this, FriendProfileActivity.class).putExtra(Const.EXTRA_USER_ID,data));
+              startActivity(new Intent(this, ProfileActivity.class).putExtra(Const.EXTRA_USER_ID,data));
                 finish();
                 break;
             }

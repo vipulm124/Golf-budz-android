@@ -15,6 +15,7 @@ import com.adcoretechnologies.golfbudz.R;
 import com.adcoretechnologies.golfbudz.core.base.BaseFragment;
 import com.adcoretechnologies.golfbudz.core.components.FragmentDataLoader;
 import com.adcoretechnologies.golfbudz.playrequest.adapter.AdapterJoinPlayRequest;
+import com.adcoretechnologies.golfbudz.playrequest.adapter.AdapterUpComingGames;
 import com.adcoretechnologies.golfbudz.playrequest.model.BoPlay;
 import com.adcoretechnologies.golfbudz.playrequest.model.PojoPlay;
 import com.adcoretechnologies.golfbudz.utils.Common;
@@ -47,7 +48,7 @@ public class UpcomingGamesFragment extends BaseFragment {
     TextView tvStatus;
     @BindView(R.id.llStatus)
     LinearLayout llStatus;
-    private AdapterJoinPlayRequest adapter;
+    private AdapterUpComingGames adapter;
     private FragmentDataLoader fragmentLoader;
     private ArrayList<BoPlay> allItems;
     @BindView(R.id.recyclerView)
@@ -78,7 +79,7 @@ public class UpcomingGamesFragment extends BaseFragment {
     public void init() {
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         allItems = new ArrayList<>();
-        adapter = new AdapterJoinPlayRequest(allItems);
+        adapter = new AdapterUpComingGames(allItems);
         recyclerView.setLayoutManager(manager);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
@@ -145,7 +146,7 @@ public class UpcomingGamesFragment extends BaseFragment {
     }
 
     private void bindData(ArrayList<BoPlay> allItems) {
-        adapter = new AdapterJoinPlayRequest(allItems);
+        adapter = new AdapterUpComingGames(allItems);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         updateViews(allItems.size());

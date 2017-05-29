@@ -136,6 +136,8 @@
         <activity
             android:name="com.adcoretechnologies.golfbudz.group.MyGroupActivity"
             android:label="My Groups" />
+        <activity android:name=".playrequest.UpComingGanesDetailActivity"
+            android:label="Details"/>
         <activity
             android:name="com.adcoretechnologies.golfbudz.friends.MyAllPlayReqActivity"
             android:label="My Play Request" />

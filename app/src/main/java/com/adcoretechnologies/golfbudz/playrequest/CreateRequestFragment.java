@@ -20,8 +20,11 @@ import android.widget.Spinner;
 
 import com.adcoretechnologies.golfbudz.R;
 import com.adcoretechnologies.golfbudz.core.base.BaseFragment;
+import com.adcoretechnologies.golfbudz.friends.PojoFriend;
 import com.adcoretechnologies.golfbudz.home.MainActivity;
+import com.adcoretechnologies.golfbudz.playrequest.model.BoDropVales;
 import com.adcoretechnologies.golfbudz.playrequest.model.BoPlay;
+import com.adcoretechnologies.golfbudz.playrequest.model.PojoDropValues;
 import com.adcoretechnologies.golfbudz.playrequest.model.PojoPlay;
 import com.adcoretechnologies.golfbudz.utils.Common;
 import com.adcoretechnologies.golfbudz.utils.Const;
@@ -248,13 +251,41 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
         etTeeOffTime.setText(hourOfDay+":"+minute);
     }
     private void getVenues() {
+        IApiService service = APIHelper.getAppServiceMethod();
+        Call<PojoDropValues> call = service.getAllVenues();
+        call.enqueue(new Callback<PojoDropValues>() {
+            @Override
+            public void onResponse(Call<PojoDropValues> call, Response<PojoDropValues> response) {
+                hideDialog();
+                if (response.isSuccessful()) {
+                    PojoDropValues pojoUser = response.body();
+                    if (pojoUser.getStatus() == Const.STATUS_SUCCESS) {
+                        setVenues(pojoUser.getAllItems());
+                        toast(pojoUser.getMessage());
+                    } else if (pojoUser.getStatus() == Const.STATUS_FAILED) {
+                        toast(pojoUser.getMessage());
+                    } else if (pojoUser.getStatus() == Const.STATUS_ERROR) {
+                        toast(pojoUser.getMessage());
+                    }
+                } else {
+                    toast("Something went wrong");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PojoDropValues> call, Throwable t) {
+                hideDialog();
+                Common.logException(getActivity(), "Internal server error", t, null);
+            }
+        });
+
+    }
+
+    private void setVenues(ArrayList<BoDropVales> allItems) {
         List<String> categories = new ArrayList<String>();
-        categories.add("King David Mowbray Golf Club");
-        categories.add("Langebaan Country Estate");
-        categories.add("Paarl Golf Club");
-        categories.add("Steenberg Golf Club");
-        categories.add("Erinvale Golf Club");
-        categories.add("The Arabella Country Estate");
+        for(int i=0; i<allItems.size();i++){
+            categories.add(allItems.get(i).getDisplayName());
+        }
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), R.layout.item_spinner_dropdown, categories);
         // Drop down layout style - list view with radio button
@@ -270,13 +301,40 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
             }
         });
     }
-
     private void getIndustry() {
+        IApiService service = APIHelper.getAppServiceMethod();
+        Call<PojoDropValues> call = service.getAllIndustry();
+        call.enqueue(new Callback<PojoDropValues>() {
+            @Override
+            public void onResponse(Call<PojoDropValues> call, Response<PojoDropValues> response) {
+                hideDialog();
+                if (response.isSuccessful()) {
+                    PojoDropValues pojoUser = response.body();
+                    if (pojoUser.getStatus() == Const.STATUS_SUCCESS) {
+                        setIndustry(pojoUser.getAllItems());
+                    } else if (pojoUser.getStatus() == Const.STATUS_FAILED) {
+                        toast(pojoUser.getMessage());
+                    } else if (pojoUser.getStatus() == Const.STATUS_ERROR) {
+                        toast(pojoUser.getMessage());
+                    }
+                } else {
+                    toast("Something went wrong");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PojoDropValues> call, Throwable t) {
+                hideDialog();
+                Common.logException(getActivity(), "Internal server error", t, null);
+            }
+        });
+
+    }
+    private void setIndustry(ArrayList<BoDropVales> allItems) {
         List<String> categories = new ArrayList<String>();
-        categories.add("Delhi");
-        categories.add("Agra");
-        categories.add("Mumbai");
-        categories.add("None");
+        for(int i=0; i<allItems.size();i++){
+            categories.add(allItems.get(i).getDisplayName());
+        }
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), R.layout.item_spinner_dropdown, categories);
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -291,13 +349,39 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
             }
         });
     }
-
     private void getProfession() {
+        IApiService service = APIHelper.getAppServiceMethod();
+        Call<PojoDropValues> call = service.getAllProfession();
+        call.enqueue(new Callback<PojoDropValues>() {
+            @Override
+            public void onResponse(Call<PojoDropValues> call, Response<PojoDropValues> response) {
+                hideDialog();
+                if (response.isSuccessful()) {
+                    PojoDropValues pojoUser = response.body();
+                    if (pojoUser.getStatus() == Const.STATUS_SUCCESS) {
+                        setProfession(pojoUser.getAllItems());
+                    } else if (pojoUser.getStatus() == Const.STATUS_FAILED) {
+                        toast(pojoUser.getMessage());
+                    } else if (pojoUser.getStatus() == Const.STATUS_ERROR) {
+                        toast(pojoUser.getMessage());
+                    }
+                } else {
+                    toast("Something went wrong");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PojoDropValues> call, Throwable t) {
+                hideDialog();
+                Common.logException(getActivity(), "Internal server error", t, null);
+            }
+        });
+    }
+    private void setProfession(ArrayList<BoDropVales> allItems) {
         List<String> categories = new ArrayList<String>();
-        categories.add("Club Member");
-        categories.add("Business man");
-        categories.add("Service man");
-        categories.add("None");
+        for(int i=0; i<allItems.size();i++){
+            categories.add(allItems.get(i).getDisplayName());
+        }
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), R.layout.item_spinner_dropdown, categories);
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -312,15 +396,39 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
             }
         });
     }
-    private void getLocation() {
+    private void getLocation(){
+        IApiService service = APIHelper.getAppServiceMethod();
+        Call<PojoDropValues> call = service.getAllRegions();
+        call.enqueue(new Callback<PojoDropValues>() {
+            @Override
+            public void onResponse(Call<PojoDropValues> call, Response<PojoDropValues> response) {
+                hideDialog();
+                if (response.isSuccessful()) {
+                    PojoDropValues pojoUser = response.body();
+                    if (pojoUser.getStatus() == Const.STATUS_SUCCESS) {
+                        setLocation(pojoUser.getAllItems());
+                    } else if (pojoUser.getStatus() == Const.STATUS_FAILED) {
+                        toast(pojoUser.getMessage());
+                    } else if (pojoUser.getStatus() == Const.STATUS_ERROR) {
+                        toast(pojoUser.getMessage());
+                    }
+                } else {
+                    toast("Something went wrong");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PojoDropValues> call, Throwable t) {
+                hideDialog();
+                Common.logException(getActivity(), "Internal server error", t, null);
+            }
+        });
+    }
+    private void setLocation(ArrayList<BoDropVales> allItems) {
         List<String> categories = new ArrayList<String>();
-        categories.add("Adelaide");
-        categories.add("Aliwal North");
-        categories.add("Balfour");
-        categories.add("Dohne");
-        categories.add("Dordrecht");
-        categories.add("Katberg");
-        categories.add("Mdantsane");
+     for(int i=0; i<allItems.size();i++){
+          categories.add(allItems.get(i).getDisplayName());
+     }
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), R.layout.item_spinner_dropdown, categories);
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -356,7 +464,10 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
             etDay.setError("Input Field");
             return;
         }
-
+        if (venue.equalsIgnoreCase("Select Golf Club")) {
+            toast("Please select club");
+            return;
+        }
         if (TextUtils.isEmpty(teeofftime)) {
             etTeeOffTime.setError("Input Field");
             return;
@@ -365,13 +476,22 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
             etPlayrequestInfo.setError("Input Field");
             return;
         }
-
-
-
         BoPlay boPlay = new BoPlay();
         boPlay.setDay(day);
         boPlay.setNoOfHoles(radioHolesButton.getText().toString());
         if(radioRefineButton.getText().toString().equals("Yes")){
+            if (location.equalsIgnoreCase("Select Region")) {
+                toast("Please select region");
+                return;
+            }
+            if (industry.equalsIgnoreCase("Select Industry")) {
+               toast("Please select industry");
+                return;
+            }
+            if (profession.equalsIgnoreCase("Select Profession")) {
+                toast("Please select profession");
+                return;
+            }
             boPlay.setGender(radioGenderButton.getText().toString());
             boPlay.setHandicap(radioHandicapButton.getText().toString());
             boPlay.setIndustry(industry);
@@ -386,6 +506,7 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
             boPlay.setProfession("");
             boPlay.setAge(String.valueOf(""));
         }
+
         boPlay.setRedefineRequest(radioRefineButton.getText().toString());
         boPlay.setRequestInfo(playrequest);
         boPlay.setTeeOffTime(teeofftime);

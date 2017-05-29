@@ -34,6 +34,8 @@ public class BoEventData {
     public static final int EVENT_NOTI_CANCEL_CLICK = 23;
     public static final int EVENT_PLAY_REQ_SEND_CLICK = 24;
     public static final int EVENT_POST_IMAGES_CLICK = 25;
+    public static final int EVENT_NEWS_FEED_USER_CLICK = 26;
+    public static final int EVENT_PLAY_REQ_UPCOMING_CLICK = 27;
     public final int eventType;
 
     public int getId() {
