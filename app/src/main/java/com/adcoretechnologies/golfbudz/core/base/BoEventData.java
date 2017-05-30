@@ -36,6 +36,7 @@ public class BoEventData {
     public static final int EVENT_POST_IMAGES_CLICK = 25;
     public static final int EVENT_NEWS_FEED_USER_CLICK = 26;
     public static final int EVENT_PLAY_REQ_UPCOMING_CLICK = 27;
+    public static final int EVENT_REQUEST_FILTER_APPLY = 28;
     public final int eventType;
 
     public int getId() {
@@ -64,7 +65,11 @@ public class BoEventData {
         this.data = data;
         this.Id = Id;
     }
-
+    public BoEventData(int eventType, int Id, Object object) {
+        this.eventType = eventType;
+        this.object = object;
+        this.Id = Id;
+    }
     public BoEventData(int eventType, int Id, String data, Object object) {
         this.eventType = eventType;
         this.Id = Id;

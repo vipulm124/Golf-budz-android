@@ -1,0 +1,143 @@
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottom_sheet1"
+    android:layout_width="match_parent"
+    android:layout_height="500dp"
+    android:background="@color/colorWhite"
+    android:clipToPadding="true"
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+
+    <LinearLayout style="@style/AppTheme.LinearLayout">
+
+        <TextView
+            style="@style/AppTheme.TextView"
+            android:text="Choose Filter Type"
+            android:textSize="@dimen/font_x3" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Spinner
+                android:id="@+id/spType"
+                style="@style/SpinnerTheme"
+                android:layout_centerVertical="true"
+                android:spinnerMode="dropdown" />
+
+            <ImageView
+                style="@style/AppTheme.ImageView.Wrap"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/space_x2"
+                android:src="@drawable/ic_down_arrow" />
+        </RelativeLayout>
+
+        <EditText
+            android:id="@+id/etNohandicap"
+            style="@style/SpinnerTheme"
+            android:inputType="number"
+            android:hint="No. of handicap" />
+
+        <RelativeLayout
+            android:id="@+id/rlAffiliate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Spinner
+                android:id="@+id/spAffliate"
+                style="@style/SpinnerTheme"
+                android:spinnerMode="dropdown"
+                android:layout_centerVertical="true"/>
+
+            <ImageView
+                style="@style/AppTheme.ImageView.Wrap"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/space_x2"
+                android:src="@drawable/ic_down_arrow" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlRegion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Spinner
+                android:id="@+id/spRegion"
+                style="@style/SpinnerTheme"
+                android:spinnerMode="dropdown"
+                android:layout_centerVertical="true"/>
+
+            <ImageView
+                style="@style/AppTheme.ImageView.Wrap"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/space_x2"
+                android:src="@drawable/ic_down_arrow" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlIndustry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Spinner
+                android:id="@+id/spIndustry"
+                style="@style/SpinnerTheme"
+                android:spinnerMode="dropdown"
+                android:layout_centerVertical="true"/>
+
+            <ImageView
+                style="@style/AppTheme.ImageView.Wrap"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/space_x2"
+                android:src="@drawable/ic_down_arrow" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlProfession"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Spinner
+                android:id="@+id/spProfession"
+                style="@style/SpinnerTheme"
+                android:spinnerMode="dropdown"
+                android:layout_centerVertical="true"/>
+
+            <ImageView
+                style="@style/AppTheme.ImageView.Wrap"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/space_x2"
+                android:src="@drawable/ic_down_arrow" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlClub"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Spinner
+                android:id="@+id/spClub"
+                style="@style/SpinnerTheme"
+                android:spinnerMode="dropdown"
+                android:layout_centerVertical="true"/>
+
+            <ImageView
+                style="@style/AppTheme.ImageView.Wrap"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/space_x2"
+                android:src="@drawable/ic_down_arrow" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btnApply"
+            style="@style/AppTheme.Button"
+            android:text="Apply" />
+    </LinearLayout>
+
+
+</android.support.v4.widget.NestedScrollView>

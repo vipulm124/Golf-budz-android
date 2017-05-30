@@ -18,6 +18,7 @@ import com.adcoretechnologies.golfbudz.notification.PojoNoti;
 import com.adcoretechnologies.golfbudz.playrequest.model.BoPlay;
 import com.adcoretechnologies.golfbudz.playrequest.model.PojoDropValues;
 import com.adcoretechnologies.golfbudz.playrequest.model.PojoPlay;
+import com.adcoretechnologies.golfbudz.playrequest.model.PojoStatusRequest;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -27,6 +28,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Created by Irfan on 2/02/17.
@@ -40,7 +42,8 @@ public interface IApiService {
     @FormUrlEncoded
     @POST("forgotpassword")
     Call<PojoUser> getpassword(@Field("email") String email);
-
+    @GET("users")
+    Call<PojoUser> getAllUsers();
     @GET("countries")
     Call<PojoCity> getAllCountry();
 
@@ -134,7 +137,9 @@ public interface IApiService {
 
     @FormUrlEncoded
     @POST("users/{userId}/upcomming/games")
-    Call<PojoPlay> getAllUpcomingGames(@Path("userId") String userId,@Field("currentDate") String currentDate);
+    Call<PojoPlay> getAllApprovedUpcomingGames(@Path("userId") String userId,@Field("currentDate") String currentDate);
+    @GET("users/{userId}/requests")
+    Call<PojoStatusRequest> getAllUpcomingGames(@Path("userId") String userId);
 
     @FormUrlEncoded
     @PUT("request/status")
@@ -175,7 +180,8 @@ public interface IApiService {
 
     @GET("playrequests/{keyword}")
     Call<PojoPlay> getSearchJoinReq(@Path("keyword") String keyword);
-
+    @GET("playrquest/search")
+    Call<PojoPlay> getSearchJoinReqest(@Query("text") String keyword);
     @FormUrlEncoded
     @POST("users/requests/accept")
     Call<PojoNoti> acceptByuserid(@Field("userId") String userId,@Field("friendId") String friendId,@Field("requestId") String requestId);
@@ -195,7 +201,7 @@ public interface IApiService {
     Call<PojoPlay> cancelPlayReq(@Field("requestId") int requestId, @Field("userId") String userId, @Field("status") String status);
     @FormUrlEncoded
     @POST("playrequests/filter/{userId}")
-    Call<PojoPlay> getAllFilterPlayReq(@Path("userId") String userId, @Field("handicap") String handicap,@Field("industry") String industry);
+    Call<PojoPlay> getAllFilterPlayReq(@Path("userId") String userId, @Field("filterType") String filterType,@Field("filterValue") String filterValue);
 
     @GET("profession")
     Call<PojoDropValues> getAllProfession();

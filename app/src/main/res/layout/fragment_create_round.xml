@@ -2,23 +2,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
-    >
+    android:background="@drawable/bg">
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/space_x2"
             android:orientation="vertical">
+
             <LinearLayout
-              android:layout_height="match_parent"
                 android:layout_width="wrap_content"
-                android:layout_weight="2"
+                android:layout_height="match_parent"
                 android:layout_margin="@dimen/space_x2"
+                android:layout_weight="2"
                 android:orientation="horizontal">
 
                 <android.support.percent.PercentRelativeLayout
@@ -30,9 +31,9 @@
 
                     <TextView
                         style="@style/AppTheme.TextView.Wrap"
-                        app:layout_widthPercent="50%"
                         android:layout_centerVertical="true"
-                        android:text="Number of Holes"/>
+                        android:text="Number of Holes"
+                        app:layout_widthPercent="50%" />
 
                     <RadioGroup
                         android:id="@+id/radioGroupHoles"
@@ -47,15 +48,15 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:checked="true"
-                            android:textColor="@color/colorWhite"
-                            android:text="18 Holes" />
+                            android:text="18 Holes"
+                            android:textColor="@color/colorWhite" />
 
                         <RadioButton
                             android:id="@+id/radio1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/colorWhite"
-                            android:text="9 Holes" />
+                            android:text="9 Holes"
+                            android:textColor="@color/colorWhite" />
 
 
                     </RadioGroup>
@@ -63,11 +64,12 @@
 
 
             </LinearLayout>
+
             <LinearLayout
-                android:layout_height="match_parent"
                 android:layout_width="wrap_content"
-                android:layout_weight="2"
+                android:layout_height="match_parent"
                 android:layout_margin="@dimen/space_x2"
+                android:layout_weight="2"
                 android:orientation="horizontal">
 
                 <android.support.percent.PercentRelativeLayout
@@ -79,9 +81,9 @@
 
                     <TextView
                         style="@style/AppTheme.TextView.Wrap"
-                        app:layout_widthPercent="50%"
                         android:layout_centerVertical="true"
-                        android:text="Number of Players"/>
+                        android:text="Number of Players"
+                        app:layout_widthPercent="50%" />
 
                     <RadioGroup
                         android:id="@+id/radioGroupPlayers"
@@ -96,40 +98,41 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:checked="true"
-                            android:textColor="@color/colorWhite"
-                            android:text="2" />
+                            android:text="2"
+                            android:textColor="@color/colorWhite" />
 
                         <RadioButton
                             android:id="@+id/radioP2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/colorWhite"
-                            android:text="3" />
+                            android:text="3"
+                            android:textColor="@color/colorWhite" />
 
                         <RadioButton
                             android:id="@+id/radioP3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/colorWhite"
-                            android:text="4" />
+                            android:text="4"
+                            android:textColor="@color/colorWhite" />
                     </RadioGroup>
                 </android.support.percent.PercentRelativeLayout>
 
 
             </LinearLayout>
+
             <LinearLayout
-                android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                 android:layout_gravity="center"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
                 android:layout_margin="@dimen/space_x2"
                 android:orientation="horizontal">
 
                 <android.support.percent.PercentRelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:descendantFocusability="beforeDescendants"
                     android:focusableInTouchMode="true"
-                    android:layout_gravity="center"
                     android:orientation="horizontal">
 
 
@@ -146,15 +149,15 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:checked="true"
-                            android:textColor="@color/colorWhite"
-                            android:text="You Walking" />
+                            android:text="You Walking"
+                            android:textColor="@color/colorWhite" />
 
                         <RadioButton
                             android:id="@+id/radioGolfcart"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/colorWhite"
-                            android:text="Taking golf cart " />
+                            android:text="Taking golf cart "
+                            android:textColor="@color/colorWhite" />
 
 
                     </RadioGroup>
@@ -162,11 +165,12 @@
 
 
             </LinearLayout>
+
             <LinearLayout
-                android:layout_height="match_parent"
                 android:layout_width="wrap_content"
-                android:layout_weight="2"
+                android:layout_height="match_parent"
                 android:layout_margin="@dimen/space_x2"
+                android:layout_weight="2"
 
                 android:orientation="horizontal">
 
@@ -179,32 +183,31 @@
 
                     <TextView
                         style="@style/AppTheme.TextView.Wrap"
-                        app:layout_widthPercent="50%"
                         android:layout_centerVertical="true"
                         android:gravity="center_vertical"
-                        android:text="Day"/>
+                        android:text="Day"
+                        app:layout_widthPercent="50%" />
+
                     <EditText
                         android:id="@+id/etDay"
                         style="@style/AppTheme.EditText"
-                        android:hint="date"
-                        app:layout_widthPercent="50%"
-                        android:focusable="false"
+                        android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                      android:layout_alignParentRight="true"
-                        />
-
-
+                        android:focusable="false"
+                        android:hint="date"
+                        app:layout_widthPercent="50%" />
 
 
                 </android.support.percent.PercentRelativeLayout>
 
 
             </LinearLayout>
+
             <LinearLayout
-                android:layout_height="match_parent"
                 android:layout_width="wrap_content"
-                android:layout_weight="2"
+                android:layout_height="match_parent"
                 android:layout_margin="@dimen/space_x2"
+                android:layout_weight="2"
                 android:orientation="horizontal">
 
                 <android.support.percent.PercentRelativeLayout
@@ -213,52 +216,52 @@
                     android:descendantFocusability="beforeDescendants"
                     android:focusableInTouchMode="true"
                     android:orientation="horizontal">
+
                     <TextView
                         style="@style/AppTheme.TextView.Wrap"
-                        app:layout_widthPercent="50%"
                         android:layout_centerVertical="true"
-                        android:text="Golf Club"/>
-                   <!-- <EditText
-                        android:id="@+id/etVenue"
-                        style="@style/AppTheme.EditText"
-                        android:hint="Select"
-                        app:layout_widthPercent="50%"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:drawableRight="@drawable/ic_down_arrow"
-                        />-->
+                        android:text="Golf Club"
+                        app:layout_widthPercent="50%" />
+                    <!-- <EditText
+                         android:id="@+id/etVenue"
+                         style="@style/AppTheme.EditText"
+                         android:hint="Select"
+                         app:layout_widthPercent="50%"
+                         android:layout_alignParentRight="true"
+                         android:layout_centerVertical="true"
+                         android:drawableRight="@drawable/ic_down_arrow"
+                         />-->
                     <RelativeLayout
 
                         style="@style/AppTheme.EditText"
-                        app:layout_widthPercent="50%"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        >
+                        app:layout_widthPercent="50%">
 
                         <Spinner
                             android:id="@+id/etVenue"
-                            android:layout_height="wrap_content"
                             android:layout_width="match_parent"
-                            android:spinnerMode="dialog"
+                            android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            />
+                            android:spinnerMode="dialog" />
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:src="@drawable/ic_down_arrow"/>
+                            android:src="@drawable/ic_down_arrow" />
                     </RelativeLayout>
                 </android.support.percent.PercentRelativeLayout>
 
 
             </LinearLayout>
+
             <LinearLayout
-                android:layout_height="match_parent"
                 android:layout_width="wrap_content"
-                android:layout_weight="2"
+                android:layout_height="match_parent"
                 android:layout_margin="@dimen/space_x2"
+                android:layout_weight="2"
                 android:orientation="horizontal">
 
                 <android.support.percent.PercentRelativeLayout
@@ -267,29 +270,31 @@
                     android:descendantFocusability="beforeDescendants"
                     android:focusableInTouchMode="true"
                     android:orientation="horizontal">
+
                     <TextView
                         style="@style/AppTheme.TextView.Wrap"
-                        app:layout_widthPercent="50%"
                         android:layout_centerVertical="true"
-                        android:text="Tee Off Time"/>
+                        android:text="Tee Off Time"
+                        app:layout_widthPercent="50%" />
+
                     <EditText
                         android:id="@+id/etTeeOffTime"
                         style="@style/AppTheme.EditText"
-                        android:hint="10:10 A.M"
-                        app:layout_widthPercent="50%"
-                        android:focusable="false"
-                        android:layout_centerVertical="true"
                         android:layout_alignParentRight="true"
-                        />
+                        android:layout_centerVertical="true"
+                        android:focusable="false"
+                        android:hint="10:10 A.M"
+                        app:layout_widthPercent="50%" />
                 </android.support.percent.PercentRelativeLayout>
 
 
             </LinearLayout>
+
             <LinearLayout
-                android:layout_height="match_parent"
                 android:layout_width="wrap_content"
-                android:layout_weight="2"
+                android:layout_height="match_parent"
                 android:layout_margin="@dimen/space_x2"
+                android:layout_weight="2"
                 android:orientation="horizontal">
 
                 <android.support.percent.PercentRelativeLayout
@@ -301,9 +306,9 @@
 
                     <TextView
                         style="@style/AppTheme.TextView.Wrap"
-                        app:layout_widthPercent="50%"
                         android:layout_centerVertical="true"
-                        android:text="Type"/>
+                        android:text="Type"
+                        app:layout_widthPercent="50%" />
 
                     <RadioGroup
                         android:id="@+id/radoGroupRound"
@@ -318,19 +323,20 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:checked="true"
-                            android:textColor="@color/colorWhite"
-                            android:text="Social Round" />
+                            android:text="Social Round"
+                            android:textColor="@color/colorWhite" />
 
                         <RadioButton
                             android:id="@+id/radioBuisness"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/colorWhite"
-                            android:text="Buisness" />
+                            android:text="Buisness"
+                            android:textColor="@color/colorWhite" />
 
                     </RadioGroup>
                 </android.support.percent.PercentRelativeLayout>
             </LinearLayout>
+
             <EditText
                 android:id="@+id/etPlayrequestInfo"
                 style="@style/AppTheme.EditText"
@@ -339,379 +345,460 @@
                 android:inputType="textMultiLine"
 
                 />
+
             <LinearLayout
-            android:layout_height="match_parent"
-            android:layout_width="wrap_content"
-            android:layout_weight="2"
-            android:layout_margin="@dimen/space_x2"
-            android:orientation="horizontal">
-
-            <android.support.percent.PercentRelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:descendantFocusability="beforeDescendants"
-                android:focusableInTouchMode="true"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/space_x2"
+                android:layout_weight="2"
                 android:orientation="horizontal">
-                <TextView
-                    style="@style/AppTheme.TextView.Wrap"
-                    app:layout_widthPercent="50%"
-                    android:layout_centerVertical="true"
-                    android:text="Refine your request"/>
-                <RadioGroup
-                    android:id="@+id/radioGroupRefine"
-                    android:layout_width="wrap_content"
+
+                <android.support.percent.PercentRelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:orientation="horizontal"
-                    app:layout_widthPercent="50%">
+                    android:descendantFocusability="beforeDescendants"
+                    android:focusableInTouchMode="true"
+                    android:orientation="horizontal">
 
-                    <RadioButton
-                        android:id="@+id/radioRefineYes"
+                    <TextView
+                        style="@style/AppTheme.TextView.Wrap"
+                        android:layout_centerVertical="true"
+                        android:text="Refine your request"
+                        app:layout_widthPercent="50%" />
+
+                    <RadioGroup
+                        android:id="@+id/radioGroupRefine"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:orientation="horizontal"
+                        app:layout_widthPercent="50%">
 
-                        android:textColor="@color/colorWhite"
-                        android:text="Yes" />
+                        <RadioButton
+                            android:id="@+id/radioRefineYes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
 
-                    <RadioButton
-                        android:id="@+id/radioRefineNo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/colorWhite"
-                        android:checked="true"
-                        android:text="No" />
+                            android:text="Yes"
+                            android:textColor="@color/colorWhite" />
 
-                </RadioGroup>
-            </android.support.percent.PercentRelativeLayout>
+                        <RadioButton
+                            android:id="@+id/radioRefineNo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="No"
+                            android:textColor="@color/colorWhite" />
+
+                    </RadioGroup>
+                </android.support.percent.PercentRelativeLayout>
 
 
-        </LinearLayout>
+            </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/llRefine"
-                android:layout_height="match_parent"
                 android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
-            <LinearLayout
-                android:layout_height="match_parent"
-                android:layout_width="wrap_content"
-                android:layout_weight="2"
-                android:layout_margin="@dimen/space_x2"
-                android:orientation="horizontal">
 
-                <android.support.percent.PercentRelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:descendantFocusability="beforeDescendants"
-                    android:focusableInTouchMode="true"
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/space_x2"
+                    android:layout_weight="2"
                     android:orientation="horizontal">
-                    <TextView
-                        style="@style/AppTheme.TextView.Wrap"
-                        app:layout_widthPercent="50%"
-                        android:layout_centerVertical="true"
-                        android:text="Handicap"/>
-                    <RadioGroup
-                        android:id="@+id/radioGroupHandicap"
-                        android:layout_width="wrap_content"
+
+                    <android.support.percent.PercentRelativeLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:orientation="horizontal"
-                        app:layout_widthPercent="50%">
+                        android:descendantFocusability="beforeDescendants"
+                        android:focusableInTouchMode="true"
+                        android:orientation="horizontal">
 
-                        <RadioButton
-                            android:id="@+id/radioHandYes"
+                        <TextView
+                            style="@style/AppTheme.TextView.Wrap"
+                            android:layout_centerVertical="true"
+                            android:text="Handicap"
+                            app:layout_widthPercent="50%" />
+
+                        <RadioGroup
+                            android:id="@+id/radioGroupHandicap"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:orientation="horizontal"
+                            app:layout_widthPercent="50%">
 
-                            android:textColor="@color/colorWhite"
-                            android:text="Yes" />
+                            <RadioButton
+                                android:id="@+id/radioHandYes"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
 
-                        <RadioButton
-                            android:id="@+id/radioHandNo"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/colorWhite"
-                            android:checked="true"
-                            android:text="No" />
+                                android:text="Yes"
+                                android:textColor="@color/colorWhite" />
 
-                    </RadioGroup>
-                </android.support.percent.PercentRelativeLayout>
+                            <RadioButton
+                                android:id="@+id/radioHandNo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:checked="true"
+                                android:text="No"
+                                android:textColor="@color/colorWhite" />
+
+                        </RadioGroup>
+                    </android.support.percent.PercentRelativeLayout>
 
 
-            </LinearLayout>
+                </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/llhandicapCount"
-                    android:layout_height="match_parent"
                     android:layout_width="wrap_content"
-                    android:layout_weight="2"
+                    android:layout_height="match_parent"
                     android:layout_margin="@dimen/space_x2"
+                    android:layout_weight="2"
                     android:orientation="horizontal">
-                <android.support.percent.PercentRelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:descendantFocusability="beforeDescendants"
-                    android:focusableInTouchMode="true"
-                    android:orientation="horizontal">
-                    <TextView
-                        style="@style/AppTheme.TextView.Wrap"
-                        app:layout_widthPercent="50%"
-                        android:layout_centerVertical="true"
-                        android:text="Number of handicap"/>
-                    <EditText
-                        android:id="@+id/etHandicapCount"
-                        style="@style/AppTheme.EditText"
-                        android:hint="no. of handicap"
-                        app:layout_widthPercent="50%"
-                        android:inputType="number"
-                        android:maxLength="2"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
-                        />
-                </android.support.percent.PercentRelativeLayout>
-</LinearLayout>
-            <LinearLayout
-                android:layout_height="match_parent"
-                android:layout_width="wrap_content"
-                android:layout_weight="2"
-                android:layout_margin="@dimen/space_x2"
-                android:orientation="horizontal">
 
-                <android.support.percent.PercentRelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:descendantFocusability="beforeDescendants"
-                    android:focusableInTouchMode="true"
-                    android:orientation="horizontal">
-                    <TextView
-                        style="@style/AppTheme.TextView.Wrap"
-                        app:layout_widthPercent="50%"
-                        android:layout_centerVertical="true"
-                        android:text="Select members region"/>
-                    <!--<EditText
-                        android:id="@+id/etlocation"
-                        style="@style/AppTheme.EditText"
-                        android:hint="Select"
-                        app:layout_widthPercent="50%"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:drawableRight="@drawable/ic_down_arrow"
-                        />-->
-                    <RelativeLayout
-
-                        style="@style/AppTheme.EditText"
-                        app:layout_widthPercent="50%"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        >
-
-                        <Spinner
-                            android:id="@+id/etlocation"
-                            android:layout_height="wrap_content"
-                            android:layout_width="match_parent"
-                            android:spinnerMode="dialog"
-                            android:layout_toRightOf="@+id/img"
-                            android:layout_centerVertical="true"
-                            />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:src="@drawable/ic_down_arrow"/>
-                    </RelativeLayout>
-                </android.support.percent.PercentRelativeLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_height="match_parent"
-                android:layout_width="wrap_content"
-                android:layout_weight="2"
-                android:layout_margin="@dimen/space_x2"
-                android:orientation="horizontal">
-
-                <android.support.percent.PercentRelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:descendantFocusability="beforeDescendants"
-                    android:focusableInTouchMode="true"
-                    android:orientation="horizontal">
-                    <TextView
-                        style="@style/AppTheme.TextView.Wrap"
-                        app:layout_widthPercent="50%"
-                        android:layout_centerVertical="true"
-                        android:text="Select Industry"/>
-                    <!--<EditText
-                        android:id="@+id/etIndustry"
-                        style="@style/AppTheme.EditText"
-                        android:hint="Select"
-                        app:layout_widthPercent="50%"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
-                        android:drawableRight="@drawable/ic_down_arrow"
-                        />-->
-                    <RelativeLayout
-
-                        style="@style/AppTheme.EditText"
-                        app:layout_widthPercent="50%"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        >
-
-                        <Spinner
-                            android:id="@+id/etIndustry"
-                            android:layout_height="wrap_content"
-                            android:layout_width="match_parent"
-                            android:spinnerMode="dialog"
-                            android:layout_toRightOf="@+id/img"
-                            android:layout_centerVertical="true"
-                            />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:src="@drawable/ic_down_arrow"/>
-                    </RelativeLayout>
-                </android.support.percent.PercentRelativeLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_height="match_parent"
-                android:layout_width="wrap_content"
-                android:layout_weight="2"
-                android:layout_margin="@dimen/space_x2"
-                android:orientation="horizontal">
-
-                <android.support.percent.PercentRelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:descendantFocusability="beforeDescendants"
-                    android:focusableInTouchMode="true"
-                    android:orientation="horizontal">
-                    <TextView
-                        style="@style/AppTheme.TextView.Wrap"
-                        app:layout_widthPercent="50%"
-                        android:layout_centerVertical="true"
-                        android:text="Select Profession"/>
-                   <!-- <EditText
-                        android:id="@+id/etProfession"
-                        style="@style/AppTheme.EditText"
-                        android:hint="Select"
-                        app:layout_widthPercent="50%"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:drawableRight="@drawable/ic_down_arrow"
-                        />-->
-                    <RelativeLayout
-
-                        style="@style/AppTheme.EditText"
-                        app:layout_widthPercent="50%"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        >
-
-                        <Spinner
-                            android:id="@+id/etProfession"
-                            android:layout_height="wrap_content"
-                            android:layout_width="match_parent"
-                            android:spinnerMode="dialog"
-                            android:layout_toRightOf="@+id/img"
-                            android:layout_centerVertical="true"
-                            />
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:src="@drawable/ic_down_arrow"/>
-                    </RelativeLayout>
-                </android.support.percent.PercentRelativeLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_height="match_parent"
-                android:layout_width="wrap_content"
-                android:layout_weight="2"
-                android:layout_margin="@dimen/space_x2"
-                android:orientation="horizontal">
-
-                <android.support.percent.PercentRelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:descendantFocusability="beforeDescendants"
-                    android:focusableInTouchMode="true"
-                    android:orientation="horizontal">
-                    <TextView
-                        style="@style/AppTheme.TextView.Wrap"
-                        app:layout_widthPercent="50%"
-                        android:layout_centerVertical="true"
-                        android:text="Gender"/>
-                    <RadioGroup
-                        android:id="@+id/radioGroupGender"
-                        android:layout_width="wrap_content"
+                    <android.support.percent.PercentRelativeLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:orientation="horizontal"
-                        app:layout_widthPercent="50%">
+                        android:descendantFocusability="beforeDescendants"
+                        android:focusableInTouchMode="true"
+                        android:orientation="horizontal">
 
-                        <RadioButton
-                            android:id="@+id/radioMale"
+                        <TextView
+                            style="@style/AppTheme.TextView.Wrap"
+                            android:layout_centerVertical="true"
+                            android:text="Number of handicap"
+                            app:layout_widthPercent="50%" />
+
+                        <EditText
+                            android:id="@+id/etHandicapCount"
+                            style="@style/AppTheme.EditText"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:hint="no. of handicap"
+                            android:inputType="number"
+                            android:maxLength="2"
+                            app:layout_widthPercent="50%" />
+                    </android.support.percent.PercentRelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/space_x2"
+                    android:layout_weight="2"
+                    android:orientation="horizontal">
+
+                    <android.support.percent.PercentRelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:descendantFocusability="beforeDescendants"
+                        android:focusableInTouchMode="true"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/AppTheme.TextView.Wrap"
+                            android:layout_centerVertical="true"
+                            android:text="Select members region"
+                            app:layout_widthPercent="50%" />
+                        <!--<EditText
+                            android:id="@+id/etlocation"
+                            style="@style/AppTheme.EditText"
+                            android:hint="Select"
+                            app:layout_widthPercent="50%"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:drawableRight="@drawable/ic_down_arrow"
+                            />-->
+                        <RelativeLayout
+
+                            style="@style/AppTheme.EditText"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            app:layout_widthPercent="50%">
+
+                            <Spinner
+                                android:id="@+id/etlocation"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@+id/img"
+                                android:spinnerMode="dialog" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/ic_down_arrow" />
+                        </RelativeLayout>
+                    </android.support.percent.PercentRelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/space_x2"
+                    android:layout_weight="2"
+                    android:orientation="horizontal">
+
+                    <android.support.percent.PercentRelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:descendantFocusability="beforeDescendants"
+                        android:focusableInTouchMode="true"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/AppTheme.TextView.Wrap"
+                            android:layout_centerVertical="true"
+                            android:text="Select Industry"
+                            app:layout_widthPercent="50%" />
+                        <!--<EditText
+                            android:id="@+id/etIndustry"
+                            style="@style/AppTheme.EditText"
+                            android:hint="Select"
+                            app:layout_widthPercent="50%"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentRight="true"
+                            android:drawableRight="@drawable/ic_down_arrow"
+                            />-->
+                        <RelativeLayout
+
+                            style="@style/AppTheme.EditText"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            app:layout_widthPercent="50%">
+
+                            <Spinner
+                                android:id="@+id/etIndustry"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@+id/img"
+                                android:spinnerMode="dialog" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/ic_down_arrow" />
+                        </RelativeLayout>
+                    </android.support.percent.PercentRelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/space_x2"
+                    android:layout_weight="2"
+                    android:orientation="horizontal">
+
+                    <android.support.percent.PercentRelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:descendantFocusability="beforeDescendants"
+                        android:focusableInTouchMode="true"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/AppTheme.TextView.Wrap"
+                            android:layout_centerVertical="true"
+                            android:text="Select Profession"
+                            app:layout_widthPercent="50%" />
+                        <!-- <EditText
+                             android:id="@+id/etProfession"
+                             style="@style/AppTheme.EditText"
+                             android:hint="Select"
+                             app:layout_widthPercent="50%"
+                             android:layout_alignParentRight="true"
+                             android:layout_centerVertical="true"
+                             android:drawableRight="@drawable/ic_down_arrow"
+                             />-->
+                        <RelativeLayout
+
+                            style="@style/AppTheme.EditText"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            app:layout_widthPercent="50%">
+
+                            <Spinner
+                                android:id="@+id/etProfession"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@+id/img"
+                                android:spinnerMode="dialog" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/ic_down_arrow" />
+                        </RelativeLayout>
+                    </android.support.percent.PercentRelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/space_x2"
+                    android:layout_weight="2"
+                    android:orientation="horizontal">
+
+                    <android.support.percent.PercentRelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:descendantFocusability="beforeDescendants"
+                        android:focusableInTouchMode="true"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/AppTheme.TextView.Wrap"
+                            android:layout_centerVertical="true"
+                            android:text="Select Affliate"
+                            app:layout_widthPercent="50%" />
+
+                        <RelativeLayout
+
+                            style="@style/AppTheme.EditText"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            app:layout_widthPercent="50%">
+
+                            <Spinner
+                                android:id="@+id/spAffliate"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@+id/img"
+                                android:spinnerMode="dialog" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/ic_down_arrow" />
+                        </RelativeLayout>
+                    </android.support.percent.PercentRelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/space_x2"
+                    android:layout_weight="2"
+                    android:orientation="horizontal">
+
+                    <android.support.percent.PercentRelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:descendantFocusability="beforeDescendants"
+                        android:focusableInTouchMode="true"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/AppTheme.TextView.Wrap"
+                            android:layout_centerVertical="true"
+                            android:text="Gender"
+                            app:layout_widthPercent="50%" />
+
+                        <RadioGroup
+                            android:id="@+id/radioGroupGender"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:checked="true"
-                            android:textColor="@color/colorWhite"
-                            android:text="Male" />
+                            android:layout_alignParentRight="true"
+                            android:orientation="horizontal"
+                            app:layout_widthPercent="50%">
 
-                        <RadioButton
-                            android:id="@+id/radioYes"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/colorWhite"
-                            android:text="Female" />
+                            <RadioButton
+                                android:id="@+id/radioMale"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:checked="true"
+                                android:text="Male"
+                                android:textColor="@color/colorWhite" />
 
-                    </RadioGroup>
-                </android.support.percent.PercentRelativeLayout>
+                            <RadioButton
+                                android:id="@+id/radioYes"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Female"
+                                android:textColor="@color/colorWhite" />
+
+                        </RadioGroup>
+                    </android.support.percent.PercentRelativeLayout>
 
 
-            </LinearLayout>
-        <LinearLayout
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:layout_weight="2"
-            android:layout_margin="@dimen/space_x2"
-            android:orientation="vertical">
+                </LinearLayout>
 
-
-            <TextView
-                style="@style/AppTheme.TextView.Wrap"
-
-                android:layout_centerVertical="true"
-                android:text="Age Range"/>
-            <SeekBar
-                android:id="@+id/seekBar1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:visibility="gone"
-                android:layout_marginTop="39dp" />
-                <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
-                    android:id="@+id/customSeekBar"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:dsb_min="18"
-                    app:dsb_max="70"
-                    app:dsb_indicatorColor="@color/yellow"
-                    app:dsb_progressColor="@color/yellow"
-                    />
+                    android:layout_margin="@dimen/space_x2"
+                    android:layout_weight="2"
+                    android:orientation="vertical">
 
-            </LinearLayout>
-            </LinearLayout>
 
+                    <TextView
+                        style="@style/AppTheme.TextView.Wrap"
+
+                        android:layout_centerVertical="true"
+                        android:text="Age Range" />
+
+                    <SeekBar
+                        android:id="@+id/seekBar1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="39dp"
+                        android:visibility="gone" />
+
+                    <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
+                        android:id="@+id/customSeekBar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:dsb_indicatorColor="@color/yellow"
+                        app:dsb_max="70"
+                        app:dsb_min="18"
+                        app:dsb_progressColor="@color/yellow" />
+
+                </LinearLayout>
+            </LinearLayout>
+            <RadioGroup
+                android:id="@+id/radioGroupInvitation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                >
+                <RadioButton
+                    android:id="@+id/radioInviteall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Invite to all"
+                    android:checked="true"
+                    android:textColor="@color/colorWhite" />
+
+                <RadioButton
+                    android:id="@+id/radioInviteonly"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Invite only"
+                    android:textColor="@color/colorWhite" />
+            </RadioGroup>
             <Button
                 android:id="@+id/btnSubmit"
                 style="@style/AppTheme.Button"
                 android:layout_marginBottom="@dimen/space_x2"
                 android:text="Submit" />
-            </LinearLayout>
-        </android.support.v4.widget.NestedScrollView>
-    </android.support.design.widget.CoordinatorLayout>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.design.widget.CoordinatorLayout>

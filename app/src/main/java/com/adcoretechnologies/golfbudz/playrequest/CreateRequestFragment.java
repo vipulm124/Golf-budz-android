@@ -1,10 +1,12 @@
 package com.adcoretechnologies.golfbudz.playrequest;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,8 +19,11 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.adcoretechnologies.golfbudz.R;
+import com.adcoretechnologies.golfbudz.auth.BoUser;
+import com.adcoretechnologies.golfbudz.auth.PojoUser;
 import com.adcoretechnologies.golfbudz.core.base.BaseFragment;
 import com.adcoretechnologies.golfbudz.friends.PojoFriend;
 import com.adcoretechnologies.golfbudz.home.MainActivity;
@@ -48,7 +53,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CreateRequestFragment extends BaseFragment implements DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener {
+public class CreateRequestFragment extends BaseFragment implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
     @BindView(R.id.radio0)
     RadioButton radio0;
@@ -70,6 +75,8 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
     RadioGroup radoGroupRound;
     @BindView(R.id.etPlayrequestInfo)
     EditText etPlayrequestInfo;
+    @BindView(R.id.etHandicapCount)
+    EditText etHandicapCount;
     @BindView(R.id.radioRefineYes)
     RadioButton radioRefineYes;
     @BindView(R.id.radioRefineNo)
@@ -88,6 +95,8 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
     Spinner etIndustry;
     @BindView(R.id.etProfession)
     Spinner etProfession;
+    @BindView(R.id.spAffliate)
+    Spinner spAffliate;
     @BindView(R.id.radioMale)
     RadioButton radioMale;
     @BindView(R.id.radioYes)
@@ -96,12 +105,19 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
     RadioGroup radioGroupGender;
     @BindView(R.id.radioGroupPlayers)
     RadioGroup radioGroupPlayers;
+    @BindView(R.id.radioGroupInvitation)
+    RadioGroup radioGroupInvitation;
     @BindView(R.id.radioP1)
     RadioButton radioP1;
     @BindView(R.id.radioP2)
     RadioButton radioP2;
     @BindView(R.id.radioP3)
     RadioButton radioP3;
+
+    @BindView(R.id.radioInviteall)
+    RadioButton radioInviteall;
+    @BindView(R.id.radioInviteonly)
+    RadioButton radioInviteonly;
     /*@BindView(R.id.seekBar1)
     SeekBar seekBar1;*/
     @BindView(R.id.btnSubmit)
@@ -114,14 +130,18 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
     DatePickerDialog datePickerDialog;
     int Year, Month, Day, Hour, Minute;
     private FragmentActivity myContext;
-    String profession, industry, venue,location;
-    RadioButton radioHolesButton, radioRoundButton, radioRefineButton, radioHandicapButton, radioGenderButton;
-    TimePickerDialog timePickerDialog ;
-    int age=16;
+    String profession, industry, venue, location, selAffiliate;
+    RadioButton radioHolesButton, radioRoundButton, radioRefineButton, radioHandicapButton, radioGenderButton,radioInviationButton;
+    TimePickerDialog timePickerDialog;
+    int age = 16;
+    List<String> allUsersList = new ArrayList<>();
+    List<String> allUserIdList = new ArrayList<>();
+    String[] studentnameArray;
+    List<String> mSelectedItems;
     public CreateRequestFragment() {
         // Required empty public constructor
     }
-
+    String reciversId="",showreciversId="";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -162,6 +182,20 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
                 }
             }
         });
+        int selectedInviataionId = radioGroupInvitation.getCheckedRadioButtonId();
+        radioInviationButton = (RadioButton) view.findViewById(selectedInviataionId);
+        radioGroupInvitation.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                radioInviationButton = (RadioButton) view.findViewById(checkedId);
+                if (radioInviationButton.getText().toString().equals("Invite to all")) {
+                 // toast("1");
+                } else {
+                    openUserlist();
+                }
+            }
+        });
+
         int selectedPlayersId = radioGroupPlayers.getCheckedRadioButtonId();
         radioP1 = (RadioButton) view.findViewById(selectedPlayersId);
 
@@ -193,12 +227,13 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
         getIndustry();
         getProfession();
         getLocation();
-
+        setAffliates();
+        getAllUsers();
         DiscreteSeekBar discreteSeekBar1 = (DiscreteSeekBar) view.findViewById(R.id.customSeekBar);
         discreteSeekBar1.setNumericTransformer(new DiscreteSeekBar.NumericTransformer() {
             @Override
             public int transform(int value) {
-              age=value * 1;
+                age = value * 1;
                 return value * 1;
             }
         });
@@ -231,6 +266,7 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
         etDay.setText(date);
 
     }
+
     @OnClick(R.id.etTeeOffTime)
     public void selTime() {
         timePickerDialog = TimePickerDialog.newInstance(this, Hour, Minute, true);
@@ -246,10 +282,12 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
 
 
     }
+
     @Override
     public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute, int second) {
-        etTeeOffTime.setText(hourOfDay+":"+minute);
+        etTeeOffTime.setText(hourOfDay + ":" + minute);
     }
+
     private void getVenues() {
         IApiService service = APIHelper.getAppServiceMethod();
         Call<PojoDropValues> call = service.getAllVenues();
@@ -283,7 +321,8 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
 
     private void setVenues(ArrayList<BoDropVales> allItems) {
         List<String> categories = new ArrayList<String>();
-        for(int i=0; i<allItems.size();i++){
+        categories.add("Select Golf Club");
+        for (int i = 0; i < allItems.size(); i++) {
             categories.add(allItems.get(i).getDisplayName());
         }
 
@@ -297,10 +336,12 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 venue = parent.getItemAtPosition(position).toString();
             }
+
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
     }
+
     private void getIndustry() {
         IApiService service = APIHelper.getAppServiceMethod();
         Call<PojoDropValues> call = service.getAllIndustry();
@@ -330,9 +371,11 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
         });
 
     }
+
     private void setIndustry(ArrayList<BoDropVales> allItems) {
         List<String> categories = new ArrayList<String>();
-        for(int i=0; i<allItems.size();i++){
+        categories.add("Select Industry");
+        for (int i = 0; i < allItems.size(); i++) {
             categories.add(allItems.get(i).getDisplayName());
         }
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), R.layout.item_spinner_dropdown, categories);
@@ -345,10 +388,12 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 industry = parent.getItemAtPosition(position).toString();
             }
+
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
     }
+
     private void getProfession() {
         IApiService service = APIHelper.getAppServiceMethod();
         Call<PojoDropValues> call = service.getAllProfession();
@@ -377,9 +422,11 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
             }
         });
     }
+
     private void setProfession(ArrayList<BoDropVales> allItems) {
         List<String> categories = new ArrayList<String>();
-        for(int i=0; i<allItems.size();i++){
+        categories.add("Select Profession");
+        for (int i = 0; i < allItems.size(); i++) {
             categories.add(allItems.get(i).getDisplayName());
         }
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), R.layout.item_spinner_dropdown, categories);
@@ -392,11 +439,13 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 profession = parent.getItemAtPosition(position).toString();
             }
+
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
     }
-    private void getLocation(){
+
+    private void getLocation() {
         IApiService service = APIHelper.getAppServiceMethod();
         Call<PojoDropValues> call = service.getAllRegions();
         call.enqueue(new Callback<PojoDropValues>() {
@@ -424,11 +473,13 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
             }
         });
     }
+
     private void setLocation(ArrayList<BoDropVales> allItems) {
         List<String> categories = new ArrayList<String>();
-     for(int i=0; i<allItems.size();i++){
-          categories.add(allItems.get(i).getDisplayName());
-     }
+        categories.add("Select Region");
+        for (int i = 0; i < allItems.size(); i++) {
+            categories.add(allItems.get(i).getDisplayName());
+        }
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), R.layout.item_spinner_dropdown, categories);
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -439,6 +490,7 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 location = parent.getItemAtPosition(position).toString();
             }
+
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
@@ -455,7 +507,7 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
         //String venue = etVenue.getText().toString();
         String teeofftime = etTeeOffTime.getText().toString();
         String playrequest = etPlayrequestInfo.getText().toString();
-       // String location = etlocation.getText().toString();
+        // String location = etlocation.getText().toString();
         // String industry = etIndustry.getText().toString();
         //  String profession = etProfession.getText().toString();
 
@@ -479,17 +531,20 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
         BoPlay boPlay = new BoPlay();
         boPlay.setDay(day);
         boPlay.setNoOfHoles(radioHolesButton.getText().toString());
-        if(radioRefineButton.getText().toString().equals("Yes")){
+        if (radioRefineButton.getText().toString().equals("Yes")) {
             if (location.equalsIgnoreCase("Select Region")) {
                 toast("Please select region");
                 return;
             }
             if (industry.equalsIgnoreCase("Select Industry")) {
-               toast("Please select industry");
+                toast("Please select industry");
                 return;
             }
             if (profession.equalsIgnoreCase("Select Profession")) {
                 toast("Please select profession");
+                return;
+            } else if (selAffiliate.equalsIgnoreCase("Select Affiliated")) {
+                Toast.makeText(getActivity(), "Please select affiliated", Toast.LENGTH_SHORT).show();
                 return;
             }
             boPlay.setGender(radioGenderButton.getText().toString());
@@ -498,7 +553,10 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
             boPlay.setLocations(location);
             boPlay.setProfession(profession);
             boPlay.setAge(String.valueOf(age));
-        }else{
+            boPlay.setAffiliated(selAffiliate);
+            boPlay.setGolfClub(venue);
+            boPlay.setNoOfHandicaps(etHandicapCount.getText().toString());
+        } else {
             boPlay.setGender("");
             boPlay.setHandicap("");
             boPlay.setIndustry("");
@@ -518,6 +576,26 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
         boPlay.setPlayers(radioP1.getText().toString());
 
         performSubmission(boPlay);
+    }
+
+    private void setAffliates() {
+        final List<String> typeList = new ArrayList<>();
+        typeList.add("Select Affiliated");
+        typeList.add("Yes");
+        typeList.add("No");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), R.layout.item_spinner_dropdown, typeList);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spAffliate.setAdapter(dataAdapter);
+        spAffliate.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selAffiliate = typeList.get(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
     }
 
     private void performSubmission(BoPlay boPlay) {
@@ -561,6 +639,95 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
 
     @Override
     public void log(String message) {
+
+    }
+    private void getAllUsers() {
+        showProgressDialog("Loading", "Please wait");
+        IApiService apiService = APIHelper.getAppServiceMethod();
+        Call<PojoUser> call = apiService.getAllUsers();
+        call.enqueue(new Callback<PojoUser>() {
+            @Override
+            public void onResponse(Call<PojoUser> call, Response<PojoUser> response) {
+                hideDialog();
+                if (response.isSuccessful()) {
+                    PojoUser pojo = response.body();
+                    if (pojo.getStatus() == Const.STATUS_SUCCESS) {
+                        //toast(pojo.getMessage());
+                        bindData(pojo.getAllItems());
+
+                    } else if (pojo.getStatus() == Const.STATUS_FAILED) {
+                        toast(pojo.getMessage());
+                    } else if (pojo.getStatus() == Const.STATUS_ERROR) {
+                        toast(pojo.getMessage());
+                    }
+                } else {
+                    toast("Something went wrong");
+                }
+            }
+
+
+            @Override
+            public void onFailure(Call<PojoUser> call, Throwable t) {
+                hideDialog();
+                Common.logException(getActivity(), "Internal server error", t, null);
+            }
+        });
+    }
+
+
+    private void bindData(ArrayList<BoUser> allItems) {
+        for (int i = 0; i < allItems.size(); i++) {
+            allUsersList.add(allItems.get(i).getFirstName());
+            allUserIdList.add(allItems.get(i).getUserId());
+        }
+        studentnameArray = allUsersList.toArray(new String[allUsersList.size()]);
+    }
+
+    public void openUserlist() {
+        mSelectedItems = new ArrayList();
+        if(studentnameArray.length==0 ||studentnameArray==null)
+        {toast("No users found");}else{
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            // Set the dialog title
+            builder.setTitle("Select Users")
+                    // Specify the list array, the items to be selected by default (null for none),
+                    // and the listener through which to receive callbacks when items are selected
+                    .setMultiChoiceItems(studentnameArray, null,
+                            new DialogInterface.OnMultiChoiceClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which,
+                                                    boolean isChecked) {
+                                    if (isChecked) {
+                                        // If the user checked the item, add it to the selected items
+                                        mSelectedItems.add(allUserIdList.get(which));
+                                    } else if (mSelectedItems.contains(which)) {
+                                        // Else, if the item is already in the array, remove it
+                                        mSelectedItems.remove(Integer.valueOf(allUserIdList.get(which)));
+                                    }
+                                }
+                            })
+                    // Set the action buttons
+                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                            getReciversId();
+                        }
+                    })
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+
+                        }
+                    });
+
+            builder.show();}
+    }
+    private void getReciversId() {
+        for (int i=0;i<mSelectedItems.size();i++){
+            reciversId +=  mSelectedItems.get(i)+"|";
+           // showreciversId +=  "Users "+mSelectedItems.get(i)+",";
+        }
+        reciversId = reciversId.substring(0, reciversId.length()-1);
 
     }
 }

@@ -49,6 +49,13 @@ public class BoPlay implements Serializable {
     public String userStatus;
     @SerializedName("dateCreated")
     public String dateCreated;
+
+    @SerializedName("NoOfHandicaps")
+    public String NoOfHandicaps;
+    @SerializedName("affiliated")
+    public String affiliated;
+    @SerializedName("golfClub")
+    public String golfClub;
     public String getNoOfHoles() {
         return noOfHoles;
     }
@@ -207,5 +214,29 @@ public class BoPlay implements Serializable {
 
     public void setDateCreated(String dateCreated) {
         this.dateCreated = dateCreated;
+    }
+
+    public String getNoOfHandicaps() {
+        return NoOfHandicaps;
+    }
+
+    public void setNoOfHandicaps(String noOfHandicaps) {
+        NoOfHandicaps = noOfHandicaps;
+    }
+
+    public String getAffiliated() {
+        return affiliated;
+    }
+
+    public void setAffiliated(String affiliated) {
+        this.affiliated = affiliated;
+    }
+
+    public String getGolfClub() {
+        return golfClub;
+    }
+
+    public void setGolfClub(String golfClub) {
+        this.golfClub = golfClub;
     }
 }

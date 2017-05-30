@@ -1,0 +1,79 @@
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/space_x2"
+    card_view:cardBackgroundColor="@color/colorGrayTrans"
+    card_view:cardCornerRadius="5dp">
+
+    <LinearLayout
+        android:id="@+id/llUpCominglayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <com.adcoretechnologies.golfbudz.utils.RoundedImageView
+                android:id="@+id/ivPic"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/pic" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvName"
+                        style="@style/AppTheme.TextView.Wrap"
+                        android:layout_marginLeft="@dimen/space_x2"
+                        android:text="Robin" />
+
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tvDesc"
+                    style="@style/AppTheme.TextView.Wrap"
+                    android:layout_marginLeft="@dimen/space_x2"
+                    android:visibility="gone"
+                    android:text="" />
+                <TextView
+                    android:id="@+id/tvStatus"
+                    style="@style/AppTheme.TextView.Wrap"
+                    android:layout_gravity="end"
+                    android:text="gdfhdh" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:visibility="gone"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/AppTheme.TextView.Wrap"
+                android:text="2 of 3 Person Joined"
+                android:visibility="gone"
+                android:textColor="@color/yellow" />
+
+            <TextView
+                style="@style/AppTheme.TextView.Wrap"
+                android:layout_alignParentRight="true"
+                android:text="View Details"
+                android:textColor="@color/yellow" />
+        </RelativeLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

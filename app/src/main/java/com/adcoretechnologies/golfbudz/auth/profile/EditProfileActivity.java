@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
@@ -54,6 +55,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -239,12 +241,11 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
 
     private void galleryIntent() {
         Intent intent = new Intent();
+// Show only images, no videos or anything else
         intent.setType("image/*");
-        intent.setAction(Intent.ACTION_PICK);//
-        intent.putExtra("crop", "true");
-        intent.putExtra("aspectX", 0);
-        intent.putExtra("aspectY", 0);
-        startActivityForResult(Intent.createChooser(intent, "Select File"), REQUEST_IMAGE_PICK);
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+// Always show the chooser (if there are multiple options available)
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_IMAGE_PICK);
     }
 
     @Override
@@ -267,74 +268,42 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == REQUEST_IMAGE_PICK) {
-
-                /*Uri selectedImage = data.getData();
-                if (selectedImage != null) {
-                    ivPic.setImageURI(selectedImage);
-                }
-                Bundle extras2 = data.getExtras();
-                if (extras2 != null) {
-                    Bitmap photo = extras2.getParcelable("data");
-                    ivPic.setImageBitmap(photo);
-                    isProfilePicChanged = true;
-                    String compressedImage = SiliCompressor.with(getApplicationContext()).compress(getImageUri(this, photo).toString());
-                    selectedImage = Uri.fromFile(new File(compressedImage));
-                    uploadImageToStorage(compressedImage, allItems.size() - 1);
-                    ivPic.setImageURI(selectedImage);
-                }*/
-                Uri selectedImage = data.getData();
-                if (selectedImage != null) {
-                    uploadImageToStorage(selectedImage.toString(), allItems.size() - 1);
-                    ivPic.setImageURI(selectedImage);
-                }
-                Bundle extras2 = data.getExtras();
-                if (extras2 != null) {
-                    Bitmap photo = extras2.getParcelable("data");
-                    Uri iame=  getImageUri(this,photo);
-                    uploadImageToStorage(iame.toString(), allItems.size() - 1);
-                    ivPic.setImageURI(selectedImage);
-
+                if (resultCode == RESULT_OK && data != null && data.getData() != null) {
+                    Uri uri = data.getData();
+                    try {
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                        String compressedImage = SiliCompressor.with(getApplicationContext()).compress(uri.toString());
+                        uploadImageToStorage(compressedImage, allItems.size() - 1);
+                        ivPic.setImageBitmap(bitmap);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
                 isProfilePicChanged = true;
-
-
-
             } else if (requestCode == REQUEST_CAMERA)
                 onCaptureImageResult(data);
         }
-        switch (requestCode) {
 
-           /* case REQUEST_IMAGE_PICK:
-                if (resultCode == RESULT_OK) {
-                    selectedImage = data.getData();
-                    isProfilePicChanged = true;
-                    String compressedImage = SiliCompressor.with(getApplicationContext()).compress(selectedImage.toString());
-                    selectedImage = Uri.fromFile(new File(compressedImage));
-                    uploadImageToStorage(compressedImage, allItems.size() - 1);
-                    ivPic.setImageURI(selectedImage);
-                }
-                break;*/
-
-
-        }
     }
+
     public Uri getImageUri(Context inContext, Bitmap inImage) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
         String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
         return Uri.parse(path);
+
     }
 
 
     private void onCaptureImageResult(Intent data) {
-        /*Uri selectedImage = data.getData();
+        Uri selectedImage = data.getData();
         ivPic.setImageURI(selectedImage);
         isProfilePicChanged = true;
         String compressedImage = SiliCompressor.with(getApplicationContext()).compress(selectedImage.toString());
         selectedImage = Uri.fromFile(new File(compressedImage));
         uploadImageToStorage(compressedImage, allItems.size() - 1);
-        ivPic.setImageURI(selectedImage);*/
-        Bundle extras = data.getExtras();
+        ivPic.setImageURI(selectedImage);
+       /* Bundle extras = data.getExtras();
         Bitmap imageBitmap = (Bitmap) extras.get("data");
         Uri selectedImage=getImageUri(this,imageBitmap);
         ivPic.setImageURI(selectedImage);
@@ -342,7 +311,7 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
         String compressedImage = SiliCompressor.with(getApplicationContext()).compress(selectedImage.toString());
         selectedImage = Uri.fromFile(new File(compressedImage));
         uploadImageToStorage(compressedImage, allItems.size() - 1);
-        ivPic.setImageURI(selectedImage);
+        ivPic.setImageURI(selectedImage);*/
     }
 
     private void uploadImageToStorage(final String file, final int position) {
@@ -350,8 +319,6 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
         FileInputStream stream = null;
         try {
             stream = new FileInputStream(new File(file));
-
-
             uploadTask = imageRef.putStream(stream);
 
             isUploading = true;

@@ -1,6 +1,7 @@
 package com.adcoretechnologies.golfbudz.playrequest;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
@@ -20,8 +21,10 @@ import android.widget.TextView;
 
 import com.adcoretechnologies.golfbudz.R;
 import com.adcoretechnologies.golfbudz.core.base.BaseFragment;
+import com.adcoretechnologies.golfbudz.core.base.BoEventData;
 import com.adcoretechnologies.golfbudz.playrequest.adapter.AdapterJoinPlayRequest;
 import com.adcoretechnologies.golfbudz.playrequest.model.BoPlay;
+import com.adcoretechnologies.golfbudz.playrequest.model.FilterRequest;
 import com.adcoretechnologies.golfbudz.playrequest.model.PojoPlay;
 import com.adcoretechnologies.golfbudz.utils.Common;
 import com.adcoretechnologies.golfbudz.utils.Const;
@@ -34,6 +37,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.greenrobot.event.EventBus;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -60,8 +64,16 @@ public class JoinFragment extends BaseFragment {
     private ArrayList<BoPlay> allItems;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
-    @BindView(R.id.fab)
-    FloatingActionButton fab;
+  /*  @BindView(R.id.fab)
+    FloatingActionButton fab;*/
+  FilterRequest filterLead;
+  @BindView(R.id.fab1)
+  com.github.clans.fab.FloatingActionButton fab1;
+    @BindView(R.id.fab2)
+    com.github.clans.fab.FloatingActionButton fab2;
+    @BindView(R.id.fab_menu)
+    com.github.clans.fab.FloatingActionMenu fabMenu;
+    FilterRequestFragment bottomSheetDialog;
     public JoinFragment() {
         // Required empty public constructor
     }
@@ -82,7 +94,20 @@ public class JoinFragment extends BaseFragment {
         init();
         return view;
     }
-
+    @OnClick(R.id.fab1)
+    public void onFilterClick() {
+        if (fabMenu.isOpened()) {
+            fabMenu.close(true);}
+        bottomSheetDialog = FilterRequestFragment.getInstance();
+        bottomSheetDialog.show(getChildFragmentManager(), "Custom Bottom Sheet");
+    }
+    @OnClick(R.id.fab2)
+    public void onRemoveFilterClick() {
+        if (fabMenu.isOpened()) {
+            fabMenu.close(true);}
+        filterLead=null;
+        fillData();
+    }
     @Override
     public void init() {
 
@@ -173,12 +198,10 @@ public class JoinFragment extends BaseFragment {
     }
 
     public void onSearch(String text) {
-        String userId = Pref.Read(getActivity(), Const.PREF_USER_ID);
-        String userName = Pref.Read(getActivity(), Const.PREF_USER_DISPLAY_NAME);
         if (apiService == null)
             apiService = APIHelper.getAppServiceMethod();
 
-        Call<PojoPlay> call = apiService.getSearchJoinReq(text);
+        Call<PojoPlay> call = apiService.getSearchJoinReqest(text);
         call.enqueue(new Callback<PojoPlay>() {
             @Override
             public void onResponse(Call<PojoPlay> call, Response<PojoPlay> response) {
@@ -214,44 +237,39 @@ public class JoinFragment extends BaseFragment {
     public void log(String message) {
 
     }
-    @OnClick(R.id.fab)
-    public void onClick(View view) {
-        AlertDialog.Builder builderSingle = new AlertDialog.Builder(getActivity());
-        builderSingle.setTitle("Filter By:-");
-
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.select_dialog_singlechoice);
-        arrayAdapter.add("Handicap");
-        arrayAdapter.add("Industry");
-        arrayAdapter.add("Type");
-        arrayAdapter.add("Region");
-        arrayAdapter.add("Profession");
-
-        builderSingle.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
+    public void onEventMainThread(BoEventData eventData) {
+        int eventType = eventData.eventType;
+        int id = eventData.getId();
+        String data = eventData.getData();
+        Object object = eventData.getObject();
+        switch (eventType) {
+            case BoEventData.EVENT_REQUEST_FILTER_APPLY: {
+                filterLead = (FilterRequest) object;
+                filterData();
+                bottomSheetDialog.dismiss();
+                break;
             }
-        });
 
-        builderSingle.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String strName = arrayAdapter.getItem(which);
-                if(strName.equals("Handicap"))
-                filterData(strName);
-                else
-                    filterIndustryData(strName);
-                dialog.dismiss();
-
-            }
-        });
-        builderSingle.show();
+        }
     }
-    public void filterData(String filterByHandicap) {
-        String userId = Pref.Read(getActivity(), Const.PREF_USER_ID);
 
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
+    }
+
+    public void filterData() {
+        String userId = Pref.Read(getActivity(), Const.PREF_USER_ID);
             apiService = APIHelper.getAppServiceMethod();
-        Call<PojoPlay> call = apiService.getAllFilterPlayReq(userId,"yes","");
+        Call<PojoPlay> call = apiService.getAllFilterPlayReq(userId,filterLead.getType(),filterLead.getValue());
         call.enqueue(new Callback<PojoPlay>() {
             @Override
             public void onResponse(Call<PojoPlay> call, Response<PojoPlay> response) {
@@ -284,41 +302,5 @@ public class JoinFragment extends BaseFragment {
             }
         });
     }
-    public void filterIndustryData(String filterByHandicap) {
-        String userId = Pref.Read(getActivity(), Const.PREF_USER_ID);
 
-        apiService = APIHelper.getAppServiceMethod();
-        Call<PojoPlay> call = apiService.getAllFilterPlayReq(userId,"","hindustan");
-        call.enqueue(new Callback<PojoPlay>() {
-            @Override
-            public void onResponse(Call<PojoPlay> call, Response<PojoPlay> response) {
-                hideDialog();
-                if (response.isSuccessful()) {
-                    PojoPlay pojo = response.body();
-                    if (pojo.getStatus() == Const.STATUS_SUCCESS) {
-                        //toast(pojo.getMessage());
-                        bindData(pojo.getAllItems());
-                        // updateCategories(position);
-
-                    } else if (pojo.getStatus() == Const.STATUS_FAILED) {
-                        updateViews(0);
-                        //toast(pojo.getMessage());
-                    } else if (pojo.getStatus() == Const.STATUS_ERROR) {
-                        updateViews(0);
-                        //toast(pojo.getMessage());
-                    }
-                } else {
-                    toast("Something went wrong");
-                    updateViews(0);
-                }
-            }
-
-
-            @Override
-            public void onFailure(Call<PojoPlay> call, Throwable t) {
-                updateViews(0);
-                Common.logException(getActivity(), "Internal server error", t, null);
-            }
-        });
-    }
 }

@@ -1,6 +1,11 @@
 package com.adcoretechnologies.golfbudz.playrequest;
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -28,6 +33,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,19 +46,7 @@ import retrofit2.Response;
  */
 
 public class UpcomingGamesFragment extends BaseFragment {
-    @BindView(R.id.pbStatus)
-    ProgressBar pbStatus;
-    @BindView(R.id.ivStatus)
-    ImageView ivStatus;
-    @BindView(R.id.tvStatus)
-    TextView tvStatus;
-    @BindView(R.id.llStatus)
-    LinearLayout llStatus;
-    private AdapterUpComingGames adapter;
-    private FragmentDataLoader fragmentLoader;
-    private ArrayList<BoPlay> allItems;
-    @BindView(R.id.recyclerView)
-    RecyclerView recyclerView;
+
 
     public UpcomingGamesFragment() {
         // Required empty public constructor
@@ -67,93 +61,70 @@ public class UpcomingGamesFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_upcoming_games, null);
+        View view = inflater.inflate(R.layout.fragment_upcoming, null);
+        ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewpager);
+        setupViewPager(viewPager);
+        // Set Tabs inside Toolbar
+        TabLayout tabs = (TabLayout) view.findViewById(R.id.result_tabs);
+        tabs.setupWithViewPager(viewPager);
 
-        ButterKnife.bind(this, view);
 
-        init();
+
         return view;
     }
 
+
     @Override
     public void init() {
-        LinearLayoutManager manager = new LinearLayoutManager(getActivity());
-        allItems = new ArrayList<>();
-        adapter = new AdapterUpComingGames(allItems);
-        recyclerView.setLayoutManager(manager);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(adapter);
-        updateViews(allItems.size());
-        fillData();
-    }
 
-    IApiService apiService;
-
-    public void fillData() {
-        String userId = Pref.Read(getActivity(), Const.PREF_USER_ID);
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        Date date = new Date();
-        String currDate = dateFormat.format(date).toString();
-
-
-        if (apiService == null)
-            apiService = APIHelper.getAppServiceMethod();
-        Call<PojoPlay> call = apiService.getAllUpcomingGames(userId,currDate);
-        call.enqueue(new Callback<PojoPlay>() {
-            @Override
-            public void onResponse(Call<PojoPlay> call, Response<PojoPlay> response) {
-                hideDialog();
-                if (response.isSuccessful()) {
-                    PojoPlay pojo = response.body();
-                    if (pojo.getStatus() == Const.STATUS_SUCCESS) {
-                        //toast(pojo.getMessage());
-                        bindData(pojo.getAllItems());
-                        // updateCategories(position);
-
-                    } else if (pojo.getStatus() == Const.STATUS_FAILED) {
-                        updateViews(0);
-                        //toast(pojo.getMessage());
-                    } else if (pojo.getStatus() == Const.STATUS_ERROR) {
-                        updateViews(0);
-                        //toast(pojo.getMessage());
-                    }
-                } else {
-                    toast("Something went wrong");
-                    updateViews(0);
-                }
-            }
-
-
-            @Override
-            public void onFailure(Call<PojoPlay> call, Throwable t) {
-                hideDialog();
-                Common.logException(getActivity(), "Internal server error", t, null);
-            }
-        });
-    }
-
-    private void updateViews(int size) {
-        if (size == 0) {
-            tvStatus.setText("No data avilable");
-            pbStatus.setVisibility(View.GONE);
-            ivStatus.setVisibility(View.VISIBLE);
-            tvStatus.setVisibility(View.VISIBLE);
-            recyclerView.setVisibility(View.GONE);
-        } else {
-            llStatus.setVisibility(View.GONE);
-            recyclerView.setVisibility(View.VISIBLE);
-        }
-    }
-
-    private void bindData(ArrayList<BoPlay> allItems) {
-        adapter = new AdapterUpComingGames(allItems);
-        recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-        updateViews(allItems.size());
     }
 
     @Override
     public void log(String message) {
 
     }
+    // Add Fragments to Tabs
+    private void setupViewPager(ViewPager viewPager) {
+
+
+        Adapter adapter = new Adapter(getChildFragmentManager());
+        adapter.addFragment(new PendingUpComingFragment(), "Pending");
+        adapter.addFragment(new ApprovedUpComingFragment(), "Approved");
+
+        viewPager.setAdapter(adapter);
+
+
+
+    }
+    static class Adapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
+
+        public Adapter(FragmentManager manager) {
+            super(manager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        public void addFragment(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
+    }
+
+
+
 }
