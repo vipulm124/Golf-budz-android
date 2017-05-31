@@ -122,7 +122,7 @@ String userChoosenTask="";
 
     private void uploadImageToStorage(final Uri file, final int position) {
         //  TODo replace with item name provided by user
-        StorageReference imageRef = storageRef.child("property_" + file.getLastPathSegment());
+        StorageReference imageRef = storageRef.child("image_" + file.getLastPathSegment());
         uploadTask = imageRef.putFile(file);
 
         isUploading = true;
@@ -228,9 +228,9 @@ String userChoosenTask="";
     public void addNewUri(Uri selectedImage) {
         allItems.add(selectedImage);
         adapter.notifyDataSetChanged();
-//        uploadImageToStorage(selectedImage, allItems.size() - 1);
-        String newFileName = compressImage(selectedImage.toString());
-        uploadImageToStorage(newFileName, allItems.size() - 1);
+        uploadImageToStorage(selectedImage, allItems.size() - 1);
+        //String newFileName = compressImage(selectedImage.toString());
+        //uploadImageToStorage(newFileName, allItems.size() - 1);
     }
 
     public void removeItem(int position) {
@@ -333,10 +333,10 @@ String userChoosenTask="";
     {
         Intent intent = new Intent();
         intent.setType("image/*");
-        intent.setAction(Intent.ACTION_PICK);//
-        intent.putExtra("crop", "true");
-        intent.putExtra("aspectX", 0);
-        intent.putExtra("aspectY", 0);
+        intent.setAction(Intent.ACTION_GET_CONTENT);//
+      //  intent.putExtra("crop", "true");
+      //  intent.putExtra("aspectX", 0);
+      //  intent.putExtra("aspectY", 0);
         getActivity().startActivityForResult(Intent.createChooser(intent, "Select File"),REQUEST_IMAGE_PICK);
     }
     @Override

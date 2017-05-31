@@ -72,7 +72,7 @@ public class AdapterInviteFriend extends
         });
 
         holder.tvUsername.setText(item.getFirstName());
-        Common.showBigImage(context, holder.ivPic, item.getProfileImage());
+        Common.showRoundImage(context, holder.ivPic, item.getProfileImage());
 
     }
 

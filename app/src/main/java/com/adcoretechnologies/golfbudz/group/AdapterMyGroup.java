@@ -69,7 +69,7 @@ public class AdapterMyGroup extends
         });
 */
         holder.tvUsername.setText(item.getTitle());
-        Common.showBigImage(context, holder.ivPic, item.getImage());
+        Common.showRoundImage(context, holder.ivPic, item.getImage());
 
     }
 

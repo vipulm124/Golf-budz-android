@@ -45,7 +45,7 @@ public class BoPlay implements Serializable {
     public String players;
     @SerializedName("Id")
     public int Id;
-    @SerializedName("userStatus")
+    @SerializedName("status")
     public String userStatus;
     @SerializedName("dateCreated")
     public String dateCreated;
@@ -56,6 +56,10 @@ public class BoPlay implements Serializable {
     public String affiliated;
     @SerializedName("golfClub")
     public String golfClub;
+    @SerializedName("requestType")
+    public String requestType;
+    @SerializedName("recieverIds")
+    public String recieverIds;
     public String getNoOfHoles() {
         return noOfHoles;
     }
@@ -238,5 +242,21 @@ public class BoPlay implements Serializable {
 
     public void setGolfClub(String golfClub) {
         this.golfClub = golfClub;
+    }
+
+    public String getRequestType() {
+        return requestType;
+    }
+
+    public void setRequestType(String requestType) {
+        this.requestType = requestType;
+    }
+
+    public String getRecieverIds() {
+        return recieverIds;
+    }
+
+    public void setRecieverIds(String recieverIds) {
+        this.recieverIds = recieverIds;
     }
 }

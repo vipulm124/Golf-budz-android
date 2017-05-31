@@ -161,9 +161,9 @@ public class Common {
         try {
             Picasso.with(context)
                     .load(url)
-                    .placeholder(R.drawable.dummy_back)
+                    .placeholder(R.drawable.ic_default_gallery)
 //                    .resize(380, 380)
-                    .error(R.drawable.dummy_back)
+                    .error(R.drawable.ic_default_gallery)
                     .into(imageView);
         } catch (Exception ex) {
             log("Unable to load round image. message: " + ex.getMessage());

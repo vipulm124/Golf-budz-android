@@ -44,7 +44,7 @@ public class ImageDataPostActivity extends BaseActivity implements FragmentImage
     private FragmentImageUpload fragmentImageUploader;
     private static final int REQUEST_IMAGE_PICK = 1;
     private static final int REQUEST_CAMERA = 2;
-    String picUrls;
+    StringBuffer picUrls = new StringBuffer();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,20 +76,13 @@ public class ImageDataPostActivity extends BaseActivity implements FragmentImage
         super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == REQUEST_IMAGE_PICK) {
-
                 Uri selectedImage = imageReturnedIntent.getData();
                 fragmentImageUploader.addNewUri(selectedImage);
             } else if (requestCode == REQUEST_CAMERA)
                 onCaptureImageResult(imageReturnedIntent);
         }
-        /*switch (requestCode) {
-            case REQUEST_IMAGE_PICK:
-                if (resultCode == RESULT_OK) {
-                    Uri selectedImage = imageReturnedIntent.getData();
-                    fragmentImageUploader.addNewUri(selectedImage);
-                }
-                break;
-        }*/
+
+
     }
 
     public Uri getImageUri(Context inContext, Bitmap inImage) {
@@ -100,14 +93,14 @@ public class ImageDataPostActivity extends BaseActivity implements FragmentImage
     }
 
     private void onCaptureImageResult(Intent data) {
-       /* fragmentImageUploader.onCaptureImageResult(data);
-         Uri selectedImage = data.getData();
-        fragmentImageUploader.addNewUri(selectedImage);*/
         fragmentImageUploader.onCaptureImageResult(data);
+         Uri selectedImage = data.getData();
+        fragmentImageUploader.addNewUri(selectedImage);
+       /* fragmentImageUploader.onCaptureImageResult(data);
         Bundle extras = data.getExtras();
         Bitmap imageBitmap = (Bitmap) extras.get("data");
         Uri selectedImage=getImageUri(this,imageBitmap);
-        fragmentImageUploader.addNewUri(selectedImage);
+        fragmentImageUploader.addNewUri(selectedImage);*/
     }
 
     @OnClick(R.id.btnPost)
@@ -127,12 +120,12 @@ public class ImageDataPostActivity extends BaseActivity implements FragmentImage
     }
 
     private void addPost(String text) {
-        showProgressDialog("Performing creation", "Please wait...");
+        showProgressDialog("Posting", "Please wait...");
         String userId = Pref.Read(this, Const.PREF_USER_ID);
         String userName = Pref.Read(this, Const.PREF_USER_DISPLAY_NAME);
         String userImage = Pref.Read(this, Const.PREF_USE_IMAGE_PATH);
         IApiService service = APIHelper.getAppServiceMethod();
-        Call<PojoPost> call = service.addPost(userName, userId, text, picUrls, "", Const.IMAGE, "0", "0", userImage);
+        Call<PojoPost> call = service.addPost(userName, userId, text, picUrls.toString(), "", Const.IMAGE, "0", "0", userImage);
         call.enqueue(new Callback<PojoPost>() {
             @Override
             public void onResponse(Call<PojoPost> call, Response<PojoPost> response) {
@@ -171,7 +164,7 @@ public class ImageDataPostActivity extends BaseActivity implements FragmentImage
     private void getPicsURL() {
         try {
             for (int i = 0; i < allUploadedImage.size(); i++) {
-                picUrls = allUploadedImage.get(i) + "|";
+                picUrls.append(allUploadedImage.get(i)).append('|');
             }
         } catch (Exception e) {
         }

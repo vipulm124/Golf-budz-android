@@ -199,7 +199,7 @@ public class ChatDashboradActivity extends BaseActivity {
         String from = Pref.Read(this, Const.PREF_USER_DISPLAY_NAME);
         String userImg = Pref.Read(this, Const.PREF_USE_IMAGE_PATH);
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        String key = mDatabase.child(Const.FIREBASE_DB_CHANNELS).child(chatWithId).push().getKey();
+       // String key = mDatabase.child(Const.FIREBASE_DB_CHANNELS).child(chatWithId).push().getKey();
         final MyChat chat = new MyChat(from, userImg, message,chatWithId);
         Map<String, Object> postValues = chat.toMap();
 

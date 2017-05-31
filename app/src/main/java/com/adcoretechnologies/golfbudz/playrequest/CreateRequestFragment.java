@@ -141,7 +141,7 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
     public CreateRequestFragment() {
         // Required empty public constructor
     }
-    String reciversId="",showreciversId="";
+    String reciversId="",showreciversId="",requestType="";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -159,6 +159,7 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
 
     @Override
     public void init() {
+        requestType="Invite to all";
         int selectedHolesId = radioGroupHoles.getCheckedRadioButtonId();
         radioHolesButton = (RadioButton) view.findViewById(selectedHolesId);
 
@@ -188,6 +189,7 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 radioInviationButton = (RadioButton) view.findViewById(checkedId);
+               requestType= radioInviationButton.getText().toString();
                 if (radioInviationButton.getText().toString().equals("Invite to all")) {
                  // toast("1");
                 } else {
@@ -574,7 +576,8 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
         boPlay.setUserName(userName);
         boPlay.setVenue(venue);
         boPlay.setPlayers(radioP1.getText().toString());
-
+        boPlay.setRequestType(requestType);
+        boPlay.setRecieverIds(reciversId);
         performSubmission(boPlay);
     }
 

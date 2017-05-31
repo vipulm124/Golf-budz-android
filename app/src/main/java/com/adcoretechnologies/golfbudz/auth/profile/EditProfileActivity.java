@@ -272,8 +272,8 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
                     Uri uri = data.getData();
                     try {
                         Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                        String compressedImage = SiliCompressor.with(getApplicationContext()).compress(uri.toString());
-                        uploadImageToStorage(compressedImage, allItems.size() - 1);
+                       // String compressedImage = SiliCompressor.with(getApplicationContext()).compress(uri.toString());
+                        uploadImageToStorage(uri, allItems.size() - 1);
                         ivPic.setImageBitmap(bitmap);
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -312,6 +312,41 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
         selectedImage = Uri.fromFile(new File(compressedImage));
         uploadImageToStorage(compressedImage, allItems.size() - 1);
         ivPic.setImageURI(selectedImage);*/
+    }
+    private void uploadImageToStorage(final Uri file, final int position) {
+        //  TODo replace with item name provided by user
+        StorageReference imageRef = storageRef.child("image_" + file.getLastPathSegment());
+        uploadTask = imageRef.putFile(file);
+
+        isUploading = true;
+        // Register observers to listen for when the download is done or if it fails
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                isUploading = false;
+                //updateProgress(position, true);
+               // uploadListener.onImageUploadFailed();
+                Common.logException(getApplicationContext(), "Image uploading failed", exception, null);
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+                isUploading = false;
+               // updateProgress(position, false);
+
+                Uri uploadedUrl = taskSnapshot.getDownloadUrl();
+                log("Upload complete for URI : " + file.getLastPathSegment());
+                allUploadedUri.add(uploadedUrl.toString());
+               // uploadListener.onImageUploadComplete(allUploadedUri);
+            }
+        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                //updateProgress(position, (int) progress);
+            }
+        });
     }
 
     private void uploadImageToStorage(final String file, final int position) {

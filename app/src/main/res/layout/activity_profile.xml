@@ -314,10 +314,11 @@
                     style="@style/AppTheme.EditText"
                     android:layout_marginTop="0dp"
                     android:editable="false"
+                    android:visibility="gone"
                     android:focusable="false" />
                 <TextView
                     style="@style/AppTheme.TextView"
-                    android:visibility="gone"
+
                     android:text="Operating Hours" />
 
                 <EditText

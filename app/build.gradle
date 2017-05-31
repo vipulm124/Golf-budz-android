@@ -9,7 +9,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 24
         versionCode 1
-        versionName "0.2.7"
+        versionName "0.2.8"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -70,5 +70,7 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
     //for floating action menu
     compile 'com.github.clans:fab:1.6.4'
+    //full screenvideoview
+    compile 'com.github.rtoshiro.fullscreenvideoview:fullscreenvideoview:1.1.2'
 }
 apply plugin: 'com.google.gms.google-services'

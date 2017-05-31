@@ -20,7 +20,9 @@ import com.adcoretechnologies.golfbudz.home.model.BoPost;
 import com.adcoretechnologies.golfbudz.utils.Common;
 import com.adcoretechnologies.golfbudz.utils.Const;
 import com.adcoretechnologies.golfbudz.utils.Pref;
+import com.github.rtoshiro.view.video.FullscreenVideoLayout;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -89,8 +91,11 @@ public class NewsFeedAdapter extends
             holder.ivVideo.setVisibility(View.VISIBLE);
             //specify the location of media file
             Uri uri = Uri.parse(item.getVideo());
-
-            holder.ivVideo.setVideoURI(uri);
+            try {
+                holder.ivVideo.setVideoURI(uri);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             holder.ivVideo.pause();
 
 
@@ -205,7 +210,7 @@ public class NewsFeedAdapter extends
         @BindView(R.id.feedImage1)
         ImageView feedImage1;
         @BindView(R.id.ivVideo)
-        VideoView ivVideo;
+        FullscreenVideoLayout ivVideo;
 
         @BindView(R.id.llLike)
         LinearLayout llLike;

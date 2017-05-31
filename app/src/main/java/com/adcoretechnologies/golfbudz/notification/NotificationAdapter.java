@@ -57,7 +57,7 @@ public class NotificationAdapter extends
         final BoNoti item = getItem(position);
 
 
-        holder.tvMessage.setText(item.getText());
+        holder.tvMessage.setText(item.getTitle());
         Common.showSmallRoundImage(context, holder.ivPic, item.getUserImgUrl());
         holder.ivAccept.setOnClickListener(new View.OnClickListener() {
             @Override

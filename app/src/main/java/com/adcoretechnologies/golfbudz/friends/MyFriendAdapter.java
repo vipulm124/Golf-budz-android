@@ -73,7 +73,7 @@ public class MyFriendAdapter extends
             item.setStatus(Const.ACCEPT);
         }
 
-        Common.showBigImage(context, holder.ivPic, item.getProfileImage());
+        Common.showRoundImage(context, holder.ivPic, item.getProfileImage());
         holder.tvView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
