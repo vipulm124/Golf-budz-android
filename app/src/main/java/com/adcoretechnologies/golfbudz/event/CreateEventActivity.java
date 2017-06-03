@@ -31,6 +31,7 @@ import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -89,9 +90,11 @@ public class CreateEventActivity extends BaseActivity implements FragmentImageUp
 
         datePickerDialog.setAccentColor(Color.parseColor("#009688"));
 
-        datePickerDialog.setTitle("Select Date From DatePickerDialog");
+        datePickerDialog.setTitle("Select Date From Golfing Budz");
+       // datePickerDialog.show(getFragmentManager(), "DatePickerDialog");
+        final Calendar c = Calendar.getInstance();
         datePickerDialog.show(getFragmentManager(), "DatePickerDialog");
-
+        datePickerDialog.setMinDate(c);
 
     }
 

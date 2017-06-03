@@ -318,8 +318,15 @@
                     android:inputType="number"
                     android:hint="Contact No" />
             </LinearLayout>
+            <TextView
+                style="@style/AppTheme.TextView"
+                android:text="Select Region" />
+            <Spinner
+                android:id="@+id/etlocation"
+                style="@style/AppTheme.EditText"
+                android:spinnerMode="dialog"
 
-
+                />
             <Button
                 android:id="@+id/btSgnupbtn"
                 style="@style/AppTheme.Button"

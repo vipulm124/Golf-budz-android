@@ -73,7 +73,7 @@ List<String> items= new ArrayList<>();
         showProgressDialog("Fetching data", "Please wait...");
         String userId = Pref.Read(this, Const.PREF_USER_ID);
         String userName = Pref.Read(this, Const.PREF_USER_DISPLAY_NAME);
-        toast(userName + userId);
+       // toast(userName + userId);
         IApiService service = APIHelper.getAppServiceMethod();
         Call<PojoEvent> call = service.getEventDetail(eventId);
         call.enqueue(new Callback<PojoEvent>() {

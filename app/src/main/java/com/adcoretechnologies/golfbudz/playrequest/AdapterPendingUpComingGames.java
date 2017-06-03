@@ -59,7 +59,7 @@ public class AdapterPendingUpComingGames extends
 
         holder.tvStatus.setText(item.getStatus());
         holder.tvName.setText(item.getFirstName()+" "+item.getLastName());
-        Common.showBigImage(context, holder.ivPic, item.getProfileImage());
+        Common.showRoundImage(context, holder.ivPic, item.getProfileImage());
        // holder.tvDesc.setText(item.getRequestInfo());
       /*  holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

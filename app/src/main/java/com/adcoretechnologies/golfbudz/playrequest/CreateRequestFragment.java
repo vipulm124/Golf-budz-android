@@ -159,7 +159,7 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
 
     @Override
     public void init() {
-        requestType="Invite to all";
+        requestType="Public Invite";
         int selectedHolesId = radioGroupHoles.getCheckedRadioButtonId();
         radioHolesButton = (RadioButton) view.findViewById(selectedHolesId);
 
@@ -190,7 +190,7 @@ public class CreateRequestFragment extends BaseFragment implements DatePickerDia
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 radioInviationButton = (RadioButton) view.findViewById(checkedId);
                requestType= radioInviationButton.getText().toString();
-                if (radioInviationButton.getText().toString().equals("Invite to all")) {
+                if (radioInviationButton.getText().toString().equals("Public Invite")) {
                  // toast("1");
                 } else {
                     openUserlist();

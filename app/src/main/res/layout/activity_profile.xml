@@ -244,7 +244,6 @@
                 android:id="@+id/llClubDeatl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:orientation="vertical">
 
                 <TextView
@@ -301,20 +300,21 @@
                     android:layout_marginTop="0dp"
                     android:editable="false"
                     android:focusable="false" />
-
-               <!-- <Spinner
-                    android:id="@+id/spLocation"
+                <TextView
+                    style="@style/AppTheme.TextView"
+                    android:text="Select Region" />
+                <!--<Spinner
+                    android:id="@+id/etlocation"
                     style="@style/AppTheme.EditText"
-                    android:visibility="gone"
                     android:spinnerMode="dialog"
 
                     />-->
-                <EditText
+               <EditText
                     android:id="@+id/etLocation"
                     style="@style/AppTheme.EditText"
                     android:layout_marginTop="0dp"
                     android:editable="false"
-                    android:visibility="gone"
+                   android:hint="Region"
                     android:focusable="false" />
                 <TextView
                     style="@style/AppTheme.TextView"

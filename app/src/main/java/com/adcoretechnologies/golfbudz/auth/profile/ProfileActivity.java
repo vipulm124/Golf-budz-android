@@ -36,6 +36,8 @@ import com.adcoretechnologies.golfbudz.core.base.BaseActivity;
 import com.adcoretechnologies.golfbudz.core.components.ComponentItemSelector;
 import com.adcoretechnologies.golfbudz.core.components.ComponentLocationItemSelector;
 import com.adcoretechnologies.golfbudz.home.MainActivity;
+import com.adcoretechnologies.golfbudz.playrequest.model.BoDropVales;
+import com.adcoretechnologies.golfbudz.playrequest.model.PojoDropValues;
 import com.adcoretechnologies.golfbudz.utils.Common;
 import com.adcoretechnologies.golfbudz.utils.Const;
 import com.adcoretechnologies.golfbudz.utils.Pref;
@@ -147,7 +149,7 @@ public class ProfileActivity extends BaseActivity {
     @BindView(R.id.etHandicapCount)
     EditText etHandicapCount;
 
-
+String location;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -239,7 +241,7 @@ public class ProfileActivity extends BaseActivity {
             etRound.setText(user.getRoundsPerMonth());
             etLike.setText(user.getPlayWithUs());
             etSocialLike.setText(user.getPlayWithOther());
-            Common.showRoundImage(getApplicationContext(), ivPic, Pref.Read(this, Const.PREF_USE_IMAGE_PATH));
+            Common.showRoundImage(getApplicationContext(), ivPic, user.getProfileImage());
 
         }
     }

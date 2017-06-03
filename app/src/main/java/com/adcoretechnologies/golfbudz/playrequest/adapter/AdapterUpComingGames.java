@@ -60,7 +60,7 @@ public class AdapterUpComingGames extends
 
 
         holder.tvName.setText(item.getUserName());
-        Common.showBigImage(context, holder.ivPic, item.getUserImgUrl());
+        Common.showRoundImage(context, holder.ivPic, item.getUserImgUrl());
         holder.tvDesc.setText(item.getRequestInfo());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

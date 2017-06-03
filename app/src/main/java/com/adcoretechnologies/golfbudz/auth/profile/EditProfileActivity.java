@@ -36,6 +36,8 @@ import com.adcoretechnologies.golfbudz.core.base.BaseActivity;
 import com.adcoretechnologies.golfbudz.core.components.ComponentItemSelector;
 import com.adcoretechnologies.golfbudz.core.components.ComponentLocationItemSelector;
 import com.adcoretechnologies.golfbudz.home.MainActivity;
+import com.adcoretechnologies.golfbudz.playrequest.model.BoDropVales;
+import com.adcoretechnologies.golfbudz.playrequest.model.PojoDropValues;
 import com.adcoretechnologies.golfbudz.utils.Common;
 import com.adcoretechnologies.golfbudz.utils.Const;
 import com.adcoretechnologies.golfbudz.utils.Pref;
@@ -138,6 +140,8 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
     LinearLayout llhandicap;
     @BindView(R.id.etHandicapCount)
     EditText etHandicapCount;
+    @BindView(R.id.etlocation)
+    Spinner etLocation;
     private DatabaseReference mDatabase;
     private boolean isUploading;
     private Uri selectedImage;
@@ -178,6 +182,7 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
         getCorses();
         preferOption();
         getProfession();
+        getLocation();
         allItems = new ArrayList<>();
         allUploadedUri = new ArrayList<>();
         getAllCountries();
@@ -528,7 +533,7 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
             etRound.setText(user.getRoundsPerMonth());
             etLike.setText(user.getPlayWithUs());
             etSocialLike.setText(user.getPlayWithOther());
-            Common.showRoundImage(getApplicationContext(), ivPic, Pref.Read(this, Const.PREF_USE_IMAGE_PATH));
+            Common.showRoundImage(getApplicationContext(), ivPic, user.getProfileImage());
             try {
                 selectedImage = Uri.parse(user.getProfileImage());
             } catch (Exception ex) {
@@ -657,6 +662,7 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
                 user.setLocation(location);
                 user.setCourse(corsesval);
                 user.setNoOfHandicap(handicapCount);
+
 
                 updateProfile(user);
             }
@@ -990,6 +996,56 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+    }
+    private void getLocation() {
+        IApiService service = APIHelper.getAppServiceMethod();
+        Call<PojoDropValues> call = service.getAllRegions();
+        call.enqueue(new Callback<PojoDropValues>() {
+            @Override
+            public void onResponse(Call<PojoDropValues> call, Response<PojoDropValues> response) {
+
+                if (response.isSuccessful()) {
+                    PojoDropValues pojoUser = response.body();
+                    if (pojoUser.getStatus() == Const.STATUS_SUCCESS) {
+                        setLocation(pojoUser.getAllItems());
+                    } else if (pojoUser.getStatus() == Const.STATUS_FAILED) {
+                        toast(pojoUser.getMessage());
+                    } else if (pojoUser.getStatus() == Const.STATUS_ERROR) {
+                        toast(pojoUser.getMessage());
+                    }
+                } else {
+                    toast("Something went wrong");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PojoDropValues> call, Throwable t) {
+
+                Common.logException(getApplicationContext(), "Internal server error", t, null);
+            }
+        });
+    }
+
+    private void setLocation(ArrayList<BoDropVales> allItems) {
+        List<String> categories = new ArrayList<String>();
+        categories.add("Select Region");
+        for (int i = 0; i < allItems.size(); i++) {
+            categories.add(allItems.get(i).getDisplayName());
+        }
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, R.layout.item_spinner_dropdown, categories);
+        // Drop down layout style - list view with radio button
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // attaching data adapter to spinner
+        etLocation.setAdapter(dataAdapter);
+        etLocation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                location = parent.getItemAtPosition(position).toString();
+            }
+
+            public void onNothingSelected(AdapterView<?> parent) {
             }
         });
     }

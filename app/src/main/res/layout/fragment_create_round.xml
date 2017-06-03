@@ -330,7 +330,7 @@
                             android:id="@+id/radioBuisness"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Buisness"
+                            android:text="Business"
                             android:textColor="@color/colorWhite" />
 
                     </RadioGroup>
@@ -783,7 +783,7 @@
                     android:id="@+id/radioInviteall"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Invite to all"
+                    android:text="Public Invite"
                     android:checked="true"
                     android:textColor="@color/colorWhite" />
 
@@ -791,7 +791,7 @@
                     android:id="@+id/radioInviteonly"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Invite only"
+                    android:text="Direct Invite"
                     android:textColor="@color/colorWhite" />
             </RadioGroup>
             <Button
