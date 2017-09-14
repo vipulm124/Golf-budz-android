@@ -9,6 +9,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 24
         versionCode 1
+        multiDexEnabled true
         versionName "0.2.9"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -72,5 +73,13 @@ dependencies {
     compile 'com.github.clans:fab:1.6.4'
     //full screenvideoview
     compile 'com.github.rtoshiro.fullscreenvideoview:fullscreenvideoview:1.1.2'
+
+    compile 'com.twitter.sdk.android:twitter-core:3.1.1'
+    compile 'com.twitter.sdk.android:tweet-ui:3.1.1'
+    compile 'com.twitter.sdk.android:tweet-composer:3.1.1'
+    compile 'com.twitter.sdk.android:twitter-mopub:3.1.1'
+    compile 'com.google.android.gms:play-services-auth:10.0.1'
+
+
 }
 apply plugin: 'com.google.gms.google-services'

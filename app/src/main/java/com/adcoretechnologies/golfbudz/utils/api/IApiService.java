@@ -38,7 +38,7 @@ public interface IApiService {
     @FormUrlEncoded
     @POST("login")
     Call<PojoUser> login(@Field("email") String email, @Field("password") String password, @Field("deviceType") String deviceType,
-                         @Field("imeiNo") String imeiNo, @Field("deviceId") String deviceId);
+                         @Field("imeiNo") String imeiNo, @Field("deviceId") String deviceId,@Field("socialToken") String socialToken);
     @FormUrlEncoded
     @POST("forgotpassword")
     Call<PojoUser> getpassword(@Field("email") String email);

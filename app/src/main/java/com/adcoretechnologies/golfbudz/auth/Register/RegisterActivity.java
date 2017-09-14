@@ -95,6 +95,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     @BindView(R.id.etContactNo)
     EditText etContactNo;
     String userType;
+    BoUser boUser;
+    String from, token, imei;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,6 +107,20 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
         init();
+
+        Intent intent = getIntent();
+        boUser = (BoUser) intent.getSerializableExtra(Const.USER);
+        from = intent.getStringExtra(Const.FROM);
+        if (from.equals("social")) {
+            etPassword.setVisibility(View.GONE);
+            etCnfrmpswrd.setVisibility(View.GONE);
+
+        }
+        if (boUser != null) {
+            etFrstnme.setText(boUser.getFullName());
+            etEmail.setText(boUser.getEmail());
+        }
+
 
     }
 
