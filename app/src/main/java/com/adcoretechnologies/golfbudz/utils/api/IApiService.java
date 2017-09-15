@@ -97,7 +97,7 @@ public interface IApiService {
     @FormUrlEncoded
     @POST("posts")
     Call<PojoPost> addPost(@Field("userName") String userName, @Field("userId") String userId, @Field("text") String text, @Field("image") String image, @Field("video") String video, @Field("postType") String postType
-            , @Field("likeCount") String likeCount, @Field("commentCount") String commentCount, @Field("userImgUrl") String userImgUrl);
+            , @Field("likeCount") String likeCount, @Field("commentCount") String commentCount, @Field("userImgUrl") String userImgUrl, @Field("thumbUrl") String thumbUrl);
 
     @GET("users/{userId}/posts")
     Call<PojoPost> getAllPostByUserId(@Path("userId") String userId);

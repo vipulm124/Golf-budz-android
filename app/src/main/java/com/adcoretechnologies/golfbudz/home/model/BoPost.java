@@ -32,6 +32,8 @@ public class BoPost implements Serializable {
     String userImgUrl;
     @SerializedName("createdAt")
     String createdAt;
+    @SerializedName("thumbUrl")
+    String thumbUrl;
     @SerializedName("likes")
     ArrayList<String> likes;
     boolean likeStatus;
@@ -138,5 +140,13 @@ public class BoPost implements Serializable {
 
     public void setLikeStatus(boolean likeStatus) {
         this.likeStatus = likeStatus;
+    }
+
+    public String getThumbUrl() {
+        return thumbUrl;
+    }
+
+    public void setThumbUrl(String thumbUrl) {
+        this.thumbUrl = thumbUrl;
     }
 }

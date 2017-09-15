@@ -2,19 +2,16 @@ package com.adcoretechnologies.golfbudz.home;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.VideoView;
 
 import com.adcoretechnologies.golfbudz.R;
 import com.adcoretechnologies.golfbudz.core.base.BoEventData;
@@ -22,8 +19,8 @@ import com.adcoretechnologies.golfbudz.home.model.BoPost;
 import com.adcoretechnologies.golfbudz.utils.Common;
 import com.adcoretechnologies.golfbudz.utils.Const;
 import com.adcoretechnologies.golfbudz.utils.Pref;
+import com.google.firebase.storage.StorageReference;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -43,6 +40,8 @@ public class NewsFeedAdapter extends
     String userId;
     private ArrayList<BoPost> allItems;
     private List<String> myImgList;
+    private StorageReference storageRef;
+
     public NewsFeedAdapter(ArrayList<BoPost> allItems) {
         this.allItems = allItems;
     }
@@ -56,7 +55,7 @@ public class NewsFeedAdapter extends
         context = parent.getContext();
         View v = LayoutInflater.from(context).inflate(R.layout.newsfed_cardview,
                 parent, false);
-         userId = Pref.Read(context, Const.PREF_USER_ID);
+        userId = Pref.Read(context, Const.PREF_USER_ID);
         ViewHolder vh = new ViewHolder(v);
 
         return vh;
@@ -73,7 +72,7 @@ public class NewsFeedAdapter extends
         holder.tvLike.setText(item.getLikeCount() + " Like");
         holder.tvComment.setText(item.getCommentCount() + " Comment");
         holder.tvDate.setText(item.getCreatedAt());
-       ArrayList<String> likeUsers= item.getLikes();
+        ArrayList<String> likeUsers = item.getLikes();
         if (likeUsers.contains(userId)) {
             holder.ivLiked.setVisibility(View.VISIBLE);
             holder.ivLike.setVisibility(View.GONE);
@@ -131,6 +130,12 @@ public class NewsFeedAdapter extends
             }
 
         } else if (item.getPostType().equals(Const.VIDEO)) {
+
+           /* Bitmap thumb = ThumbnailUtils.createVideoThumbnail(String.valueOf(imageRef),
+                    MediaStore.Images.Thumbnails.MINI_KIND);
+            holder.ivVideothumb.setImageBitmap(thumb);
+*/
+
             //holder.ivVideo.setVisibility(View.VISIBLE);
             //specify the location of media file
            /* Uri uri = Uri.parse(item.getVideo());
@@ -145,7 +150,7 @@ public class NewsFeedAdapter extends
             holder.feedThirdLayout.setVisibility(View.GONE);
             holder.feedSeconLayout.setVisibility(View.GONE);
             holder.llVideo.setVisibility(View.VISIBLE);
-            //Common.showBigImage(context, holder.ivVideothumb, item.getThumbUrl());
+            Common.showBigImage(context, holder.ivVideothumb, item.getThumbUrl());
             holder.ivVideoPlay.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -165,41 +170,41 @@ public class NewsFeedAdapter extends
         holder.llShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EventBus.getDefault().post(new BoEventData(BoEventData.EVENT_NEWS_SHARE_CLICK,position,"",item));
+                EventBus.getDefault().post(new BoEventData(BoEventData.EVENT_NEWS_SHARE_CLICK, position, "", item));
             }
         });
         holder.llComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EventBus.getDefault().post(new BoEventData(BoEventData.EVENT_NEWS_COMMENT_CLICK,position,item.get_id()));
+                EventBus.getDefault().post(new BoEventData(BoEventData.EVENT_NEWS_COMMENT_CLICK, position, item.get_id()));
             }
         });
         holder.llLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (item.isLikeStatus()==false)
-                EventBus.getDefault().post(new BoEventData(BoEventData.EVENT_NEWS_LIKE_CLICK,position,"false",item));
-                else{
-                    EventBus.getDefault().post(new BoEventData(BoEventData.EVENT_NEWS_LIKE_CLICK,position,"true",item));
+                if (item.isLikeStatus() == false)
+                    EventBus.getDefault().post(new BoEventData(BoEventData.EVENT_NEWS_LIKE_CLICK, position, "false", item));
+                else {
+                    EventBus.getDefault().post(new BoEventData(BoEventData.EVENT_NEWS_LIKE_CLICK, position, "true", item));
                 }
             }
         });
         holder.llFeedImages.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EventBus.getDefault().post(new BoEventData(BoEventData.EVENT_POST_IMAGES_CLICK,position,"",item));
+                EventBus.getDefault().post(new BoEventData(BoEventData.EVENT_POST_IMAGES_CLICK, position, "", item));
             }
         });
         holder.ivProfilepic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EventBus.getDefault().post(new BoEventData(BoEventData.EVENT_NEWS_FEED_USER_CLICK,position,"",item));
+                EventBus.getDefault().post(new BoEventData(BoEventData.EVENT_NEWS_FEED_USER_CLICK, position, "", item));
             }
         });
         holder.tvName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EventBus.getDefault().post(new BoEventData(BoEventData.EVENT_NEWS_FEED_USER_CLICK,position,"",item));
+                EventBus.getDefault().post(new BoEventData(BoEventData.EVENT_NEWS_FEED_USER_CLICK, position, "", item));
             }
         });
         holder.ivVideoPlay.setOnClickListener(new View.OnClickListener() {
@@ -209,6 +214,7 @@ public class NewsFeedAdapter extends
             }
         });
     }
+
     private void getPicsURL(BoPost gallery) {
         try {
             myImgList = new ArrayList<String>(Arrays.asList(gallery.getImage().split("\\|")));
@@ -302,6 +308,7 @@ public class NewsFeedAdapter extends
         ImageView ivVideothumb;
         @BindView(R.id.llVideo)
         LinearLayout llVideo;
+
         ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);

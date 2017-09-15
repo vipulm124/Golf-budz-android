@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.media.ExifInterface;
+import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -63,11 +64,6 @@ public class FragmentVideoUpload extends BaseFragment {
     private LinearLayoutManager layoutManager;
     private VideoUploadListener uploadListener;
     private View view;
-
-    public boolean isUploading() {
-        return isUploading;
-    }
-
     private boolean isUploading;
 
     public FragmentVideoUpload() {
@@ -78,6 +74,9 @@ public class FragmentVideoUpload extends BaseFragment {
         return new FragmentVideoUpload();
     }
 
+    public boolean isUploading() {
+        return isUploading;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -116,47 +115,52 @@ public class FragmentVideoUpload extends BaseFragment {
             throw new RuntimeException("PLease initilalize firebase");
         }
     }
+private void genrateThumb(Uri selectedImage){
+    Bitmap thumb = ThumbnailUtils.createVideoThumbnail(selectedImage.toString(),
+            MediaStore.Images.Thumbnails.MINI_KIND);
+    //ivCover.setImageBitmap(thumb);
 
-
+}
 
     private void uploadVideoToStorage(final String file, final int position) {
-        StorageReference imageRef = storageRef.child("Viedos/"+"video_" + System.currentTimeMillis()+".mp3");
+        StorageReference imageRef = storageRef.child("Viedos/" + "video_" + System.currentTimeMillis() + ".mp3");
         InputStream stream = null;
+
         try {
             //stream = new FileInputStream(new File(file));
+            stream = getContext().getContentResolver().openInputStream(Uri.parse(file));
 
-            stream= getContext().getContentResolver().openInputStream(Uri.parse(file));
             uploadTask = imageRef.putStream(stream);
-        isUploading = true;
-        // Register observers to listen for when the download is done or if it fails
-        uploadTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                isUploading = false;
-                updateProgress(position, true);
-                uploadListener.onVideoUploadFailed();
-                Common.logException(getContext(), "Viedo uploading failed", exception, null);
-            }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
-                isUploading = false;
-                updateProgress(position, false);
+            isUploading = true;
+            // Register observers to listen for when the download is done or if it fails
+            uploadTask.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    isUploading = false;
+                    updateProgress(position, true);
+                    uploadListener.onVideoUploadFailed();
+                    Common.logException(getContext(), "Viedo uploading failed", exception, null);
+                }
+            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+                    isUploading = false;
+                    updateProgress(position, false);
 
-                Uri uploadedUrl = taskSnapshot.getDownloadUrl();
-                log("Upload complete for URI : " + file);
-                allUploadedUri.add(uploadedUrl.toString());
-                uploadListener.onVideoUploadComplete(allUploadedUri);
-            }
-        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
-                updateProgress(position, (int) progress);
-            }
-        });}
-        catch (Exception e) {
+                    Uri uploadedUrl = taskSnapshot.getDownloadUrl();
+                    log("Upload complete for URI : " + file);
+                    allUploadedUri.add(uploadedUrl.toString());
+                    uploadListener.onVideoUploadComplete(allUploadedUri);
+                }
+            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                    double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                    updateProgress(position, (int) progress);
+                }
+            });
+        } catch (Exception e) {
             toast("error");
             e.printStackTrace();
         }
@@ -192,7 +196,9 @@ public class FragmentVideoUpload extends BaseFragment {
         adapter.notifyDataSetChanged();
 //        uploadImageToStorage(selectedImage, allItems.size() - 1);
         //String newFileName = compressImage(selectedImage.toString());
+genrateThumb(selectedImage);
         uploadVideoToStorage(selectedImage.toString(), allItems.size() - 1);
+
     }
 
     public void removeItem(int position) {
@@ -259,13 +265,6 @@ public class FragmentVideoUpload extends BaseFragment {
     public void onStop() {
         EventBus.getDefault().unregister(this);
         super.onStop();
-    }
-
-
-    public interface VideoUploadListener {
-        void onVideoUploadComplete(ArrayList<String> allUploadedUri);
-
-        void onVideoUploadFailed();
     }
 
     @Override
@@ -431,5 +430,14 @@ public class FragmentVideoUpload extends BaseFragment {
         }
 
         return inSampleSize;
+    }
+
+    public interface VideoUploadListener {
+        void onVideoUploadComplete(ArrayList<String> allUploadedUri);
+
+        void onVideoUploadFailed();
+    }
+    public interface  getFIlePath{
+       
     }
 }
