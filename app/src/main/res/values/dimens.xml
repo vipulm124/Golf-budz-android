@@ -12,14 +12,14 @@
     <dimen name="slide_title">30dp</dimen>
     <dimen name="slide_desc">16dp</dimen>
     <dimen name="desc_padding">40dp</dimen>
-
+    <dimen name="font_x0">8sp</dimen>
     <dimen name="font_x1">12sp</dimen>
     <dimen name="font_x2">16sp</dimen>
     <dimen name="font_x3">20sp</dimen>
     <dimen name="font_x4">24sp</dimen>
     <dimen name="font_x5">28sp</dimen>
     <dimen name="font_x6">32sp</dimen>
-
+    <dimen name="space_x0">0dp</dimen>
     <dimen name="space_x1">4dp</dimen>
     <dimen name="space_x2">8dp</dimen>
     <dimen name="space_x3">16dp</dimen>

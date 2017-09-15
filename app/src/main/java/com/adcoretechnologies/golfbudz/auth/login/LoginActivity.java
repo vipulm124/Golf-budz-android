@@ -41,6 +41,7 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.Profile;
 import com.facebook.ProfileTracker;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
@@ -52,6 +53,7 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
@@ -77,7 +79,7 @@ import retrofit2.Response;
 
 public class LoginActivity extends BaseActivity implements GoogleApiClient.OnConnectionFailedListener {
 
-    private static final int RC_SIGN_IN = 007;
+    //private static final int RC_SIGN_IN = 007;
     private static final int RC_FB_SIGNIN = 005;
     @BindView(R.id.etEmail)
     EditText etEmail;
@@ -103,8 +105,14 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
     private LoginButton loginButton;
     private SignInButton btnSignIn_google;
     private String facebook_id, type, f_name, l_name, gender, profile_image, full_name, email_id, twitterImage, username, email_twitter;
-    private GoogleApiClient mGoogleApiClient;
     String toke, imei;
+    //Signing Options
+    private GoogleSignInOptions gso;
+    //google api client
+    private GoogleApiClient mGoogleApiClient;
+    private FirebaseAuth mAuth;
+    //Signin constant to check the activity result
+    private int RC_SIGN_IN = 100;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,10 +129,7 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
                 .requestEmail()
                 .build();
 
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this, this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
+
 
 
         ButterKnife.bind(this);
@@ -135,10 +140,10 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
 
     @Override
     public void init() {
-
+        initilaize();
         // printHashKey(this);
         ///start facebook
-        callbackManager = CallbackManager.Factory.create();
+ /*       callbackManager = CallbackManager.Factory.create();
         loginButton = (LoginButton) findViewById(R.id.login_button);
         loginButton.setReadPermissions(Arrays.asList(
                 "public_profile", "email", "user_birthday", "user_friends"));
@@ -204,9 +209,151 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
             public void onError(FacebookException error) {
                 Common.logException(getApplicationContext(), "Facebook login error", error, null);
             }
-        });
+        });*/
+    }
+    @OnClick(R.id.ivFacebook)
+    public void onSignupFbClick() {
+        loginButton.callOnClick();
     }
 
+    @OnClick(R.id.llgp)
+    public void onSignupGpClick() {
+        signIn();
+    }
+    private void initilaize() {
+        toke = FirebaseInstanceId.getInstance().getToken();
+        imei = Common.getImei(this);
+        // printKeyHash(this);
+        mAuth = FirebaseAuth.getInstance();
+
+        if (Pref.isLoggedIn(this)) {
+            LoginManager.getInstance().logOut();
+        }
+        ///start facebook
+        callbackManager = CallbackManager.Factory.create();
+        loginButton = (LoginButton) findViewById(R.id.login_button);
+
+        loginButton.setReadPermissions(Arrays.asList(
+                "public_profile", "email", "user_birthday", "user_friends"));
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                try {
+                    ProfileTracker mProfileTracker = new ProfileTracker() {
+                        @Override
+                        protected void onCurrentProfileChanged(Profile oldProfile, Profile newProfile) {
+                            if (newProfile != null) {
+                                facebook_id = newProfile.getId();
+                                full_name = newProfile.getName();
+                                f_name = newProfile.getFirstName();
+                                l_name = newProfile.getLastName();
+                                profile_image = String.valueOf(newProfile.getProfilePictureUri(150, 150));
+                                ;
+
+                            }
+                        }
+                    };
+                } catch (Exception e) {
+                    Common.logException(getApplicationContext(), "Error while logging in", e, null);
+                }
+                final GraphRequest request = GraphRequest.newMeRequest(
+                        loginResult.getAccessToken(),
+                        new GraphRequest.GraphJSONObjectCallback() {
+                            @Override
+                            public void onCompleted(JSONObject object, GraphResponse response) {
+                                String email = null;
+                                String birthday = null;
+                                try {
+                                    email = object.getString("email");
+                                    socialRegisteration(f_name, l_name, email, profile_image, "facebook", facebook_id);
+
+                                } catch (JSONException e) {
+                                    toast("email not found");
+                                    e.printStackTrace();
+                                }
+
+                            }
+                        });
+                Bundle parameters = new Bundle();
+                parameters.putString("fields", "id,name,email,gender,birthday");
+                request.setParameters(parameters);
+                request.executeAsync();
+            }
+
+            @Override
+            public void onCancel() {
+                toast("request cancelled");
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                Common.logException(getApplicationContext(), "Facebook login error", error, null);
+            }
+        });
+        //for google
+        //Initializing google signin option
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                // .requestIdToken(getString(R.string.server_client_id))
+                .requestEmail()
+                .build();
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this, this).addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+    }
+    //This function will option signing intent
+    private void signIn() {
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //If signin
+        if (requestCode == RC_SIGN_IN) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+//            //Calling a new function to handle signin
+            handleSignInResult(result);
+        } else {
+            callbackManager.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+
+    //After the signing we are calling this function
+    private void handleSignInResult(GoogleSignInResult result) {
+        //If the login succeed
+        String personPhotoUrl = "";
+        if (result.isSuccess()) {
+            //Getting google account
+            GoogleSignInAccount acct = result.getSignInAccount();
+            String personName = acct.getDisplayName();
+            try {
+                personPhotoUrl = acct.getPhotoUrl().toString();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            String email = acct.getEmail();
+            String[] parts = personName.split("\\s+");
+            if (parts.length == 2) {
+                f_name = parts[0];
+                l_name = parts[1];
+
+            } else if (parts.length == 3) {
+                f_name = parts[0];
+                String middlename = parts[1];
+                l_name = parts[2];
+
+            }
+
+
+            socialRegisteration(f_name, l_name, email, personPhotoUrl, "google", acct.getId());
+
+        } else {
+            toast("Not able to login");
+        }
+    }
     public void loginTwitter() {
         login_button_twitter = (TwitterLoginButton) findViewById(R.id.login_button_twitter);
         login_button_twitter.setCallback(new com.twitter.sdk.android.core.Callback<TwitterSession>() {
@@ -272,7 +419,7 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
     private void performLogin(String userName, String password) {
         showProgressDialog("Performing login", "Please wait...");
         toke = FirebaseInstanceId.getInstance().getToken();
-        Log.e("token=", toke);
+//        Log.e("token=", toke);
         String imei = Common.getImei(this);
         IApiService service = APIHelper.getAppServiceMethod();
         Call<PojoUser> call = service.login(userName, password, Const.DEVICE_TYPE, imei, toke,"");
@@ -354,7 +501,7 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
     }
 
     //for facebook
-    @Override
+   /* @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == TwitterAuthConfig.DEFAULT_AUTH_REQUEST_CODE) {
@@ -371,9 +518,9 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
                     " else");
         }
 
-    }
+    }*/
 
-    private void handleSignInResult(GoogleSignInResult result) {
+    /*private void handleSignInResult(GoogleSignInResult result) {
         Log.d("LoginActivity", "handleSignInResult:" + result.isSuccess());
         Log.d("result", "result:" + result.toString());
         if (result.isSuccess()) {
@@ -394,7 +541,7 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
         } else {
             log("inside else part");
         }
-    }
+    }*/
 
     @OnClick(R.id.ivFacebook)
     public void onFacebook() {
