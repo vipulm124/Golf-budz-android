@@ -53,7 +53,7 @@
                     android:id="@+id/ivVideoPlay"
                     style="@style/AppTheme.ImageView.Wrap"
                     android:layout_centerInParent="true"
-                    app:srcCompat="@drawable/ic_video_paly" />
+                    app:srcCompat="@drawable/ic_upload" />
             </RelativeLayout>
 
 
