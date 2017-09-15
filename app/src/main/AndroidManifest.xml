@@ -146,6 +146,9 @@
         <activity
             android:name="com.adcoretechnologies.golfbudz.friends.MyAllPlayReqActivity"
             android:label="My Play Request" />
+        <activity
+            android:name=".boxing_ui.ui.BoxingActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <service android:name="com.adcoretechnologies.golfbudz.MyFirebaseMessagingService">
             <intent-filter>

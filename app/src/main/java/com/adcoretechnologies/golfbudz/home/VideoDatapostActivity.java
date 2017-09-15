@@ -57,8 +57,7 @@ import retrofit2.Response;
 public class VideoDatapostActivity extends BaseActivity  {
     @BindView(R.id.etText)
     EditText etText;
-    @BindView(R.id.frameLayout)
-    FrameLayout frameLayout;
+
 
     @BindView(R.id.btnPost)
     Button btnPost;
@@ -182,7 +181,7 @@ public class VideoDatapostActivity extends BaseActivity  {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
-
+                    progressDismiss();
                     Uri uploadedUrl = taskSnapshot.getDownloadUrl();
                    // post(uploadedUrl.toString(), thumUrl);
                     addPost(uploadedUrl.toString(), thumUrl);
@@ -220,7 +219,7 @@ public class VideoDatapostActivity extends BaseActivity  {
         if (TextUtils.isEmpty(text)) {
             etText.setError("Please enter");
             return;
-        }else if(allUploadedImage.size()==0){
+        }else if(localPath.equals("")){
             toast("Please upload images");
             return;
         }
@@ -268,13 +267,7 @@ public class VideoDatapostActivity extends BaseActivity  {
         startActivity(intent);
         finish();
     }
-    private void getPicsURL() {
-        try{
-            for(int i=0; i<allUploadedImage.size();i++){
-                picUrls=   allUploadedImage.get(i)+"|";
 
-            }}catch (Exception e){}
-    }
     @Override
     public void log(String message) {
 
