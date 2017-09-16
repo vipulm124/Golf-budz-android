@@ -262,7 +262,6 @@ public class MainActivity extends BaseActivity
                     imageViewLike.setVisibility(View.VISIBLE);
                     TextView tvLike=(TextView) view.findViewById(R.id.tvLike);
                     tvLike.setText(decreaseCount+" Likes");
-
                 }
 
                 performLike(id, post.get_id(), post.getLikeCount(), data);
