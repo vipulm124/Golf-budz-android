@@ -391,7 +391,7 @@ public class MainActivity extends BaseActivity
         final String userName = Pref.Read(this, Const.PREF_USER_DISPLAY_NAME);
         final String userImage = Pref.Read(this, Const.PREF_USE_IMAGE_PATH);
         IApiService service = APIHelper.getAppServiceMethod();
-        Call<PojoPost> call = service.addPost(userName, userId, text, "", "", Const.TEXT, "0", "0", userImage);
+        Call<PojoPost> call = service.addPost(userName, userId, text, "", "", Const.TEXT, "0", "0", userImage,"");
         call.enqueue(new Callback<PojoPost>() {
             @Override
             public void onResponse(Call<PojoPost> call, Response<PojoPost> response) {

@@ -11,7 +11,8 @@ import java.io.Serializable;
 public class BoUser implements Serializable {
     @SerializedName("email")
     public String email;
-
+    @SerializedName("fullName")
+    public String fullName;
     @SerializedName("contact")
     public String contact;
     @SerializedName("password")
@@ -83,6 +84,18 @@ public class BoUser implements Serializable {
     public String course;
     @SerializedName("location")
     public String location;
+
+    @SerializedName("socialToken")
+    public String socialToken;
+
+    @SerializedName("userlanguage")
+    public String language;
+
+
+
+
+    @SerializedName("pushId")
+    public String pushId;
     public String getNoOfHandicap() {
         return noOfHandicap;
     }
@@ -369,5 +382,38 @@ public class BoUser implements Serializable {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getSocialToken() {
+        return socialToken;
+    }
+
+    public void setSocialToken(String socialToken) {
+        this.socialToken = socialToken;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getPushId() {
+        return pushId;
+    }
+
+    public void setPushId(String pushId) {
+        this.pushId = pushId;
     }
 }

@@ -25,6 +25,8 @@ public class Const {
     public static final String EXTRA_USER_ID = "userId";
     public static final String EXTRA_POST_ID = "postId";
     public static final String EXTRA_POST = "post";
+    public static final String USER = "user";
+    public static final String FROM = "from";
 
     public static boolean IS_TEST = false;
     public static boolean IS_PRODUCTION=false;
