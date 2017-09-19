@@ -465,7 +465,7 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
 
     @OnClick(R.id.tvNewUser)
     public void onRegister() {
-        Intent intent = new Intent(this, RegisterActivity.class);
+        Intent intent = new Intent(this, RegisterActivity.class).putExtra(Const.FROM, "signup");
         startActivity(intent);
         finish();
     }

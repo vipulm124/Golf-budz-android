@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.adcoretechnologies.golfbudz.R;
@@ -34,7 +35,7 @@ public class UpComingGanesDetailActivity extends BaseActivity {
 
 
     @BindView(R.id.ivPic)
-    RoundedImageView ivPic;
+    ImageView ivPic;
     @BindView(R.id.tvName)
     TextView tvName;
     @BindView(R.id.tvVenue)
