@@ -44,7 +44,8 @@
                 android:background="@color/transblack"
                 android:padding="@dimen/space_x1"
                 android:layout_gravity="end"
-                android:text="Follow"/>
+                android:text="Follow"
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
     </RelativeLayout>

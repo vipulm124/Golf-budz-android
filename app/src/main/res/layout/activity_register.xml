@@ -20,6 +20,14 @@
             android:padding="@dimen/space_x2">
 
             <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:id="@+id/back_arrow_register"
+                android:src="@drawable/ic_left_arrow"
+                />
+
+            <ImageView
                 android:id="@+id/iv_logo"
                 android:layout_width="150dp"
                 android:layout_height="150dp"

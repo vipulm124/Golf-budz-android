@@ -111,7 +111,6 @@ String fragDisply="0";
                 Intent intent = new Intent(this, RequestDetailActivity.class);
                 intent.putExtra(Const.EXTRA_REQ_ID, (Serializable) object);
                 startActivity(intent);
-
                 break;
             }
             case BoEventData.EVENT_PLAY_REQ_UPCOMING_CLICK: {

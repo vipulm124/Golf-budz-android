@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -126,6 +127,7 @@ public class MyFriendActivity extends BaseActivity {
     }
     public void onSearch(String text) {
         String userId = Pref.Read(this, Const.PREF_USER_ID);
+        Log.e("id",userId  + " "+text);
         String userName = Pref.Read(this, Const.PREF_USER_DISPLAY_NAME);
         if (apiService == null)
             apiService = APIHelper.getAppServiceMethod();
@@ -220,6 +222,7 @@ public class MyFriendActivity extends BaseActivity {
         showProgressDialog("Performing operation", "Please wait...");
         String userId = Pref.Read(this, Const.PREF_USER_ID);
         IApiService service = APIHelper.getAppServiceMethod();
+        Log.e("status",status+friendId + "   "+userId+"");
         Call<PojoFriend> call = service.friendStatus(status,friendId,userId,"");
         call.enqueue(new Callback<PojoFriend>() {
             @Override
@@ -227,8 +230,10 @@ public class MyFriendActivity extends BaseActivity {
                 hideDialog();
                 if (response.isSuccessful()) {
                     PojoFriend pojoUser = response.body();
+                    Log.e("status",pojoUser.getStatus()+"");
                     if (pojoUser.getStatus() == Const.STATUS_SUCCESS) {
                         //toast(pojoUser.getMessage());
+                        Log.e("status sucess",pojoUser.getStatus()+"");
                         adapter.getItem(position).setStatus(status);
                         adapter.notifyDataSetChanged();
                     } else if (pojoUser.getStatus() == Const.STATUS_FAILED) {

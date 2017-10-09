@@ -15,6 +15,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -632,10 +633,15 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
                 user.setFirstName(fName);
                 user.setLastName(lName);
                 user.setCountry("India");
-                if (allUploadedUri.size() > 0)
+                Log.e("profileimage",allUploadedUri.get(0) +"");
+                if (allUploadedUri.size() > 0) {
                     user.setProfileImage(allUploadedUri.get(0));
-                else
+                    Log.e("profileimage", allUploadedUri.get(0) + "");
+                }
+                else {
                     user.setProfileImage(Pref.Read(this, Const.PREF_USE_IMAGE_PATH));
+                    Log.e("profileimage else",Pref.Read(this, Const.PREF_USE_IMAGE_PATH) +"");
+                }
                 user.setDob("");
                 user.setHandicap(handicap);
                 user.setStrength("");
@@ -662,8 +668,6 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
                 user.setLocation(location);
                 user.setCourse(corsesval);
                 user.setNoOfHandicap(handicapCount);
-
-
                 updateProfile(user);
             }
 

@@ -17,7 +17,7 @@ public class ShowAlert {
      *                author   Gaurav Jain
      *                since 0.9
      */
-    public static  void showAlertDialog(Context context, String title, String message, Boolean status) {
+    public static  void showAlertDialog(final Context context, String title, String message, Boolean status) {
 //        AlertDialog alertDialog = new AlertDialog.Builder(context).create();
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         // Setting Dialog Title
@@ -26,6 +26,7 @@ public class ShowAlert {
         // Setting Dialog Message
         builder.setMessage(message);
 
+
         if (status != null)
             // Setting alert dialog icon
 //         builder.setIcon((status) ? R.drawable.tick : R.drawable.delete);
@@ -33,6 +34,8 @@ public class ShowAlert {
             // Setting OK Button
             builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
+
+
                 }
             });
 

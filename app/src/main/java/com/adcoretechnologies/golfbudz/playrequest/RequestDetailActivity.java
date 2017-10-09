@@ -143,7 +143,6 @@ public class RequestDetailActivity extends BaseActivity {
                 }
             }
 
-
             @Override
             public void onFailure(Call<PojoPlay> call, Throwable t) {
                 hideDialog();

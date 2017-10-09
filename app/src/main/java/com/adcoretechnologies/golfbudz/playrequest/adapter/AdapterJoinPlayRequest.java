@@ -55,7 +55,6 @@ public class AdapterJoinPlayRequest extends
     public void onBindViewHolder(final AdapterJoinPlayRequest.ViewHolder holder, final int position) {
         final BoPlay item = getItem(position);
 
-
         holder.tvName.setText(item.getUserName());
         Common.showRoundImage(context, holder.ivPic, item.getUserImgUrl());
         holder.tvDesc.setText(item.getRequestInfo());

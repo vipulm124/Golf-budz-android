@@ -3,6 +3,7 @@ package com.adcoretechnologies.golfbudz.notification;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -11,6 +12,7 @@ import com.adcoretechnologies.golfbudz.core.base.BaseActivity;
 import com.adcoretechnologies.golfbudz.core.base.BoEventData;
 import com.adcoretechnologies.golfbudz.core.components.FragmentDataLoader;
 import com.adcoretechnologies.golfbudz.friends.PojoFriend;
+import com.adcoretechnologies.golfbudz.home.MainActivity;
 import com.adcoretechnologies.golfbudz.utils.Common;
 import com.adcoretechnologies.golfbudz.utils.Const;
 import com.adcoretechnologies.golfbudz.utils.Pref;
@@ -105,12 +107,13 @@ public class NotificationActivity extends BaseActivity {
 
     private void updateViews(int size) {
         if (size == 0) {
-            fragmentLoader.setDataEmpty("No request found");
+            fragmentLoader.setDataEmpty("No notifications found");
             recyclerView.setVisibility(View.GONE);
         } else {
             fragmentLoader.setDataAvailable();
             recyclerView.setVisibility(View.VISIBLE);
         }
+
     }
 
     private void bindData(ArrayList<BoNoti> allItems) {
@@ -128,16 +131,12 @@ public class NotificationActivity extends BaseActivity {
         switch (eventType) {
             case BoEventData.EVENT_NOTI_ACCEPT_CLICK: {
                 BoNoti noti = (BoNoti) object;
-
                 performAction(noti,noti.get_id(),Const.ACCEPT,id);
-
                 break;
             }
             case BoEventData.EVENT_NOTI_CANCEL_CLICK: {
                 BoNoti noti = (BoNoti) object;
-
                     performAction(noti,noti.get_id(),Const.CANCEL,id);
-
                 break;
             }
         }
@@ -188,6 +187,8 @@ public class NotificationActivity extends BaseActivity {
         else{
 
         }
+
+        Log.e("play request",status + " " + noti.getRequestId() + " " + noti.getFriendId() + " " + notId +"");
         call.enqueue(new Callback<PojoFriend>() {
             @Override
             public void onResponse(Call<PojoFriend> call, Response<PojoFriend> response) {
@@ -196,6 +197,7 @@ public class NotificationActivity extends BaseActivity {
                     PojoFriend pojoUser = response.body();
                     if (pojoUser.getStatus() == Const.STATUS_SUCCESS) {
                         toast(pojoUser.getMessage());
+                        allItems.remove(position);
                         adapter.notifyItemRemoved(position);
 
                     } else if (pojoUser.getStatus() == Const.STATUS_FAILED) {

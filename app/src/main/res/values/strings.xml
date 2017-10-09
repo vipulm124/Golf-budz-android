@@ -64,7 +64,11 @@
 <!--
     <string name="facebook_app_id">799348380216953</string>
 -->
-    <string name="facebook_app_id">867331700095423</string>
+    <!--<string name="facebook_app_id">867331700095423</string>-->
+    
+    <string name="facebook_app_id">297696994049574</string>
+    <string name="fb_login_protocol_scheme">fb297696994049574</string>
+
 
     <string name="boxing_ok">OK</string>
     <string name="boxing_fab_label_camera">take a shot</string>

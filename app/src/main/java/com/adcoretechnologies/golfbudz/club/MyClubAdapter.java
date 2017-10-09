@@ -69,6 +69,8 @@ public class MyClubAdapter extends
             public void onClick(View v) {
                 //context.startActivity(new Intent(context,JoinClubActivity.class));
                 EventBus.getDefault().post(new BoEventData(BoEventData.EVENT_CLUB_JOIN_CLICK,position,item.getUserId()));
+                holder.tvJoin.setText("Following");
+
             }
         });
 
