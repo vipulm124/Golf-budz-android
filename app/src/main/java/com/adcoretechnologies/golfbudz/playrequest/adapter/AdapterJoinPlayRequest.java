@@ -2,6 +2,7 @@ package com.adcoretechnologies.golfbudz.playrequest.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.greenrobot.event.EventBus;
 
+import static com.adcoretechnologies.golfbudz.R.id.pair_up_join_request;
+
 /**
  * Created by Rehan on 1/14/2017.
  */
@@ -29,7 +32,7 @@ public class AdapterJoinPlayRequest extends
     Context context;
 
 
-    private ArrayList<BoPlay> allItems;
+    private static ArrayList<BoPlay> allItems;
 
     public AdapterJoinPlayRequest(ArrayList<BoPlay> allItems) {
         this.allItems = allItems;
@@ -64,8 +67,21 @@ public class AdapterJoinPlayRequest extends
                 EventBus.getDefault().post(new BoEventData(BoEventData.EVENT_PLAY_REQ_CLICK,position,"",item));
             }
         });
+
+
+
+//        UpdateView("Pair up",position);
+
     }
 
+//    public static void UpdateView(String s,int position)
+//    {
+//        allItems.get(position).setPairtext(s);
+//        ViewHolder.pairJoin.setText(allItems.get(position).getPairtext());
+//        Log.e("text",allItems.get(position).getPairtext() + "" + position);
+//        Log.e("text at ",ViewHolder.pairJoin.getText().toString());
+//
+//    }
 
     @Override
     public int getItemCount() {
@@ -76,8 +92,7 @@ public class AdapterJoinPlayRequest extends
         return allItems.get(position);
     }
 
-    private void log(String message) {
-
+    private void log() {
 
     }
 
@@ -91,6 +106,7 @@ public class AdapterJoinPlayRequest extends
 
     }
 
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         View itemView;
 
@@ -103,10 +119,13 @@ public class AdapterJoinPlayRequest extends
         TextView tvDesc;
         @BindView(R.id.ivPic)
         ImageView ivPic;
+        @BindView(R.id.pair_up_join_request)
+         TextView pairJoin;
         ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
             itemView = view;
+
         }
 
     }

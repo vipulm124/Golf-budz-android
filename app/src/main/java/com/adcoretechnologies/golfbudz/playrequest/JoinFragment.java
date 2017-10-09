@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +33,7 @@ import com.adcoretechnologies.golfbudz.utils.Pref;
 import com.adcoretechnologies.golfbudz.utils.api.APIHelper;
 import com.adcoretechnologies.golfbudz.utils.api.IApiService;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -176,6 +178,7 @@ public class JoinFragment extends BaseFragment {
         });
     }
 
+
     private void updateViews(int size) {
         if (size == 0) {
             tvStatus.setText("No data avilable");
@@ -250,6 +253,17 @@ public class JoinFragment extends BaseFragment {
                 break;
             }
 
+            case BoEventData.EVENT_POST_PARED_UP_SUCESS:
+            {
+                View view = llStatus.getChildAt(id);
+                TextView pair = (TextView) view.findViewById(R.id.pair_up_join_request);
+                pair.setText("Paired");
+                Log.e("pair",pair.getText().toString());
+
+
+                break;
+            }
+
         }
     }
 
@@ -257,7 +271,7 @@ public class JoinFragment extends BaseFragment {
     @Override
     public void onStart() {
         super.onStart();
-        EventBus.getDefault().register(this);
+        EventBus.getDefault().registerSticky(this);
     }
 
     @Override

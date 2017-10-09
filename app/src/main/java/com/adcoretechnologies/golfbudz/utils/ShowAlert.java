@@ -17,7 +17,10 @@ public class ShowAlert {
      *                author   Gaurav Jain
      *                since 0.9
      */
-    public static  void showAlertDialog(final Context context, String title, String message, Boolean status) {
+
+
+
+    public static  void showAlertDialog(final Context context, String title, String message, final Boolean status) {
 //        AlertDialog alertDialog = new AlertDialog.Builder(context).create();
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         // Setting Dialog Title
@@ -34,6 +37,7 @@ public class ShowAlert {
             // Setting OK Button
             builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
+
 
 
                 }
