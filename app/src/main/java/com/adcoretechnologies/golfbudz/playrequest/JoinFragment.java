@@ -120,6 +120,7 @@ public class JoinFragment extends BaseFragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
         updateViews(allItems.size());
+        Log.e("all items",allItems.size()+"");
         fillData();
         etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -142,6 +143,7 @@ public class JoinFragment extends BaseFragment {
 
     public void fillData() {
         String userId = Pref.Read(getActivity(), Const.PREF_USER_ID);
+        Log.e("user id",userId);
         if (apiService == null)
             apiService = APIHelper.getAppServiceMethod();
         Call<PojoPlay> call = apiService.getAllPlayReq(userId);
@@ -154,6 +156,7 @@ public class JoinFragment extends BaseFragment {
                     if (pojo.getStatus() == Const.STATUS_SUCCESS) {
                         //toast(pojo.getMessage());
                         bindData(pojo.getAllItems());
+                        Log.e("user",pojo.getAllItems().size()+"");
                         // updateCategories(position);
 
                     } else if (pojo.getStatus() == Const.STATUS_FAILED) {
@@ -198,6 +201,7 @@ public class JoinFragment extends BaseFragment {
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         updateViews(allItems.size());
+        Log.e("all items bind",allItems.size()+"");
     }
 
     public void onSearch(String text) {
@@ -290,6 +294,7 @@ public class JoinFragment extends BaseFragment {
                 hideDialog();
                 if (response.isSuccessful()) {
                     PojoPlay pojo = response.body();
+
                     if (pojo.getStatus() == Const.STATUS_SUCCESS) {
                         //toast(pojo.getMessage());
                         bindData(pojo.getAllItems());

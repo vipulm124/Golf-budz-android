@@ -1,5 +1,6 @@
 package com.adcoretechnologies.golfbudz.playrequest;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialogFragment;
@@ -24,8 +25,12 @@ import com.adcoretechnologies.golfbudz.utils.Common;
 import com.adcoretechnologies.golfbudz.utils.Const;
 import com.adcoretechnologies.golfbudz.utils.api.APIHelper;
 import com.adcoretechnologies.golfbudz.utils.api.IApiService;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
+import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import butterknife.BindView;
@@ -40,7 +45,7 @@ import retrofit2.Response;
  * Created by Adcore on 4/20/2017.
  */
 
-public class FilterRequestFragment extends BottomSheetDialogFragment {
+public class FilterRequestFragment extends BottomSheetDialogFragment implements DatePickerDialog.OnDateSetListener{
 
     @BindView(R.id.spType)
     Spinner spType;
@@ -60,6 +65,8 @@ public class FilterRequestFragment extends BottomSheetDialogFragment {
     String status = "", fromDate = "", toDate = "";
     @BindView(R.id.etNohandicap)
     EditText etNohandicap;
+    @BindView(R.id.etDate)
+    EditText etDate;
     @BindView(R.id.rlAffiliate)
     RelativeLayout rlAffiliate;
     @BindView(R.id.rlRegion)
@@ -70,6 +77,8 @@ public class FilterRequestFragment extends BottomSheetDialogFragment {
     RelativeLayout rlProfession;
     @BindView(R.id.rlClub)
     RelativeLayout rlClub;
+    DatePickerDialog datePickerDialog;
+    int Year, Month, Day;
 
     public static FilterRequestFragment getInstance() {
         return new FilterRequestFragment();
@@ -97,9 +106,28 @@ public class FilterRequestFragment extends BottomSheetDialogFragment {
         getVenues();
     }
 
+    @OnClick(R.id.etDate)
+    public void addDateForFilter()
+    {
+        datePickerDialog = DatePickerDialog.newInstance(this, Year, Month, Day);
+        datePickerDialog.setThemeDark(false);
+        datePickerDialog.showYearPickerFirst(false);
+        datePickerDialog.setAccentColor(Color.parseColor("#009688"));
+        datePickerDialog.setTitle("Select Date From Golfing Budz");
+        final Calendar c = Calendar.getInstance();
+        datePickerDialog.show(getActivity().getFragmentManager(), "DatePickerDialogto");
+        datePickerDialog.setMinDate(c);
+    }
+
     @OnClick(R.id.btnApply)
     public void filterApply() {
 
+        if (selTpe.equals("Date")) {
+            String selValue = etDate.getText().toString();
+            if (TextUtils.isEmpty(selValue)) {
+                Toast.makeText(getActivity(), "Please the date", Toast.LENGTH_SHORT).show();
+                return;
+            }}else
         if (selTpe.equals("Handicap")) {
             String selValue=etNohandicap.getText().toString();
         if (TextUtils.isEmpty(selValue)) {
@@ -273,6 +301,7 @@ public class FilterRequestFragment extends BottomSheetDialogFragment {
 
     private void setFilterType() {
         final List<String> typeList = new ArrayList<>();
+        typeList.add("Date");
         typeList.add("Handicap");
         typeList.add("Affiliated");
         typeList.add("Region");
@@ -286,7 +315,17 @@ public class FilterRequestFragment extends BottomSheetDialogFragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 selTpe = typeList.get(position);
-                if (selTpe.equals("Handicap")) {
+                if (selTpe.equals("Date")){
+                    etDate.setVisibility(View.VISIBLE);
+                    etNohandicap.setVisibility(View.GONE);
+                    rlAffiliate.setVisibility(View.GONE);
+                    rlRegion.setVisibility(View.GONE);
+                    rlIndustry.setVisibility(View.GONE);
+                    rlProfession.setVisibility(View.GONE);
+                    rlClub.setVisibility(View.GONE);
+                }
+              else  if (selTpe.equals("Handicap")) {
+                    etDate.setVisibility(View.GONE);
                     etNohandicap.setVisibility(View.VISIBLE);
                     rlAffiliate.setVisibility(View.GONE);
                     rlRegion.setVisibility(View.GONE);
@@ -296,6 +335,7 @@ public class FilterRequestFragment extends BottomSheetDialogFragment {
 
                 }else  if (selTpe.equals("Affiliated")) {
                     etNohandicap.setText("");
+                    etDate.setVisibility(View.GONE);
                     etNohandicap.setVisibility(View.GONE);
                     rlAffiliate.setVisibility(View.VISIBLE);
                     rlRegion.setVisibility(View.GONE);
@@ -305,6 +345,7 @@ public class FilterRequestFragment extends BottomSheetDialogFragment {
 
                 }else  if (selTpe.equals("Region")) {
                     etNohandicap.setText("");
+                    etDate.setVisibility(View.GONE);
                     etNohandicap.setVisibility(View.GONE);
                     rlAffiliate.setVisibility(View.GONE);
                     rlRegion.setVisibility(View.VISIBLE);
@@ -315,6 +356,7 @@ public class FilterRequestFragment extends BottomSheetDialogFragment {
                 }
                 else  if (selTpe.equals("Golf course")) {
                     etNohandicap.setText("");
+                    etDate.setVisibility(View.GONE);
                     etNohandicap.setVisibility(View.GONE);
                     rlAffiliate.setVisibility(View.GONE);
                     rlRegion.setVisibility(View.GONE);
@@ -325,6 +367,7 @@ public class FilterRequestFragment extends BottomSheetDialogFragment {
                 }
                 else  if (selTpe.equals("Industry")) {
                     etNohandicap.setText("");
+                    etDate.setVisibility(View.GONE);
                     etNohandicap.setVisibility(View.GONE);
                     rlAffiliate.setVisibility(View.GONE);
                     rlRegion.setVisibility(View.GONE);
@@ -335,6 +378,7 @@ public class FilterRequestFragment extends BottomSheetDialogFragment {
                 }
                 else  if (selTpe.equals("Profession")) {
                     etNohandicap.setText("");
+                    etDate.setVisibility(View.GONE);
                     etNohandicap.setVisibility(View.GONE);
                     rlAffiliate.setVisibility(View.GONE);
                     rlRegion.setVisibility(View.GONE);
@@ -426,4 +470,10 @@ public class FilterRequestFragment extends BottomSheetDialogFragment {
     }
 
 
+    @Override
+    public void onDateSet(DatePickerDialog view, int year, int month, int day) {
+
+        String date = day + "-" + (month + 1) + "-" + year;
+        etDate.setText(date);
+    }
 }

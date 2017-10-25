@@ -91,8 +91,12 @@ public interface IApiService {
     Call<PojoUser> createGroup(@Field("userName") String userName, @Field("title") String title, @Field("description") String description,
                                @Field("category") String category, @Field("operatingHours") String operatingHours, @Field("image") String image, @Field("video") String video, @Field("userId") String userId, @Field("friendId") String friendId);
 
-    @GET("blogs")
-    Call<PojoBlog> getAllBlogs();
+//    @GET("blogs")
+//    Call<PojoBlog> getAllBlogs();
+//    getBlog?blogtype=1
+
+  @GET("getBlog?blogtype{blogid}")
+    Call<PojoBlog> getAllBlogs(@Path("blogId") String blogId);
 
     @FormUrlEncoded
     @POST("posts")

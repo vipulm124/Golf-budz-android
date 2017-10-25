@@ -73,10 +73,11 @@ public class OnCourseActivity extends BaseActivity {
     IApiService apiService;
 
     public void fillData() {
+        String blogId = "2";
         if (apiService == null)
             apiService = APIHelper.getAppServiceMethod();
         fragmentLoader.setDataLoading("Please wait...");
-        Call<PojoBlog> call = apiService.getAllBlogs();
+        Call<PojoBlog> call = apiService.getAllBlogs(blogId);
         call.enqueue(new Callback<PojoBlog>() {
             @Override
             public void onResponse(Call<PojoBlog> call, Response<PojoBlog> response) {

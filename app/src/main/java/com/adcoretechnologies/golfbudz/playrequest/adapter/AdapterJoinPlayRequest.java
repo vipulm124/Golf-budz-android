@@ -61,27 +61,19 @@ public class AdapterJoinPlayRequest extends
         holder.tvName.setText(item.getUserName());
         Common.showRoundImage(context, holder.ivPic, item.getUserImgUrl());
         holder.tvDesc.setText(item.getRequestInfo());
+        holder.joinDate.setText(item.getDay());
+        holder.teaOffTime.setText(item.getTeeOffTime());
+        holder.golfRegion.setText(item.getLocations());
+        holder.golfClub.setText(item.getGolfClub()
+        );
         holder.llJoinRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EventBus.getDefault().post(new BoEventData(BoEventData.EVENT_PLAY_REQ_CLICK,position,"",item));
             }
         });
-
-
-
-//        UpdateView("Pair up",position);
-
     }
 
-//    public static void UpdateView(String s,int position)
-//    {
-//        allItems.get(position).setPairtext(s);
-//        ViewHolder.pairJoin.setText(allItems.get(position).getPairtext());
-//        Log.e("text",allItems.get(position).getPairtext() + "" + position);
-//        Log.e("text at ",ViewHolder.pairJoin.getText().toString());
-//
-//    }
 
     @Override
     public int getItemCount() {
@@ -121,6 +113,15 @@ public class AdapterJoinPlayRequest extends
         ImageView ivPic;
         @BindView(R.id.pair_up_join_request)
          TextView pairJoin;
+        @BindView(R.id.tvDateJoin)
+        TextView joinDate;
+        @BindView(R.id.tvTeaOff)
+        TextView teaOffTime;
+        @BindView(R.id.tvRegion)
+        TextView golfRegion;
+        @BindView(R.id.tvGolfClub)
+        TextView golfClub;
+
         ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);

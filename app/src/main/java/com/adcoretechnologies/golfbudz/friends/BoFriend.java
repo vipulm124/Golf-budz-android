@@ -12,6 +12,17 @@ public class BoFriend {
 
     @SerializedName("contact")
     public String contact;
+
+    public String getRefId() {
+        return refId;
+    }
+
+    public void setRefId(String refId) {
+        this.refId = refId;
+    }
+
+    @SerializedName("refId")
+    public String refId;
     @SerializedName("password")
     public String password;
     @SerializedName("userId")

@@ -55,7 +55,7 @@ public class MyFriendAdapter extends
     public void onBindViewHolder(final MyFriendAdapter.ViewHolder holder, final int position) {
         final BoFriend item = getItem(position);
 
-        Log.e("allow pic",allItems.get(position).getProfileImage()+"");
+//        Log.e("allow pic",allItems.get(position).getRefId()+"");
 
         holder.tvName.setText(item.getFirstName() +" "+item.getLastName());
 

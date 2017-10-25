@@ -33,19 +33,7 @@ import com.adcoretechnologies.golfbudz.utils.Const;
 import com.adcoretechnologies.golfbudz.utils.Pref;
 import com.adcoretechnologies.golfbudz.utils.api.APIHelper;
 import com.adcoretechnologies.golfbudz.utils.api.IApiService;
-import com.facebook.AccessToken;
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.facebook.Profile;
-import com.facebook.ProfileTracker;
-import com.facebook.appevents.AppEventsLogger;
-import com.facebook.login.LoginManager;
-import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
+
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -111,8 +99,8 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
     ProgressDialog progress;
     long twitter_id;
     TwitterSession session;
-    private CallbackManager callbackManager;
-    private LoginButton loginButton;
+//    private CallbackManager callbackManager;
+//    private LoginButton loginButton;
     private SignInButton btnSignIn_google;
     private String facebook_id, type, f_name, l_name, gender, profile_image, full_name, email_id, twitterImage, username, email_twitter;
     String toke, imei;
@@ -131,8 +119,8 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         //for facebook init
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        AppEventsLogger.activateApp(this);
+//        FacebookSdk.sdkInitialize(getApplicationContext());
+//        AppEventsLogger.activateApp(this);
         //End
         setContentView(R.layout.activity_login);
         mAuth = FirebaseAuth.getInstance();
@@ -150,7 +138,7 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
 
         ButterKnife.bind(this);
         init();
-        loginTwitter();
+//        loginTwitter();
 
     }
 
@@ -236,10 +224,10 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
         finish();
     }
 
-    @OnClick(R.id.ivFacebook)
-    public void onSignupFbClick() {
-        loginButton.callOnClick();
-    }
+//    @OnClick(R.id.ivFacebook)
+//    public void onSignupFbClick() {
+//        loginButton.callOnClick();
+//    }
 
     @OnClick(R.id.llgp)
     public void onSignupGpClick() {
@@ -256,71 +244,71 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
         // printKeyHash(this);
         mAuth = FirebaseAuth.getInstance();
 
-        if (Pref.isLoggedIn(this)) {
-            LoginManager.getInstance().logOut();
-        }
+//        if (Pref.isLoggedIn(this)) {
+//            LoginManager.getInstance().logOut();
+//        }
         ///start facebook
-        callbackManager = CallbackManager.Factory.create();
-        loginButton = (LoginButton) findViewById(R.id.login_button);
-
-        loginButton.setReadPermissions(Arrays.asList(
-                "public_profile", "email", "user_birthday", "user_friends"));
-        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                try {
-                    ProfileTracker mProfileTracker = new ProfileTracker() {
-                        @Override
-                        protected void onCurrentProfileChanged(Profile oldProfile, Profile newProfile) {
-                            if (newProfile != null) {
-                                facebook_id = newProfile.getId();
-                                full_name = newProfile.getName();
-                                f_name = newProfile.getFirstName();
-                                l_name = newProfile.getLastName();
-                                profile_image = String.valueOf(newProfile.getProfilePictureUri(150, 150));
-                                ;
-
-                            }
-                        }
-                    };
-                } catch (Exception e) {
-                    Common.logException(getApplicationContext(), "Error while logging in", e, null);
-                }
-                final GraphRequest request = GraphRequest.newMeRequest(
-                        loginResult.getAccessToken(),
-                        new GraphRequest.GraphJSONObjectCallback() {
-                            @Override
-                            public void onCompleted(JSONObject object, GraphResponse response) {
-                                String email = null;
-                                String birthday = null;
-                                try {
-                                    email = object.getString("email");
-                                    socialRegisteration(f_name, l_name, email, profile_image, "facebook", facebook_id);
-
-                                } catch (JSONException e) {
-                                    toast("email not found");
-                                    e.printStackTrace();
-                                }
-
-                            }
-                        });
-                Bundle parameters = new Bundle();
-                parameters.putString("fields", "id,name,email,gender,birthday");
-                request.setParameters(parameters);
-                request.executeAsync();
-            }
-
-            @Override
-            public void onCancel() {
-                toast("request cancelled");
-            }
-
-            @Override
-            public void onError(FacebookException error) {
-                Common.logException(getApplicationContext(), "Facebook login error", error, null);
-            }
-        });
+//        callbackManager = CallbackManager.Factory.create();
+//        loginButton = (LoginButton) findViewById(R.id.login_button);
+//
+//        loginButton.setReadPermissions(Arrays.asList(
+//                "public_profile", "email", "user_birthday", "user_friends"));
+//        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+//
+//            @Override
+//            public void onSuccess(LoginResult loginResult) {
+//                try {
+//                    ProfileTracker mProfileTracker = new ProfileTracker() {
+//                        @Override
+//                        protected void onCurrentProfileChanged(Profile oldProfile, Profile newProfile) {
+//                            if (newProfile != null) {
+//                                facebook_id = newProfile.getId();
+//                                full_name = newProfile.getName();
+//                                f_name = newProfile.getFirstName();
+//                                l_name = newProfile.getLastName();
+//                                profile_image = String.valueOf(newProfile.getProfilePictureUri(150, 150));
+//                                ;
+//
+//                            }
+//                        }
+//                    };
+//                } catch (Exception e) {
+//                    Common.logException(getApplicationContext(), "Error while logging in", e, null);
+//                }
+//               final GraphRequest request = GraphRequest.newMeRequest(
+//                        loginResult.getAccessToken(),
+//                        new GraphRequest.GraphJSONObjectCallback() {
+//                            @Override
+//                            public void onCompleted(JSONObject object, GraphResponse response) {
+//                                String email = null;
+//                                String birthday = null;
+//                                try {
+//                                    email = object.getString("email");
+//                                    socialRegisteration(f_name, l_name, email, profile_image, "facebook", facebook_id);
+//
+//                                } catch (JSONException e) {
+//                                    toast("email not found");
+//                                    e.printStackTrace();
+//                                }
+//
+//                            }
+//                        });
+//                Bundle parameters = new Bundle();
+//                parameters.putString("fields", "id,name,email,gender,birthday");
+//                request.setParameters(parameters);
+//                request.executeAsync();
+//            }
+//
+//            @Override
+//            public void onCancel() {
+//                toast("request cancelled");
+//            }
+//
+//            @Override
+//            public void onError(FacebookException error) {
+//                Common.logException(getApplicationContext(), "Facebook login error", error, null);
+//            }
+//        });
         //for google
         //Initializing google signin option
 //        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -357,7 +345,7 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
             }
 
         } else {
-            callbackManager.onActivityResult(requestCode, resultCode, data);
+//            callbackManager.onActivityResult(requestCode, resultCode, data);
         }
     }
 
@@ -621,7 +609,7 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
 
     @OnClick(R.id.ivFacebook)
     public void onFacebook() {
-        loginButton.callOnClick();
+//        loginButton.callOnClick();
         // LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("public_profile", "user_friends", "email"));
     }
 

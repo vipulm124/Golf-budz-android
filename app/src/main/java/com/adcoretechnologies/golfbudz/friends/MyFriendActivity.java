@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.adcoretechnologies.golfbudz.R;
 import com.adcoretechnologies.golfbudz.auth.profile.ProfileActivity;
@@ -201,12 +202,18 @@ public class MyFriendActivity extends BaseActivity {
             }
             case BoEventData.EVENT_EVENT_FMESSAGECLICK: {
                 BoFriend  friend= (BoFriend) object;
-                Intent intent = new Intent(this, ChatDashboradActivity.class);
-                intent.putExtra(Const.EXTRA_CHAT_WITH, friend.getFirstName());
-                intent.putExtra(Const.EXTRA_CHANNEL_ID, friend.getChanelId());
-                intent.putExtra(Const.EXTRA_IMAGE_URL, friend.getProfileImage());
-                intent.putExtra(Const.EXTRA_CHATWITH_ID, friend.getUserId());
-                startActivity(intent);
+//                Log.e("refid",friend.getRefId());
+                if (friend.getRefId().equals("1")) {
+                    Intent intent = new Intent(this, ChatDashboradActivity.class);
+                    intent.putExtra(Const.EXTRA_CHAT_WITH, friend.getFirstName());
+                    intent.putExtra(Const.EXTRA_CHANNEL_ID, friend.getChanelId());
+                    intent.putExtra(Const.EXTRA_IMAGE_URL, friend.getProfileImage());
+                    intent.putExtra(Const.EXTRA_CHATWITH_ID, friend.getUserId());
+                    startActivity(intent);
+                }else
+                {
+                    Toast.makeText(this,"Send friend request first",Toast.LENGTH_SHORT).show();
+                }
                 break;
             }
             case BoEventData.EVENT_EVENT_FSENDREQ_CLICK: {

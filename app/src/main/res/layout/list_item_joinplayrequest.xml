@@ -34,12 +34,41 @@
                     android:layout_marginLeft="@dimen/space_x2"
                     android:text=""
                     />
+
+                <TextView
+                    android:id="@+id/tvDateJoin"
+                    style="@style/AppTheme.TextView.Wrap"
+                    android:layout_marginLeft="@dimen/space_x2"
+                    android:text=""
+                    />
+                <TextView
+                    android:id="@+id/tvTeaOff"
+                    style="@style/AppTheme.TextView.Wrap"
+                    android:layout_marginLeft="@dimen/space_x2"
+                    android:text=""
+                    />
+                <TextView
+                    android:id="@+id/tvRegion"
+                    style="@style/AppTheme.TextView.Wrap"
+                    android:layout_marginLeft="@dimen/space_x2"
+                    android:text=""
+                    />
+                 <TextView
+                    android:id="@+id/tvGolfClub"
+                    style="@style/AppTheme.TextView.Wrap"
+                    android:layout_marginLeft="@dimen/space_x2"
+                    android:text=""
+                    />
+
                 <TextView
                     android:id="@+id/tvDesc"
                     style="@style/AppTheme.TextView.Wrap"
                     android:layout_marginLeft="@dimen/space_x2"
                     android:text=""
-                    /></LinearLayout>
+                    />
+
+
+            </LinearLayout>
         </LinearLayout>
         <TextView
             style="@style/AppTheme.TextView.Wrap"

@@ -26,6 +26,7 @@ import com.adcoretechnologies.golfbudz.auth.login.LoginActivity;
 import com.adcoretechnologies.golfbudz.auth.profile.EditProfileActivity;
 import com.adcoretechnologies.golfbudz.auth.profile.ProfileActivity;
 import com.adcoretechnologies.golfbudz.blog.BLogActivity;
+import com.adcoretechnologies.golfbudz.blog.OnCourseActivity;
 import com.adcoretechnologies.golfbudz.chat.MyChatActivity;
 import com.adcoretechnologies.golfbudz.club.MyClubActivity;
 import com.adcoretechnologies.golfbudz.core.base.BaseActivity;
@@ -514,7 +515,7 @@ public class MainActivity extends BaseActivity
             Common.shareApp(this);
 
         } else if (id == R.id.nav_oncourse) {
-            startActivity(new Intent(MainActivity.this, BLogActivity.class));
+            startActivity(new Intent(MainActivity.this, OnCourseActivity.class));
 
         } else if (id == R.id.nav_daledgolfchat) {
             startActivity(new Intent(MainActivity.this, BLogActivity.class));
