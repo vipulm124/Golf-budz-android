@@ -32,4 +32,20 @@ public class APIHelper {
     }
 
 
+    public static IApiService getAppServiceMethodChange() {
+        String url = Common.getAPIUrlChange();
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(interceptor).build();
+        Retrofit retrofit = new Retrofit.Builder()
+                .client(client)
+                .baseUrl(url)
+                .addConverterFactory(GsonConverterFactory.create())
+//                .addConverterFactory(ProtoConverterFactory.create())
+                .build();
+        return retrofit.create(IApiService.class);
+    }
+
+
 }

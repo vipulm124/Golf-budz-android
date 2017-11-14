@@ -298,6 +298,13 @@ public class Common {
             return Const.IS_PRODUCTION ? Const.API_BASE_URL_PROD : Const.API_BASE_URL_DEV;
         }
 
+    } public static String getAPIUrlChange() {
+        if (BuildConfig.BUILD_TYPE.contentEquals("release"))
+            return Const.API_BASE_URL_PROD_CHANGE;
+        else {
+            return Const.IS_PRODUCTION ? Const.API_BASE_URL_PROD_CHANGE : Const.API_BASE_URL_DEV_CHANGE;
+        }
+
     }
     public static final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 123;
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)

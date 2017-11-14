@@ -286,7 +286,7 @@ public class NewsFeedAdapter extends
         LinearLayout feedFourthLayout;
         @BindView(R.id.llFeedImages)
         LinearLayout llFeedImages;
-        @BindView(R.id.feedTImage1)
+        @BindView(R.id.feedTImage1Blog)
         ImageView feedTImage1;
         @BindView(R.id.feedTImage2)
         ImageView feedTImage2;

@@ -660,20 +660,19 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
                 user.setFirstName(fName);
                 user.setLastName(lName);
                 user.setCountry("India");
-                Log.e("profileimage",allUploadedUri.get(0) +"");
+
                 if (allUploadedUri.size() > 0) {
                     user.setProfileImage(allUploadedUri.get(0));
-                    Log.e("profileimage", allUploadedUri.get(0) + "");
+
                 }
                 else {
                     user.setProfileImage(Pref.Read(this, Const.PREF_USE_IMAGE_PATH));
-                    Log.e("profileimage else",Pref.Read(this, Const.PREF_USE_IMAGE_PATH) +"");
+
                 }
                 user.setDob("");
                 user.setHandicap(handicap);
                 user.setStrength("");
                 user.setWeakness("");
-
                 user.setDeviceId(toke);
                 user.setImeiNo(imei);
                 user.setDeviceType(Const.DEVICE_TYPE);

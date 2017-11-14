@@ -62,6 +62,8 @@ public class JoinFragment extends BaseFragment {
     @BindView(R.id.llStatus)
     LinearLayout llStatus;
     private AdapterJoinPlayRequest adapter;
+    LinearLayoutManager manager;
+
 
     private ArrayList<BoPlay> allItems;
     @BindView(R.id.recyclerView)
@@ -96,6 +98,7 @@ public class JoinFragment extends BaseFragment {
         init();
         return view;
     }
+
     @OnClick(R.id.fab1)
     public void onFilterClick() {
         if (fabMenu.isOpened()) {
@@ -103,6 +106,7 @@ public class JoinFragment extends BaseFragment {
         bottomSheetDialog = FilterRequestFragment.getInstance();
         bottomSheetDialog.show(getChildFragmentManager(), "Custom Bottom Sheet");
     }
+
     @OnClick(R.id.fab2)
     public void onRemoveFilterClick() {
         if (fabMenu.isOpened()) {
@@ -110,10 +114,11 @@ public class JoinFragment extends BaseFragment {
         filterLead=null;
         fillData();
     }
+
     @Override
     public void init() {
 
-        LinearLayoutManager manager = new LinearLayoutManager(getActivity());
+       manager = new LinearLayoutManager(getActivity());
         allItems = new ArrayList<>();
         adapter = new AdapterJoinPlayRequest(allItems);
         recyclerView.setLayoutManager(manager);
@@ -259,7 +264,7 @@ public class JoinFragment extends BaseFragment {
 
             case BoEventData.EVENT_POST_PARED_UP_SUCESS:
             {
-                View view = llStatus.getChildAt(id);
+                View view = manager.getChildAt(id);
                 TextView pair = (TextView) view.findViewById(R.id.pair_up_join_request);
                 pair.setText("Paired");
                 Log.e("pair",pair.getText().toString());

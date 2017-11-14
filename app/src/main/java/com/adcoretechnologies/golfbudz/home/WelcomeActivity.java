@@ -106,6 +106,8 @@ public class WelcomeActivity extends AppCompatActivity {
             dots[i].setTextSize(35);
             dots[i].setTextColor(colorsInactive[currentPage]);
             dotsLayout.addView(dots[i]);
+
+
         }
 
         if (dots.length > 0)

@@ -2,10 +2,12 @@ package com.adcoretechnologies.golfbudz.blog;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -28,9 +30,9 @@ public class BlogAdapter extends
     Context context;
 
 
-    private ArrayList<BoBlog> allItems;
+    private ArrayList<BoBlogs> allItems;
 
-    public BlogAdapter(ArrayList<BoBlog> allItems) {
+    public BlogAdapter(ArrayList<BoBlogs> allItems) {
         this.allItems = allItems;
     }
 
@@ -52,19 +54,27 @@ public class BlogAdapter extends
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(final BlogAdapter.ViewHolder holder, final int position) {
-        final BoBlog item = getItem(position);
+        final BoBlogs item = getItem(position);
 
-        holder.rlBlog.setOnClickListener(new View.OnClickListener() {
+        holder.tvView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EventBus.getDefault().post(new BoEventData(BoEventData.EVENT_BLOG_ITEM_CLICK,position,"",item));
             }
         });
-        holder.tvDate.setText(item.getShortText());
-        holder.tvName.setText(item.getTitle());
-        holder.tvDesc.setText(item.getShortText());
+
+        holder.tvDate.setText(item.getUpdatedAt());
+        holder.tvName.setText(item.getUserName());
+        holder.tvDesc.setText(item.getText());
         Common.showBigImage(context, holder.ivPic, item.getUserImgUrl());
 
+        if (item.getPostType().equals("image"))
+        {
+            Log.e("posted text",item.getPostType() + item.getImage());
+            holder.llFeedImages.setVisibility(View.VISIBLE);
+            holder.feedTImage1.setVisibility(View.VISIBLE);
+            Common.showBigImage(context, holder.feedTImage1, item.getImage());
+        }
     }
 
 
@@ -73,7 +83,7 @@ public class BlogAdapter extends
         return allItems.size();
     }
 
-    public BoBlog getItem(int position) {
+    public BoBlogs getItem(int position) {
         return allItems.get(position);
     }
 
@@ -97,6 +107,8 @@ public class BlogAdapter extends
 
         @BindView(R.id.rlBlog)
         RelativeLayout rlBlog;
+        @BindView(R.id.tvView)
+        TextView tvView;
         @BindView(R.id.tvName)
         TextView tvName;
         @BindView(R.id.tvDesc)
@@ -105,6 +117,11 @@ public class BlogAdapter extends
         TextView tvDate;
         @BindView(R.id.ivPic)
         ImageView ivPic;
+        @BindView(R.id.llFeedImagesBlog)
+        LinearLayout llFeedImages;
+        @BindView(R.id.feed_blog_image)
+        ImageView feedTImage1;
+
 
         ViewHolder(View view) {
             super(view);

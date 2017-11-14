@@ -14,15 +14,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="@dimen/space_x2"
-
         android:orientation="horizontal">
 
 
-        <com.adcoretechnologies.golfbudz.utils.RoundedImageView
+        <!--<com.adcoretechnologies.golfbudz.utils.RoundedImageView-->
+            <!--android:id="@+id/ivPic"-->
+            <!--android:layout_width="80dp"-->
+            <!--android:layout_height="80dp"-->
+
+            <!--android:layout_below="@+id/tvName"-->
+            <!--android:src="@drawable/pic"/> -->
+
+        <ImageView
             android:id="@+id/ivPic"
             android:layout_width="80dp"
             android:layout_height="80dp"
-
             android:layout_below="@+id/tvName"
             android:src="@drawable/pic"/>
 
@@ -32,10 +38,43 @@
             android:layout_below="@+id/tvName"
             android:layout_toRightOf="@+id/ivPic"
             android:text="Because of the importance of balance and stability in the golf swing, the need for good golf shoes is a “no brainer.”.."/>
+
+
+        <LinearLayout
+            android:id="@+id/llFeedImagesBlog"
+            style="@style/AppTheme.Linearmain"
+            android:orientation="vertical"
+            android:layout_below="@+id/tvDesc"
+            android:layout_above="@+id/tvDesc"
+            android:layout_toRightOf="@+id/ivPic"
+            android:visibility="gone">
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/feed_blog_image"
+                />
+            <!--<include layout="@layout/layout_feed_user_images"></include>-->
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llVideoBlog"
+            style="@style/AppTheme.Linearmain"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <!--<include layout="@layout/row_feed_user_video"></include>-->
+
+
+        </LinearLayout>
+
+
+
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_below="@+id/ivPic"
-            android:layout_marginTop="@dimen/space_x3"
+            android:layout_below="@+id/tvDesc"
+            android:layout_marginTop="@dimen/space_x4"
             android:layout_marginLeft="@dimen/space_x2"
             android:layout_marginRight="@dimen/space_x2"
             android:layout_height="wrap_content">

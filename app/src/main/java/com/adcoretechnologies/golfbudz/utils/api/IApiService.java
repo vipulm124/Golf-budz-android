@@ -5,6 +5,7 @@ import com.adcoretechnologies.golfbudz.auth.BoUser;
 import com.adcoretechnologies.golfbudz.auth.PojoUser;
 import com.adcoretechnologies.golfbudz.auth.Register.PojoCity;
 import com.adcoretechnologies.golfbudz.blog.PojoBlog;
+import com.adcoretechnologies.golfbudz.blog.PojoBlogs;
 import com.adcoretechnologies.golfbudz.event.PojoEvent;
 import com.adcoretechnologies.golfbudz.friends.PojoFriend;
 import com.adcoretechnologies.golfbudz.group.PojoGroup;
@@ -95,8 +96,11 @@ public interface IApiService {
 //    Call<PojoBlog> getAllBlogs();
 //    getBlog?blogtype=1
 
-  @GET("getBlog?blogtype{blogid}")
-    Call<PojoBlog> getAllBlogs(@Path("blogId") String blogId);
+//  @GET("getBlog?blogtype{blogid}")
+//    Call<PojoBlog> getAllBlogs(@Path("blogId") String blogId);
+
+    @GET("getBlog?blogtype")
+    Call<PojoBlogs> getAllBlog(@Query("blogtype") String blogId);
 
     @FormUrlEncoded
     @POST("posts")
@@ -215,4 +219,6 @@ public interface IApiService {
     Call<PojoDropValues> getAllIndustry();
     @GET("categories")
     Call<PojoDropValues> getAllVenues();
+
+
 }

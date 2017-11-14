@@ -288,10 +288,15 @@
                     android:layout_marginTop="0dp"
                     android:hint="Enter suburb" />
 
+                <TextView
+                    style="@style/AppTheme.TextView"
+                    android:text="Location" />
+
+
                 <Spinner
                     android:id="@+id/spLocation"
                     style="@style/AppTheme.EditText"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:spinnerMode="dialog"
 
                     />

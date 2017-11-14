@@ -26,6 +26,7 @@ import com.adcoretechnologies.golfbudz.auth.login.LoginActivity;
 import com.adcoretechnologies.golfbudz.core.base.BaseActivity;
 import com.adcoretechnologies.golfbudz.core.components.ComponentItemSelector;
 import com.adcoretechnologies.golfbudz.home.MainActivity;
+import com.adcoretechnologies.golfbudz.more.TermsConditionActivity;
 import com.adcoretechnologies.golfbudz.utils.Common;
 import com.adcoretechnologies.golfbudz.utils.Const;
 import com.adcoretechnologies.golfbudz.utils.Pref;
@@ -229,6 +230,12 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         citySelector.initialize(items, "Select Country");
     }
 
+    @OnClick(R.id.tvTc)
+    public void termsAndCondition()
+    {
+        Intent i = new Intent(RegisterActivity.this, TermsConditionActivity.class);
+        startActivity(i);
+    }
 
     @OnClick(R.id.btSgnupbtn)
     public void sungUp() {
