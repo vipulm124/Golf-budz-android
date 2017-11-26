@@ -1,35 +1,33 @@
 {
   "project_info": {
-    "project_number": "75123473387",
-    "firebase_url": "https://golfbudz-a605d.firebaseio.com",
-    "project_id": "golfbudz-a605d",
-    "storage_bucket": "golfbudz-a605d.appspot.com"
+    "project_number": "290086498470",
+    "project_id": "golfingbudz-93225"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:75123473387:android:265d4b49aebc2b06",
+        "mobilesdk_app_id": "1:290086498470:android:265d4b49aebc2b06",
         "android_client_info": {
           "package_name": "com.adcoretechnologies.golfbudz"
         }
       },
       "oauth_client": [
         {
-          "client_id": "75123473387-4qvg11ustusiccjaqj4do8sj7l146sa2.apps.googleusercontent.com",
+          "client_id": "290086498470-f0q5rqdttsq32i1lsna7hbrod4b44pjh.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "290086498470-9u58pkjcbhrp9qjrpifn6gj0lpfksuhl.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.adcoretechnologies.golfbudz",
-            "certificate_hash": "d37d6256296f7dbea48c70de2848dc96db165142"
+            "certificate_hash": "dcdc2180434d4b5ad48da0f31a53c3ae0c98e118"
           }
-        },
-        {
-          "client_id": "75123473387-g4n2ltsc196ssuhg1l2i0n927e8i77nv.apps.googleusercontent.com",
-          "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAMTtg8ueijcsvlDzrydtTrQPVMo1zXnx0"
+          "current_key": "AIzaSyAtPJ28HH52U_RSrBpmhpAWcDPzGifIdBw"
         }
       ],
       "services": {
@@ -37,16 +35,11 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "75123473387-g4n2ltsc196ssuhg1l2i0n927e8i77nv.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
-          "status": 2
+          "status": 1
         }
       }
     }

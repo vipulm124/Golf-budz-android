@@ -91,7 +91,8 @@ public class BoUser implements Serializable {
     @SerializedName("userlanguage")
     public String language;
 
-
+    @SerializedName("imeiNo")
+    public String imei;
 
 
     @SerializedName("pushId")
@@ -415,5 +416,13 @@ public class BoUser implements Serializable {
 
     public void setPushId(String pushId) {
         this.pushId = pushId;
+    }
+
+    public String getImei() {
+        return imei;
+    }
+
+    public void setImei(String imei) {
+        this.imei = imei;
     }
 }

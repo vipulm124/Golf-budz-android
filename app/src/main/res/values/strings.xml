@@ -69,11 +69,11 @@
     <string name="post_detail_error_toast">Can not retrieve post detail at the moment</string>
     <string name="retrieving">Retrieving data</string>
     <string name="performing_operation">Performing Operation</string>
-<!--
+    <!--
     <string name="facebook_app_id">799348380216953</string>
 -->
     <!--<string name="facebook_app_id">867331700095423</string>-->
-    
+
     <string name="facebook_app_id">297696994049574</string>
     <string name="fb_login_protocol_scheme">fb297696994049574</string>
 
@@ -104,4 +104,5 @@
     <string name="boxing_too_many_picture_fmt">You can only select up to %d pictures</string>
     <string name="boxing_default_album_name">Pictures</string>
     <string name="boxing_preview">Preview</string>
+    <string name="title_activity_test_sh">Map</string>
 </resources>
