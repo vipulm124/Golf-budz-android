@@ -5,6 +5,7 @@ import com.adcoretechnologies.golfbudz.auth.BoUser;
 import com.adcoretechnologies.golfbudz.auth.PojoUser;
 import com.adcoretechnologies.golfbudz.auth.Register.PojoCity;
 import com.adcoretechnologies.golfbudz.blog.PojoBlog;
+import com.adcoretechnologies.golfbudz.blog.PojoBlogs;
 import com.adcoretechnologies.golfbudz.event.PojoEvent;
 import com.adcoretechnologies.golfbudz.friends.PojoFriend;
 import com.adcoretechnologies.golfbudz.group.PojoGroup;
@@ -91,8 +92,15 @@ public interface IApiService {
     Call<PojoUser> createGroup(@Field("userName") String userName, @Field("title") String title, @Field("description") String description,
                                @Field("category") String category, @Field("operatingHours") String operatingHours, @Field("image") String image, @Field("video") String video, @Field("userId") String userId, @Field("friendId") String friendId);
 
-    @GET("blogs")
-    Call<PojoBlog> getAllBlogs();
+//    @GET("blogs")
+//    Call<PojoBlog> getAllBlogs();
+//    getBlog?blogtype=1
+
+//  @GET("getBlog?blogtype{blogid}")
+//    Call<PojoBlog> getAllBlogs(@Path("blogId") String blogId);
+
+    @GET("getBlog?blogtype")
+    Call<PojoBlogs> getAllBlog(@Query("blogtype") String blogId);
 
     @FormUrlEncoded
     @POST("posts")
@@ -211,4 +219,6 @@ public interface IApiService {
     Call<PojoDropValues> getAllIndustry();
     @GET("categories")
     Call<PojoDropValues> getAllVenues();
+
+
 }

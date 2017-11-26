@@ -2,6 +2,7 @@ package com.adcoretechnologies.golfbudz.playrequest.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.greenrobot.event.EventBus;
 
+import static com.adcoretechnologies.golfbudz.R.id.pair_up_join_request;
+
 /**
  * Created by Rehan on 1/14/2017.
  */
@@ -29,7 +32,7 @@ public class AdapterJoinPlayRequest extends
     Context context;
 
 
-    private ArrayList<BoPlay> allItems;
+    private static ArrayList<BoPlay> allItems;
 
     public AdapterJoinPlayRequest(ArrayList<BoPlay> allItems) {
         this.allItems = allItems;
@@ -55,10 +58,14 @@ public class AdapterJoinPlayRequest extends
     public void onBindViewHolder(final AdapterJoinPlayRequest.ViewHolder holder, final int position) {
         final BoPlay item = getItem(position);
 
-
         holder.tvName.setText(item.getUserName());
         Common.showRoundImage(context, holder.ivPic, item.getUserImgUrl());
         holder.tvDesc.setText(item.getRequestInfo());
+        holder.joinDate.setText(item.getDay());
+        holder.teaOffTime.setText(item.getTeeOffTime());
+        holder.golfRegion.setText(item.getLocations());
+        holder.golfClub.setText(item.getGolfClub()
+        );
         holder.llJoinRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,8 +84,7 @@ public class AdapterJoinPlayRequest extends
         return allItems.get(position);
     }
 
-    private void log(String message) {
-
+    private void log() {
 
     }
 
@@ -92,6 +98,7 @@ public class AdapterJoinPlayRequest extends
 
     }
 
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         View itemView;
 
@@ -104,10 +111,22 @@ public class AdapterJoinPlayRequest extends
         TextView tvDesc;
         @BindView(R.id.ivPic)
         ImageView ivPic;
+        @BindView(R.id.pair_up_join_request)
+         TextView pairJoin;
+        @BindView(R.id.tvDateJoin)
+        TextView joinDate;
+        @BindView(R.id.tvTeaOff)
+        TextView teaOffTime;
+        @BindView(R.id.tvRegion)
+        TextView golfRegion;
+        @BindView(R.id.tvGolfClub)
+        TextView golfClub;
+
         ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
             itemView = view;
+
         }
 
     }

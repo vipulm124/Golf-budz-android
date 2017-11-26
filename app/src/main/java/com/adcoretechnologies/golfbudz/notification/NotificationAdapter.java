@@ -65,6 +65,7 @@ public class NotificationAdapter extends
                 EventBus.getDefault().post(new BoEventData(BoEventData.EVENT_NOTI_ACCEPT_CLICK,position,"",item));
                 Animation shake = AnimationUtils.loadAnimation(context, R.anim.shake);
                 view.findViewById(R.id.ivAccept).startAnimation(shake);
+                notifyDataSetChanged();
             }
         });
         holder.ivCancel.setOnClickListener(new View.OnClickListener() {

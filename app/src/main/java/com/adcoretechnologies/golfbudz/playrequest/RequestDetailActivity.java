@@ -1,7 +1,9 @@
 package com.adcoretechnologies.golfbudz.playrequest;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -10,19 +12,20 @@ import android.widget.TextView;
 
 import com.adcoretechnologies.golfbudz.R;
 import com.adcoretechnologies.golfbudz.core.base.BaseActivity;
+import com.adcoretechnologies.golfbudz.core.base.BoEventData;
+import com.adcoretechnologies.golfbudz.playrequest.adapter.AdapterJoinPlayRequest;
 import com.adcoretechnologies.golfbudz.playrequest.model.BoPlay;
 import com.adcoretechnologies.golfbudz.playrequest.model.PojoPlay;
 import com.adcoretechnologies.golfbudz.utils.Common;
 import com.adcoretechnologies.golfbudz.utils.Const;
 import com.adcoretechnologies.golfbudz.utils.Pref;
-import com.adcoretechnologies.golfbudz.utils.RoundedImageView;
-import com.adcoretechnologies.golfbudz.utils.ShowAlert;
 import com.adcoretechnologies.golfbudz.utils.api.APIHelper;
 import com.adcoretechnologies.golfbudz.utils.api.IApiService;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.greenrobot.event.EventBus;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -68,6 +71,7 @@ public class RequestDetailActivity extends BaseActivity {
     TextView tvAge;
     @BindView(R.id.tvDate)
     TextView tvDate;
+    private int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +115,8 @@ public class RequestDetailActivity extends BaseActivity {
             }
         } else {
         }
+
+        position = getIntent().getIntExtra("position",0);
     }
 
     @Override
@@ -130,7 +136,9 @@ public class RequestDetailActivity extends BaseActivity {
                 if (response.isSuccessful()) {
                     PojoPlay pojo = response.body();
                     if (pojo.getStatus() == Const.STATUS_SUCCESS) {
-                        ShowAlert.showAlertDialog(RequestDetailActivity.this,"Play request send successfully","",false);
+                        EventBus.getDefault().postSticky(new BoEventData(BoEventData.EVENT_POST_PARED_UP_SUCESS,position,"Paired up"));
+//                        ShowAlert.showAlertDialog(RequestDetailActivity.this,"Play request send successfully","",false);
+                        ShowAlertDialog();
                     } else if (pojo.getStatus() == Const.STATUS_FAILED) {
                         toast(pojo.getMessage());
                     } else if (pojo.getStatus() == Const.STATUS_ERROR) {
@@ -142,7 +150,6 @@ public class RequestDetailActivity extends BaseActivity {
 
                 }
             }
-
 
             @Override
             public void onFailure(Call<PojoPlay> call, Throwable t) {
@@ -217,5 +224,21 @@ public class RequestDetailActivity extends BaseActivity {
 
         finish();
 //        super.onBackPressed();
+    }
+
+    public void ShowAlertDialog()
+    {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Play request send successfully");
+         builder.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+             @Override
+             public void onClick(DialogInterface dialogInterface, int i) {
+
+
+                 finish();
+             }
+         });
+        builder.show();
     }
 }

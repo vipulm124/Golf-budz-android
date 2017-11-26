@@ -43,8 +43,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     public void hideDialog() {
-        if (dialog != null)
+        if (dialog != null) {
             dialog.dismiss();
+        }
     }
 
     public void showExitDialog(String title, String message) {

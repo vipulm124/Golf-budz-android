@@ -39,11 +39,11 @@ public class BlogDeatilActivity extends BaseActivity {
     @Override
     public void init() {
         Intent intent=getIntent();
-       BoBlog boBlog= (BoBlog) intent.getSerializableExtra(Const.EXTRA_BLOG_ID);
+       BoBlogs boBlog= (BoBlogs) intent.getSerializableExtra(Const.EXTRA_BLOG_ID);
 
-        tvTilte.setText(boBlog.getShortText());
+        tvTilte.setText(boBlog.getUserName());
         tvDesc.setText(boBlog.getText());
-        tvPosted.setText(boBlog.getCreatedAt());
+        tvPosted.setText(boBlog.getUpdatedAt());
         Common.showBigImage(this, ivImage, boBlog.getUserImgUrl());
     }
 

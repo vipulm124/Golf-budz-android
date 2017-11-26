@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -30,7 +31,7 @@ public class BLogActivity extends BaseActivity {
 
     private BlogAdapter adapter;
     private FragmentDataLoader fragmentLoader;
-    private ArrayList<BoBlog> allItems;
+    private ArrayList<BoBlogs> allItems;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
@@ -69,16 +70,17 @@ public class BLogActivity extends BaseActivity {
     IApiService apiService;
 
     public void fillData() {
+        String blogId = "2";
         if (apiService == null)
-            apiService = APIHelper.getAppServiceMethod();
+            apiService = APIHelper.getAppServiceMethodChange() ;
         fragmentLoader.setDataLoading("Please wait...");
-        Call<PojoBlog> call = apiService.getAllBlogs();
-        call.enqueue(new Callback<PojoBlog>() {
+        Call<PojoBlogs> call = apiService.getAllBlog(blogId);
+        call.enqueue(new Callback<PojoBlogs>() {
             @Override
-            public void onResponse(Call<PojoBlog> call, Response<PojoBlog> response) {
+            public void onResponse(Call<PojoBlogs> call, Response<PojoBlogs> response) {
                 hideDialog();
                 if (response.isSuccessful()) {
-                    PojoBlog pojo = response.body();
+                    PojoBlogs pojo = response.body();
                     if (pojo.getStatus() == Const.STATUS_SUCCESS) {
                         //toast(pojo.getMessage());
                         bindData(pojo.getAllItems());
@@ -87,6 +89,7 @@ public class BLogActivity extends BaseActivity {
                     } else if (pojo.getStatus() == Const.STATUS_FAILED) {
                         updateViews(0);
                         toast(pojo.getMessage());
+
                     } else if (pojo.getStatus() == Const.STATUS_ERROR) {
                         toast(pojo.getMessage());
                     }
@@ -98,7 +101,7 @@ public class BLogActivity extends BaseActivity {
 
 
             @Override
-            public void onFailure(Call<PojoBlog> call, Throwable t) {
+            public void onFailure(Call<PojoBlogs> call, Throwable t) {
                 updateViews(0);
                 Common.logException(getApplicationContext(), "Internal server error", t, null);
             }
@@ -114,7 +117,7 @@ public class BLogActivity extends BaseActivity {
         }
     }
 
-    private void bindData(ArrayList<BoBlog> allItems) {
+    private void bindData(ArrayList<BoBlogs> allItems) {
         adapter = new BlogAdapter(allItems);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();

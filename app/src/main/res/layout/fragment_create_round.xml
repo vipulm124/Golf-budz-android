@@ -283,7 +283,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:focusable="false"
-                        android:hint="10:10 A.M"
+                        android:hint=" "
                         app:layout_widthPercent="50%" />
                 </android.support.percent.PercentRelativeLayout>
 

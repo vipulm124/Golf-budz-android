@@ -35,6 +35,17 @@ public class BoEvent {
     @SerializedName("likes")
     ArrayList<String> likes;
     boolean likeStatus;
+
+    public boolean isAttendingStatus() {
+        return attendingStatus;
+    }
+
+    public void setAttendingStatus(boolean attendingStatus) {
+        this.attendingStatus = attendingStatus;
+    }
+
+    boolean attendingStatus;
+
     public String get_id() {
         return _id;
     }
@@ -122,7 +133,9 @@ public class BoEvent {
     public void setImage(String image) {
         this.image = image;
     }
+
     public boolean isLikeStatus() {
+
         return likeStatus;
     }
 

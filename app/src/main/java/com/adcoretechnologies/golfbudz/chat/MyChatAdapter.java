@@ -2,16 +2,20 @@ package com.adcoretechnologies.golfbudz.chat;
 
 import android.app.Activity;
 import android.content.Context;
+import android.media.Image;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
 import com.adcoretechnologies.golfbudz.R;
 import com.adcoretechnologies.golfbudz.core.base.BoEventData;
+import com.adcoretechnologies.golfbudz.utils.Common;
 
 import java.util.List;
 
@@ -49,6 +53,9 @@ public class MyChatAdapter extends RecyclerView.Adapter<MyChatAdapter.ViewHolder
         viewHolder.tvMsg.setText(item.getMessage());
         viewHolder.tvName.setText(item.getName());
         viewHolder.tvDate.setText(item.getPostedOn());
+
+        Common.showRoundImage(comtext, viewHolder.ivPic, item.getImage());
+
         viewHolder.rlChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,6 +82,8 @@ public class MyChatAdapter extends RecyclerView.Adapter<MyChatAdapter.ViewHolder
         TextView tvDate;
         @BindView(R.id.tvName)
         TextView tvName;
+        @BindView(R.id.ivPic)
+        ImageView ivPic;
 
         @BindView(R.id.rlChat)
         RelativeLayout rlChat;

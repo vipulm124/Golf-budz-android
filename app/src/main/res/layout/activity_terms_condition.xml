@@ -9,6 +9,10 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.adcoretechnologies.golfbudz.more.TermsConditionActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 <TextView
     style="@style/AppTheme.TextView"
     android:textColor="@color/colorPrimary"
@@ -20,4 +24,7 @@ We welcome users to register on our digital platforms. We offer the below mentio
 www.business-standard.com/subscription-cart/product We may in exceptional circumstances cease to provide subscription services. We will give you at least 7 days notice of this, if possible. If we do so, then we will have no further obligation to you.
 3) Privacy Policy and Registration
 All information received by us from your registration on business-standard.com or other digital products of Business Standard will be used by Business Standard in accordance with our Privacy Policy. Kindly read the below mentioned details."/>
+
+    </ScrollView>
+
 </RelativeLayout>

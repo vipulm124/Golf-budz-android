@@ -11,9 +11,16 @@
             android:id="@+id/email_login_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space_x3"
             android:orientation="vertical"
             android:padding="@dimen/space_x2">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:id="@+id/back_arrow_login"
+                android:src="@drawable/ic_left_arrow"
+                />
 
             <ImageView
                 android:id="@+id/iv_logo"
@@ -115,23 +122,23 @@
 
             <ImageView
                 android:id="@+id/ivFacebook"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:background="@drawable/facebook"
                 />
 
-            <com.facebook.login.widget.LoginButton
-                android:id="@+id/login_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:visibility="gone"
-                />
+            <!--<com.facebook.login.widget.LoginButton-->
+                <!--android:id="@+id/login_button"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_centerInParent="true"-->
+                <!--android:visibility="gone"-->
+                <!--/>-->
 
             <ImageView
                 android:id="@+id/llgp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_marginLeft="@dimen/space_x2"
                 android:background="@drawable/google"
                 />
@@ -149,6 +156,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/space_x2"
+                android:visibility="gone"
                 android:background="@drawable/twitter" />
 
             <com.twitter.sdk.android.core.identity.TwitterLoginButton

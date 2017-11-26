@@ -3,6 +3,7 @@ package com.adcoretechnologies.golfbudz.auth.Register;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -21,9 +22,11 @@ import android.widget.TextView;
 import com.adcoretechnologies.golfbudz.R;
 import com.adcoretechnologies.golfbudz.auth.BoUser;
 import com.adcoretechnologies.golfbudz.auth.PojoUser;
+import com.adcoretechnologies.golfbudz.auth.login.LoginActivity;
 import com.adcoretechnologies.golfbudz.core.base.BaseActivity;
 import com.adcoretechnologies.golfbudz.core.components.ComponentItemSelector;
 import com.adcoretechnologies.golfbudz.home.MainActivity;
+import com.adcoretechnologies.golfbudz.more.TermsConditionActivity;
 import com.adcoretechnologies.golfbudz.utils.Common;
 import com.adcoretechnologies.golfbudz.utils.Const;
 import com.adcoretechnologies.golfbudz.utils.Pref;
@@ -89,7 +92,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     EditText etCity;
     @BindView(R.id.etSubrub)
     EditText etSubrub;
-
+    @BindView(R.id.back_arrow_register)
+    ImageView back_arrow_register;
     @BindView(R.id.etOperatingHours)
     EditText etOperatingHours;
     @BindView(R.id.etContactNo)
@@ -112,8 +116,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         boUser = (BoUser) intent.getSerializableExtra(Const.USER);
         from = intent.getStringExtra(Const.FROM);
         if (from.equals("social")) {
-            etPassword.setVisibility(View.GONE);
-            etCnfrmpswrd.setVisibility(View.GONE);
+            etPassword.setVisibility(View.VISIBLE );
+            etCnfrmpswrd.setVisibility(View.VISIBLE);
 
         }
         if (boUser != null) {
@@ -122,6 +126,14 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         }
 
 
+    }
+
+    @OnClick(R.id.back_arrow_register)
+    public void onBackClicked(){
+
+        Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
+        startActivity(i);
+        finish();
     }
 
     @Override
@@ -218,6 +230,12 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         citySelector.initialize(items, "Select Country");
     }
 
+    @OnClick(R.id.tvTc)
+    public void termsAndCondition()
+    {
+        Intent i = new Intent(RegisterActivity.this, TermsConditionActivity.class);
+        startActivity(i);
+    }
 
     @OnClick(R.id.btSgnupbtn)
     public void sungUp() {
@@ -239,6 +257,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
+
         String toke= FirebaseInstanceId.getInstance().getToken();
         String imei=Common.getImei(RegisterActivity.this);
         if (v.getId() == R.id.btSgnupbtn) {
@@ -313,6 +332,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 user.setCity(city);
                 user.setSubRub(subrub);
                 user.setOperatingHours(operatingHours);
+                Log.e("userr",user.toString());
+
                 register(user);
             }
 
@@ -320,6 +341,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void register(BoUser user) {
+        Log.e("click","cdsc" + user);
         showProgressDialog("Registering", "Please wait...");
 
         IApiService service = APIHelper.getAppServiceMethod();

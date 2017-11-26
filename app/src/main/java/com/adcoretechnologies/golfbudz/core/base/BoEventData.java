@@ -38,6 +38,7 @@ public class BoEventData {
     public static final int EVENT_PLAY_REQ_UPCOMING_CLICK = 27;
     public static final int EVENT_REQUEST_FILTER_APPLY = 28;
     public static final int EVENT_POST_IMAGE_UPLOAD_EDIT = 29;
+    public static final int EVENT_POST_PARED_UP_SUCESS = 30;
     public final int eventType;
 
     public int getId() {

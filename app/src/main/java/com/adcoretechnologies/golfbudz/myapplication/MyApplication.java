@@ -26,11 +26,6 @@ public class MyApplication extends Application {
 
         BoxingMediaLoader.getInstance().init(loader);
         BoxingCrop.getInstance().init(new BoxingUcrop());
-        TwitterConfig config = new TwitterConfig.Builder(this)
-                .logger(new DefaultLogger(Log.DEBUG))
-                .twitterAuthConfig(new TwitterAuthConfig("pWR4FbMTekDFxmeLjIwQOl98G", "IId80LVZ9DejYZzfzaWl7pVhUUYXr6CWKIGyxmdQpXI4xwIfQ6"))
-                .debug(true)
-                .build();
-        Twitter.initialize(config);
+
     }
 }

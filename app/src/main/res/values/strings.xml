@@ -34,17 +34,25 @@
     <string name="start">GOT IT</string>
 
     <string name="slide_1_title">Play Request</string>
-    <string name="slide_1_desc">Lorem ipsum dolor sit amet, consectetur adipiscing
+    <string name="slide_1_desc">Send or receive play requests from any golfer that fits your profile both locally
+        or internationally,our Golfing Budz system generates direct play requests , public play requests, and
+        refined play requests.
     </string>
 
-    <string name="slide_2_title">Search product</string>
-    <string name="slide_2_desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit!</string>
+    <string name="slide_2_title">Buy Equipments</string>
+    <string name="slide_2_desc">Buy any golfing equipment and apparel safely and
+        directly from our many online registered pro shops available to our members 24/7
+        and ensure you are kept up to date on all the latest golfing deals and promotions.
+</string>
 
     <string name="slide_3_title">Search Friends</string>
-    <string name="slide_3_desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod</string>
+    <string name="slide_3_desc">Search all your golfing fiends and invite them to your direct
+        play requests and ensure that both you and your friends enjoy all the exiting Golfing Budz features together.</string>
 
-    <string name="slide_4_title">Have Chat</string>
-    <string name="slide_4_desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore</string>
+    <string name="slide_4_title">Budz Chat</string>
+    <string name="slide_4_desc">Stay in touch and enjoy Budz live chats with any golfer both
+        locally and internationally ,, share news ,, images or any golfing related topics directly to your friends.
+</string>
 
     <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
     <string name="play_again">Play Again</string>
@@ -64,7 +72,11 @@
 <!--
     <string name="facebook_app_id">799348380216953</string>
 -->
-    <string name="facebook_app_id">867331700095423</string>
+    <!--<string name="facebook_app_id">867331700095423</string>-->
+    
+    <string name="facebook_app_id">297696994049574</string>
+    <string name="fb_login_protocol_scheme">fb297696994049574</string>
+
 
     <string name="boxing_ok">OK</string>
     <string name="boxing_fab_label_camera">take a shot</string>

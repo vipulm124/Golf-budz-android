@@ -76,4 +76,12 @@ public class FragmentDataLoader extends BaseFragment {
     public void log(String message) {
 
     }
+
+    public void hideDataLoading()
+    {
+        tvStatus.setVisibility(View.GONE);
+        ivStatus.setVisibility(View.GONE);
+        pbStatus.setVisibility(View.GONE);
+        llStatus.setVisibility(View.GONE);
+    }
 }

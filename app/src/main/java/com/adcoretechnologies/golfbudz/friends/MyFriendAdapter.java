@@ -2,6 +2,7 @@ package com.adcoretechnologies.golfbudz.friends;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,8 +55,10 @@ public class MyFriendAdapter extends
     public void onBindViewHolder(final MyFriendAdapter.ViewHolder holder, final int position) {
         final BoFriend item = getItem(position);
 
+//        Log.e("allow pic",allItems.get(position).getRefId()+"");
 
         holder.tvName.setText(item.getFirstName() +" "+item.getLastName());
+
         if(item.getStatus()==null){
             holder.tvStatus.setText(Const.ADD_FRIENDS);
         }
@@ -72,6 +75,8 @@ public class MyFriendAdapter extends
             holder.tvStatus.setText(Const.ACCEPT);
             item.setStatus(Const.ACCEPT);
         }
+
+        Log.e("pic",item.getProfileImage()+"");
 
         Common.showRoundImage(context, holder.ivPic, item.getProfileImage());
         holder.tvView.setOnClickListener(new View.OnClickListener() {

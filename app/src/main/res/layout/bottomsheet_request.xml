@@ -38,6 +38,15 @@
             android:inputType="number"
             android:hint="No. of handicap" />
 
+        <EditText
+            android:id="@+id/etDate"
+            style="@style/AppTheme.EditText"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:focusable="false"
+            android:hint="date"/>
+
+
         <RelativeLayout
             android:id="@+id/rlAffiliate"
             android:layout_width="match_parent"

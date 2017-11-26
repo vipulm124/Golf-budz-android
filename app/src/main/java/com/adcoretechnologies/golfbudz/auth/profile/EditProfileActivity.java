@@ -15,6 +15,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -88,6 +89,7 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
 
     boolean checked = false;
     List<String> locationList = new ArrayList<String>();
+    List<String> professionList = new ArrayList<String>();
     List<String> roleitems = new ArrayList<String>();
     ComponentLocationItemSelector citySelector;
     ComponentItemSelector roleSelector;
@@ -156,7 +158,7 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
     String affliateval, handicapval, corsesval, referval, professionval;
     final List<String> course = new ArrayList<String>();
     String location;
-    List<String> professionList;
+
     List<String> affliateList;
     List<String> handicapList;
     List<String> referList;
@@ -460,6 +462,31 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
         });
     }
 
+//    private void bindDataProfession(ArrayList<BoProfession> allItems) {
+//        for (int i = 0; i < allItems.size(); i++) {
+//            professionList.add(allItems.get(i).getName());
+//        }
+//        // Creating adapter for spinner
+//        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, R.layout.item_spinner_dropdown, locationList);
+//
+//        // Drop down layout style - list view with radio button
+//        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//
+//        // attaching data adapter to spinner
+//        spProfession.setAdapter(dataAdapter);
+//        spProfession.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                professionval = professionList.get(position).toString();
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
+//    }
+
     private void getProfile() {
         String userId = Pref.Read(this, Const.PREF_USER_ID);
         showProgressDialog("Reteriving", "Please wait...");
@@ -514,6 +541,7 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
 
             etSex.setText(user.getSex());
             etAge.setText(user.getAge());
+
             int index = professionList.indexOf(user.getProfession());
             spProfession.setSelection(index);
 
@@ -632,15 +660,19 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
                 user.setFirstName(fName);
                 user.setLastName(lName);
                 user.setCountry("India");
-                if (allUploadedUri.size() > 0)
+
+                if (allUploadedUri.size() > 0) {
                     user.setProfileImage(allUploadedUri.get(0));
-                else
+
+                }
+                else {
                     user.setProfileImage(Pref.Read(this, Const.PREF_USE_IMAGE_PATH));
+
+                }
                 user.setDob("");
                 user.setHandicap(handicap);
                 user.setStrength("");
                 user.setWeakness("");
-
                 user.setDeviceId(toke);
                 user.setImeiNo(imei);
                 user.setDeviceType(Const.DEVICE_TYPE);
@@ -662,8 +694,6 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
                 user.setLocation(location);
                 user.setCourse(corsesval);
                 user.setNoOfHandicap(handicapCount);
-
-
                 updateProfile(user);
             }
 
@@ -859,32 +889,7 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
         });
     }
 
-    private void getProfession() {
-        professionList = new ArrayList<String>();
-        professionList.add("Please select profession");
-        professionList.add("Buisness man");
-        professionList.add("Service man");
-        // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, R.layout.item_spinner_dropdown, professionList);
 
-        // Drop down layout style - list view with radio button
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        // attaching data adapter to spinner
-        spProfession.setAdapter(dataAdapter);
-        spProfession.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                professionval = professionList.get(position).toString();
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-    }
 
     private void handicap() {
         // Spinner Drop down elements
@@ -999,6 +1004,7 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
             }
         });
     }
+
     private void getLocation() {
         IApiService service = APIHelper.getAppServiceMethod();
         Call<PojoDropValues> call = service.getAllRegions();
@@ -1027,6 +1033,65 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
             }
         });
     }
+
+
+    private void getProfession() {
+        IApiService service = APIHelper.getAppServiceMethod();
+        Call<PojoDropValues> call = service.getAllProfession();
+        call.enqueue(new Callback<PojoDropValues>() {
+            @Override
+            public void onResponse(Call<PojoDropValues> call, Response<PojoDropValues> response) {
+
+                if (response.isSuccessful()) {
+                    PojoDropValues pojoUser = response.body();
+                    if (pojoUser.getStatus() == Const.STATUS_SUCCESS) {
+                        setProfession(pojoUser.getAllItems());
+                    } else if (pojoUser.getStatus() == Const.STATUS_FAILED) {
+                        toast(pojoUser.getMessage());
+                    } else if (pojoUser.getStatus() == Const.STATUS_ERROR) {
+                        toast(pojoUser.getMessage());
+                    }
+                } else {
+                    toast("Something went wrong");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PojoDropValues> call, Throwable t) {
+
+                Common.logException(getApplicationContext(), "Internal server error", t, null);
+            }
+        });
+    }
+
+    private void setProfession(ArrayList<BoDropVales> allItems) {
+         List<String>  professionList = new ArrayList<String>();
+        professionList.add("Professions");
+        for (int i = 0; i < allItems.size(); i++) {
+            professionList.add(allItems.get(i).getDisplayName());
+        }
+        // Creating adapter for spinner
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, R.layout.item_spinner_dropdown, professionList);
+
+        // Drop down layout style - list view with radio button
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // attaching data adapter to spinner
+        spProfession.setAdapter(dataAdapter);
+        spProfession.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                professionval = parent.getItemAtPosition(position).toString();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
 
     private void setLocation(ArrayList<BoDropVales> allItems) {
         List<String> categories = new ArrayList<String>();

@@ -18,6 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
+
             <com.adcoretechnologies.golfbudz.utils.RoundedImageView
                 android:id="@+id/ivPic"
                 android:layout_width="60dp"
@@ -33,12 +34,41 @@
                     android:layout_marginLeft="@dimen/space_x2"
                     android:text=""
                     />
+
+                <TextView
+                    android:id="@+id/tvDateJoin"
+                    style="@style/AppTheme.TextView.Wrap"
+                    android:layout_marginLeft="@dimen/space_x2"
+                    android:text=""
+                    />
+                <TextView
+                    android:id="@+id/tvTeaOff"
+                    style="@style/AppTheme.TextView.Wrap"
+                    android:layout_marginLeft="@dimen/space_x2"
+                    android:text=""
+                    />
+                <TextView
+                    android:id="@+id/tvRegion"
+                    style="@style/AppTheme.TextView.Wrap"
+                    android:layout_marginLeft="@dimen/space_x2"
+                    android:text=""
+                    />
+                 <TextView
+                    android:id="@+id/tvGolfClub"
+                    style="@style/AppTheme.TextView.Wrap"
+                    android:layout_marginLeft="@dimen/space_x2"
+                    android:text=""
+                    />
+
                 <TextView
                     android:id="@+id/tvDesc"
                     style="@style/AppTheme.TextView.Wrap"
                     android:layout_marginLeft="@dimen/space_x2"
                     android:text=""
-                    /></LinearLayout>
+                    />
+
+
+            </LinearLayout>
         </LinearLayout>
         <TextView
             style="@style/AppTheme.TextView.Wrap"
@@ -47,7 +77,8 @@
             android:background="@drawable/custom_circle"
             android:padding="@dimen/space_x2"
             android:textStyle="bold"
-            android:text="Pair up"
+            android:id="@+id/pair_up_join_request"
+            android:text=" Pair up"
             />
     </LinearLayout>
 </android.support.v7.widget.CardView>

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -191,12 +192,12 @@ public class EventActivity extends BaseActivity {
                 BoEvent event = (BoEvent) object;
                 if (data.equals("false")) {
 
+                    Log.e("status event",data.toString() + "   " + manager.getChildAt(id));
                     View view = manager.getChildAt(id);
                     ImageView imageViewLiked = (ImageView) view.findViewById(R.id.ivAttended);
                     imageViewLiked.setVisibility(View.VISIBLE);
                     ImageView imageViewLike = (ImageView) view.findViewById(R.id.ivAttend);
                     imageViewLike.setVisibility(View.GONE);
-
 
                 } else {
                     View view = manager.getChildAt(id);

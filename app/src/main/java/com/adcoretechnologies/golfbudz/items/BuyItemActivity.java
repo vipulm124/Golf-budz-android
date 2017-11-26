@@ -7,7 +7,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.adcoretechnologies.golfbudz.R;
-import com.adcoretechnologies.golfbudz.club.MyClubActivity;
 import com.adcoretechnologies.golfbudz.core.base.BaseActivity;
 import com.adcoretechnologies.golfbudz.core.base.BoEventData;
 import com.adcoretechnologies.golfbudz.core.components.FragmentDataLoader;
@@ -58,7 +57,7 @@ public class BuyItemActivity extends BaseActivity {
         recyclerView.setLayoutManager(manager);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
-        updateViews(allItems.size());
+        updateViews(allItems.size(),"");
         getBuyItems();
     }
 
@@ -77,7 +76,9 @@ public class BuyItemActivity extends BaseActivity {
         call.enqueue(new Callback<PojoItems>() {
             @Override
             public void onResponse(Call<PojoItems> call, Response<PojoItems> response) {
+
                 hideDialog();
+//                fragmentLoader.hideDataLoading();
                 if (response.isSuccessful()) {
                     PojoItems pojo = response.body();
                     if (pojo.getStatus() == Const.STATUS_SUCCESS) {
@@ -87,26 +88,29 @@ public class BuyItemActivity extends BaseActivity {
 
                     } else if (pojo.getStatus() == Const.STATUS_FAILED) {
                         toast(pojo.getMessage());
+                        updateViews(0,pojo.getMessage());
                     } else if (pojo.getStatus() == Const.STATUS_ERROR) {
                         toast(pojo.getMessage());
+                        updateViews(0, pojo.getMessage());
                     }
                 } else {
                     toast("Something went wrong");
-                    updateViews(0);
+                    updateViews(0, "Something went wrong");
                 }
             }
 
 
             @Override
             public void onFailure(Call<PojoItems> call, Throwable t) {
-                updateViews(0);
+                updateViews(0, "");
                 Common.logException(getApplicationContext(), "Internal server error", t, null);
             }
         });
     }
-    private void updateViews(int size) {
+    private void updateViews(int size, String message) {
         if (size == 0) {
-            fragmentLoader.setDataEmpty("No services are available in your region for the chosen category");
+//            fragmentLoader.setDataEmpty("No services are available in your region for the chosen category");
+            fragmentLoader.setDataEmpty(message);
             recyclerView.setVisibility(View.GONE);
         } else {
             fragmentLoader.setDataAvailable();
@@ -118,7 +122,7 @@ public class BuyItemActivity extends BaseActivity {
         adapter = new BuyItemAdapter(allItems);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-        updateViews(allItems.size());
+        updateViews(allItems.size(), "");
     }
     public void onEventMainThread(BoEventData eventData) {
 

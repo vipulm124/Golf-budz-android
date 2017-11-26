@@ -64,6 +64,7 @@ public class EventListAdapter extends
         holder.tvDescription.setText(item.getDescription());
         holder.tvDate.setText(item.getCreatedAt());
         holder.tvLike.setText(item.getLikeCount() + " Like");
+
         ArrayList<String> likeUsers = item.getLikes();
         if (likeUsers.contains(userId)) {
             holder.ivLiked.setVisibility(View.VISIBLE);
@@ -111,10 +112,13 @@ public class EventListAdapter extends
         holder.llAttend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (item.isLikeStatus() == false)
+                if (item.isAttendingStatus() == false) {
                     EventBus.getDefault().post(new BoEventData(BoEventData.EVENT_EVENT_ATTENDING_CLICK, position, "false", item));
+                    item.attendingStatus = true;
+                }
                 else {
-                    EventBus.getDefault().post(new BoEventData(BoEventData.EVENT_EVENT_ATTENDING_CLICK, position, "true", item));;
+                    EventBus.getDefault().post(new BoEventData(BoEventData.EVENT_EVENT_ATTENDING_CLICK, position, "true", item));
+                    item.attendingStatus = false;
                 }
 
             }

@@ -60,6 +60,18 @@ public class BoPlay implements Serializable {
     public String requestType;
     @SerializedName("recieverIds")
     public String recieverIds;
+    public String pairtext;
+
+    public String getPairtext() {
+        return pairtext;
+    }
+
+    public void setPairtext(String pairtext) {
+        this.pairtext = pairtext;
+    }
+
+
+
     public String getNoOfHoles() {
         return noOfHoles;
     }

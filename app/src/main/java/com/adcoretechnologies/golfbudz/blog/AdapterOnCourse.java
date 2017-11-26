@@ -28,9 +28,9 @@ public class AdapterOnCourse extends
     Context context;
 
 
-    private ArrayList<BoBlog> allItems;
+    private ArrayList<BoBlogs> allItems;
 
-    public AdapterOnCourse(ArrayList<BoBlog> allItems) {
+    public AdapterOnCourse(ArrayList<BoBlogs> allItems) {
         this.allItems = allItems;
     }
 
@@ -52,7 +52,7 @@ public class AdapterOnCourse extends
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(final AdapterOnCourse.ViewHolder holder, final int position) {
-        final BoBlog item = getItem(position);
+        final BoBlogs item = getItem(position);
 
         holder.rlBlog.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,9 +60,9 @@ public class AdapterOnCourse extends
                 EventBus.getDefault().post(new BoEventData(BoEventData.EVENT_BLOG_ITEM_CLICK,position,"",item));
             }
         });
-        holder.tvDate.setText(item.getShortText());
-        holder.tvName.setText(item.getTitle());
-        holder.tvDesc.setText(item.getShortText());
+        holder.tvDate.setText(item.getUpdatedAt());
+        holder.tvName.setText(item.getUserName());
+        holder.tvDesc.setText(item.getText());
         Common.showBigImage(context, holder.ivPic, item.getUserImgUrl());
 
     }
@@ -73,7 +73,7 @@ public class AdapterOnCourse extends
         return allItems.size();
     }
 
-    public BoBlog getItem(int position) {
+    public BoBlogs getItem(int position) {
         return allItems.get(position);
     }
 
