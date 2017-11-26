@@ -322,6 +322,9 @@
                     android:layout_marginTop="0dp"
                     android:inputType="number"
                     android:hint="Contact No" />
+
+
+
             </LinearLayout>
             <TextView
                 style="@style/AppTheme.TextView"

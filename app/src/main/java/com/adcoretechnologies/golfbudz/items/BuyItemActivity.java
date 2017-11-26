@@ -154,7 +154,7 @@ public class BuyItemActivity extends BaseActivity {
                                 .setTitleText("Congratulations")
                                 .setContentText("You have buy this item.")
                                 .show();*/
-                        ShowAlert.showAlertDialog(BuyItemActivity.this,"Congratulations","You have buy this item.",false);
+                        ShowAlert.showAlertDialog(BuyItemActivity.this,"Congratulations","You successfully bought this  item.",false);
                     } else if (pojoUser.getStatus() == Const.STATUS_FAILED) {
                         toast(pojoUser.getMessage());
                     } else if (pojoUser.getStatus() == Const.STATUS_ERROR) {
