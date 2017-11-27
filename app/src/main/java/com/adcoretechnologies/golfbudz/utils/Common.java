@@ -28,6 +28,9 @@ import android.widget.Toast;
 
 import com.adcoretechnologies.golfbudz.BuildConfig;
 import com.adcoretechnologies.golfbudz.R;
+import com.adcoretechnologies.golfbudz.auth.PojoUser;
+import com.adcoretechnologies.golfbudz.utils.api.APIHelper;
+import com.adcoretechnologies.golfbudz.utils.api.IApiService;
 import com.google.firebase.database.DatabaseError;
 import com.squareup.picasso.Picasso;
 
@@ -36,6 +39,10 @@ import java.util.Date;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Irfan on 27/05/16.
@@ -338,5 +345,22 @@ public class Common {
             return true;
         }
     }
+    public static void saveUpdatedPushOnServer(Context context, String token) {
+        String userId = Pref.Read(context, Const.PREF_USER_ID);
 
+        if(userId!=null && !userId.equals("")){
+            IApiService service = APIHelper.getAppServiceMethod();
+            Call<PojoUser> call = service.saveUpdatedPushId(userId, token);
+            call.enqueue(new Callback<PojoUser>() {
+                @Override
+                public void onResponse(Call<PojoUser> call, Response<PojoUser> response) {
+                    if (response.isSuccessful()) {
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<PojoUser> call, Throwable t) {
+                }
+            });}
+    }
 }

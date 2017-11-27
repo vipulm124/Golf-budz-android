@@ -156,7 +156,7 @@ public class LoginActivity extends BaseActivity implements GoogleApiClient.OnCon
         gso = ((MyApplication) getApplication()).getGoogleSignInOptions();
         mGoogleApiClient = ((MyApplication) getApplication()).getGoogleApiClient(LoginActivity.this, this);
         initilaize();
-
+      //  printHashKey(this);
     }
 
     @OnClick(R.id.back_arrow_login)
@@ -311,7 +311,7 @@ public void onSigninFbClick() {
             }
 
         } else {
-//            callbackManager.onActivityResult(requestCode, resultCode, data);
+            callbackManager.onActivityResult(requestCode, resultCode, data);
         }
     }
 
@@ -595,6 +595,7 @@ public void onSigninFbClick() {
 
     @OnClick(R.id.ivFacebook)
     public void onFacebook() {
+        loginButton.callOnClick();
 //        loginButton.callOnClick();
         // LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("public_profile", "user_friends", "email"));
     }
@@ -633,7 +634,7 @@ public void onSigninFbClick() {
      */
     private void socialRegisteration(final BoUser user) {
         IApiService apiService = APIHelper.getAppServiceMethod();
-        Call<PojoUser> call = apiService.login(user.getEmail(), "", toke, imei, Const.DEVICE_TYPE, user.getSocialToken());
+        Call<PojoUser> call = apiService.loginSocial(user.getEmail(), "", toke, imei, Const.DEVICE_TYPE, user.getSocialToken());
         call.enqueue(new Callback<PojoUser>() {
             @Override
             public void onResponse(Call<PojoUser> call, Response<PojoUser> response) {
@@ -713,13 +714,14 @@ public void onSigninFbClick() {
             toke = FirebaseInstanceId.getInstance().getToken();
             imei = Common.getImei(this);
             BoUser boUser = new BoUser();
-            boUser.setFullName(firstname);
+            boUser.setFirstName(firstname);
+            boUser.setLastName(lastname);
             boUser.setEmail(gmail);
             boUser.setSocialToken(socialId);
             boUser.setProfileImage(image);
             boUser.setLanguage("en");
             boUser.setDeviceType(Const.DEVICE_TYPE);
-            boUser.setImei(imei);
+            boUser.setImeiNo(imei);
             boUser.setPushId(toke);
             socialRegisteration(boUser);
         } else {

@@ -19,6 +19,8 @@ import android.widget.RelativeLayout;
 
 
 import com.adcoretechnologies.golfbudz.home.SplashScreen;
+import com.adcoretechnologies.golfbudz.utils.Common;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -46,7 +48,8 @@ public class LauncherActivity extends AppCompatActivity {
         askReadExternalStoragePermission();
         //askLocationPermission();
         //askReadPhoneStatePermission();
-
+        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+        Common.saveUpdatedPushOnServer(this,refreshedToken);
 
     }
 

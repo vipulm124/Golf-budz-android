@@ -26,6 +26,7 @@ import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
@@ -40,6 +41,12 @@ public interface IApiService {
     @POST("login")
     Call<PojoUser> login(@Field("email") String email, @Field("password") String password, @Field("deviceType") String deviceType,
                          @Field("imeiNo") String imeiNo, @Field("deviceId") String deviceId,@Field("socialToken") String socialToken);
+
+    @FormUrlEncoded
+    @POST("users/social/auth")
+    Call<PojoUser> loginSocial(@Field("email") String email, @Field("password") String password, @Field("deviceType") String deviceType,
+                         @Field("imeiNo") String imeiNo, @Field("deviceId") String deviceId,@Field("socialToken") String socialToken);
+
     @FormUrlEncoded
     @POST("forgotpassword")
     Call<PojoUser> getpassword(@Field("email") String email);
@@ -220,5 +227,8 @@ public interface IApiService {
     @GET("categories")
     Call<PojoDropValues> getAllVenues();
 
+    @FormUrlEncoded
+    @PUT("token")
+    Call<PojoUser> saveUpdatedPushId(@Header("userId") String userId, @Field("token") String token);
 
 }
