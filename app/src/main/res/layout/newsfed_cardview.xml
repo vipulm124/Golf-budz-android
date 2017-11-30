@@ -2,6 +2,7 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/tools"
     android:layout_marginLeft="@dimen/space_x1"
     android:layout_marginRight="@dimen/space_x1"
     android:layout_marginTop="@dimen/space_x1"
@@ -14,12 +15,12 @@
         android:layout_height="match_parent"
         android:layout_margin="@dimen/space_x2"
         android:orientation="vertical">
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingLeft="@dimen/feed_item_padding_left_right"
-            android:paddingRight="@dimen/feed_item_padding_left_right" >
+            android:paddingLeft="@dimen/space_x2"
+            android:paddingRight="@dimen/space_x2" >
 
             <com.adcoretechnologies.golfbudz.utils.RoundedImageView
                 android:id="@+id/ivProfilepic"
@@ -30,27 +31,40 @@
             </com.adcoretechnologies.golfbudz.utils.RoundedImageView>
 
             <LinearLayout
-                android:layout_width="fill_parent"
+                android:id="@+id/llName"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:layout_marginRight="@dimen/space_x2"
+                android:layout_toRightOf="@+id/ivProfilepic"
+                android:layout_toLeftOf="@+id/ivAction"
                 android:paddingLeft="@dimen/feed_item_profile_info_padd" >
 
                 <TextView
                     android:id="@+id/tvName"
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/feed_item_profile_name"
+                    android:text=""
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvDate"
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/hintcolor"
+                    android:text=""
                     android:textSize="@dimen/feed_item_timestamp" />
             </LinearLayout>
-        </LinearLayout>
+            <ImageView
+                android:id="@+id/ivAction"
+                style="@style/AppTheme.ImageView.Wrap"
+               android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:padding="@dimen/space_x1"
+                android:src="@drawable/ic_more_feed" />
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/tvDescription"
@@ -60,6 +74,7 @@
             android:textColor="@color/colorWhite"
             android:paddingLeft="@dimen/feed_item_status_pad_left_right"
             android:paddingRight="@dimen/feed_item_status_pad_left_right"
+            android:text="fgdfgdfgfdg"
             android:paddingTop="@dimen/feed_item_status_pad_top" />
 
        <!-- <ImageView

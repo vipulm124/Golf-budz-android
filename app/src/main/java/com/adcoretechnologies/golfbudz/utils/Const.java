@@ -57,4 +57,7 @@ public class Const {
     public static final String EXTRA_IMAGE_URL = "image";
     public static final String EXTRA_CLUB_DETAIL = "club_detail";
     public static final String EXTRA_FRAGMENT_DISPLAY_COUNT = "fragmentDisplayCount";
+    public static String PROJECT_FOLDER = "GolfBudz";
+    public static final String PROJECT_IMAGES = "IMAGE";
+    public static String FILE_PROVIDER_SUFFIX = ".file.provider";
 }

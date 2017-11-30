@@ -23,6 +23,7 @@ import com.adcoretechnologies.golfbudz.playrequest.model.PojoStatusRequest;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -230,5 +231,7 @@ public interface IApiService {
     @FormUrlEncoded
     @PUT("token")
     Call<PojoUser> saveUpdatedPushId(@Header("userId") String userId, @Field("token") String token);
+    @DELETE("posts/{id}")
+    Call<PojoPost> deletePostBypostId(@Header("userId") String userId, @Path("id") String id);
 
 }

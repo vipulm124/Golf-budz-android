@@ -18,8 +18,10 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.ImageView;
@@ -34,8 +36,11 @@ import com.adcoretechnologies.golfbudz.utils.api.IApiService;
 import com.google.firebase.database.DatabaseError;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -288,7 +293,15 @@ public class Common {
         context.startActivity(Intent.createChooser(emailIntent, "Choose your mail application")); //start mail application chooser with message
     }
 
-
+    public static File getStorageDirectoryOfImages() {
+        String storageDirectory = Environment.getExternalStorageDirectory() + File.separator + Const.PROJECT_FOLDER + File.separator + Const.PROJECT_IMAGES;
+        File directory = new File(storageDirectory);
+        if (!directory.exists()) {
+            boolean isCreaetd = directory.mkdir();
+            log("Directory created ; " + isCreaetd);
+        }
+        return directory;
+    }
 
     public static String getImei(Context context) {
         TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
@@ -362,5 +375,46 @@ public class Common {
                 public void onFailure(Call<PojoUser> call, Throwable t) {
                 }
             });}
+    }
+    public static void shareStatus(Context context, String status, String unhuLink, String userName) {
+        Intent share = new Intent(android.content.Intent.ACTION_SEND);
+        share.setType("text/plain");
+        share.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+        share.putExtra(Intent.EXTRA_SUBJECT, "GolfBudz status");
+        share.putExtra(Intent.EXTRA_TEXT, status + ".  \n Download now " + unhuLink + " \n to connect with " + userName);
+        context.startActivity(Intent.createChooser(share, "Share link!"));
+    }
+
+    public static void shareUserVideo(Context context, String title, String thumb, String url, String unhuLink, String userName) {
+        Intent share = new Intent(android.content.Intent.ACTION_SEND);
+        share.setType("text/plain");
+        share.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+        share.putExtra(Intent.EXTRA_SUBJECT, "GolfBudz video");
+        share.putExtra(Intent.EXTRA_TEXT, "Watch " + title + " " + url + ".\n Download now " + unhuLink + " \n to connect with "+userName);
+        context.startActivity(Intent.createChooser(share, "Share link!"));
+    }
+    public static void sharePhoto(Context context, List<String> filesToSend, String title, String unhuLink, String userName) {
+        try {
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_SEND_MULTIPLE);
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Unhu Pics");
+            intent.setType("image/jpeg"); /* This example is sharing jpeg images. */
+            ArrayList<Uri> files = new ArrayList<Uri>();
+            for (String path : filesToSend /* List of the files you want to send */) {
+                File file = new File(path);
+                //Uri uri = Uri.fromFile(file);
+                Uri uri = FileProvider.getUriForFile(
+                        context,
+                        context.getApplicationContext()
+                                .getPackageName() + Const.FILE_PROVIDER_SUFFIX, file);
+                files.add(uri);
+            }
+            intent.putExtra(Intent.EXTRA_TEXT, title + " on Unhu.\n Download now " + unhuLink + " \n to connect with " + userName);
+            intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, files);
+            context.startActivity(intent);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(context, "Can not share images due to permission restriction", Toast.LENGTH_SHORT).show();
+        }
     }
 }
