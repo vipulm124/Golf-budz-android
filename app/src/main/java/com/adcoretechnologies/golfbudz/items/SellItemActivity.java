@@ -153,7 +153,7 @@ public class SellItemActivity extends BaseActivity implements FragmentImageUploa
         String userId = Pref.Read(this, Const.PREF_USER_ID);
         String userName = Pref.Read(this, Const.PREF_USER_DISPLAY_NAME);
         IApiService service = APIHelper.getAppServiceMethod();
-        Call<PojoItems> call = service.sellItem(userId, title, description, price, picUrls);
+        Call<PojoItems> call = service.sellItem(userId, title, price, picUrls,description );
         call.enqueue(new Callback<PojoItems>() {
             @Override
             public void onResponse(Call<PojoItems> call, Response<PojoItems> response) {
