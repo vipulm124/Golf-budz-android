@@ -6,7 +6,7 @@
         android:title="Share"
         android:visible="true"/>
     <item
-        android:id="@+id/item_delte"
+        android:id="@+id/item_delete"
         android:title="Delete"
         />
 </menu>

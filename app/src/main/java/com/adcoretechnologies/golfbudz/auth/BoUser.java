@@ -90,7 +90,8 @@ public class BoUser implements Serializable {
 
     @SerializedName("userlanguage")
     public String language;
-
+@SerializedName("followStatus")
+    public  String followStatus;
 
 
 
@@ -302,6 +303,17 @@ public class BoUser implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getFollowStatus() {
+        if(followStatus==null) {
+        followStatus="false";
+        }
+        return followStatus;
+    }
+
+    public void setFollowStatus(String status) {
+        this.followStatus = followStatus;
     }
 
     public String getSex() {

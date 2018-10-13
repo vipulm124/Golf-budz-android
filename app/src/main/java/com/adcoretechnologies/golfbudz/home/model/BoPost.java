@@ -10,33 +10,46 @@ import java.util.ArrayList;
  */
 
 public class BoPost implements Serializable {
-    @SerializedName("_id")
-    String _id;
-    @SerializedName("userName")
-    String userName;
+    @SerializedName("id")
+    String id;
     @SerializedName("userId")
     String userId;
-    @SerializedName("text")
-    String text;
-    @SerializedName("image")
-    String image;
-    @SerializedName("video")
-    String video;
+    @SerializedName("blogType")
+    String blogType;
     @SerializedName("postType")
     String postType;
+    @SerializedName("blogImage")
+    String blogImage;
+    @SerializedName("text")
+    String text;
+    @SerializedName("title")
+    String title;
     @SerializedName("likeCount")
     String likeCount;
+    @SerializedName("likeStatus")
+    String likeStatus;
     @SerializedName("commentCount")
     String commentCount;
-    @SerializedName("userImgUrl")
-    String userImgUrl;
-    @SerializedName("createdAt")
-    String createdAt;
     @SerializedName("thumbUrl")
     String thumbUrl;
-    @SerializedName("likes")
-    ArrayList<String> likes;
-    boolean likeStatus;
+    @SerializedName("likeUsers")
+    ArrayList<String> likeUsers;
+
+    public  ArrayList<String> getLikes(){
+        return  likeUsers;
+    }
+
+    public void setLikes(ArrayList<String> likeUsers){
+        this.likeUsers=likeUsers;
+    }
+    public  String getLikeStatus(){return  likeStatus;}
+    public  void setLikeStatus(String likeStatus){this.likeStatus = likeStatus;}
+
+    public  String getLikeCount(){return  likeCount;}
+    public  void setLikeCount(String like){this.likeCount = like;}
+
+    public  String getCommentCount(){return  commentCount;}
+    public  void setCommentCount(String commentCount){this.commentCount = commentCount;}
 
     public String getPostType() {
         return postType;
@@ -46,12 +59,22 @@ public class BoPost implements Serializable {
         this.postType = postType;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getblogType() {
+        return blogType;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setblogType(String blogType) {
+        this.blogType = blogType;
+    }
+
+
+
+    public String getblogImage() {
+        return blogImage;
+    }
+
+    public void setblogImage(String blogImage) {
+        this.blogImage = blogImage;
     }
 
     public String getUserId() {
@@ -70,76 +93,27 @@ public class BoPost implements Serializable {
         this.text = text;
     }
 
-    public String getImage() {
-        return image;
+    public String getTitle() {
+        return title;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
+    public String getid() {
+        return id;
+    }
+
+    public void setid(String id) {
+        this.id = id;
+    }
     public String getVideo() {
-        return video;
+        return blogImage;
     }
 
-    public void setVideo(String video) {
-        this.video = video;
-    }
-
-    public String getLikeCount() {
-        return likeCount;
-    }
-
-    public void setLikeCount(String likeCount) {
-        this.likeCount = likeCount;
-    }
-
-    public String getCommentCount() {
-        return commentCount;
-    }
-
-    public void setCommentCount(String commentCount) {
-        this.commentCount = commentCount;
-    }
-
-    public String getUserImgUrl() {
-        return userImgUrl;
-    }
-
-    public void setUserImgUrl(String userImgUrl) {
-        this.userImgUrl = userImgUrl;
-    }
-
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public String get_id() {
-        return _id;
-    }
-
-    public void set_id(String _id) {
-        this._id = _id;
-    }
-
-    public ArrayList<String> getLikes() {
-        return likes;
-    }
-
-    public void setLikes(ArrayList<String> likes) {
-        this.likes = likes;
-    }
-
-    public boolean isLikeStatus() {
-        return likeStatus;
-    }
-
-    public void setLikeStatus(boolean likeStatus) {
-        this.likeStatus = likeStatus;
+    public void setVideo(String blogImage) {
+        this.blogImage = blogImage;
     }
 
     public String getThumbUrl() {

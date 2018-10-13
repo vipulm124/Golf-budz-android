@@ -174,7 +174,7 @@ public class Common {
             Picasso.with(context)
                     .load(url)
                     .placeholder(R.drawable.ic_default_gallery)
-//                    .resize(380, 380)
+                    .resize(380, 380)
                     .error(R.drawable.ic_default_gallery)
                     .into(imageView);
         } catch (Exception ex) {

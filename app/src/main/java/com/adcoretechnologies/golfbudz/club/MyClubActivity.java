@@ -76,10 +76,11 @@ public class MyClubActivity extends BaseActivity {
     IApiService apiService;
 
     public void fillData() {
+        String userId = Pref.Read(this, Const.PREF_USER_ID);
         if (apiService == null)
             apiService = APIHelper.getAppServiceMethod();
         fragmentLoader.setDataLoading("Please wait...");
-        Call<PojoUser> call = apiService.getAllClub();
+        Call<PojoUser> call = apiService.getAllClub(userId);
         call.enqueue(new Callback<PojoUser>() {
             @Override
             public void onResponse(Call<PojoUser> call, Response<PojoUser> response) {
@@ -155,7 +156,7 @@ public class MyClubActivity extends BaseActivity {
                                 .setContentText("you are following the this club .")
                                 .show();*/
                         ShowAlert.showAlertDialog(MyClubActivity.this,"Congratulations","you are following the this club",false);
-
+                        fillData();
                     } else if (pojoUser.getStatus() == Const.STATUS_FAILED) {
                         toast(pojoUser.getMessage());
                     } else if (pojoUser.getStatus() == Const.STATUS_ERROR) {
@@ -178,7 +179,7 @@ public class MyClubActivity extends BaseActivity {
     private void bindData(ArrayList<BoUser> allItems) {
         adapter = new MyClubAdapter(allItems);
         recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        //adapter.notifyDataSetChanged();
         updateViews(allItems.size());
     }
     @Override

@@ -59,7 +59,7 @@ public class AdapterComment extends
         });
         holder.tvDate.setText(item.getShortText());*/
         holder.tvUsername.setText(item.getUserName());
-        holder.tvtext.setText(item.getText());
+        holder.tvtext.setText(item.getComment());
         Common.showBigImage(context, holder.ivPic, item.getUserImgUrl());
 
     }

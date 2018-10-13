@@ -64,7 +64,6 @@
                         <ImageView
                             android:id="@+id/video"
                             style="@style/AppTheme.ImageView.Wrap"
-                            android:layout_marginLeft="10dp"
 
                             android:layout_toRightOf="@+id/addtext"
                             android:src="@drawable/ic_video_camera"
@@ -72,6 +71,7 @@
 
                         <TextView
                             style="@style/AppTheme.TextView"
+                            android:textSize="@dimen/font_x1"
                             android:text="Video" />
                     </LinearLayout>
 
@@ -85,12 +85,12 @@
                         <ImageView
                             android:id="@+id/image"
                             style="@style/AppTheme.ImageView.Wrap"
-                            android:layout_marginLeft="10dp"
                             android:layout_toRightOf="@+id/video"
                             android:src="@drawable/ic_gallery" />
 
                         <TextView
                             style="@style/AppTheme.TextView"
+                            android:textSize="@dimen/font_x1"
                             android:text="Images" />
                     </LinearLayout>
 

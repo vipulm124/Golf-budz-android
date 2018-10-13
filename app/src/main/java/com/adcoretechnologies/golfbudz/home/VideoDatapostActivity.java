@@ -233,7 +233,7 @@ public class VideoDatapostActivity extends BaseActivity  {
         String userName = Pref.Read(this, Const.PREF_USER_DISPLAY_NAME);
         String userImage = Pref.Read(this, Const.PREF_USE_IMAGE_PATH);
         IApiService service = APIHelper.getAppServiceMethod();
-        Call<PojoPost> call = service.addPost(userName,userId,text,"",videoUrl,Const.VIDEO,"0","0",userImage,thumbUrl);
+        Call<PojoPost> call = service.addPost(userId,text,videoUrl,Const.VIDEO,thumbUrl);
         call.enqueue(new Callback<PojoPost>() {
             @Override
             public void onResponse(Call<PojoPost> call, Response<PojoPost> response) {

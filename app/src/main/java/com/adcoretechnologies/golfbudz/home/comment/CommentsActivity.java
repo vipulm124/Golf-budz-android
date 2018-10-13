@@ -89,7 +89,7 @@ public class CommentsActivity extends BaseActivity {
         if (apiService == null)
             apiService = APIHelper.getAppServiceMethod();
         fragmentLoader.setDataLoading("Please wait...");
-        Call<PojoComment> call = apiService.getCommnetsByPostId(postId);
+        Call<PojoComment> call = apiService.getCommentsByPostId(postId);
         call.enqueue(new Callback<PojoComment>() {
             @Override
             public void onResponse(Call<PojoComment> call, Response<PojoComment> response) {
@@ -166,7 +166,7 @@ public class CommentsActivity extends BaseActivity {
                     if (pojoUser.getStatus() == Const.STATUS_SUCCESS) {
                         BoCommnet commnet = new BoCommnet();
                         commnet.setUserImgUrl(userImage);
-                        commnet.setText(messageText);
+                        commnet.setComment(messageText);
                         commnet.setUserName(userName);
                         commnet.setUserId(userId);
                         commnet.setPostId(postid);

@@ -11,7 +11,8 @@ import java.io.Serializable;
 public class BoBlog implements Serializable{
     @SerializedName("userId")
     public String userId;
-
+    @SerializedName("username")
+    public String username;
     @SerializedName("title")
     public String title;
     @SerializedName("userImgUrl")
@@ -45,6 +46,14 @@ public class BoBlog implements Serializable{
 
     public void setUserImgUrl(String userImgUrl) {
         this.userImgUrl = userImgUrl;
+    }
+
+    public String getUserName() {
+        return username;
+    }
+
+    public void setUserName(String username) {
+        this.username = username;
     }
 
     public String getText() {

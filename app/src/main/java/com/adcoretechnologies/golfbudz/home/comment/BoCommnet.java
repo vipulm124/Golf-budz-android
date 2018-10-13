@@ -15,8 +15,8 @@ public class BoCommnet implements Serializable {
     public String userName;
     @SerializedName("postId")
     public String postId;
-    @SerializedName("text")
-    public String text;
+    @SerializedName("comment")
+    public String comment;
     @SerializedName("userImgUrl")
     String userImgUrl;
     public String getUserId() {
@@ -43,12 +43,12 @@ public class BoCommnet implements Serializable {
         this.postId = postId;
     }
 
-    public String getText() {
-        return text;
+    public String getComment() {
+        return comment;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public String getUserImgUrl() {

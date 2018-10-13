@@ -951,8 +951,9 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
     }
 
     public void getCorses() {
+        String userId = Pref.Read(this, Const.PREF_USER_ID);
         IApiService apiService = APIHelper.getAppServiceMethod();
-        Call<PojoUser> call = apiService.getAllClub();
+        Call<PojoUser> call = apiService.getAllClub(userId);
         call.enqueue(new Callback<PojoUser>() {
             @Override
             public void onResponse(Call<PojoUser> call, Response<PojoUser> response) {

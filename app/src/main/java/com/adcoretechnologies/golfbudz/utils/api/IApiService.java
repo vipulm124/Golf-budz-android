@@ -112,14 +112,13 @@ public interface IApiService {
 
     @FormUrlEncoded
     @POST("posts")
-    Call<PojoPost> addPost(@Field("userName") String userName, @Field("userId") String userId, @Field("text") String text, @Field("image") String image, @Field("video") String video, @Field("postType") String postType
-            , @Field("likeCount") String likeCount, @Field("commentCount") String commentCount, @Field("userImgUrl") String userImgUrl, @Field("thumbUrl") String thumbUrl);
+    Call<PojoPost> addPost(@Field("userId") String userId, @Field("text") String text, @Field("image") String image,  @Field("postType") String postType, @Field("thumbUrl") String thumbUrl);
 
     @GET("users/{userId}/posts")
     Call<PojoPost> getAllPostByUserId(@Path("userId") String userId);
 
-    @GET("clubs")
-    Call<PojoUser> getAllClub();
+    @GET("clubs/{userId}")
+    Call<PojoUser> getAllClub(@Path("userId") String userId);
 
     @GET("users/{userId}/posts")
     Call<PojoItems> butItems(@Path("userId") String userId);
@@ -178,12 +177,12 @@ public interface IApiService {
     Call<PojoEvent> postLike(@Field("userName") String userName, @Field("userId") String userId, @Field("postId") String postId);
 
     @GET("posts/comments/{postId}")
-    Call<PojoComment> getCommnetsByPostId(@Path("postId") String postId);
+    Call<PojoComment> getCommentsByPostId(@Path("postId") String postId);
 
     @FormUrlEncoded
     @POST("posts/comment")
     Call<PojoUser> commentByUserId(@Field("userId") String userId, @Field("userName") String userName
-            , @Field("postId") String postId, @Field("text") String text, @Field("userImgUrl") String userImgUrl);
+            , @Field("postId") String postId, @Field("comment") String comment, @Field("userImgUrl") String userImgUrl);
 
     @FormUrlEncoded
     @POST("send/playrequest")

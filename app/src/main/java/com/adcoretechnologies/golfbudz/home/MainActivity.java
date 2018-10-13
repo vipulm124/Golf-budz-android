@@ -242,7 +242,7 @@ public class MainActivity extends BaseActivity
                 if (data.equals("false")) {
                     int increaseCount = Integer.parseInt(post.getLikeCount()) + 1;
                     adapter.getItem(id).setLikeCount(String.valueOf(increaseCount));
-                    adapter.getItem(id).setLikeStatus(true);
+                    adapter.getItem(id).setLikeStatus("true");
 
                     View view = manager.getChildAt(id);
 
@@ -255,7 +255,7 @@ public class MainActivity extends BaseActivity
                 } else {
                     int decreaseCount = Integer.parseInt(post.getLikeCount()) - 1;
                     adapter.getItem(id).setLikeCount(String.valueOf(decreaseCount));
-                    adapter.getItem(id).setLikeStatus(false);
+                    adapter.getItem(id).setLikeStatus("false");
                     View view = manager.getChildAt(id);
                     ImageView imageViewLiked = (ImageView) view.findViewById(R.id.ivLiked);
                     imageViewLiked.setVisibility(View.GONE);
@@ -265,7 +265,7 @@ public class MainActivity extends BaseActivity
                     tvLike.setText(decreaseCount+" Likes");
                 }
 
-                performLike(id, post.get_id(), post.getLikeCount(), data);
+                performLike(id, post.getid(), post.getLikeCount(), data);
                 break;
             }
             case BoEventData.EVENT_NEWS_SHARE_CLICK: {
@@ -275,6 +275,7 @@ public class MainActivity extends BaseActivity
             }
             case BoEventData.EVENT_NEWS_COMMENT_CLICK: {
                 startActivity(new Intent(this, CommentsActivity.class).putExtra(Const.EXTRA_POST_ID, data));
+                //startActivity(new Intent(this, CommentsActivity.class).putExtra(Const.EXTRA_POST_ID, data));
                 overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
                 break;
             }
@@ -300,7 +301,7 @@ public class MainActivity extends BaseActivity
             i.setType("text/plain");
             i.putExtra(Intent.EXTRA_SUBJECT, R.string.app_name);
             String sAux = post.getText();
-            sAux = sAux + post.getImage();
+            sAux = sAux + post.getblogImage();
             i.putExtra(Intent.EXTRA_TEXT, sAux);
             startActivity(Intent.createChooser(i, "choose one"));
         } catch (Exception e) { //e.toString();
@@ -392,7 +393,7 @@ public class MainActivity extends BaseActivity
         final String userName = Pref.Read(this, Const.PREF_USER_DISPLAY_NAME);
         final String userImage = Pref.Read(this, Const.PREF_USE_IMAGE_PATH);
         IApiService service = APIHelper.getAppServiceMethod();
-        Call<PojoPost> call = service.addPost(userName, userId, text, "", "", Const.TEXT, "0", "0", userImage,"");
+        Call<PojoPost> call = service.addPost(userId, text, "", Const.TEXT,"");
         call.enqueue(new Callback<PojoPost>() {
             @Override
             public void onResponse(Call<PojoPost> call, Response<PojoPost> response) {
@@ -402,15 +403,15 @@ public class MainActivity extends BaseActivity
                     if (pojo.getStatus() == Const.STATUS_SUCCESS) {
                         BoPost post = new BoPost();
                         post.setLikeCount("0");
-                        post.setCommentCount("0");
+               //         post.setCommentCount("0");
                         post.setPostType(Const.TEXT);
-                        post.setUserImgUrl(userImage);
+                 //       post.setUserImgUrl(userImage);
                         post.setText(text);
-                        post.setUserName(userName);
+                   //     post.setUserName(userName);
                         post.setUserId(userId);
-                        post.setImage("");
-                        post.setVideo("");
-                        post.setLikes(new ArrayList<String>());
+                        post.setblogImage("");
+                   //     post.setVideo("");
+                    //    post.setLikes(new ArrayList<String>());
                         allItems.add(0,post);
                         bindData(allItems);
                         //adapter.notifyDataSetChanged();

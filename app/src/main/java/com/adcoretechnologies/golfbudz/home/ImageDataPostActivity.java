@@ -125,7 +125,7 @@ public class ImageDataPostActivity extends BaseActivity implements FragmentImage
         String userName = Pref.Read(this, Const.PREF_USER_DISPLAY_NAME);
         String userImage = Pref.Read(this, Const.PREF_USE_IMAGE_PATH);
         IApiService service = APIHelper.getAppServiceMethod();
-        Call<PojoPost> call = service.addPost(userName, userId, text, picUrls.toString(), "", Const.IMAGE, "0", "0", userImage,"");
+        Call<PojoPost> call = service.addPost(userId, text, picUrls.toString(),  Const.IMAGE,"");
         call.enqueue(new Callback<PojoPost>() {
             @Override
             public void onResponse(Call<PojoPost> call, Response<PojoPost> response) {

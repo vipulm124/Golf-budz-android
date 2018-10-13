@@ -56,6 +56,12 @@ public class MyClubAdapter extends
         final BoUser item = getItem(position);
         holder.tvClubName.setText(item.getClubName());
         holder.tvClubDesc.setText(item.getDescription());
+        if(item.getFollowStatus().equalsIgnoreCase("true")) {
+        holder.tvJoin.setText("Following");
+        }
+        else{
+            holder.tvJoin.setText("Follow");
+        }
         Common.showBigImage(context, holder.ivImg, item.getProfileImage());
          holder.rlclub.setOnClickListener(new View.OnClickListener() {
              @Override
@@ -69,7 +75,7 @@ public class MyClubAdapter extends
             public void onClick(View v) {
                 //context.startActivity(new Intent(context,JoinClubActivity.class));
                 EventBus.getDefault().post(new BoEventData(BoEventData.EVENT_CLUB_JOIN_CLICK,position,item.getUserId()));
-                holder.tvJoin.setText("Following");
+                //holder.tvJoin.setText("Following");
 
             }
         });

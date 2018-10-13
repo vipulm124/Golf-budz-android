@@ -30,8 +30,8 @@ public class Const {
 
     public static boolean IS_TEST = false;
     public static boolean IS_PRODUCTION=false;
-    public static String API_BASE_URL_DEV="https://golfbudz.herokuapp.com/api/";//https://golfbudz-api.herokuapp.com/api/";
-    public static final String API_BASE_URL_PROD = "https://golfbudz-api.herokuapp.com/api/";//https://golfbudz-staging.herokuapp.com/api/
+    public static String API_BASE_URL_DEV="https://golfbuzzapp.herokuapp.com/api/";//https://golfbudz-api.herokuapp.com/api/";
+    public static final String API_BASE_URL_PROD = "https://golfbuzzapp.herokuapp.com/api/";//https://golfbudz-staging.herokuapp.com/api/
     public static String API_BASE_URL_DEV_CHANGE="https://www.adcoretechnologies.com/golf-admin/api/";//https://golfbudz-api.herokuapp.com/api/";
     public static final String API_BASE_URL_PROD_CHANGE = "https://www.adcoretechnologies.com/golf-admin/api/";//https://golfbudz-staging.herokuapp.com/api/
 

@@ -65,7 +65,7 @@
         <activity android:name=".auth.profile.ChnagePasswordActivity" />
         <activity
             android:name=".items.BuyItemActivity"
-            android:label="Buy Items" />
+            android:label="Buy Equipment" />
         <activity android:name=".items.BuyItemDetailActivity" />
         <activity
             android:name=".auth.login.LoginActivity"
@@ -104,7 +104,7 @@
             android:label="Join Club" />
         <activity
             android:name=".items.SellItemActivity"
-            android:label="Post an item for sale" />
+            android:label="Post an equipment for sale" />
         <activity android:name=".home.ImageDataPostActivity" />
         <activity android:name=".blog.BLogActivity" />
         <activity android:name=".blog.OnCourseActivity" />

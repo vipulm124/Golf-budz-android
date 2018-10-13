@@ -3,8 +3,11 @@ package com.adcoretechnologies.golfbudz.home;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.media.ThumbnailUtils;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
@@ -87,30 +90,30 @@ public class NewsFeedAdapter extends
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final BoPost item = getItem(position);
-        holder.tvName.setText(item.getUserName());
+        //holder.tvName.setText(item.getUserName());
 
         holder.tvDescription.setText(item.getText());
         holder.tvLike.setText(item.getLikeCount() + " Like");
         holder.tvComment.setText(item.getCommentCount() + " Comment");
-        holder.tvDate.setText(item.getCreatedAt());
+        //holder.tvDate.setText(item.getCreatedAt());
         ArrayList<String> likeUsers = item.getLikes();
         if (likeUsers.contains(userId)) {
-            holder.ivLiked.setVisibility(View.VISIBLE);
-            holder.ivLike.setVisibility(View.GONE);
-            holder.llLike.setClickable(false);
+          holder.ivLiked.setVisibility(View.VISIBLE);
+         holder.ivLike.setVisibility(View.GONE);
+        holder.llLike.setClickable(false);
         }
-        Common.showRoundImage(context, holder.ivProfilepic, item.getUserImgUrl());
+        //Common.showRoundImage(context, holder.ivProfilepic, item.getUserImgUrl());
         if (item.getPostType().equals(Const.IMAGE)) {
             holder.llFeedImages.setVisibility(View.VISIBLE);
-            //holder.feedImage1.setVisibility(View.VISIBLE);
-            /*try {
-                String[] parts = item.getImage().split("\\|");
+            holder.feedImage1.setVisibility(View.VISIBLE);
+            try {
+                String[] parts = item.getblogImage().split("\\|");
                 Common.showBigImage(context, holder.feedImage1, parts[0]);
             } catch (Exception e) {
                 holder.feedImage1.setVisibility(View.GONE);
-            }*/
+            }
             getPicsURL(item);
-            if (myImgList.size() == 1) {
+           if (myImgList.size() == 1) {
                 Common.showBigImage(context, holder.feedImage1, myImgList.get(0));
                 holder.feedImage1.setVisibility(View.VISIBLE);
                 holder.feedThirdLayout.setVisibility(View.GONE);
@@ -118,7 +121,7 @@ public class NewsFeedAdapter extends
                 holder.feedFourthLayout.setVisibility(View.GONE);
                 holder.llVideo.setVisibility(View.GONE);
 
-            } else if (myImgList.size() == 2) {
+            }  else if (myImgList.size() == 2) {
                 Common.showBigImage(context, holder.feedSImage1, myImgList.get(0));
                 Common.showBigImage(context, holder.feedSImage2, myImgList.get(1));
                 holder.feedImage1.setVisibility(View.GONE);
@@ -152,12 +155,12 @@ public class NewsFeedAdapter extends
 
         } else if (item.getPostType().equals(Const.VIDEO)) {
 
-           /* Bitmap thumb = ThumbnailUtils.createVideoThumbnail(String.valueOf(imageRef),
+           Bitmap thumb = ThumbnailUtils.createVideoThumbnail(String.valueOf(""),
                     MediaStore.Images.Thumbnails.MINI_KIND);
             holder.ivVideothumb.setImageBitmap(thumb);
-*/
-
-            //holder.ivVideo.setVisibility(View.VISIBLE);
+//
+//
+//            holder.ivVideo.setVisibility(View.VISIBLE);
             //specify the location of media file
            /* Uri uri = Uri.parse(item.getVideo());
             try {
@@ -172,12 +175,12 @@ public class NewsFeedAdapter extends
             holder.feedSeconLayout.setVisibility(View.GONE);
             holder.llVideo.setVisibility(View.VISIBLE);
             Common.showBigImage(context, holder.ivVideothumb, item.getThumbUrl());
-            holder.ivVideoPlay.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    context.startActivity(new Intent(context, VideoActivity.class).putExtra("link", item.getVideo()));
-                }
-            });
+       //     holder.ivVideoPlay.setOnClickListener(new View.OnClickListener() {
+       //         @Override
+       //        public void onClick(View v) {
+       //             context.startActivity(new Intent(context, VideoActivity.class).putExtra("link", item.getVideo()));
+       //         }
+       //     });
 
         } else {
             holder.llFeedImages.setVisibility(View.GONE);
@@ -202,13 +205,13 @@ public class NewsFeedAdapter extends
         holder.llComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EventBus.getDefault().post(new BoEventData(BoEventData.EVENT_NEWS_COMMENT_CLICK, position, item.get_id()));
+                EventBus.getDefault().post(new BoEventData(BoEventData.EVENT_NEWS_COMMENT_CLICK, position, item.getid()));
             }
         });
         holder.llLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (item.isLikeStatus() == false)
+                if (item.getLikeStatus() == "false" || item.getLikeStatus()==null || item.getLikeStatus().isEmpty())
                     EventBus.getDefault().post(new BoEventData(BoEventData.EVENT_NEWS_LIKE_CLICK, position, "false", item));
                 else {
                     EventBus.getDefault().post(new BoEventData(BoEventData.EVENT_NEWS_LIKE_CLICK, position, "true", item));
@@ -236,7 +239,7 @@ public class NewsFeedAdapter extends
         holder.ivVideoPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(new Intent(context, VideoPlayActivity.class).putExtra("link", item.getVideo()));
+                context.startActivity(new Intent(context, VideoPlayActivity.class).putExtra("link", item.getblogImage()));
             }
         });
     }
@@ -256,9 +259,10 @@ public class NewsFeedAdapter extends
                 switch (id) {
                     case R.id.item_share:
                         share(boPost);
+                        break;
                         // Toast.makeText(context, "under process", Toast.LENGTH_SHORT).show(); break;
-                    case R.id.item_delte:
-                      deletPost(context,boPost,pos);
+                    case R.id.item_delete:
+                      deletePost(context,boPost,pos);
                         break;
                 }
                 return true;
@@ -266,12 +270,17 @@ public class NewsFeedAdapter extends
         });
         menu.inflate(R.menu.menu_feed);
         menu.show();
+        //if the post is not from the current user, then don't allow that user to delete it. He can still share it
+        if(!boPost.getUserId().equals(Pref.Read(context,Const.PREF_USER_ID)))
+        {
+            menu.getMenu().getItem(1).setVisible(false);
+        }
     }
-    public void deletPost(Context context, BoPost boPost, final int pos) {
+    public void deletePost(Context context, BoPost boPost, final int pos) {
         String userId = Pref.Read(context, Const.PREF_USER_ID);
-        if(userId!=null && !userId.equals("")){
+        if(userId!=null && !userId.equals("") && (boPost.getUserId().equals(Pref.Read(context,Const.PREF_USER_ID)))){
             IApiService service = APIHelper.getAppServiceMethod();
-            Call<PojoPost> call = service.deletePostBypostId(userId, boPost.get_id());
+            Call<PojoPost> call = service.deletePostBypostId(userId, boPost.getid());
             call.enqueue(new Callback<PojoPost>() {
                 @Override
                 public void onResponse(Call<PojoPost> call, Response<PojoPost> response) {
@@ -298,17 +307,18 @@ public class NewsFeedAdapter extends
 
         if (bofeed.getPostType().equals(Const.IMAGE)) {
             new DownloadManager(bofeed).execute(myImgList);
-        } else if (bofeed.getPostType().equals(Const.VIDEO)) {
-            Common.shareUserVideo(context, bofeed.getText(), bofeed.getThumbUrl(), bofeed.getVideo(), Common.getPlaystoreUrl(), bofeed.getUserName());
+        }
+        else if (bofeed.getPostType().equals(Const.VIDEO)) {
+            Common.shareUserVideo(context, bofeed.getText(), bofeed.getblogImage(), bofeed.getVideo(), Common.getPlaystoreUrl(), bofeed.getUserId());
         } else if (bofeed.getPostType().equals(Const.TEXT)) {
-            Common.shareStatus(context, bofeed.getText(), Common.getPlaystoreUrl(), bofeed.getUserName());
+            Common.shareStatus(context, bofeed.getText(), Common.getPlaystoreUrl(), bofeed.getblogImage());
 
         }
 
     }
     private void getPicsURL(BoPost gallery) {
         try {
-            myImgList = new ArrayList<String>(Arrays.asList(gallery.getImage().split("\\|")));
+            myImgList = new ArrayList<String>(Arrays.asList(gallery.getblogImage().split("\\|")));
         } catch (Exception e) {
             Toast.makeText(context, "No image found", Toast.LENGTH_SHORT).show();
         }
@@ -420,21 +430,21 @@ public class NewsFeedAdapter extends
         @Override
         protected Boolean doInBackground(List<String>... params) {
             //List<String> passedFiles = params[0];
-            List<String> passedFiles = Arrays.asList(bofeed.getImage().split("\\|"));
-            try {
-                userLocalUritoShare.clear();
-                for (int i = 0; i < passedFiles.size(); i++) {
-                    String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-                    File destinationFile = new File(Common.getStorageDirectoryOfImages(), timeStamp + "_" + i + ".jpg");
-                    reciverLocalPath = destinationFile.getAbsolutePath();
-                    userLocalUritoShare.add(reciverLocalPath);
-                    DownloadFile(passedFiles.get(i), reciverLocalPath);
+    //       List<String> passedFiles = Arrays.asList(bofeed.getImage().split("\\|"));
+    //       try {
+    //           userLocalUritoShare.clear();
+    //           for (int i = 0; i < passedFiles.size(); i++) {
+    //               String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+    //               File destinationFile = new File(Common.getStorageDirectoryOfImages(), timeStamp + "_" + i + ".jpg");
+    //               reciverLocalPath = destinationFile.getAbsolutePath();
+    //               userLocalUritoShare.add(reciverLocalPath);
+    //               DownloadFile(passedFiles.get(i), reciverLocalPath);
 
 
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+    //           }
+    //       } catch (Exception e) {
+    //           e.printStackTrace();
+    //       }
             return true;
         }
 
@@ -448,7 +458,7 @@ public class NewsFeedAdapter extends
             PD.dismiss();
             if (result) {
                 log("download success : " + userLocalUritoShare);
-                Common.sharePhoto(context, userLocalUritoShare, bofeed.getText(), Common.getPlaystoreUrl(), bofeed.getUserName());
+                //Common.sharePhoto(context, userLocalUritoShare, bofeed.getText(), Common.getPlaystoreUrl(), bofeed.getUserName());
 
             } else log("download failed");
         }

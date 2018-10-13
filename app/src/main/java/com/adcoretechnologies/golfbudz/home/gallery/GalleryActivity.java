@@ -30,14 +30,14 @@ public class GalleryActivity extends BaseActivity {
     public void init() {
         Intent intent=getIntent();
         BoPost post= (BoPost) intent.getSerializableExtra(Const.EXTRA_POST);
-        setTitle(post.getUserName());
+//        //setTitle(post.getUserName());
         scrollGalleryView = (ScrollGalleryView)findViewById(R.id.scroll_gallery_view);
 
-            String[] parts = post.getImage().split("\\|");
+        String[] parts = post.getblogImage().split("\\|");
 
         for (String urls : parts) {
             //do something interesting here
-            imrUrlList.add(urls);
+           imrUrlList.add(urls);
         }
         List<MediaInfo> infos = new ArrayList<>(imrUrlList.size());
         for (String url : imrUrlList)
