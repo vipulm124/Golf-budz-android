@@ -82,7 +82,7 @@ dependencies {
     // compile 'com.github.rtoshiro.fullscreenvideoview:fullscreenvideoview:1.1.2'
 
     compile 'com.twitter.sdk.android:twitter-core:3.1.1'
-    compile 'com.twitter.sdk.android:tweet-ui:3.1.1'
+//    compile 'com.twitter.sdk.android:tweet-ui:3.1.1'
     compile 'com.twitter.sdk.android:tweet-composer:3.1.1'
     compile 'com.twitter.sdk.android:twitter-mopub:3.1.1'
     compile 'com.bilibili:boxing:0.8.0'

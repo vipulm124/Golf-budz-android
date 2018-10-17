@@ -96,8 +96,8 @@ public class NewsFeedAdapter extends
         holder.tvLike.setText(item.getLikeCount() + " Like");
         holder.tvComment.setText(item.getCommentCount() + " Comment");
         //holder.tvDate.setText(item.getCreatedAt());
-        ArrayList<String> likeUsers = item.getLikes();
-        if (likeUsers.contains(userId)) {
+        String likeUsers = item.getLikes();
+        if (likeUsers != null && likeUsers.contains(userId)) {
           holder.ivLiked.setVisibility(View.VISIBLE);
          holder.ivLike.setVisibility(View.GONE);
         holder.llLike.setClickable(false);

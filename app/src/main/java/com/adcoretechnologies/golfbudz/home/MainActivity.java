@@ -175,8 +175,7 @@ public class MainActivity extends BaseActivity
 
     public void fillData() {
         String userId = Pref.Read(this, Const.PREF_USER_ID);
-        if (apiService == null)
-            apiService = APIHelper.getAppServiceMethod();
+        apiService = APIHelper.getAppServiceMethod();
         fragmentLoader.setDataLoading("Please wait...");
         Call<PojoPost> call = apiService.getAllPostByUserId(userId);
         call.enqueue(new Callback<PojoPost>() {

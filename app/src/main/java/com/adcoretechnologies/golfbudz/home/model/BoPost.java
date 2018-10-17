@@ -33,13 +33,13 @@ public class BoPost implements Serializable {
     @SerializedName("thumbUrl")
     String thumbUrl;
     @SerializedName("likeUsers")
-    ArrayList<String> likeUsers;
+    String likeUsers;
 
-    public  ArrayList<String> getLikes(){
-        return  likeUsers;
+    public String getLikes(){
+        return likeUsers;
     }
 
-    public void setLikes(ArrayList<String> likeUsers){
+    public void setLikes(String likeUsers){
         this.likeUsers=likeUsers;
     }
     public  String getLikeStatus(){return  likeStatus;}
