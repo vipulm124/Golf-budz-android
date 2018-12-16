@@ -59,6 +59,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.ProviderMismatchException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -179,9 +180,10 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void init() {
+
         affliate();
         handicap();
-        getCorses();
+//        getCorses();
         preferOption();
         getProfession();
         getLocation();
@@ -189,12 +191,11 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
         allUploadedUri = new ArrayList<>();
         getAllCountries();
         getProfile();
+
         try {
             storageRef = FirebaseStorage.getInstance().getReferenceFromUrl(Const.FIREBASE_STORAGE_BUCKET_PATH);
-
-
         } catch (ClassCastException ex) {
-            throw new RuntimeException("PLease initilalize firebase");
+            throw new RuntimeException("Please initilalize firebase");
         }
     }
 
@@ -425,7 +426,7 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
                         toast(pojoUser.getMessage());
                     }
                 } else {
-                    toast("Something went wrong");
+                    toast("Something went wrong while fetching countries");
                 }
             }
 
@@ -507,7 +508,7 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
                         toast(pojoUser.getMessage());
                     }
                 } else {
-                    toast("Something went wrong");
+                    toast("Something went wrong while fetching profile");
                 }
             }
 
@@ -970,7 +971,7 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
                         toast(pojo.getMessage());
                     }
                 } else {
-                    toast("Something went wrong");
+                    toast("Something went wrong while fetching corses");
                 }
             }
 
@@ -1023,7 +1024,7 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
                         toast(pojoUser.getMessage());
                     }
                 } else {
-                    toast("Something went wrong");
+                    toast("Something went wrong while fetching locations");
                 }
             }
 
@@ -1053,7 +1054,7 @@ public class EditProfileActivity extends BaseActivity implements View.OnClickLis
                         toast(pojoUser.getMessage());
                     }
                 } else {
-                    toast("Something went wrong");
+                    toast("Something went wrong while fetching professions");
                 }
             }
 

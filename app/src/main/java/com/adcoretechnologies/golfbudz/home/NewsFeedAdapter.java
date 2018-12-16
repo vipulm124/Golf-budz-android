@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.ThumbnailUtils;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.provider.MediaStore;
@@ -91,7 +92,10 @@ public class NewsFeedAdapter extends
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final BoPost item = getItem(position);
         //holder.tvName.setText(item.getUserName());
-
+        Uri profileImage = Uri.parse(item.getProfileImage());
+        ///Common.showBigImage(context, holder.feedImage1, parts[0]);
+        Common.showSmallRoundImage(context,holder.ivProfilepic,item.getProfileImage());
+        //holder.ivProfilepic.setImageURI(profileImage);
         holder.tvDescription.setText(item.getText());
         holder.tvLike.setText(item.getLikeCount() + " Like");
         holder.tvComment.setText(item.getCommentCount() + " Comment");

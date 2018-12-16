@@ -165,7 +165,7 @@ public class FriendProfileActivity extends BaseActivity {
 
 
         } catch (ClassCastException ex) {
-            throw new RuntimeException("PLease initilalize firebase");
+            throw new RuntimeException("Please initilalize firebase.");
         }
     }
 

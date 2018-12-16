@@ -34,6 +34,8 @@ public class BoPost implements Serializable {
     String thumbUrl;
     @SerializedName("likeUsers")
     String likeUsers;
+    @SerializedName("profileImage")
+    String profileImage;
 
     public String getLikes(){
         return likeUsers;
@@ -123,4 +125,7 @@ public class BoPost implements Serializable {
     public void setThumbUrl(String thumbUrl) {
         this.thumbUrl = thumbUrl;
     }
+
+    public String getProfileImage(){ return profileImage;}
+    public void setProfileImage(String profileImage){this.profileImage = profileImage;}
 }
